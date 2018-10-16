@@ -1,0 +1,6 @@
+*
+!/fonts
+!/images
+!/scripts
+!/styles
+!.gitignore
