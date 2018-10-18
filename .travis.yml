@@ -1,0 +1,34 @@
+language: php
+
+matrix:
+    fast_finish: true
+
+php:
+    - "7.1"
+    - "7.2"
+
+mysql:
+    - database: ci_vertebrae
+
+services:
+    - mysql
+    - memcached
+    - redis-server
+
+before_install:
+    - phpenv config-rm xdebug.ini || true
+    - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - printf "\n" | pecl install -f redis
+    - travis_retry composer self-update
+
+install:
+    - mysql -e 'create database ci_vertebrae;'
+    - cp .env.ci .env
+    - composer install --no-interaction
+    - php artisan key:generate
+    - php artisan migrate --seed
+    - yarn
+    - npm run prod
+
+script:
+    - vendor/bin/phpunit
