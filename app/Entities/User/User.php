@@ -1,4 +1,4 @@
-<?php namespace App\Models;
+<?php namespace App\Entities\User;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

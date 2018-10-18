@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers\Auth;
 
+use App\Entities\User\User;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 

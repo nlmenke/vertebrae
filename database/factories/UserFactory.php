@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Entities\User\User;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
