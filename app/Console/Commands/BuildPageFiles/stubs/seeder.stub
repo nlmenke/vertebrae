@@ -1,0 +1,35 @@
+<?php
+
+use DummyRootNamespaceEntities\Dummy\Dummy;
+
+class DummiesTableSeeder extends AbstractSeeder
+{
+    /**
+     * Tables that should be truncated before running.
+     *
+     * @var array
+     */
+    protected $truncateTables = [
+        CreateDummiesTable::TABLENAME
+    ];
+
+    /**
+     * Items to be added to the database.
+     *
+     * @var array
+     */
+    protected $itemList = [
+        //
+    ];
+
+    /**
+     * Create a new seeder instance.
+     *
+     * @param Dummy $model
+     * @return void
+     */
+    public function __construct(Dummy $model)
+    {
+        $this->model = $model;
+    }
+}

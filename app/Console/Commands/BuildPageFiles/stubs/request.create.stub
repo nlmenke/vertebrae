@@ -1,0 +1,28 @@
+<?php namespace DummyRootNamespaceHttp\Requests\Dummy;
+
+use DummyRootNamespaceHttp\Requests\AbstractFormRequest;
+
+class CreateDummyRequest extends AbstractFormRequest
+{
+    /**
+     * The authorization rules.
+     *
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    /**
+     * Does the current user have access?
+     *
+     * @return bool
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+}

@@ -1,0 +1,19 @@
+<?php namespace DummyRootNamespaceHttp\Controllers;
+
+use DummyRootNamespaceServices\Entities\Dummy\DummyService;
+
+class DummyController extends AbstractController
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @param DummyService $service
+     * @return void
+     */
+    public function __construct(DummyService $service)
+    {
+        parent::__construct();
+
+        $this->service = $service;
+    }
+}
