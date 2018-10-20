@@ -6,7 +6,7 @@
 
     <title>{{ config('app.name') }}</title>
 
-    <link href="{{ asset('favicon.ico', 'assets') }}" type="image/x-icon" rel="icon">
+    <link href="{{ asset('favicon.ico') }}" type="image/x-icon" rel="icon">
 
     <!-- styles -->
     <link href="{{ mix('styles/app.css', 'assets') }}" type="text/css" rel="stylesheet">
