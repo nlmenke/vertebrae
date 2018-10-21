@@ -1,19 +1,26 @@
-<?php namespace DummyRootNamespaceHttp\Controllers;
+<?php namespace DummyRootNamespaceHttp\Controllers\Api;
 
-use DummyRootNamespaceServices\Entities\Dummy\DummyService;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class DummyController extends AbstractController
+class DummyController extends AbstractApiController
 {
     /**
      * Create a new controller instance.
      *
-     * @param DummyService $service
      * @return void
      */
-    public function __construct(DummyService $service)
+    public function __construct()
     {
         parent::__construct();
+    }
 
-        $this->service = $service;
+    /**
+     * Display a listing of LowerDummies.
+     *
+     * @return AnonymousResourceCollection
+     */
+    public function index(): AnonymousResourceCollection
+    {
+        //
     }
 }

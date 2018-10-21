@@ -2,7 +2,7 @@
 
 use Tests\TestCase;
 
-class DummyTest extends TestCase
+class CurrencyTest extends TestCase
 {
     /**
      * A basic test example.
@@ -11,7 +11,7 @@ class DummyTest extends TestCase
      */
     public function testBasicTest(): void
     {
-        $response = $this->get('api/LowerDummies');
+        $response = $this->get('api/currencies');
 
         $response->assertStatus(200);
     }

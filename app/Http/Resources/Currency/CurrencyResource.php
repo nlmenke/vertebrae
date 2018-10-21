@@ -1,9 +1,9 @@
-<?php namespace DummyRootNamespaceHttp\Resources\Dummy;
+<?php namespace App\Http\Resources\Currency;
 
 use App\Http\Resources\AbstractResource;
 use Illuminate\Http\Request;
 
-class DummyResource extends AbstractResource
+class CurrencyResource extends AbstractResource
 {
     /**
      * Transform the resource into an array.
