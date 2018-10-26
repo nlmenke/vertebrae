@@ -6,6 +6,12 @@ use App\Http\Requests\Currency\UpdateCurrencyRequest;
 use App\Http\Resources\Currency\CurrencyResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+/**
+ * Class CurrencyController
+ *
+ * @package App\Http\Controllers\Api
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class CurrencyController extends AbstractApiController
 {
     /**

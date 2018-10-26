@@ -10,6 +10,12 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class User
+ *
+ * @package App\Entities\User
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class User extends AbstractEntity implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
     use Authenticatable,

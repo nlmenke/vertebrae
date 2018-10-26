@@ -3,6 +3,12 @@
 use App\Http\Controllers\AbstractController;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
+/**
+ * Class ResetPasswordController
+ *
+ * @package App\Http\Controllers\Auth
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class ResetPasswordController extends AbstractController
 {
     use ResetsPasswords;

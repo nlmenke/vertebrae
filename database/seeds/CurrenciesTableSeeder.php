@@ -2,6 +2,11 @@
 
 use App\Entities\Currency\Currency;
 
+/**
+ * Class CurrenciesTableSeeder
+ *
+ * @author Nick Menke <nick@nlmenke.net>
+ */
 class CurrenciesTableSeeder extends AbstractSeeder
 {
     /**

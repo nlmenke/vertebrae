@@ -3,6 +3,12 @@
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class AbstractEntity
+ *
+ * @package App\Entities
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 abstract class AbstractEntity extends Model
 {
     /**

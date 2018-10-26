@@ -7,6 +7,12 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
+/**
+ * Class BuildPageFilesCommand
+ *
+ * @package App\Console\Commands\BuildPageFiles
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class BuildPageFilesCommand extends Command
 {
     /**

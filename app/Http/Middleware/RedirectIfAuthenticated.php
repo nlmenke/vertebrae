@@ -2,6 +2,12 @@
 
 use Illuminate\Http\Request;
 
+/**
+ * Class RedirectIfAuthenticated
+ *
+ * @package App\Http\Middleware
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class RedirectIfAuthenticated
 {
     /**

@@ -34,6 +34,7 @@ body {
 
 .title {
     color: $link-color;
+    font-family: $font-family-serif;
     font-size: 84px;
 }
 
@@ -46,7 +47,6 @@ body {
 .links > a {
     color: $text-color;
     padding: 0 25px;
-    font-family: $font-family-serif;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .1rem;

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class DatabaseSeeder
+ *
+ * @author Nick Menke <nick@nlmenke.net>
+ */
 class DatabaseSeeder extends AbstractSeeder
 {
     /**

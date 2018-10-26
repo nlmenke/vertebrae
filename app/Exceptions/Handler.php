@@ -4,6 +4,12 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+/**
+ * Class Handler
+ *
+ * @package App\Exceptions
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class Handler extends ExceptionHandler
 {
     /**

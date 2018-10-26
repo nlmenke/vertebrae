@@ -3,6 +3,12 @@
 use App\Entities\AbstractEntity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Currency
+ *
+ * @package App\Entities\Currency
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class Currency extends AbstractEntity
 {
     use SoftDeletes;

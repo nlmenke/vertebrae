@@ -22,6 +22,12 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+/**
+ * Class Kernel
+ *
+ * @package App\Http
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class Kernel extends HttpKernel
 {
     /**

@@ -3,6 +3,11 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
+/**
+ * Class CreateCurrenciesTable
+ *
+ * @author Nick Menke <nick@nlmenke.net>
+ */
 class CreateCurrenciesTable extends Migration
 {
     const TABLENAME = 'currencies';

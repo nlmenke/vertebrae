@@ -3,6 +3,11 @@
 use App\Entities\AbstractEntity;
 use Illuminate\Database\Seeder;
 
+/**
+ * Class AbstractSeeder
+ *
+ * @author Nick Menke <nick@nlmenke.net>
+ */
 abstract class AbstractSeeder extends Seeder
 {
     /**

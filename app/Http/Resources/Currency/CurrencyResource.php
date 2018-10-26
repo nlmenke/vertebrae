@@ -3,6 +3,12 @@
 use App\Http\Resources\AbstractResource;
 use Illuminate\Http\Request;
 
+/**
+ * Class CurrencyResource
+ *
+ * @package App\Http\Resources\Currency
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class CurrencyResource extends AbstractResource
 {
     /**

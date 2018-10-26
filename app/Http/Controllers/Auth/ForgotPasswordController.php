@@ -3,6 +3,12 @@
 use App\Http\Controllers\AbstractController;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
+/**
+ * Class ForgotPasswordController
+ *
+ * @package App\Http\Controllers\Auth
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class ForgotPasswordController extends AbstractController
 {
     use SendsPasswordResetEmails;

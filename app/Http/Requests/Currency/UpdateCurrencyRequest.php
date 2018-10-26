@@ -2,6 +2,12 @@
 
 use App\Http\Requests\AbstractFormRequest;
 
+/**
+ * Class UpdateCurrencyRequest
+ *
+ * @package App\Http\Requests\Currency
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class UpdateCurrencyRequest extends AbstractFormRequest
 {
     /**
