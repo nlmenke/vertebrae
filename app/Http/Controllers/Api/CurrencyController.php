@@ -6,7 +6,6 @@ use App\Http\Requests\Currency\UpdateCurrencyRequest;
 use App\Http\Resources\Currency\CurrencyResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 /**
@@ -30,12 +29,13 @@ class CurrencyController extends AbstractApiController
     /**
      * Display a listing of currencies.
      *
-     * @return AnonymousResourceCollection|JsonResponse
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         try {
-            return CurrencyResource::collection(Currency::paginate(\Request::get('count') ?? 10));
+            return CurrencyResource::collection(Currency::paginate(\Request::get('count') ?? 10))
+                ->response();
         } catch (\Exception $e) {
             return JsonResponse::create([
                 'message' => 'Oops, something went wrong.',
@@ -50,12 +50,13 @@ class CurrencyController extends AbstractApiController
      * Display the specified currency.
      *
      * @param int $id
-     * @return CurrencyResource|JsonResponse
+     * @return JsonResponse
      */
-    public function show(int $id)
+    public function show(int $id): JsonResponse
     {
         try {
-            return CurrencyResource::make(Currency::findOrFail($id));
+            return CurrencyResource::make(Currency::findOrFail($id))
+                ->response();
         } catch (ModelNotFoundException $e) {
             return JsonResponse::create([
                 'message' => 'No records found for the given ID.',
