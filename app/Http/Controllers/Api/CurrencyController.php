@@ -38,11 +38,11 @@ class CurrencyController extends AbstractApiController
                 ->response();
         } catch (\Exception $e) {
             return JsonResponse::create([
-                'message' => 'Oops, something went wrong.',
+                'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_BAD_REQUEST);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -59,18 +59,18 @@ class CurrencyController extends AbstractApiController
                 ->response();
         } catch (ModelNotFoundException $e) {
             return JsonResponse::create([
-                'message' => 'No records found for the given ID.',
+                'message' => trans('exceptions.http.404_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
             ], Response::HTTP_NOT_FOUND);
         } catch (\Exception $e) {
             return JsonResponse::create([
-                'message' => 'Oops, something went wrong.',
+                'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_BAD_REQUEST);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -97,11 +97,11 @@ class CurrencyController extends AbstractApiController
             \DB::rollBack();
 
             return JsonResponse::create([
-                'message' => 'Oops, something went wrong.',
+                'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_BAD_REQUEST);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -130,7 +130,7 @@ class CurrencyController extends AbstractApiController
             \DB::rollBack();
 
             return JsonResponse::create([
-                'message' => 'No records found for the given ID.',
+                'message' => trans('exceptions.http.404_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
@@ -139,11 +139,11 @@ class CurrencyController extends AbstractApiController
             \DB::rollBack();
 
             return JsonResponse::create([
-                'message' => 'Oops, something went wrong.',
+                'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_BAD_REQUEST);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -170,7 +170,7 @@ class CurrencyController extends AbstractApiController
             \DB::rollBack();
 
             return JsonResponse::create([
-                'message' => 'No records found for the given ID.',
+                'message' => trans('exceptions.http.404_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
@@ -179,11 +179,11 @@ class CurrencyController extends AbstractApiController
             \DB::rollBack();
 
             return JsonResponse::create([
-                'message' => 'Oops, something went wrong.',
+                'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_BAD_REQUEST);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
