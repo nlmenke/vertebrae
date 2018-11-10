@@ -1,6 +1,7 @@
 <?php namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -48,9 +49,9 @@ class Handler extends ExceptionHandler
      *
      * @param Request    $request
      * @param \Exception $exception
-     * @return Response
+     * @return JsonResponse|Response
      */
-    public function render($request, \Exception $exception): Response
+    public function render($request, \Exception $exception)
     {
         return parent::render($request, $exception);
     }
