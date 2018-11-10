@@ -4,6 +4,7 @@ use App\Entities\Currency\Currency;
 use App\Http\Requests\Currency\CreateCurrencyRequest;
 use App\Http\Requests\Currency\UpdateCurrencyRequest;
 use App\Http\Resources\Currency\CurrencyResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -29,11 +30,20 @@ class CurrencyController extends AbstractApiController
     /**
      * Display a listing of currencies.
      *
-     * @return AnonymousResourceCollection
+     * @return AnonymousResourceCollection|JsonResponse
      */
-    public function index(): AnonymousResourceCollection
+    public function index()
     {
-        return CurrencyResource::collection(Currency::paginate(\Request::get('count') ?? 10));
+        try {
+            return CurrencyResource::collection(Currency::paginate(\Request::get('count') ?? 10));
+        } catch (\Exception $e) {
+            return JsonResponse::create([
+                'message' => 'Oops, something went wrong.',
+                'errors' => (object)[
+                    $e->getCode() => [$e->getMessage()],
+                ],
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     /**
@@ -46,13 +56,20 @@ class CurrencyController extends AbstractApiController
     {
         try {
             return CurrencyResource::make(Currency::findOrFail($id));
-        } catch (\Exception $e) {
+        } catch (ModelNotFoundException $e) {
             return JsonResponse::create([
                 'message' => 'No records found for the given ID.',
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
             ], Response::HTTP_NOT_FOUND);
+        } catch (\Exception $e) {
+            return JsonResponse::create([
+                'message' => 'Oops, something went wrong.',
+                'errors' => (object)[
+                    $e->getCode() => [$e->getMessage()],
+                ],
+            ], Response::HTTP_BAD_REQUEST);
         }
     }
 
@@ -108,6 +125,15 @@ class CurrencyController extends AbstractApiController
             return CurrencyResource::make($currency)
                 ->response()
                 ->header('Location', route('currencies.show', ['id' => $currency->getId()]));
+        } catch (ModelNotFoundException $e) {
+            \DB::rollBack();
+
+            return JsonResponse::create([
+                'message' => 'No records found for the given ID.',
+                'errors' => (object)[
+                    $e->getCode() => [$e->getMessage()],
+                ],
+            ], Response::HTTP_NOT_FOUND);
         } catch (\Exception $e) {
             \DB::rollBack();
 
@@ -137,7 +163,17 @@ class CurrencyController extends AbstractApiController
 
             \DB::commit();
 
-            return JsonResponse::create(null, Response::HTTP_NO_CONTENT);
+            return JsonResponse::create(null, Response::HTTP_NO_CONTENT)
+                ->header('Location', route('currencies.index'));
+        } catch (ModelNotFoundException $e) {
+            \DB::rollBack();
+
+            return JsonResponse::create([
+                'message' => 'No records found for the given ID.',
+                'errors' => (object)[
+                    $e->getCode() => [$e->getMessage()],
+                ],
+            ], Response::HTTP_NOT_FOUND);
         } catch (\Exception $e) {
             \DB::rollBack();
 
