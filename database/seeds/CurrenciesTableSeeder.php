@@ -1,6 +1,8 @@
 <?php
 
 use App\Entities\Currency\Currency;
+use App\Jobs\UpdateExchangeRates;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class CurrenciesTableSeeder
@@ -9,6 +11,8 @@ use App\Entities\Currency\Currency;
  */
 class CurrenciesTableSeeder extends AbstractSeeder
 {
+    use DispatchesJobs;
+
     /**
      * Tables that should be truncated before running.
      *
@@ -186,5 +190,15 @@ class CurrenciesTableSeeder extends AbstractSeeder
             ['iso_alpha' => 'ZMW', 'iso_numeric' => '967', 'name' => 'Zambian Kwacha', 'symbol' => 'ZK'],
             ['iso_alpha' => 'ZWL', 'iso_numeric' => '932', 'name' => 'Zimbabwean Dollar'],
         ];
+    }
+
+    /**
+     * Additional tasks to be completed after seeding has completed.
+     *
+     * @return void
+     */
+    public function complete(): void
+    {
+        $this->dispatch(new UpdateExchangeRates);
     }
 }
