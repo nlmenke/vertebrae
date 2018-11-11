@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-         $schedule->job(new UpdateExchangeRates)->quarterly();
+        $schedule->job(new UpdateExchangeRates)->quarterly();
     }
 
     /**
