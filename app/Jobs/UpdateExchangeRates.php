@@ -28,18 +28,22 @@ class UpdateExchangeRates implements ShouldQueue
      */
     public function handle(): void
     {
-        $exchangeRatesApiService = app(OpenExchangeRatesApiService::class);
+        try {
+            $exchangeRatesApiService = app(OpenExchangeRatesApiService::class);
 
-        $currencies = Currency::all();
-        $exchangeRates = $exchangeRatesApiService->get('latest.json', null, ['base' => config('currency.default')]);
+            $currencies = Currency::all();
+            $exchangeRates = $exchangeRatesApiService->get('latest.json', null, ['base' => config('currency.default')]);
 
-        $currencies->each(function (Currency $currency) use ($exchangeRates) {
-            if (array_key_exists($currency->getIsoAlpha(), $exchangeRates['rates'])) {
-                $currency->setAttribute('exchange_rate', $exchangeRates['rates'][$currency->getIsoAlpha()]);
-                $currency->save();
-            } else {
-                \Log::warning('Exchange rate for ' . $currency->getName() . ' does not exist in the OXR database');
-            }
-        });
+            $currencies->each(function (Currency $currency) use ($exchangeRates) {
+                if (array_key_exists($currency->getIsoAlpha(), $exchangeRates['rates'])) {
+                    $currency->setAttribute('exchange_rate', $exchangeRates['rates'][$currency->getIsoAlpha()]);
+                    $currency->save();
+                } else {
+                    \Log::warning('Exchange rate for ' . $currency->getName() . ' does not exist in the OXR database');
+                }
+            });
+        } catch (\Exception $e) {
+            \Log::error($e);
+        }
     }
 }
