@@ -7,6 +7,12 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
+/**
+ * Class BuildPageFilesCommand
+ *
+ * @package App\Console\Commands\BuildPageFiles
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class BuildPageFilesCommand extends Command
 {
     /**
@@ -84,11 +90,8 @@ class BuildPageFilesCommand extends Command
 
         $name = studly_case(str_singular($this->argument('name')));
 
-        $controllerPath = app_path('Http/Controllers');
-        $controllerFile = $name . 'Controller.php';
-
-        $servicePath = app_path('Services/Entities/' . $name);
-        $serviceFile = $name . 'Service.php';
+        $controllerPath = app_path('Http/Controllers/Api');
+        $controllerFile = $name . 'ApiController.php';
 
         $modelPath = app_path('Entities/' . $name);
         $modelFile = $name . '.php';
@@ -98,12 +101,18 @@ class BuildPageFilesCommand extends Command
         $updateRequestFile = 'Update' . $name . 'Request.php';
 
         $resourcePath = app_path('Http/Resources/' . $name);
-        $resourceFile = $name . 'Collection.php';
+        $resourceFile = $name . 'Resource.php';
 
         $stylePath = resource_path('assets/sass');
         $styleFile = str_plural(snake_case($name, '-')) . '.scss';
 
         $languageFile = str_plural(snake_case($name, '-')) . '.php';
+
+        $featureTestPath = base_path('tests/Feature/Controllers/Api');
+        $featureTestFile = $name . 'ApiTest.php';
+
+        $unitTestPath = base_path('tests/Unit');
+        $unitTestFile = $name . 'Test.php';
 
         // check for existing model; no need to create if files exist
         if (\File::exists($modelFile)) {
@@ -115,11 +124,6 @@ class BuildPageFilesCommand extends Command
         $controller = $this->buildFile($name, 'controller');
         $this->saveFile($controllerPath, $controllerFile, $controller);
         $this->gitAdd($controllerPath . '/' . $controllerFile);
-
-        // create service and add to git
-        $service = $this->buildFile($name, 'service');
-        $this->saveFile($servicePath, $serviceFile, $service);
-        $this->gitAdd($servicePath . '/' . $serviceFile);
 
         // create model and add to git
         $model = $this->buildFile($name, 'model');
@@ -152,20 +156,15 @@ class BuildPageFilesCommand extends Command
             $this->gitAdd($languagePath . '/' . $languageFile);
         }
 
-        // create tests and add to git
-        $testFile = $name . 'Test.php';
-
-        // feature test
-        $featureTestPath = base_path('tests/Feature');
+        // create feature test and add to git
         $featureTest = $this->buildFile($name, 'test.feature');
-        $this->saveFile($featureTestPath, $testFile, $featureTest);
-        $this->gitAdd($featureTestPath . '/' . $testFile);
+        $this->saveFile($featureTestPath, $featureTestFile, $featureTest);
+        $this->gitAdd($featureTestPath . '/' . $featureTestFile);
 
-        // unit test
-        $unitTestPath = base_path('tests/Unit');
+        // create unit test and add to git
         $unitTest = $this->buildFile($name, 'test.unit');
-        $this->saveFile($unitTestPath, $testFile, $unitTest);
-        $this->gitAdd($unitTestPath . '/' . $testFile);
+        $this->saveFile($unitTestPath, $unitTestFile, $unitTest);
+        $this->gitAdd($unitTestPath . '/' . $unitTestFile);
 
         // create migration and add to git
         if ($this->option('migration')) {
@@ -211,7 +210,16 @@ class BuildPageFilesCommand extends Command
     {
         $file = \File::get($this->getStub($type));
 
-        return str_replace(['DummyRootNamespace', 'Dummy', 'Dummies'], [$this->laravel->getNamespace(), $name, str_plural($name)], $file);
+        $replacements = [
+            'LowerDummyRootNamespace' => strtolower($this->laravel->getNamespace()),
+            'DummyRootNamespace' => $this->laravel->getNamespace(),
+            'LowerDummy' => strtolower($name),
+            'Dummy' => $name,
+            'LowerDummies' => strtolower(str_plural($name)),
+            'Dummies' => str_plural($name),
+        ];
+
+        return str_replace(array_keys($replacements), array_values($replacements), $file);
     }
 
     /**

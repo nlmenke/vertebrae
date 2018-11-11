@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class DatabaseSeeder
+ *
+ * @author Nick Menke <nick@nlmenke.net>
+ */
 class DatabaseSeeder extends AbstractSeeder
 {
     /**
@@ -9,6 +14,6 @@ class DatabaseSeeder extends AbstractSeeder
      */
     public function run(): void
     {
-//        $this->call(UsersTableSeeder::class);
+        $this->call(CurrenciesTableSeeder::class);
     }
 }

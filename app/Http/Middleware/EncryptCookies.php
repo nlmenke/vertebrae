@@ -2,6 +2,12 @@
 
 use Illuminate\Cookie\Middleware\EncryptCookies as Middleware;
 
+/**
+ * Class EncryptCookies
+ *
+ * @package App\Http\Middleware
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class EncryptCookies extends Middleware
 {
     /**

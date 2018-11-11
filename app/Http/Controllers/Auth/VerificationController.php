@@ -3,6 +3,12 @@
 use App\Http\Controllers\AbstractController;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 
+/**
+ * Class VerificationController
+ *
+ * @package App\Http\Controllers\Auth
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class VerificationController extends AbstractController
 {
     use VerifiesEmails;

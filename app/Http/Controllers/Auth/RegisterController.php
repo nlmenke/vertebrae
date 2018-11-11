@@ -5,6 +5,12 @@ use App\Http\Controllers\AbstractController;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+/**
+ * Class RegisterController
+ *
+ * @package App\Http\Controllers\Auth
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class RegisterController extends AbstractController
 {
     use RegistersUsers;

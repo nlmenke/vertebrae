@@ -2,7 +2,7 @@
 
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class CurrencyTest extends TestCase
 {
     /**
      * A basic test example.

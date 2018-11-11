@@ -3,6 +3,12 @@
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 
+/**
+ * Class DashboardController
+ *
+ * @package App\Http\Controllers
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class DashboardController extends AbstractController
 {
     /**

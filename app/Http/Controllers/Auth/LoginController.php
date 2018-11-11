@@ -3,6 +3,12 @@
 use App\Http\Controllers\AbstractController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+/**
+ * Class LoginController
+ *
+ * @package App\Http\Controllers\Auth
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class LoginController extends AbstractController
 {
     use AuthenticatesUsers;

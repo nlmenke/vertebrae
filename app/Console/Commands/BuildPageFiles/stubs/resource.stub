@@ -1,9 +1,9 @@
 <?php namespace DummyRootNamespaceHttp\Resources\Dummy;
 
+use App\Http\Resources\AbstractResource;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class DummyResource extends JsonResource
+class DummyResource extends AbstractResource
 {
     /**
      * Transform the resource into an array.

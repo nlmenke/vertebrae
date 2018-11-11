@@ -2,6 +2,12 @@
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+/**
+ * Class AuthServiceProvider
+ *
+ * @package App\Providers
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class AuthServiceProvider extends ServiceProvider
 {
     /**

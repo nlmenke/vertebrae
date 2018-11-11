@@ -3,6 +3,12 @@
 use App\Http\Requests\AbstractFormRequest;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class FormRequestServiceProvider
+ *
+ * @package App\Providers
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class FormRequestServiceProvider extends ServiceProvider
 {
     /**

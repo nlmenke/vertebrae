@@ -2,6 +2,12 @@
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+/**
+ * Class RouteServiceProvider
+ *
+ * @package App\Providers
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -64,7 +70,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         \Route::prefix('api')
             ->middleware('api')
-            ->namespace($this->namespace)
+            ->namespace($this->namespace . '\Api')
             ->group(base_path('routes/api.php'));
     }
 }

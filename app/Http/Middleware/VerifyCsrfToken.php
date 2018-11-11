@@ -2,6 +2,12 @@
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 
+/**
+ * Class VerifyCsrfToken
+ *
+ * @package App\Http\Middleware
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class VerifyCsrfToken extends Middleware
 {
     /**
