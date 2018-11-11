@@ -1,6 +1,6 @@
 <?php namespace DummyRootNamespaceHttp\Controllers\Api;
 
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\JsonResponse;
 
 class DummyController extends AbstractApiController
 {
@@ -17,9 +17,9 @@ class DummyController extends AbstractApiController
     /**
      * Display a listing of LowerDummies.
      *
-     * @return AnonymousResourceCollection
+     * @return JsonResponse
      */
-    public function index(): AnonymousResourceCollection
+    public function index(): JsonResponse
     {
         //
     }
