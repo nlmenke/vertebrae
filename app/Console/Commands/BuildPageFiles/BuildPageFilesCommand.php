@@ -108,6 +108,12 @@ class BuildPageFilesCommand extends Command
 
         $languageFile = str_plural(snake_case($name, '-')) . '.php';
 
+        $featureTestPath = base_path('tests/Feature/Controllers/Api');
+        $featureTestFile = $name . 'ApiTest.php';
+
+        $unitTestPath = base_path('tests/Unit');
+        $unitTestFile = $name . 'Test.php';
+
         // check for existing model; no need to create if files exist
         if (\File::exists($modelFile)) {
             $this->error($name . ' already exists!');
@@ -150,20 +156,15 @@ class BuildPageFilesCommand extends Command
             $this->gitAdd($languagePath . '/' . $languageFile);
         }
 
-        // create tests and add to git
-        $testFile = $name . 'Test.php';
-
-        // feature test
-        $featureTestPath = base_path('tests/Feature');
+        // create feature test and add to git
         $featureTest = $this->buildFile($name, 'test.feature');
-        $this->saveFile($featureTestPath, $testFile, $featureTest);
-        $this->gitAdd($featureTestPath . '/' . $testFile);
+        $this->saveFile($featureTestPath, $featureTestFile, $featureTest);
+        $this->gitAdd($featureTestPath . '/' . $featureTestFile);
 
-        // unit test
-        $unitTestPath = base_path('tests/Unit');
+        // create unit test and add to git
         $unitTest = $this->buildFile($name, 'test.unit');
-        $this->saveFile($unitTestPath, $testFile, $unitTest);
-        $this->gitAdd($unitTestPath . '/' . $testFile);
+        $this->saveFile($unitTestPath, $unitTestFile, $unitTest);
+        $this->gitAdd($unitTestPath . '/' . $unitTestFile);
 
         // create migration and add to git
         if ($this->option('migration')) {

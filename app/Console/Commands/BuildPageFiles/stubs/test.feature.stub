@@ -1,18 +1,22 @@
-<?php namespace Tests\Feature;
+<?php namespace Tests\Feature\Controllers\Api;
 
-use Tests\TestCase;
+use App\Entities\Dummy\Dummy;
 
-class DummyTest extends TestCase
+class DummyApiTest extends AbstractApiControllerTest
 {
     /**
-     * A basic test example.
+     * The entity used by the tests.
      *
-     * @return void
+     * @var Dummy
      */
-    public function testBasicTest(): void
-    {
-        $response = $this->get('api/LowerDummies');
+    protected $model = Dummy::class;
 
-        $response->assertStatus(200);
-    }
+    /**
+     * Required fields to be cleared for testing validation.
+     *
+     * @var array
+     */
+    protected $validationRequirements = [
+        //
+    ];
 }
