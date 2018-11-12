@@ -6,16 +6,45 @@
  * @license MIT
  */
 
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Architects+Daughter|Lora:400,700|Open+Sans:300,400,600,700,800|Ubuntu+Mono:400,700');
+/* Configuration and Helpers
+-----------------------------------------------*/
+@import 'abstracts/colors';
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
 
-// Variables
-@import 'colors';
-@import 'variables';
-
+/* Vendors
+-----------------------------------------------*/
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-@import 'base';
-@import 'laravel';
-@import 'currencies';
+// FontAwesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+/* Base
+-----------------------------------------------*/
+@import 'base/base';
+@import 'base/fonts';
+@import 'base/typography';
+@import 'base/helpers';
+
+/* Layout-Related Sections
+-----------------------------------------------*/
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/laravel'; // Laravel's default welcome page
+
+/* Components
+-----------------------------------------------*/
+@import 'components/button';
+
+/* Page-Specific Styles
+-----------------------------------------------*/
+@import 'pages/currencies';
+
+/* Themes
+-----------------------------------------------*/
+@import 'themes/default';

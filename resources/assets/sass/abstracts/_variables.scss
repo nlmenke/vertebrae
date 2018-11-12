@@ -1,0 +1,35 @@
+// Font families
+$font-family-cursive: 'Architects Daughter', cursive !default;
+$font-family-monospace: 'Ubuntu Mono', monospace !default;
+$font-family-sans-serif: 'Open Sans', sans-serif !default;
+$font-family-serif: 'Lora', serif !default;
+
+// Breakpoints map
+$breakpoints: (
+    xsmall: 320px,
+    small: 480px,
+    medium: 768px,
+    large: 1024px,
+    xlarge: 1280px,
+) !default;
+
+// Relative or absolute assets URL
+$base-url: '/assets/' !default;
+
+// Google Fonts URL
+$google-fonts-url: 'https://fonts.googleapis.com/css?family=Architects+Daughter|Lora:400,700|Open+Sans:300,400,600,700,800|Ubuntu+Mono:400,700';
+
+// Typeface map
+//$typefaces: (
+//    'filename': (
+//        family: 'fontname',
+//        style: normal,
+//        weight: 400,
+//    ),
+//);
+
+// FontAwesome path
+$fa-font-path: "../webfonts";
+
+// Container's maximum width
+$max-width: 1180px !default;
