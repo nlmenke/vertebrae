@@ -21,8 +21,8 @@ class CreateCurrenciesTable extends Migration
     {
         \Schema::create(self::TABLENAME, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('iso_alpha', 3)->index(); // IS 4217; 3-char
-            $table->string('iso_numeric', 3)->index(); // IS 4217; 3-number
+            $table->string('iso_alpha', 3)->index(); // ISO 4217; 3-char
+            $table->string('iso_numeric', 3)->index(); // ISO 4217; 3-number
             $table->string('name');
             $table->string('symbol')->default('$');
             $table->unsignedInteger('decimal_precision')->default(2);
