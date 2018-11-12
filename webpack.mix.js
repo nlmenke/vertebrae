@@ -17,5 +17,9 @@ mix.options({
     })
     .copyDirectory('resources/assets/svg', 'public/assets/images')
     .js('resources/assets/scripts/app.js', 'scripts')
-    .sass('resources/assets/sass/app.scss', 'styles')
-    .sourceMaps();
+    .sass('resources/assets/sass/app.scss', 'styles');
+
+if (mix.inProduction()) {
+    mix.version()
+        .sourceMaps();
+}

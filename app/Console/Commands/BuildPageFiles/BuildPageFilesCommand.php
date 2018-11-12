@@ -103,8 +103,8 @@ class BuildPageFilesCommand extends Command
         $resourcePath = app_path('Http/Resources/' . $name);
         $resourceFile = $name . 'Resource.php';
 
-        $stylePath = resource_path('assets/sass');
-        $styleFile = str_plural(snake_case($name, '-')) . '.scss';
+        $stylePath = resource_path('assets/sass/pages');
+        $styleFile = '_' . str_plural(snake_case($name, '-')) . '.scss';
 
         $languageFile = str_plural(snake_case($name, '-')) . '.php';
 
