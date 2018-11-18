@@ -109,7 +109,7 @@ class BuildPageFilesCommand extends Command
         $languageFile = str_plural(snake_case($name, '-')) . '.php';
 
         $featureTestPath = base_path('tests/Feature/Controllers/Api');
-        $featureTestFile = $name . 'ApiTest.php';
+        $featureTestFile = $name . 'ApiControllerTest.php';
 
         $unitTestPath = base_path('tests/Unit');
         $unitTestFile = $name . 'Test.php';
