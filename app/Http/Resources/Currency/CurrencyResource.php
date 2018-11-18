@@ -16,6 +16,7 @@ class CurrencyResource extends AbstractResource
      * Create a new resource instance.
      *
      * @param Currency $resource
+     * @return void
      */
     public function __construct(Currency $resource)
     {

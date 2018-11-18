@@ -16,6 +16,7 @@ class CountryResource extends AbstractResource
      * Create a new resource instance.
      *
      * @param Country $resource
+     * @return void
      */
     public function __construct(Country $resource)
     {
