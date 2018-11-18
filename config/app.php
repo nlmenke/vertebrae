@@ -171,6 +171,8 @@ return [
         App\Providers\AuthServiceProvider::class,
 //        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\FacadeServiceProvider::class,
+        App\Providers\FormRequestServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],

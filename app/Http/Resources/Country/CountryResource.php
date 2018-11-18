@@ -1,23 +1,23 @@
-<?php namespace App\Http\Resources\Currency;
+<?php namespace App\Http\Resources\Country;
 
-use App\Entities\Currency\Currency;
+use App\Entities\Country\Country;
 use App\Http\Resources\AbstractResource;
 use Illuminate\Http\Request;
 
 /**
- * Class CurrencyResource
+ * Class CountryResource
  *
- * @package App\Http\Resources\Currency
+ * @package App\Http\Resources\Country
  * @author  Nick Menke <nick@nlmenke.net>
  */
-class CurrencyResource extends AbstractResource
+class CountryResource extends AbstractResource
 {
     /**
      * Create a new resource instance.
      *
-     * @param Currency $resource
+     * @param Country $resource
      */
-    public function __construct(Currency $resource)
+    public function __construct(Country $resource)
     {
         parent::__construct($resource);
     }

@@ -13,18 +13,18 @@ use Tests\TestCase;
 abstract class AbstractApiControllerTest extends TestCase
 {
     /**
-     * The entity used by the tests.
-     *
-     * @var AbstractEntity
-     */
-    protected $model;
-
-    /**
      * The base route name used by the tests.
      *
      * @var string
      */
     protected $baseRouteName;
+
+    /**
+     * The entity used by the tests.
+     *
+     * @var AbstractEntity
+     */
+    protected $model;
 
     /**
      * Required fields to be cleared for testing validation.
@@ -282,11 +282,11 @@ abstract class AbstractApiControllerTest extends TestCase
         if (\Route::has($route)) {
             $resource = $this->createResources();
 
-            $response = $this->deleteJson(route('currencies.destroy', $resource->getId()));
+            $response = $this->deleteJson(route($route, $resource->getId()));
             $response->assertStatus(Response::HTTP_NO_CONTENT);
 
             // verify resource was deleted
-            $response = $this->get(route('currencies.show', $resource->getId()));
+            $response = $this->get(route($this->baseRouteName . '.show', $resource->getId()));
             $response->assertStatus(Response::HTTP_NOT_FOUND);
         } else {
             $this->markTestSkipped($route . ' route is not implemented.');

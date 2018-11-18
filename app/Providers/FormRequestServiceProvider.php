@@ -24,7 +24,7 @@ class FormRequestServiceProvider extends ServiceProvider
 
             $classParts = explode('\\', reset($routeParts));
             $className = end($classParts);
-            $modelName = str_replace('Controller', '', $className);
+            $modelName = str_replace(['ApiController', 'Controller'], '', $className);
 
             $formRequestVerb = '';
             if ($routeAction === 'store') {

@@ -15,5 +15,6 @@ class DatabaseSeeder extends AbstractSeeder
     public function run(): void
     {
         $this->call(CurrenciesTableSeeder::class);
+        $this->call(CountriesTableSeeder::class);
     }
 }
