@@ -1,21 +1,21 @@
 <?php namespace Tests\Feature\Controllers\Api;
 
-use App\Entities\Currency\Currency;
+use App\Entities\Country\Country;
 
 /**
- * Class CurrencyApiTest
+ * Class CountryApiTest
  *
  * @package Tests\Feature\Controllers\Api
  * @author  Nick Menke <nick@nlmenke.net>
  */
-class CurrencyApiTest extends AbstractApiControllerTest
+class CountryApiControllerTest extends AbstractApiControllerTest
 {
     /**
      * The entity used by the tests.
      *
-     * @var Currency
+     * @var Country
      */
-    protected $model = Currency::class;
+    protected $model = Country::class;
 
     /**
      * Required fields to be cleared for testing validation.
@@ -23,11 +23,9 @@ class CurrencyApiTest extends AbstractApiControllerTest
      * @var array
      */
     protected $validationRequirements = [
-        'iso_alpha',
+        'iso_alpha_2',
+        'iso_alpha_3',
         'iso_numeric',
         'name',
-        'symbol',
-        'decimal_precision',
-        'exchange_rate',
     ];
 }

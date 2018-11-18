@@ -1,26 +1,22 @@
 <?php namespace DummyRootNamespaceHttp\Controllers\Api;
 
-use Illuminate\Http\JsonResponse;
+use App\Entities\Dummy\Dummy;
+use App\Http\Resources\Dummy\DummyResource;
 
-class DummyController extends AbstractApiController
+class DummyApiController extends AbstractApiController
 {
     /**
      * Create a new controller instance.
      *
+     * @param Dummy         $model
+     * @param DummyResource $resource
      * @return void
      */
-    public function __construct()
+    public function __construct(Dummy $model, DummyResource $resource)
     {
-        parent::__construct();
-    }
+        $this->model = $model;
+        $this->resource = $resource;
 
-    /**
-     * Display a listing of LowerDummies.
-     *
-     * @return JsonResponse
-     */
-    public function index(): JsonResponse
-    {
-        //
+        parent::__construct();
     }
 }

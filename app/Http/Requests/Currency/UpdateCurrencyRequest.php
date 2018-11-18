@@ -18,8 +18,8 @@ class UpdateCurrencyRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            'iso_alpha' => 'required|size:3|unique:currencies,iso_alpha,' . $this->route('currency'),
-            'iso_numeric' => 'required|size:3|unique:currencies,iso_numeric,' . $this->route('currency'),
+            'iso_alpha' => 'required|size:3|unique:currencies,iso_alpha,' . $this->route('currency') . ',id,deleted_at,null',
+            'iso_numeric' => 'required|size:3|unique:currencies,iso_numeric,' . $this->route('currency') . ',id,deleted_at,null',
             'name' => 'required',
             'symbol' => 'required',
             'decimal_precision' => 'required',

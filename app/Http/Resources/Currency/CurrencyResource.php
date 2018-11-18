@@ -1,5 +1,6 @@
 <?php namespace App\Http\Resources\Currency;
 
+use App\Entities\Currency\Currency;
 use App\Http\Resources\AbstractResource;
 use Illuminate\Http\Request;
 
@@ -11,6 +12,17 @@ use Illuminate\Http\Request;
  */
 class CurrencyResource extends AbstractResource
 {
+    /**
+     * Create a new resource instance.
+     *
+     * @param Currency $resource
+     * @return void
+     */
+    public function __construct(Currency $resource)
+    {
+        parent::__construct($resource);
+    }
+
     /**
      * Transform the resource into an array.
      *

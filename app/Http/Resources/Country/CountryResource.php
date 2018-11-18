@@ -1,18 +1,24 @@
-<?php namespace DummyRootNamespaceHttp\Resources\Dummy;
+<?php namespace App\Http\Resources\Country;
 
-use App\Entities\Dummy\Dummy;
+use App\Entities\Country\Country;
 use App\Http\Resources\AbstractResource;
 use Illuminate\Http\Request;
 
-class DummyResource extends AbstractResource
+/**
+ * Class CountryResource
+ *
+ * @package App\Http\Resources\Country
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
+class CountryResource extends AbstractResource
 {
     /**
      * Create a new resource instance.
      *
-     * @param Dummy $resource
+     * @param Country $resource
      * @return void
      */
-    public function __construct(Dummy $resource)
+    public function __construct(Country $resource)
     {
         parent::__construct($resource);
     }

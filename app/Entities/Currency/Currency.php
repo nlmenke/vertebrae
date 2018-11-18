@@ -1,6 +1,9 @@
 <?php namespace App\Entities\Currency;
 
 use App\Entities\AbstractEntity;
+use App\Entities\Country\Country;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -26,6 +29,26 @@ class Currency extends AbstractEntity
         'decimal_precision',
         'exchange_rate',
     ];
+
+    /**
+     * The countries relationship instance.
+     *
+     * @return HasMany
+     */
+    public function countries(): HasMany
+    {
+        return $this->hasMany(Country::class);
+    }
+
+    /**
+     * Get the countries attribute.
+     *
+     * @return Country[]|Collection
+     */
+    public function getCountries()
+    {
+        return $this->getAttribute('countries');
+    }
 
     /**
      * Get the decimal_precision attribute.
