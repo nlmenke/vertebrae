@@ -2,6 +2,12 @@
 
 use Tests\TestCase;
 
+/**
+ * Class CurrencyTest
+ *
+ * @package Tests\Unit
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class CurrencyTest extends TestCase
 {
     /**
