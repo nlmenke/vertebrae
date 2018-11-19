@@ -3,12 +3,12 @@
 use Tests\TestCase;
 
 /**
- * Class ScriptTest
+ * Class LanguageTest
  *
  * @package Tests\Unit
  * @author  Nick Menke <nick@nlmenke.net>
  */
-class ScriptTest extends TestCase
+class LanguageTest extends TestCase
 {
     /**
      * A basic test example.

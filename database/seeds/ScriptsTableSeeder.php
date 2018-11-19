@@ -2,6 +2,11 @@
 
 use App\Entities\Script\Script;
 
+/**
+ * Class ScriptsTableSeeder
+ *
+ * @author Nick Menke <nick@nlmenke.net>
+ */
 class ScriptsTableSeeder extends AbstractSeeder
 {
     /**

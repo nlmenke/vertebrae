@@ -1,24 +1,24 @@
-<?php namespace App\Http\Resources\Script;
+<?php namespace App\Http\Resources\Language;
 
-use App\Entities\Script\Script;
+use App\Entities\Language\Language;
 use App\Http\Resources\AbstractResource;
 use Illuminate\Http\Request;
 
 /**
- * Class ScriptResource
+ * Class LanguageResource
  *
- * @package App\Http\Resources\Script
+ * @package App\Http\Resources\Language
  * @author  Nick Menke <nick@nlmenke.net>
  */
-class ScriptResource extends AbstractResource
+class LanguageResource extends AbstractResource
 {
     /**
      * Create a new resource instance.
      *
-     * @param Script $resource
+     * @param Language $resource
      * @return void
      */
-    public function __construct(Script $resource)
+    public function __construct(Language $resource)
     {
         parent::__construct($resource);
     }

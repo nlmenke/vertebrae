@@ -3,6 +3,12 @@
 use App\Entities\AbstractEntity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Script
+ *
+ * @package App\Entities\Script
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class Script extends AbstractEntity
 {
     use SoftDeletes;
