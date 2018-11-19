@@ -10,6 +10,5 @@ $factory->define(Language::class, function (Faker $faker) {
         'iso_alpha_2' => $faker->unique()->languageCode,
         'iso_alpha_3' => $faker->unique()->languageCode . $faker->randomLetter,
         'name' => $faker->firstName,
-        'native' => $faker->lastName,
     ];
 });

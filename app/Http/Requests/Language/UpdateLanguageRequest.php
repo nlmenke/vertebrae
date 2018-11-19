@@ -21,7 +21,6 @@ class UpdateLanguageRequest extends AbstractFormRequest
             'iso_alpha_2' => 'required|size:2|unique:languages,iso_alpha_2,' . $this->route('language') . ',id,deleted_at,null',
             'iso_alpha_3' => 'required|size:3|unique:languages,iso_alpha_3,' . $this->route('language') . ',id,deleted_at,null',
             'name' => 'required',
-            'native' => 'required',
         ];
     }
 

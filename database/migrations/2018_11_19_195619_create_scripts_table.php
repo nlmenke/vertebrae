@@ -4,13 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class CreateLanguagesTable
+ * Class CreateScriptsTable
  *
  * @author Nick Menke <nick@nlmenke.net>
  */
-class CreateLanguagesTable extends Migration
+class CreateScriptsTable extends Migration
 {
-    const TABLENAME = 'languages';
+    const TABLENAME = 'scripts';
 
     /**
      * Run the migrations.
@@ -21,11 +21,10 @@ class CreateLanguagesTable extends Migration
     {
         \Schema::create(self::TABLENAME, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('iso_alpha_2', 2)->index(); // ISO 639-1 alpha-2; 2-char
-            $table->string('iso_alpha_3', 3)->index(); // ISO 639-2 alpha-3; 3-char
+            $table->string('iso_alpha', 4); // ISO 15924; 4-char
+            $table->string('iso_numeric', 3); // ISO 15924; 3-number
             $table->string('name');
-            $table->string('native');
-            $table->string('script', 4)->default('Latn');
+            $table->string('direction')->default('l-r');
             $table->timestamps();
             $table->softDeletes();
         });

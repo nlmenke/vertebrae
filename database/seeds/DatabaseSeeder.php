@@ -17,5 +17,6 @@ class DatabaseSeeder extends AbstractSeeder
         $this->call(CurrenciesTableSeeder::class);
         $this->call(CountriesTableSeeder::class);
         $this->call(LanguagesTableSeeder::class);
+        $this->call(ScriptsTableSeeder::class);
     }
 }

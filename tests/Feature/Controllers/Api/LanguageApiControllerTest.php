@@ -26,6 +26,5 @@ class LanguageApiControllerTest extends AbstractApiControllerTest
         'iso_alpha_2',
         'iso_alpha_3',
         'name',
-        'native',
     ];
 }

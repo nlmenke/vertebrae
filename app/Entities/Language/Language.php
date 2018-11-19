@@ -22,11 +22,11 @@ class Language extends AbstractEntity
         'iso_alpha_2',
         'iso_alpha_3',
         'name',
-        'native',
-        'script',
     ];
 
     /**
+     * Get the iso_alpha_2 attribute.
+     *
      * @return string
      */
     public function getIsoAlpha2(): string
@@ -35,6 +35,8 @@ class Language extends AbstractEntity
     }
 
     /**
+     * Get the iso_alpha_3 attribute.
+     *
      * @return string
      */
     public function getIsoAlpha3(): string
@@ -43,26 +45,12 @@ class Language extends AbstractEntity
     }
 
     /**
+     * Get the name attribute.
+     *
      * @return string
      */
     public function getName(): string
     {
         return $this->getAttribute('name');
-    }
-
-    /**
-     * @return string
-     */
-    public function getNative(): string
-    {
-        return $this->getAttribute('native');
-    }
-
-    /**
-     * @return string
-     */
-    public function getScript(): string
-    {
-        return $this->getAttribute('script');
     }
 }

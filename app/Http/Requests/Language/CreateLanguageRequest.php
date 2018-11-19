@@ -21,7 +21,6 @@ class CreateLanguageRequest extends AbstractFormRequest
             'iso_alpha_2' => 'required|size:2|unique:languages',
             'iso_alpha_3' => 'required|size:3|unique:languages',
             'name' => 'required',
-            'native' => 'required',
         ];
     }
 
