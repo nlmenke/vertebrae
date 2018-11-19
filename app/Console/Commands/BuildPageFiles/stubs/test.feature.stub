@@ -2,7 +2,7 @@
 
 use App\Entities\Dummy\Dummy;
 
-class DummyApiControllerTest extends AbstractApiControllerTest
+class DummyApiTest extends AbstractApiControllerTest
 {
     /**
      * The entity used by the tests.
