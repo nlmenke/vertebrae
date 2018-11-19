@@ -3,12 +3,12 @@
 use Tests\TestCase;
 
 /**
- * Class CurrencyTest
+ * Class LanguageTest
  *
  * @package Tests\Unit
  * @author  Nick Menke <nick@nlmenke.net>
  */
-class CurrencyTest extends TestCase
+class LanguageTest extends TestCase
 {
     /**
      * A basic test example.
