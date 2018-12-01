@@ -18,9 +18,9 @@ class UpdateLanguageRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            'iso_alpha_2' => 'required|size:2|unique:languages,iso_alpha_2,' . $this->route('language') . ',id,deleted_at,null',
-            'iso_alpha_3' => 'required|size:3|unique:languages,iso_alpha_3,' . $this->route('language') . ',id,deleted_at,null',
-            'name' => 'required',
+            'iso_alpha_2' => 'required|string|size:2|unique:languages,iso_alpha_2,' . $this->route('language') . ',id,deleted_at,null',
+            'iso_alpha_3' => 'required|string|size:3|unique:languages,iso_alpha_3,' . $this->route('language') . ',id,deleted_at,null',
+            'name' => 'required|string',
         ];
     }
 

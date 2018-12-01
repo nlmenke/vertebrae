@@ -34,14 +34,25 @@ abstract class AbstractController extends Controller
     protected $model;
 
     /**
+     * The number of results to show per page.
+     *
      * @var int
      */
     protected $perPage;
 
     /**
+     * The order of the results.
+     *
      * @var array
      */
     protected $sorting;
+
+    /**
+     * Relationships to be returned with the results.
+     *
+     * @var array
+     */
+    protected $with = [];
 
     /**
      * Create a new controller instance.

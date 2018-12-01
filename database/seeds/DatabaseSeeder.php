@@ -18,5 +18,6 @@ class DatabaseSeeder extends AbstractSeeder
         $this->call(CountriesTableSeeder::class);
         $this->call(LanguagesTableSeeder::class);
         $this->call(ScriptsTableSeeder::class);
+        $this->call(LocalesTableSeeder::class); // must be after countries, languages, and scripts
     }
 }

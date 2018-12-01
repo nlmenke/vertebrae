@@ -38,7 +38,13 @@ abstract class AbstractApiController extends AbstractController
     public function index(): JsonResponse
     {
         try {
-            $result = $this->model->orderBy($this->sorting['column'], $this->sorting['direction'])
+            $result = $this->model;
+
+            if (array_key_exists('index', $this->with)) {
+                $result = $result->with($this->with['index']);
+            }
+
+            $result = $result->orderBy($this->sorting['column'], $this->sorting['direction'])
                 ->paginate($this->perPage);
 
             return $this->resource->collection($result)
@@ -62,7 +68,13 @@ abstract class AbstractApiController extends AbstractController
     public function show(int $id): JsonResponse
     {
         try {
-            $result = $this->model->findOrFail($id);
+            $result = $this->model;
+
+            if (array_key_exists('show', $this->with)) {
+                $result = $result->with($this->with['show']);
+            }
+
+            $result = $result->findOrFail($id);
 
             return $this->resource->make($result)
                 ->response();

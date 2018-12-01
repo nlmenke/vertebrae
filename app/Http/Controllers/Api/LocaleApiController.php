@@ -1,15 +1,15 @@
 <?php namespace App\Http\Controllers\Api;
 
-use App\Entities\Language\Language;
-use App\Http\Resources\Language\LanguageResource;
+use App\Entities\Locale\Locale;
+use App\Http\Resources\Locale\LocaleResource;
 
 /**
- * Class LanguageApiController
+ * Class LocaleApiController
  *
  * @package App\Http\Controllers\Api
  * @author  Nick Menke <nick@nlmenke.net>
  */
-class LanguageApiController extends AbstractApiController
+class LocaleApiController extends AbstractApiController
 {
     /**
      * Relationships to be returned with the results.
@@ -18,21 +18,25 @@ class LanguageApiController extends AbstractApiController
      */
     protected $with = [
         'index' => [
-            'countries',
+            'country',
+            'language',
+            'script',
         ],
         'show' => [
-            'countries',
+            'country',
+            'language',
+            'script',
         ],
     ];
 
     /**
      * Create a new controller instance.
      *
-     * @param Language         $model
-     * @param LanguageResource $resource
+     * @param Locale         $model
+     * @param LocaleResource $resource
      * @return void
      */
-    public function __construct(Language $model, LanguageResource $resource)
+    public function __construct(Locale $model, LocaleResource $resource)
     {
         $this->model = $model;
         $this->resource = $resource;

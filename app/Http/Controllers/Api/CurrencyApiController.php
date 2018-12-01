@@ -12,6 +12,20 @@ use App\Http\Resources\Currency\CurrencyResource;
 class CurrencyApiController extends AbstractApiController
 {
     /**
+     * Relationships to be returned with the results.
+     *
+     * @var array
+     */
+    protected $with = [
+        'index' => [
+            'countries',
+        ],
+        'show' => [
+            'countries',
+        ],
+    ];
+
+    /**
      * Create a new controller instance.
      *
      * @param Currency         $model

@@ -1,6 +1,10 @@
 <?php namespace App\Entities\Language;
 
 use App\Entities\AbstractEntity;
+use App\Entities\Country\Country;
+use App\Entities\Locale\Locale;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -23,6 +27,26 @@ class Language extends AbstractEntity
         'iso_alpha_3',
         'name',
     ];
+
+    /**
+     * The country relationship instance.
+     *
+     * @return HasManyThrough
+     */
+    public function countries(): HasManyThrough
+    {
+        return $this->hasManyThrough(Country::class, Locale::class, 'language_id', 'id', 'id', 'country_id');
+    }
+
+    /**
+     * Get the countries attribute.
+     *
+     * @return Country[]|Collection
+     */
+    public function getCountries()
+    {
+        return $this->getAttribute('countries');
+    }
 
     /**
      * Get the iso_alpha_2 attribute.
