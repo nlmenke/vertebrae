@@ -65,36 +65,6 @@ class Locale extends AbstractEntity
     }
 
     /**
-     * Get the country attribute.
-     *
-     * @return Country|null
-     */
-    public function getCountry(): ?Country
-    {
-        return $this->getAttribute('country');
-    }
-
-    /**
-     * Get the language attribute.
-     *
-     * @return Language
-     */
-    public function getLanguage(): Language
-    {
-        return $this->getAttribute('language');
-    }
-
-    /**
-     * Get the script attribute.
-     *
-     * @return Script
-     */
-    public function getScript(): Script
-    {
-        return $this->getAttribute('script');
-    }
-
-    /**
      * Get the code attribute.
      *
      * @return string
@@ -105,13 +75,13 @@ class Locale extends AbstractEntity
     }
 
     /**
-     * Get the native attribute.
+     * Get the country attribute.
      *
-     * @return string
+     * @return Country|null
      */
-    public function getNative(): string
+    public function getCountry(): ?Country
     {
-        return $this->getAttribute('native');
+        return $this->getAttribute('country');
     }
 
     /**
@@ -135,6 +105,36 @@ class Locale extends AbstractEntity
     }
 
     /**
+     * Get the language attribute.
+     *
+     * @return Language
+     */
+    public function getLanguage(): Language
+    {
+        return $this->getAttribute('language');
+    }
+
+    /**
+     * Get the native attribute.
+     *
+     * @return string
+     */
+    public function getNative(): string
+    {
+        return $this->getAttribute('native');
+    }
+
+    /**
+     * Get the script attribute.
+     *
+     * @return Script
+     */
+    public function getScript(): Script
+    {
+        return $this->getAttribute('script');
+    }
+
+    /**
      * Get the thousands_separator attribute.
      *
      * @return string
@@ -145,11 +145,11 @@ class Locale extends AbstractEntity
     }
 
     /**
-     * Get the active attribute.
+     * Check whether the locale is active.
      *
      * @return bool
      */
-    public function getActive(): bool
+    public function isActive(): bool
     {
         return $this->getAttribute('active');
     }

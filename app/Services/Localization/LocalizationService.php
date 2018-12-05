@@ -64,7 +64,7 @@ class LocalizationService
      */
     public function getActiveLocales()
     {
-        if (!$this->activeLocales->isEmpty()) {
+        if ($this->activeLocales !== null && $this->activeLocales->isNotEmpty()) {
             return $this->activeLocales;
         }
 
