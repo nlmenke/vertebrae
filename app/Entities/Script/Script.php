@@ -38,6 +38,16 @@ class Script extends AbstractEntity
     }
 
     /**
+     * Get the direction attribute.
+     *
+     * @return string
+     */
+    public function getDirection(): string
+    {
+        return $this->getAttribute('direction');
+    }
+
+    /**
      * Get the iso_alpha attribute.
      *
      * @return string
@@ -65,15 +75,5 @@ class Script extends AbstractEntity
     public function getName(): string
     {
         return $this->getAttribute('name');
-    }
-
-    /**
-     * Get the direction attribute.
-     *
-     * @return string
-     */
-    public function getDirection(): string
-    {
-        return $this->getAttribute('direction');
     }
 }
