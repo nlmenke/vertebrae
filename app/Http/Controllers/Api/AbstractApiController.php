@@ -16,6 +16,8 @@ use Illuminate\Http\Response;
 abstract class AbstractApiController extends AbstractController
 {
     /**
+     * The resource instance.
+     *
      * @var AbstractResource
      */
     protected $resource;
@@ -38,18 +40,27 @@ abstract class AbstractApiController extends AbstractController
     public function index(): JsonResponse
     {
         try {
-            $result = $this->model->orderBy($this->sorting['column'], $this->sorting['direction'])
+            $result = $this->model;
+
+            if (array_key_exists('index', $this->with)) {
+                $result = $result->with($this->with['index']);
+            }
+
+            $result = $result->orderBy($this->sorting['column'], $this->sorting['direction'])
                 ->paginate($this->perPage);
 
             return $this->resource->collection($result)
-                ->response();
+                ->response()
+                ->header('Content-Language', $this->currentLocale);
         } catch (\Exception $e) {
             return JsonResponse::create([
                 'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR, [
+                'Content-Language' => $this->currentLocale,
+            ]);
         }
     }
 
@@ -62,24 +73,35 @@ abstract class AbstractApiController extends AbstractController
     public function show(int $id): JsonResponse
     {
         try {
-            $result = $this->model->findOrFail($id);
+            $result = $this->model;
+
+            if (array_key_exists('show', $this->with)) {
+                $result = $result->with($this->with['show']);
+            }
+
+            $result = $result->findOrFail($id);
 
             return $this->resource->make($result)
-                ->response();
+                ->response()
+                ->header('Content-Language', $this->currentLocale);
         } catch (ModelNotFoundException $e) {
             return JsonResponse::create([
                 'message' => trans('exceptions.http.404_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_NOT_FOUND);
+            ], Response::HTTP_NOT_FOUND, [
+                'Content-Language' => $this->currentLocale,
+            ]);
         } catch (\Exception $e) {
             return JsonResponse::create([
                 'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR, [
+                'Content-Language' => $this->currentLocale,
+            ]);
         }
     }
 
@@ -101,6 +123,7 @@ abstract class AbstractApiController extends AbstractController
 
             return $this->resource->make($result)
                 ->response()
+                ->header('Content-Language', $this->currentLocale)
                 ->header('Location', route($this->baseRouteName . 'show', ['id' => $result->getId()]));
         } catch (\Exception $e) {
             \DB::rollBack();
@@ -110,7 +133,9 @@ abstract class AbstractApiController extends AbstractController
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR, [
+                'Content-Language' => $this->currentLocale,
+            ]);
         }
     }
 
@@ -134,6 +159,7 @@ abstract class AbstractApiController extends AbstractController
 
             return $this->resource->make($result)
                 ->response()
+                ->header('Content-Language', $this->currentLocale)
                 ->header('Location', route($this->baseRouteName . 'show', ['id' => $result->getId()]));
         } catch (ModelNotFoundException $e) {
             \DB::rollBack();
@@ -143,7 +169,9 @@ abstract class AbstractApiController extends AbstractController
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_NOT_FOUND);
+            ], Response::HTTP_NOT_FOUND, [
+                'Content-Language' => $this->currentLocale,
+            ]);
         } catch (\Exception $e) {
             \DB::rollBack();
 
@@ -152,7 +180,9 @@ abstract class AbstractApiController extends AbstractController
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR, [
+                'Content-Language' => $this->currentLocale,
+            ]);
         }
     }
 
@@ -174,6 +204,7 @@ abstract class AbstractApiController extends AbstractController
             \DB::commit();
 
             return JsonResponse::create(null, Response::HTTP_NO_CONTENT)
+                ->header('Content-Language', $this->currentLocale)
                 ->header('Location', route($this->baseRouteName . 'index'));
         } catch (ModelNotFoundException $e) {
             \DB::rollBack();
@@ -183,7 +214,9 @@ abstract class AbstractApiController extends AbstractController
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_NOT_FOUND);
+            ], Response::HTTP_NOT_FOUND, [
+                'Content-Language' => $this->currentLocale,
+            ]);
         } catch (\Exception $e) {
             \DB::rollBack();
 
@@ -192,7 +225,9 @@ abstract class AbstractApiController extends AbstractController
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
                 ],
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR, [
+                'Content-Language' => $this->currentLocale,
+            ]);
         }
     }
 }

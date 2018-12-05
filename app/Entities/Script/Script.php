@@ -1,6 +1,8 @@
 <?php namespace App\Entities\Script;
 
 use App\Entities\AbstractEntity;
+use App\Entities\Locale\Locale;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -24,6 +26,26 @@ class Script extends AbstractEntity
         'name',
         'direction',
     ];
+
+    /**
+     * The locales relationship instance.
+     *
+     * @return HasMany
+     */
+    public function locales(): HasMany
+    {
+        return $this->hasMany(Locale::class);
+    }
+
+    /**
+     * Get the direction attribute.
+     *
+     * @return string
+     */
+    public function getDirection(): string
+    {
+        return $this->getAttribute('direction');
+    }
 
     /**
      * Get the iso_alpha attribute.
@@ -53,15 +75,5 @@ class Script extends AbstractEntity
     public function getName(): string
     {
         return $this->getAttribute('name');
-    }
-
-    /**
-     * Get the direction attribute.
-     *
-     * @return string
-     */
-    public function getDirection(): string
-    {
-        return $this->getAttribute('direction');
     }
 }

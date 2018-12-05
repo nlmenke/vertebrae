@@ -27,6 +27,13 @@ abstract class AbstractController extends Controller
     protected $baseRouteName;
 
     /**
+     * The current locale.
+     *
+     * @var string
+     */
+    protected $currentLocale;
+
+    /**
      * The entity instance.
      *
      * @var AbstractEntity|EloquentBuilder
@@ -34,14 +41,25 @@ abstract class AbstractController extends Controller
     protected $model;
 
     /**
+     * The number of results to show per page.
+     *
      * @var int
      */
     protected $perPage;
 
     /**
+     * The order of the results.
+     *
      * @var array
      */
     protected $sorting;
+
+    /**
+     * Relationships to be returned with the results.
+     *
+     * @var array
+     */
+    protected $with = [];
 
     /**
      * Create a new controller instance.
@@ -51,6 +69,8 @@ abstract class AbstractController extends Controller
     public function __construct()
     {
         $this->baseRouteName = str_replace(['index', 'show', 'store', 'update', 'destroy'], '', \Request::route()->getName());
+
+        $this->currentLocale = app()->getLocale();
 
         $this->perPage = (int)\Request::get('count', 10);
 

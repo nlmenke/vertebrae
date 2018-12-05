@@ -18,12 +18,9 @@ class CreateCurrencyRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            'iso_alpha' => 'required|size:3|unique:currencies',
-            'iso_numeric' => 'required|size:3|unique:currencies',
-            'name' => 'required',
-            'symbol' => 'required',
-            'decimal_precision' => 'required',
-            'exchange_rate' => 'required',
+            'iso_alpha' => 'required|string|size:3|unique:currencies',
+            'iso_numeric' => 'required|string|size:3|unique:currencies',
+            'name' => 'required|string',
         ];
     }
 

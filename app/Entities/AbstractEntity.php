@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class AbstractEntity
@@ -22,6 +23,16 @@ abstract class AbstractEntity extends Model
     }
 
     /**
+     * Get the deleted_at attribute.
+     *
+     * @return Carbon|null
+     */
+    public function getDeletedAt(): ?Carbon
+    {
+        return $this->usesSoftDeletes() ? $this->getAttribute(app(SoftDeletes::class)->getDeletedAtColumn()) : null;
+    }
+
+    /**
      * Get the id attribute.
      *
      * @return int
@@ -39,5 +50,15 @@ abstract class AbstractEntity extends Model
     public function getUpdatedAt(): ?Carbon
     {
         return $this->usesTimestamps() ? $this->getAttribute($this->getUpdatedAtColumn()) : null;
+    }
+
+    /**
+     * Determine if the model uses soft deletes.
+     *
+     * @return bool
+     */
+    protected function usesSoftDeletes(): bool
+    {
+        return in_array('SoftDeletingTrait', class_uses(self::class));
     }
 }

@@ -18,11 +18,11 @@ class CreateCountryRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            'currency_id' => 'integer',
-            'iso_alpha_2' => 'required|size:2|unique:countries',
-            'iso_alpha_3' => 'required|size:3|unique:countries',
-            'iso_numeric' => 'required|size:3|unique:countries',
-            'name' => 'required',
+            'currency_id' => 'integer|nullable',
+            'iso_alpha_2' => 'required|string|size:2|unique:countries',
+            'iso_alpha_3' => 'required|string|size:3|unique:countries',
+            'iso_numeric' => 'required|string|size:3|unique:countries',
+            'name' => 'required|string',
         ];
     }
 

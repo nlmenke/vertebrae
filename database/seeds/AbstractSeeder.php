@@ -1,6 +1,7 @@
 <?php
 
 use App\Entities\AbstractEntity;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Seeder;
 
 /**
@@ -20,7 +21,7 @@ abstract class AbstractSeeder extends Seeder
     /**
      * The entity used for importing.
      *
-     * @var AbstractEntity
+     * @var AbstractEntity|EloquentBuilder
      */
     protected $model;
 

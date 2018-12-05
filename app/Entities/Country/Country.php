@@ -2,7 +2,10 @@
 
 use App\Entities\AbstractEntity;
 use App\Entities\Currency\Currency;
+use App\Entities\Language\Language;
+use App\Entities\Locale\Locale;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -39,11 +42,21 @@ class Country extends AbstractEntity
     }
 
     /**
+     * The languages relationship instance.
+     *
+     * @return HasManyThrough
+     */
+    public function languages(): HasManyThrough
+    {
+        return $this->hasManyThrough(Language::class, Locale::class, 'country_id', 'id', 'id', 'language_id');
+    }
+
+    /**
      * Get the currency attribute.
      *
      * @return Currency|null
      */
-    public function getCurrency()
+    public function getCurrency(): ?Currency
     {
         return $this->getAttribute('currency');
     }

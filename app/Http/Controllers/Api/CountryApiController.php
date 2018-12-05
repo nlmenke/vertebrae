@@ -12,6 +12,22 @@ use App\Http\Resources\Country\CountryResource;
 class CountryApiController extends AbstractApiController
 {
     /**
+     * Relationships to be returned with the results.
+     *
+     * @var array
+     */
+    protected $with = [
+        'index' => [
+            'currency',
+            'languages',
+        ],
+        'show' => [
+            'currency',
+            'languages',
+        ],
+    ];
+
+    /**
      * Create a new controller instance.
      *
      * @param Country         $model

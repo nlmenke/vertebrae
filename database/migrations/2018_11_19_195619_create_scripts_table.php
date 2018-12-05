@@ -21,8 +21,8 @@ class CreateScriptsTable extends Migration
     {
         \Schema::create(self::TABLENAME, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('iso_alpha', 4); // ISO 15924; 4-char
-            $table->string('iso_numeric', 3); // ISO 15924; 3-number
+            $table->string('iso_alpha', 4); // ISO 15924 alpha; 4-char
+            $table->string('iso_numeric', 3); // ISO 15924 numeric; 3-number
             $table->string('name');
             $table->string('direction')->default('l-r');
             $table->timestamps();

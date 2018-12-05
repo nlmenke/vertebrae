@@ -69,6 +69,7 @@ class LanguagesTableSeeder extends AbstractSeeder
         ['iso_alpha_2' => 'fa', 'iso_alpha_3' => 'fas', 'name' => 'Persian'],
         ['iso_alpha_2' => 'ff', 'iso_alpha_3' => 'ful', 'name' => 'Fulah'],
         ['iso_alpha_2' => 'fi', 'iso_alpha_3' => 'fin', 'name' => 'Finnish'],
+        ['iso_alpha_2' => 'fj', 'iso_alpha_3' => 'fij', 'name' => 'Fijian'],
         ['iso_alpha_2' => 'fo', 'iso_alpha_3' => 'fao', 'name' => 'Faroese'],
         ['iso_alpha_2' => 'fr', 'iso_alpha_3' => 'fra', 'name' => 'French'],
         ['iso_alpha_2' => 'fy', 'iso_alpha_3' => 'fry', 'name' => 'Frisian'],

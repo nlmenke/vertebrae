@@ -1,6 +1,7 @@
 <?php namespace Tests\Feature\Controllers\Api;
 
 use App\Entities\AbstractEntity;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
@@ -13,11 +14,23 @@ use Tests\TestCase;
 abstract class AbstractApiControllerTest extends TestCase
 {
     /**
+     * @todo Remove the need for this trait. Mock the LocalizationService?
+     */
+    use WithoutMiddleware;
+
+    /**
      * The base route name used by the tests.
      *
      * @var string
      */
     protected $baseRouteName;
+
+    /**
+     * The locale used as the Accept-Language header.
+     *
+     * @var string
+     */
+    protected $currentLocale;
 
     /**
      * The entity used by the tests.
@@ -34,17 +47,19 @@ abstract class AbstractApiControllerTest extends TestCase
     protected $validationRequirements = [];
 
     /**
-     * Create a new test instance.
+     * Setup the test environment.
      *
      * @return void
      */
-    public function __construct()
+    public function setUp(): void
     {
-        parent::__construct();
+        parent::setUp();
 
         if (!$this->baseRouteName) {
             $this->baseRouteName = $this->getBaseRouteNameFromModel();
         }
+
+        $this->currentLocale = $this->app->getLocale();
     }
 
     /**
@@ -99,7 +114,7 @@ abstract class AbstractApiControllerTest extends TestCase
      *
      * @return array
      */
-    protected function getValidationRequirementErrors()
+    protected function getValidationRequirementErrors(): array
     {
         $validation = [];
         if (!empty($this->validationRequirements)) {
@@ -124,7 +139,8 @@ abstract class AbstractApiControllerTest extends TestCase
         if (\Route::has($route)) {
             $resources = $this->createResources(10);
 
-            $response = $this->get(route($route));
+            $response = $this->withHeader('Accept-Language', $this->currentLocale)
+                ->get(route($route));
             $response->assertStatus(Response::HTTP_OK)
                 ->assertJson([
                     'data' => $resources->toArray(),
@@ -147,7 +163,8 @@ abstract class AbstractApiControllerTest extends TestCase
         if (\Route::has($route)) {
             $resource = $this->createResources();
 
-            $response = $this->get(route($route, $resource->getId()));
+            $response = $this->withHeader('Accept-Language', $this->currentLocale)
+                ->get(route($route, $resource->getId()));
             $response->assertStatus(Response::HTTP_OK)
                 ->assertJson([
                     'data' => $resource->toArray(),
@@ -170,7 +187,8 @@ abstract class AbstractApiControllerTest extends TestCase
         if (\Route::has($route)) {
             $request = $this->createRequest();
 
-            $response = $this->postJson(route($route), $request);
+            $response = $this->withHeader('Accept-Language', $this->currentLocale)
+                ->postJson(route($route), $request);
             $response->assertJsonMissingValidationErrors($this->validationRequirements)
                 ->assertStatus(Response::HTTP_CREATED)
                 ->assertJson([
@@ -201,7 +219,8 @@ abstract class AbstractApiControllerTest extends TestCase
         if (\Route::has($route)) {
             $request = $this->createRequest(true);
 
-            $response = $this->postJson(route($route), $request);
+            $response = $this->withHeader('Accept-Language', $this->currentLocale)
+                ->postJson(route($route), $request);
             $response->assertJsonValidationErrors($this->validationRequirements)
                 ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
                 ->assertJson([
@@ -226,7 +245,8 @@ abstract class AbstractApiControllerTest extends TestCase
             $resource = $this->createResources();
             $request = $this->createRequest();
 
-            $response = $this->putJson(route($route, $resource->getId()), $request);
+            $response = $this->withHeader('Accept-Language', $this->currentLocale)
+                ->putJson(route($route, $resource->getId()), $request);
             $response->assertJsonMissingValidationErrors($this->validationRequirements)
                 ->assertStatus(Response::HTTP_OK)
                 ->assertJson([
@@ -258,7 +278,8 @@ abstract class AbstractApiControllerTest extends TestCase
             $resource = $this->createResources();
             $request = $this->createRequest(true);
 
-            $response = $this->putJson(route($route, $resource->getId()), $request);
+            $response = $this->withHeader('Accept-Language', $this->currentLocale)
+                ->putJson(route($route, $resource->getId()), $request);
             $response->assertJsonValidationErrors($this->validationRequirements)
                 ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
                 ->assertJson([
@@ -282,7 +303,8 @@ abstract class AbstractApiControllerTest extends TestCase
         if (\Route::has($route)) {
             $resource = $this->createResources();
 
-            $response = $this->deleteJson(route($route, $resource->getId()));
+            $response = $this->withHeader('Accept-Language', $this->currentLocale)
+                ->deleteJson(route($route, $resource->getId()));
             $response->assertStatus(Response::HTTP_NO_CONTENT);
 
             // verify resource was deleted
