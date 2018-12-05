@@ -27,4 +27,6 @@ return [
         '503_message' => 'Sorry, we are doing some maintenance. Please check back soon.',
     ],
 
+    'active_locales_not_defined' => 'Active locales have not been defined.',
+
 ];
