@@ -1,0 +1,30 @@
+<?php namespace DummyRootNamespaceHttp\Resources\Dummy;
+
+use App\Entities\Dummy\Dummy;
+use App\Http\Resources\AbstractResource;
+use Illuminate\Http\Request;
+
+class DummyResource extends AbstractResource
+{
+    /**
+     * Create a new resource instance.
+     *
+     * @param Dummy $resource
+     * @return void
+     */
+    public function __construct(Dummy $resource)
+    {
+        parent::__construct($resource);
+    }
+
+    /**
+     * Transform the resource into an array.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function toArray($request): array
+    {
+        return parent::toArray($request);
+    }
+}

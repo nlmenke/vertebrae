@@ -6,10 +6,10 @@
 
     <title>{{ config('app.name') }}</title>
 
-    <link href="{{ asset('favicon.ico', 'assets') }}" type="image/x-icon" rel="icon">
+    <link href="{{ asset('favicon.ico') }}" type="image/x-icon" rel="icon">
 
     <!-- styles -->
-    <link href="{{ mix('styles/app.css', 'assets') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset(mix('styles/app.css', 'assets')) }}" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="flex-center position-ref full-height">
@@ -33,22 +33,27 @@
         </div>
 
         <div class="subtitle m-b-md">
-            Built with Laravel {{ \App::version() }}
+            Built with Laravel {{ $appVersion = \App::version() }}
         </div>
 
-        <div class="links">
-            <a href="https://laravel.com/docs">Documentation</a>
-            <a href="https://laracasts.com">Laracasts</a>
-            <a href="https://laravel-news.com">News</a>
-            <a href="https://nova.laravel.com">Nova</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
+        <div class="links m-b-md">
+            <a href="https://laravel.com/docs/{{ substr($appVersion, 0, strpos($appVersion, '.', 2)) }}">Laradocs</a>
+            <a href="https://github.com/nlmenke/vertebrae">GitHub</a>
+        </div>
+
+        <div class="badges">
+            <a href="https://travis-ci.org/nlmenke/vertebrae"><img src="https://travis-ci.org/nlmenke/vertebrae.svg"></a>
+            <a href="https://github.com/nlmenke/vertebrae/blob/master/LICENSE.md"><img src="https://poser.pugx.org/laravel/laravel/license"></a>
+        </div>
+
+        <div class="contributors">
+            Chiropractors: <a href="https://github.com/nlmenke">nlmenke</a>
         </div>
     </div>
 </div>
 
 <!-- scripts -->
-<script src="{{ mix('scripts/app.js', 'assets') }}" type="text/javascript"></script>
+<script src="{{ asset(mix('scripts/app.js', 'assets')) }}" type="text/javascript"></script>
 
 </body>
 </html>

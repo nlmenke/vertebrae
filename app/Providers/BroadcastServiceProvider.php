@@ -2,6 +2,12 @@
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class BroadcastServiceProvider
+ *
+ * @package App\Providers
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class BroadcastServiceProvider extends ServiceProvider
 {
     /**

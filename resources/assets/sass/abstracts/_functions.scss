@@ -1,0 +1,14 @@
+// Native 'url(...)' function wrapper
+@function asset($base, $type, $path) {
+    @return url($base + $type + $path);
+}
+
+// Returns URL to an image based on it's path
+@function image($path, $base: $base-url) {
+    @return asset($base, 'images/', $path);
+}
+
+// Returns URL to a font based on it's path
+@function font($path, $base: $base-url) {
+    @return asset($base, 'fonts/', $path);
+}

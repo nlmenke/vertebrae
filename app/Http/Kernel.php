@@ -3,6 +3,7 @@
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\CheckForMaintenanceMode;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\Localization\LocalizeApi;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
@@ -22,6 +23,12 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+/**
+ * Class Kernel
+ *
+ * @package App\Http
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 class Kernel extends HttpKernel
 {
     /**
@@ -57,6 +64,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            LocalizeApi::class,
         ],
     ];
 
