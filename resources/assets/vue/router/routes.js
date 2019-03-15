@@ -7,6 +7,7 @@
 import Dashboard from './views/dashboard';
 import CountryIndex from './views/countries/index';
 import CurrencyIndex from './views/currencies/index';
+import LanguageIndex from './views/languages/index';
 
 export default [
     {
@@ -23,5 +24,10 @@ export default [
         path: '/currencies',
         name: 'currencies.index',
         component: CurrencyIndex,
+    },
+    {
+        path: '/languages',
+        name: 'languages.index',
+        component: LanguageIndex,
     },
 ]

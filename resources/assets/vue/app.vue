@@ -15,6 +15,9 @@
                     <li class="nav-item" :class="{ 'active': isPath('/currencies') }">
                         <RouterLink :to="{ path: 'currencies' }" class="nav-link">Currencies</RouterLink>
                     </li>
+                    <li class="nav-item" :class="{ 'active': isPath('/languages') }">
+                        <RouterLink :to="{ path: 'languages' }" class="nav-link">Languages</RouterLink>
+                    </li>
                 </ul>
             </div>
         </nav>

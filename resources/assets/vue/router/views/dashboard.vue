@@ -3,6 +3,7 @@
         <div class="top-right links">
             <RouterLink :to="{ path: 'countries' }">Countries</RouterLink>
             <RouterLink :to="{ path: 'currencies' }">Currencies</RouterLink>
+            <RouterLink :to="{ path: 'languages' }">Languages</RouterLink>
         </div>
 
         <div class="content">
