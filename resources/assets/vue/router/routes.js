@@ -5,6 +5,7 @@
  */
 
 import Dashboard from './views/dashboard';
+import CountryIndex from './views/countries/index';
 import CurrencyIndex from './views/currencies/index';
 
 export default [
@@ -12,6 +13,11 @@ export default [
         path: '/',
         name: 'dashboard',
         component: Dashboard,
+    },
+    {
+        path: '/countries',
+        name: 'countries.index',
+        component: CountryIndex,
     },
     {
         path: '/currencies',

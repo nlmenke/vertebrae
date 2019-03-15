@@ -1,6 +1,7 @@
 <template>
     <div class="flex-center position-ref full-height">
         <div class="top-right links">
+            <RouterLink :to="{ path: 'countries' }">Countries</RouterLink>
             <RouterLink :to="{ path: 'currencies' }">Currencies</RouterLink>
         </div>
 
