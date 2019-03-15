@@ -49,7 +49,7 @@
 
             <div class="badges">
                 <a href="https://travis-ci.org/nlmenke/vertebrae"><img src="https://travis-ci.org/nlmenke/vertebrae.svg"></a>
-                <a href="https://github.com/nlmenke/vertebrae/blob/master/LICENSE.md"><img src="https://poser.pugx.org/laravel/laravel/license"></a>
+                <a href="https://github.com/nlmenke/vertebrae/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-428F7E.svg"></a>
             </div>
 
             <div class="contributors">
