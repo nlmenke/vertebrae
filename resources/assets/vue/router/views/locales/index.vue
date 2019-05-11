@@ -1,30 +1,28 @@
 <template>
-    <main id="currencies" class="container">
+    <main id="locales" class="container">
         <div class="error" v-if="error">
             <p>{{ error }}</p>
         </div>
 
         <div class="table-responsive">
-            <table v-if="currencies" class="table table-striped table-bordered table-hover">
+            <table v-if="locales" class="table table-striped table-bordered table-hover">
                 <thead>
-                    <tr>
-                        <th>ISO Alpha</th>
-                        <th>ISO Numeric</th>
-                        <th>Name</th>
-                        <th>Symbol</th>
-                        <th>Decimal Precision</th>
-                        <th>Exchange Rate</th>
-                    </tr>
+                <tr>
+                    <th>Code</th>
+                    <th>Language (Native)</th>
+                    <th>Language (English)</th>
+                    <th>Script</th>
+                    <th>Active?</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="currency in currencies">
-                        <td>{{ currency.iso_alpha }}</td>
-                        <td>{{ currency.iso_numeric }}</td>
-                        <td>{{ currency.name }}</td>
-                        <td>{{ currency.symbol }}</td>
-                        <td>{{ currency.decimal_precision }}</td>
-                        <td>{{ currency.exchange_rate }}</td>
-                    </tr>
+                <tr v-for="locale in locales">
+                    <td>{{ locale.code }}</td>
+                    <td>{{ locale.native }}</td>
+                    <td>{{ locale.language.name }}</td>
+                    <td>{{ locale.script.name }}</td>
+                    <td>{{ locale.active ? 'Yes' : 'No' }}</td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -47,12 +45,12 @@
 <script>
     import axios from 'axios';
 
-    const getCurrencies = (page, callback) => {
+    const getLocales = (page, callback) => {
         const params = {
             page
         };
 
-        axios.get('v1/currencies', { params })
+        axios.get('v1/locales', { params })
             .then(response => {
                 callback(response.data);
             })
@@ -64,7 +62,7 @@
     export default {
         data() {
             return {
-                currencies: null,
+                locales: null,
                 meta: null,
                 links: {
                     first: null,
@@ -131,14 +129,14 @@
             },
         },
         beforeRouteEnter(to, from, next) {
-            getCurrencies(to.query.page, (data, error) => {
+            getLocales(to.query.page, (data, error) => {
                 next(vm => vm.setData(data, error));
             });
         },
         beforeRouteUpdate(to, from, next) {
-            this.currencies = this.links = this.meta = null;
+            this.locales = this.links = this.meta = null;
 
-            getCurrencies(to.query.page, (data, error) => {
+            getLocales(to.query.page, (data, error) => {
                 this.setData(data, error);
 
                 next();
@@ -155,11 +153,11 @@
             onPage(page) {
                 return (!this.meta || this.meta.current_page === page);
             },
-            setData({ data: currencies, links, meta }, error) {
+            setData({ data: locales, links, meta }, error) {
                 if (error) {
                     this.error = error.toString();
                 } else {
-                    this.currencies = currencies;
+                    this.locales = locales;
                     this.links = links;
                     this.meta = meta;
                 }

@@ -10,7 +10,6 @@
                 <tr>
                     <th>ISO Alpha 2</th>
                     <th>ISO Alpha 3</th>
-                    <th>ISO Numeric</th>
                     <th>Name</th>
                 </tr>
                 </thead>
@@ -18,7 +17,6 @@
                 <tr v-for="language in languages">
                     <td>{{ language.iso_alpha_2 }}</td>
                     <td>{{ language.iso_alpha_3 }}</td>
-                    <td>{{ language.iso_numeric }}</td>
                     <td>{{ language.name }}</td>
                 </tr>
                 </tbody>

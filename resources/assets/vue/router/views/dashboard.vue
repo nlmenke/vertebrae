@@ -4,6 +4,7 @@
             <RouterLink :to="{ path: 'countries' }">Countries</RouterLink>
             <RouterLink :to="{ path: 'currencies' }">Currencies</RouterLink>
             <RouterLink :to="{ path: 'languages' }">Languages</RouterLink>
+            <RouterLink :to="{ path: 'locales' }">Locales</RouterLink>
         </div>
 
         <div class="content">

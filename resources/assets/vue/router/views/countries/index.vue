@@ -12,6 +12,7 @@
                     <th>ISO Alpha 3</th>
                     <th>ISO Numeric</th>
                     <th>Name</th>
+                    <th>Currency</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,7 @@
                     <td>{{ country.iso_alpha_3 }}</td>
                     <td>{{ country.iso_numeric }}</td>
                     <td>{{ country.name }}</td>
+                    <td>{{ country.currency ? country.currency.iso_alpha : null }}</td>
                 </tr>
                 </tbody>
             </table>
