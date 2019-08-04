@@ -4,7 +4,8 @@ matrix:
     fast_finish: true
 
 php:
-    - "7.2"
+    - '7.2'
+    - '7.3'
 
 mysql:
     - database: ci_vertebrae
@@ -23,11 +24,14 @@ before_install:
 install:
     - mysql -e 'create database ci_vertebrae;'
     - cp .env.ci .env
-    - composer install --no-interaction
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
     - php artisan key:generate
-    - php artisan migrate --seed
-    - yarn
-    - npm run prod
+    - php artisan migrate:fresh --seed
+    - yarn install --pure-lockfile
+    - yarn run production --progress false
 
 script:
-    - vendor/bin/phpunit
+    - vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
