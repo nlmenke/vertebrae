@@ -16,7 +16,6 @@ services:
     - redis-server
 
 before_install:
-    - phpenv config-rm xdebug.ini || true
     - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - printf "\n" | pecl install -f redis
     - travis_retry composer self-update
@@ -24,7 +23,7 @@ before_install:
 install:
     - mysql -e 'create database ci_vertebrae;'
     - cp .env.ci .env
-    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - composer install --no-ansi --no-interaction --no-progress --no-scripts --no-suggest
     - php artisan key:generate
     - php artisan migrate:fresh --seed
     - yarn install --pure-lockfile
