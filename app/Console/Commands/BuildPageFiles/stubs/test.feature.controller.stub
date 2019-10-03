@@ -3,7 +3,6 @@
 namespace Tests\Feature\Controllers;
 
 use App\Entities\Dummy\Dummy;
-use Tests\Feature\Controllers\AbstractControllerTest;
 
 class DummyControllerTest extends AbstractControllerTest
 {

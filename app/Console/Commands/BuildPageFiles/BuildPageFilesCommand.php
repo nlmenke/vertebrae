@@ -252,7 +252,7 @@ class BuildPageFilesCommand extends Command
             'LowerDummy' => strtolower($name),
             'Dummy' => $name,
             'LowerDummies' => strtolower(Str::plural($name)),
-            'Dummies' => strtolower(Str::plural($name)),
+            'Dummies' => Str::plural($name),
         ];
 
         return str_replace(array_keys($replacements), array_values($replacements), $file);

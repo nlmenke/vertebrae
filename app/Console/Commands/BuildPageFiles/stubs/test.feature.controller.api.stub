@@ -3,7 +3,6 @@
 namespace Tests\Feature\Controllers\Api;
 
 use App\Entities\Dummy\Dummy;
-use Tests\Feature\Controllers\Api\AbstractApiControllerTest;
 
 class DummyApiControllerTest extends AbstractApiControllerTest
 {
