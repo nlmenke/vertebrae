@@ -1,8 +1,11 @@
-<?php namespace Tests\Feature\Controllers\Api;
+<?php declare(strict_types=1);
+
+namespace Tests\Feature\Controllers;
 
 use App\Entities\Dummy\Dummy;
+use Tests\Feature\Controllers\AbstractControllerTest;
 
-class DummyApiControllerTest extends AbstractApiControllerTest
+class DummyControllerTest extends AbstractControllerTest
 {
     /**
      * The entity used by the tests.

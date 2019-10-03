@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Auth;
+<?php declare(strict_types=1);
+
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\AbstractController;
 use Illuminate\Foundation\Auth\VerifiesEmails;
@@ -27,6 +29,8 @@ class VerificationController extends AbstractController
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('auth');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');

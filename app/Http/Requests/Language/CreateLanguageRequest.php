@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests\Language;
+<?php declare(strict_types=1);
+
+namespace App\Http\Requests\Language;
 
 use App\Http\Requests\AbstractFormRequest;
 

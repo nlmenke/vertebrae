@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Entities\Language\Language;
 use Faker\Generator as Faker;

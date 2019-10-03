@@ -1,4 +1,6 @@
-<?php namespace App\Http\Resources\Locale;
+<?php declare(strict_types=1);
+
+namespace App\Http\Resources\Locale;
 
 use App\Entities\Locale\Locale;
 use App\Http\Resources\AbstractResource;

@@ -1,4 +1,6 @@
-<?php namespace App\Entities\Script;
+<?php declare(strict_types=1);
+
+namespace App\Entities\Script;
 
 use App\Entities\AbstractEntity;
 use App\Entities\Locale\Locale;

@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests\Currency;
+<?php declare(strict_types=1);
+
+namespace App\Http\Requests\Currency;
 
 use App\Http\Requests\AbstractFormRequest;
 
@@ -18,8 +20,8 @@ class UpdateCurrencyRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            'iso_alpha' => 'required|string|size:3|unique:currencies,iso_alpha,' . $this->route('currency') . ',id,deleted_at,null',
-            'iso_numeric' => 'required|string|size:3|unique:currencies,iso_numeric,' . $this->route('currency') . ',id,deleted_at,null',
+            'iso_alpha' => 'required|string|size:3|unique:currencies,iso_alpha,' . $this->route('currency') . ',id,deleted_at,NULL',
+            'iso_numeric' => 'required|string|size:3|unique:currencies,iso_numeric,' . $this->route('currency') . ',id,deleted_at,NULL',
             'name' => 'required|string',
         ];
     }

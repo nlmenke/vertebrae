@@ -1,4 +1,6 @@
-<?php namespace App\Http\Resources\Country;
+<?php declare(strict_types=1);
+
+namespace App\Http\Resources\Country;
 
 use App\Entities\Country\Country;
 use App\Http\Resources\AbstractResource;

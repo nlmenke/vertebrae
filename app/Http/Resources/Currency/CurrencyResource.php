@@ -1,4 +1,6 @@
-<?php namespace App\Http\Resources\Currency;
+<?php declare(strict_types=1);
+
+namespace App\Http\Resources\Currency;
 
 use App\Entities\Currency\Currency;
 use App\Http\Resources\AbstractResource;

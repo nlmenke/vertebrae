@@ -3,6 +3,7 @@
 /vendor
 
 .env
+.php_cs.cache
 .phpstorm.meta.php
 .phpunit.result.cache
 _ide_helper.php

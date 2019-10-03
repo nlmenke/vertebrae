@@ -1,4 +1,6 @@
-<?php namespace Tests\Feature\Controllers\Api;
+<?php declare(strict_types=1);
+
+namespace Tests\Feature\Controllers\Api;
 
 use App\Entities\Locale\Locale;
 

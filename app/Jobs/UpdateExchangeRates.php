@@ -1,12 +1,16 @@
-<?php namespace App\Jobs;
+<?php declare(strict_types=1);
+
+namespace App\Jobs;
 
 use App\Entities\Currency\Currency;
 use App\Services\Api\Currency\OpenExchangeRatesApiService;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Log;
 
 /**
  * Class UpdateExchangeRates
@@ -39,11 +43,11 @@ class UpdateExchangeRates implements ShouldQueue
                     $currency->setAttribute('exchange_rate', $exchangeRates['rates'][$currency->getIsoAlpha()]);
                     $currency->save();
                 } else {
-                    \Log::warning('Exchange rate for ' . $currency->getName() . ' does not exist in the OXR database');
+                    Log::warning('Exchange rate for ' . $currency->getName() . ' does not exist in the OXR database');
                 }
             });
-        } catch (\Exception $e) {
-            \Log::error($e);
+        } catch (Exception $e) {
+            Log::error($e);
         }
     }
 }

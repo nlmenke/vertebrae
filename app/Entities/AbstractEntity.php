@@ -1,4 +1,6 @@
-<?php namespace App\Entities;
+<?php declare(strict_types=1);
+
+namespace App\Entities;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;

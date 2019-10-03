@@ -1,4 +1,6 @@
-<?php namespace App\Services\Localization;
+<?php declare(strict_types=1);
+
+namespace App\Services\Localization;
 
 use App\Entities\Locale\Locale;
 use App\Exceptions\Localization\ActiveLocalesNotDefinedException;

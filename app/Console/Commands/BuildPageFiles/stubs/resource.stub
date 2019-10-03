@@ -1,4 +1,6 @@
-<?php namespace DummyRootNamespaceHttp\Resources\Dummy;
+<?php declare(strict_types=1);
+
+namespace DummyRootNamespaceHttp\Resources\Dummy;
 
 use App\Entities\Dummy\Dummy;
 use App\Http\Resources\AbstractResource;

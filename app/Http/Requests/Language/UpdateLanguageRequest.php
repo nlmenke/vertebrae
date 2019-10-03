@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests\Language;
+<?php declare(strict_types=1);
+
+namespace App\Http\Requests\Language;
 
 use App\Http\Requests\AbstractFormRequest;
 
@@ -18,8 +20,8 @@ class UpdateLanguageRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            'iso_alpha_2' => 'required|string|size:2|unique:languages,iso_alpha_2,' . $this->route('language') . ',id,deleted_at,null',
-            'iso_alpha_3' => 'required|string|size:3|unique:languages,iso_alpha_3,' . $this->route('language') . ',id,deleted_at,null',
+            'iso_alpha_2' => 'required|string|size:2|unique:languages,iso_alpha_2,' . $this->route('language') . ',id,deleted_at,NULL',
+            'iso_alpha_3' => 'required|string|size:3|unique:languages,iso_alpha_3,' . $this->route('language') . ',id,deleted_at,NULL',
             'name' => 'required|string',
         ];
     }

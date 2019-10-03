@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests\Country;
+<?php declare(strict_types=1);
+
+namespace App\Http\Requests\Country;
 
 use App\Http\Requests\AbstractFormRequest;
 

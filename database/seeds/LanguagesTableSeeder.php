@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Entities\Language\Language;
 
@@ -15,7 +15,7 @@ class LanguagesTableSeeder extends AbstractSeeder
      * @var array
      */
     protected $truncateTables = [
-        CreateLanguagesTable::TABLENAME
+        CreateLanguagesTable::TABLE
     ];
 
     /**

@@ -1,4 +1,6 @@
-<?php namespace App\Entities\Language;
+<?php declare(strict_types=1);
+
+namespace App\Entities\Language;
 
 use App\Entities\AbstractEntity;
 use App\Entities\Country\Country;

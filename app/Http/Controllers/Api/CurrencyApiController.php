@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Api;
+<?php declare(strict_types=1);
+
+namespace App\Http\Controllers\Api;
 
 use App\Entities\Currency\Currency;
 use App\Http\Resources\Currency\CurrencyResource;

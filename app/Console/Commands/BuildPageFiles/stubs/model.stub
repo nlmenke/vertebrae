@@ -1,4 +1,6 @@
-<?php namespace DummyRootNamespaceEntities\Dummy;
+<?php declare(strict_types=1);
+
+namespace DummyRootNamespaceEntities\Dummy;
 
 use DummyRootNamespaceEntities\AbstractEntity;
 use Illuminate\Database\Eloquent\SoftDeletes;

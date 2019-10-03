@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests\Locale;
+<?php declare(strict_types=1);
+
+namespace App\Http\Requests\Locale;
 
 use App\Http\Requests\AbstractFormRequest;
 
@@ -21,7 +23,7 @@ class UpdateLocaleRequest extends AbstractFormRequest
             'country_id' => 'integer|nullable',
             'language_id' => 'required|integer',
             'script_id' => 'required|integer',
-            'code' => 'required|string|max:11|unique:locales,code,' . $this->route('locale') . ',id,deleted_at,null',
+            'code' => 'required|string|max:11|unique:locales,code,' . $this->route('locale') . ',id,deleted_at,NULL',
             'native' => 'required|string',
             'currency_symbol_first' => 'boolean',
         ];

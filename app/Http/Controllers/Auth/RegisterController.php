@@ -1,9 +1,13 @@
-<?php namespace App\Http\Controllers\Auth;
+<?php declare(strict_types=1);
+
+namespace App\Http\Controllers\Auth;
 
 use App\Entities\User\User;
 use App\Http\Controllers\AbstractController;
-use Illuminate\Contracts\Validation\Validator;
+use Hash;
+use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Validator;
 
 /**
  * Class RegisterController
@@ -29,21 +33,23 @@ class RegisterController extends AbstractController
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('guest');
     }
 
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array $data
-     * @return Validator
+     * @param array $data
+     * @return ValidatorContract|Validator
      */
     protected function validator(array $data): Validator
     {
-        return \Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -58,7 +64,7 @@ class RegisterController extends AbstractController
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => \Hash::make($data['password']),
+            'password' => Hash::make($data['password']),
         ]);
     }
 }

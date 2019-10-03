@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests\Currency;
+<?php declare(strict_types=1);
+
+namespace App\Http\Requests\Currency;
 
 use App\Http\Requests\AbstractFormRequest;
 

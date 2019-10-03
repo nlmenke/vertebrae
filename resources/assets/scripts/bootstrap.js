@@ -1,5 +1,14 @@
+/**
+ * Application Bootstrap Script.
+ *
+ * @package   Scripts
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2019 n.l.menke
+ * @link      https://gitlab.com/n.l.menke/sigr
+ * @since     0.0.0-framework introduced
+ */
+
 window._ = require('lodash');
-window.Popper = require('popper.js').default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -8,11 +17,12 @@ window.Popper = require('popper.js').default;
  */
 
 try {
+    window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
 } catch (e) {
-    // noop
+    //
 }
 
 /**
@@ -45,10 +55,10 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo'
-//
+// import Echo from 'laravel-echo';
+
 // window.Pusher = require('pusher-js');
-//
+
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
 //     key: process.env.MIX_PUSHER_APP_KEY,

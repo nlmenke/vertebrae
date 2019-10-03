@@ -1,4 +1,6 @@
-<?php namespace App\Entities\Currency;
+<?php declare(strict_types=1);
+
+namespace App\Entities\Currency;
 
 use App\Entities\AbstractEntity;
 use App\Entities\Country\Country;

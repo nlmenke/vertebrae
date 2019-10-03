@@ -1,5 +1,8 @@
-<?php namespace App\Services\Api;
+<?php declare(strict_types=1);
 
+namespace App\Services\Api;
+
+use Closure;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
@@ -47,16 +50,17 @@ abstract class AbstractApiService
     }
 
     /**
-     * Submit a DELETE API request.
+     * Submits a DELETE API request.
      *
-     * @param string        $uri
-     * @param \Closure|null $callback
+     * @param string       $uri
+     * @param int|null     $id
+     * @param Closure|null $callback
      * @return array
      */
-    public function delete(string $uri, \Closure $callback = null): array
+    public function delete(string $uri, int $id = null, Closure $callback = null): array
     {
         try {
-            $result = $this->client->delete($uri, [
+            $result = $this->client->delete($uri . ($id !== null ? '/' . $id : ''), [
                 'headers' => $this->headerList,
             ]);
 
@@ -73,15 +77,15 @@ abstract class AbstractApiService
     }
 
     /**
-     * Submit a GET API request.
+     * Submits a GET API request.
      *
-     * @param string        $uri
-     * @param int|null      $id
-     * @param array         $query
-     * @param \Closure|null $callback
+     * @param string       $uri
+     * @param int|null     $id
+     * @param array        $query
+     * @param Closure|null $callback
      * @return array
      */
-    public function get(string $uri, int $id = null, array $query = [], \Closure $callback = null): array
+    public function get(string $uri, int $id = null, array $query = [], Closure $callback = null): array
     {
         try {
             $result = $this->client->get($uri . ($id !== null ? '/' . $id : ''), [
@@ -102,14 +106,14 @@ abstract class AbstractApiService
     }
 
     /**
-     * Submit a POST API request.
+     * Submits a POST API request.
      *
-     * @param string        $uri
-     * @param array         $formParams
-     * @param \Closure|null $callback
+     * @param string       $uri
+     * @param array        $formParams
+     * @param Closure|null $callback
      * @return array
      */
-    public function post(string $uri, array $formParams = [], \Closure $callback = null): array
+    public function post(string $uri, array $formParams = [], Closure $callback = null): array
     {
         try {
             $result = $this->client->post($uri, [
@@ -130,15 +134,15 @@ abstract class AbstractApiService
     }
 
     /**
-     * Submit a PUT API request.
+     * Submits a PUT API request.
      *
-     * @param string        $uri
-     * @param int|null      $id
-     * @param array         $formParams
-     * @param \Closure|null $callback
+     * @param string       $uri
+     * @param int|null     $id
+     * @param array        $formParams
+     * @param Closure|null $callback
      * @return array
      */
-    public function put(string $uri, int $id = null, array $formParams = [], \Closure $callback = null): array
+    public function put(string $uri, int $id = null, array $formParams = [], Closure $callback = null): array
     {
         try {
             $result = $this->client->put($uri . ($id !== null ? '/' . $id : ''), [
@@ -159,13 +163,15 @@ abstract class AbstractApiService
     }
 
     /**
-     * Add additional headers to the headerList array.
+     * Adds additional headers to the headerList array.
      *
      * @param array $headerList
-     * @return void
+     * @return self
      */
-    protected function headers(array $headerList): void
+    protected function headers(array $headerList): self
     {
         $this->headerList = array_merge($this->headerList, $headerList);
+
+        return $this;
     }
 }

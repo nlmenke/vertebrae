@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -10,16 +10,16 @@ use Illuminate\Database\Schema\Blueprint;
  */
 class CreateScriptsTable extends Migration
 {
-    const TABLENAME = 'scripts';
+    const TABLE = 'scripts';
 
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        \Schema::create(self::TABLENAME, function (Blueprint $table) {
+        Schema::create(self::TABLE, function (Blueprint $table) {
             $table->increments('id');
             $table->string('iso_alpha', 4); // ISO 15924 alpha; 4-char
             $table->string('iso_numeric', 3); // ISO 15924 numeric; 3-number
@@ -35,8 +35,8 @@ class CreateScriptsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        \Schema::dropIfExists(self::TABLENAME);
+        Schema::dropIfExists(self::TABLE);
     }
 }

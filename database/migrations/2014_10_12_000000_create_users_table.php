@@ -4,13 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class CreateLanguagesTable
+ * Class CreateUsersTable
  *
  * @author Nick Menke <nick@nlmenke.net>
  */
-class CreateLanguagesTable extends Migration
+class CreateUsersTable extends Migration
 {
-    const TABLE = 'languages';
+    const TABLE = 'users';
 
     /**
      * Run the migrations.
@@ -20,12 +20,13 @@ class CreateLanguagesTable extends Migration
     public function up(): void
     {
         Schema::create(self::TABLE, function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('iso_alpha_2', 2)->index(); // ISO 639-1 alpha-2; 2-char
-            $table->string('iso_alpha_3', 3)->index(); // ISO 639-2 alpha-3; 3-char
+            $table->bigIncrements('id');
             $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

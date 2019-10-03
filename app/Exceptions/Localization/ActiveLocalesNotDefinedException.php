@@ -1,4 +1,8 @@
-<?php namespace App\Exceptions\Localization;
+<?php declare(strict_types=1);
+
+namespace App\Exceptions\Localization;
+
+use Exception;
 
 /**
  * Class ActiveLocalesNotDefinedException
@@ -6,7 +10,7 @@
  * @package App\Exceptions\Localization
  * @author  Nick Menke <nick@nlmenke.net>
  */
-class ActiveLocalesNotDefinedException extends \Exception
+class ActiveLocalesNotDefinedException extends Exception
 {
     /**
      * Create a new exception instance.

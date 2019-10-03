@@ -1,4 +1,6 @@
-<?php namespace App\Http;
+<?php declare(strict_types=1);
+
+namespace App\Http;
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\CheckForMaintenanceMode;
@@ -39,11 +41,11 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        TrustProxies::class,
         CheckForMaintenanceMode::class,
         ValidatePostSize::class,
         TrimStrings::class,
         ConvertEmptyStringsToNull::class,
-        TrustProxies::class,
     ];
 
     /**
@@ -90,7 +92,7 @@ class Kernel extends HttpKernel
     /**
      * The priority-sorted list of middleware.
      *
-     * This forces the listed middleware to always be in the given order.
+     * This forces non-global middleware to always be in the given order.
      *
      * @var array
      */
@@ -98,6 +100,7 @@ class Kernel extends HttpKernel
         StartSession::class,
         ShareErrorsFromSession::class,
         Authenticate::class,
+        ThrottleRequests::class,
         AuthenticateSession::class,
         SubstituteBindings::class,
         Authorize::class,

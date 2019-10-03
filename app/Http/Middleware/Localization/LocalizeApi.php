@@ -1,6 +1,9 @@
-<?php namespace App\Http\Middleware\Localization;
+<?php declare(strict_types=1);
+
+namespace App\Http\Middleware\Localization;
 
 use App\Services\Localization\LocalizationService;
+use Closure;
 use Illuminate\Http\Request;
 
 /**
@@ -15,10 +18,10 @@ class LocalizeApi extends Localization
      * Handle an incoming request.
      *
      * @param Request  $request
-     * @param \Closure $next
+     * @param Closure $next
      * @return mixed
      */
-    public function handle(Request $request, \Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         // requested URL should be ignored
         if ($this->shouldIgnore($request)) {
