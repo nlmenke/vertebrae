@@ -1,4 +1,6 @@
-<?php namespace App\Http\Resources\Script;
+<?php declare(strict_types=1);
+
+namespace App\Http\Resources\Script;
 
 use App\Entities\Script\Script;
 use App\Http\Resources\AbstractResource;

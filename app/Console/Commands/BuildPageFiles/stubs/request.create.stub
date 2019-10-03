@@ -1,4 +1,6 @@
-<?php namespace DummyRootNamespaceHttp\Requests\Dummy;
+<?php declare(strict_types=1);
+
+namespace DummyRootNamespaceHttp\Requests\Dummy;
 
 use DummyRootNamespaceHttp\Requests\AbstractFormRequest;
 

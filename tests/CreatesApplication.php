@@ -1,8 +1,16 @@
-<?php namespace Tests;
+<?php declare(strict_types=1);
+
+namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
 
+/**
+ * Trait CreatesApplication
+ *
+ * @package Tests
+ * @author  Nick Menke <nick@nlmenke.net>
+ */
 trait CreatesApplication
 {
     /**

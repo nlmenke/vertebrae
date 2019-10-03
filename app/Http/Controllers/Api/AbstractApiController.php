@@ -1,11 +1,16 @@
-<?php namespace App\Http\Controllers\Api;
+<?php declare(strict_types=1);
+
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AbstractController;
 use App\Http\Requests\AbstractFormRequest;
 use App\Http\Resources\AbstractResource;
+use DB;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Request;
 
 /**
  * Class AbstractApiController
@@ -16,6 +21,13 @@ use Illuminate\Http\Response;
 abstract class AbstractApiController extends AbstractController
 {
     /**
+     * The base route name used by the controller.
+     *
+     * @var string
+     */
+    protected $baseRouteName;
+
+    /**
      * The resource instance.
      *
      * @var AbstractResource
@@ -23,17 +35,25 @@ abstract class AbstractApiController extends AbstractController
     protected $resource;
 
     /**
-     * Create a new controller instance.
+     * Create a new API controller instance.
      *
      * @return void
      */
     public function __construct()
     {
+        $this->baseRouteName = str_replace([
+            'index',
+            'show',
+            'store',
+            'update',
+            'destroy',
+        ], '', Request::route()->getName());
+
         parent::__construct();
     }
 
     /**
-     * Display a listing of resources.
+     * Displays a listing of resources.
      *
      * @return JsonResponse
      */
@@ -52,7 +72,7 @@ abstract class AbstractApiController extends AbstractController
             return $this->resource->collection($result)
                 ->response()
                 ->header('Content-Language', $this->currentLocale);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return JsonResponse::create([
                 'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
@@ -65,7 +85,7 @@ abstract class AbstractApiController extends AbstractController
     }
 
     /**
-     * Display the specified resource.
+     * Displays a specified resource.
      *
      * @param int $id
      * @return JsonResponse
@@ -93,7 +113,7 @@ abstract class AbstractApiController extends AbstractController
             ], Response::HTTP_NOT_FOUND, [
                 'Content-Language' => $this->currentLocale,
             ]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return JsonResponse::create([
                 'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
@@ -106,27 +126,27 @@ abstract class AbstractApiController extends AbstractController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Stores a newly created resource in storage.
      *
      * @param AbstractFormRequest $request
      * @return JsonResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function store(AbstractFormRequest $request): JsonResponse
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $result = $this->model->create($request->toArray());
 
-            \DB::commit();
+            DB::commit();
 
             return $this->resource->make($result)
                 ->response()
                 ->header('Content-Language', $this->currentLocale)
-                ->header('Location', route($this->baseRouteName . 'show', ['id' => $result->getId()]));
-        } catch (\Exception $e) {
-            \DB::rollBack();
+                ->header('Location', route($this->baseRouteName . 'show', $result->getId()));
+        } catch (Exception $e) {
+            DB::rollBack();
 
             return JsonResponse::create([
                 'message' => trans('exceptions.http.500_message'),
@@ -140,29 +160,29 @@ abstract class AbstractApiController extends AbstractController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Updates a specified resource in storage.
      *
      * @param AbstractFormRequest $request
      * @param int                 $id
      * @return JsonResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function update(AbstractFormRequest $request, int $id): JsonResponse
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $result = $this->model->findOrFail($id);
-            $result->update($request->all());
+            $result->update($request->toArray());
 
-            \DB::commit();
+            DB::commit();
 
             return $this->resource->make($result)
                 ->response()
                 ->header('Content-Language', $this->currentLocale)
-                ->header('Location', route($this->baseRouteName . 'show', ['id' => $result->getId()]));
+                ->header('Location', route($this->baseRouteName . 'show', $result->getId()));
         } catch (ModelNotFoundException $e) {
-            \DB::rollBack();
+            DB::rollBack();
 
             return JsonResponse::create([
                 'message' => trans('exceptions.http.404_message'),
@@ -172,8 +192,8 @@ abstract class AbstractApiController extends AbstractController
             ], Response::HTTP_NOT_FOUND, [
                 'Content-Language' => $this->currentLocale,
             ]);
-        } catch (\Exception $e) {
-            \DB::rollBack();
+        } catch (Exception $e) {
+            DB::rollBack();
 
             return JsonResponse::create([
                 'message' => trans('exceptions.http.500_message'),
@@ -187,27 +207,29 @@ abstract class AbstractApiController extends AbstractController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Removes a specified resource from storage.
      *
      * @param int $id
      * @return JsonResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(int $id): JsonResponse
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $result = $this->model->findOrFail($id);
             $result->delete();
 
-            \DB::commit();
+            DB::commit();
 
-            return JsonResponse::create(null, Response::HTTP_NO_CONTENT)
+            return $this->resource
+                ->response()
+                ->setStatusCode(Response::HTTP_NO_CONTENT)
                 ->header('Content-Language', $this->currentLocale)
                 ->header('Location', route($this->baseRouteName . 'index'));
         } catch (ModelNotFoundException $e) {
-            \DB::rollBack();
+            DB::rollBack();
 
             return JsonResponse::create([
                 'message' => trans('exceptions.http.404_message'),
@@ -217,8 +239,8 @@ abstract class AbstractApiController extends AbstractController
             ], Response::HTTP_NOT_FOUND, [
                 'Content-Language' => $this->currentLocale,
             ]);
-        } catch (\Exception $e) {
-            \DB::rollBack();
+        } catch (Exception $e) {
+            DB::rollBack();
 
             return JsonResponse::create([
                 'message' => trans('exceptions.http.500_message'),

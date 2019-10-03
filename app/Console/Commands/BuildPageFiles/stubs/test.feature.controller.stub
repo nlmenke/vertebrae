@@ -1,0 +1,24 @@
+<?php declare(strict_types=1);
+
+namespace Tests\Feature\Controllers;
+
+use App\Entities\Dummy\Dummy;
+
+class DummyControllerTest extends AbstractControllerTest
+{
+    /**
+     * The entity used by the tests.
+     *
+     * @var Dummy
+     */
+    protected $model = Dummy::class;
+
+    /**
+     * Required fields to be cleared for testing validation.
+     *
+     * @var array
+     */
+    protected $validationRequirements = [
+        //
+    ];
+}

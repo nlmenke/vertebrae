@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Entities\Country\Country;
 use App\Entities\Currency\Currency;
@@ -16,7 +16,7 @@ class CountriesTableSeeder extends AbstractSeeder
      * @var array
      */
     protected $truncateTables = [
-        CreateCountriesTable::TABLENAME
+        CreateCountriesTable::TABLE
     ];
 
     /**

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Entities\Country\Country;
 use App\Entities\Language\Language;
@@ -18,7 +18,7 @@ class LocalesTableSeeder extends AbstractSeeder
      * @var array
      */
     protected $truncateTables = [
-        CreateLocalesTable::TABLENAME
+        CreateLocalesTable::TABLE
     ];
 
     /**

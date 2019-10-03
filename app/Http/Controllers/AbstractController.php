@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php declare(strict_types=1);
+
+namespace App\Http\Controllers;
 
 use App\Entities\AbstractEntity;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
@@ -6,6 +8,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller;
+use Request;
 
 /**
  * Class AbstractController
@@ -18,13 +21,6 @@ abstract class AbstractController extends Controller
     use AuthorizesRequests,
         DispatchesJobs,
         ValidatesRequests;
-
-    /**
-     * The base route name used by the controller.
-     *
-     * @var string
-     */
-    protected $baseRouteName;
 
     /**
      * The current locale.
@@ -41,14 +37,14 @@ abstract class AbstractController extends Controller
     protected $model;
 
     /**
-     * The number of results to show per page.
+     * The number of results per page.
      *
      * @var int
      */
     protected $perPage;
 
     /**
-     * The order of the results.
+     * The order the results displayed.
      *
      * @var array
      */
@@ -62,19 +58,17 @@ abstract class AbstractController extends Controller
     protected $with = [];
 
     /**
-     * Create a new controller instance.
+     * Creates a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->baseRouteName = str_replace(['index', 'show', 'store', 'update', 'destroy'], '', \Request::route()->getName());
-
         $this->currentLocale = app()->getLocale();
 
-        $this->perPage = (int)\Request::get('count', 10);
+        $this->perPage = (int)Request::get('count', 10);
 
-        $sortRequest = \Request::get('sorting', ['id' => 'asc']);
+        $sortRequest = Request::get('sorting', ['id' => 'asc']);
         $this->sorting = [
             'column' => array_keys($sortRequest)[0],
             'direction' => array_values($sortRequest)[0],

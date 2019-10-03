@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Entities\Currency\Currency;
 use App\Jobs\UpdateExchangeRates;
@@ -19,7 +19,7 @@ class CurrenciesTableSeeder extends AbstractSeeder
      * @var array
      */
     protected $truncateTables = [
-        CreateCurrenciesTable::TABLENAME
+        CreateCurrenciesTable::TABLE
     ];
 
     /**

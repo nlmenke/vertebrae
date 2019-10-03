@@ -1,21 +1,20 @@
-<?php namespace DummyRootNamespaceHttp\Controllers\Api;
+<?php declare(strict_types=1);
+
+namespace DummyRootNamespaceHttp\Controllers;
 
 use App\Entities\Dummy\Dummy;
-use App\Http\Resources\Dummy\DummyResource;
 
-class DummyApiController extends AbstractApiController
+class DummyController extends AbstractController
 {
     /**
      * Create a new controller instance.
      *
-     * @param Dummy         $model
-     * @param DummyResource $resource
+     * @param Dummy $model
      * @return void
      */
-    public function __construct(Dummy $model, DummyResource $resource)
+    public function __construct(Dummy $model)
     {
         $this->model = $model;
-        $this->resource = $resource;
 
         parent::__construct();
     }

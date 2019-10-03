@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests\Country;
+<?php declare(strict_types=1);
+
+namespace App\Http\Requests\Country;
 
 use App\Http\Requests\AbstractFormRequest;
 
@@ -19,9 +21,9 @@ class UpdateCountryRequest extends AbstractFormRequest
     {
         return [
             'currency_id' => 'integer|nullable',
-            'iso_alpha_2' => 'required|string|size:2|unique:countries,iso_alpha_2,' . $this->route('country') . ',id,deleted_at,null',
-            'iso_alpha_3' => 'required|string|size:3|unique:countries,iso_alpha_3,' . $this->route('country') . ',id,deleted_at,null',
-            'iso_numeric' => 'required|string|size:3|unique:countries,iso_numeric,' . $this->route('country') . ',id,deleted_at,null',
+            'iso_alpha_2' => 'required|string|size:2|unique:countries,iso_alpha_2,' . $this->route('country') . ',id,deleted_at,NULL',
+            'iso_alpha_3' => 'required|string|size:3|unique:countries,iso_alpha_3,' . $this->route('country') . ',id,deleted_at,NULL',
+            'iso_numeric' => 'required|string|size:3|unique:countries,iso_numeric,' . $this->route('country') . ',id,deleted_at,NULL',
             'name' => 'required|string',
         ];
     }

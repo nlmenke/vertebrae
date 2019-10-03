@@ -1,8 +1,12 @@
-<?php namespace Tests\Feature\Controllers\Api;
+<?php declare(strict_types=1);
+
+namespace Tests\Feature\Controllers\Api;
 
 use App\Entities\AbstractEntity;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
+use Route;
 use Tests\TestCase;
 
 /**
@@ -47,87 +51,7 @@ abstract class AbstractApiControllerTest extends TestCase
     protected $validationRequirements = [];
 
     /**
-     * Setup the test environment.
-     *
-     * @return void
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        if (!$this->baseRouteName) {
-            $this->baseRouteName = $this->getBaseRouteNameFromModel();
-        }
-
-        $this->currentLocale = $this->app->getLocale();
-    }
-
-    /**
-     * Use the model factory to generate a fake resource.
-     *
-     * @param int $count
-     * @return mixed
-     */
-    protected function createResources(int $count = 1)
-    {
-        if ($count > 1) {
-            return factory($this->model, $count)->create();
-        }
-
-        return factory($this->model)->create();
-    }
-
-    /**
-     * Use the model factory to generate a fake request.
-     *
-     * @param bool $failValidation
-     * @return array
-     */
-    protected function createRequest($failValidation = false): array
-    {
-        $validation = [];
-        if ($failValidation && !empty($this->validationRequirements)) {
-            foreach ($this->validationRequirements as $field) {
-                $validation[$field] = '';
-            }
-        }
-
-        $request = factory($this->model)->make($validation);
-
-        return $request->toArray();
-    }
-
-    /**
-     * Get the baseRouteName from the entity.
-     *
-     * @return string
-     */
-    protected function getBaseRouteNameFromModel(): string
-    {
-        $modelArray = explode('\\', $this->model);
-
-        return str_plural(strtolower(end($modelArray)));
-    }
-
-    /**
-     * Build the error array for required field validation failures.
-     *
-     * @return array
-     */
-    protected function getValidationRequirementErrors(): array
-    {
-        $validation = [];
-        if (!empty($this->validationRequirements)) {
-            foreach ($this->validationRequirements as $field) {
-                $validation[$field] = ['The ' . str_replace('_', ' ', $field) . ' field is required.'];
-            }
-        }
-
-        return $validation;
-    }
-
-    /**
-     * Listing of the resources can be displayed via API.
+     * Tests if a listing of resources can be displayed via API.
      *
      * @return void
      * @test
@@ -136,8 +60,8 @@ abstract class AbstractApiControllerTest extends TestCase
     {
         $route = $this->baseRouteName . '.index';
 
-        if (\Route::has($route)) {
-            $resources = $this->createResources(10);
+        if (Route::has($route)) {
+            $resources = $this->createTestResources(10);
 
             $response = $this->withHeader('Accept-Language', $this->currentLocale)
                 ->get(route($route));
@@ -151,7 +75,7 @@ abstract class AbstractApiControllerTest extends TestCase
     }
 
     /**
-     * Specified resource can be displayed via API.
+     * Tests if a specified resource can be displayed via API.
      *
      * @return void
      * @test
@@ -160,8 +84,8 @@ abstract class AbstractApiControllerTest extends TestCase
     {
         $route = $this->baseRouteName . '.show';
 
-        if (\Route::has($route)) {
-            $resource = $this->createResources();
+        if (Route::has($route)) {
+            $resource = $this->createTestResources();
 
             $response = $this->withHeader('Accept-Language', $this->currentLocale)
                 ->get(route($route, $resource->getId()));
@@ -175,7 +99,7 @@ abstract class AbstractApiControllerTest extends TestCase
     }
 
     /**
-     * Resource can be created through API.
+     * Tests if a resource can be created through API.
      *
      * @return void
      * @test
@@ -184,8 +108,8 @@ abstract class AbstractApiControllerTest extends TestCase
     {
         $route = $this->baseRouteName . '.store';
 
-        if (\Route::has($route)) {
-            $request = $this->createRequest();
+        if (Route::has($route)) {
+            $request = $this->createTestRequest();
 
             $response = $this->withHeader('Accept-Language', $this->currentLocale)
                 ->postJson(route($route), $request);
@@ -207,7 +131,7 @@ abstract class AbstractApiControllerTest extends TestCase
     }
 
     /**
-     * API store request validation failure.
+     * Tests if the API store request validation fails gracefully.
      *
      * @return void
      * @test
@@ -216,8 +140,8 @@ abstract class AbstractApiControllerTest extends TestCase
     {
         $route = $this->baseRouteName . '.store';
 
-        if (\Route::has($route)) {
-            $request = $this->createRequest(true);
+        if (Route::has($route)) {
+            $request = $this->createTestRequest(true);
 
             $response = $this->withHeader('Accept-Language', $this->currentLocale)
                 ->postJson(route($route), $request);
@@ -232,7 +156,7 @@ abstract class AbstractApiControllerTest extends TestCase
     }
 
     /**
-     * Specified resource can be updated through API.
+     * Tests if a specified resource can be updated through API.
      *
      * @return void
      * @test
@@ -241,9 +165,9 @@ abstract class AbstractApiControllerTest extends TestCase
     {
         $route = $this->baseRouteName . '.update';
 
-        if (\Route::has($route)) {
-            $resource = $this->createResources();
-            $request = $this->createRequest();
+        if (Route::has($route)) {
+            $resource = $this->createTestResources();
+            $request = $this->createTestRequest();
 
             $response = $this->withHeader('Accept-Language', $this->currentLocale)
                 ->putJson(route($route, $resource->getId()), $request);
@@ -265,7 +189,7 @@ abstract class AbstractApiControllerTest extends TestCase
     }
 
     /**
-     * API update request validation failure.
+     * Tests if the API update request validation fails gracefully.
      *
      * @return void
      * @test
@@ -274,9 +198,9 @@ abstract class AbstractApiControllerTest extends TestCase
     {
         $route = $this->baseRouteName . '.update';
 
-        if (\Route::has($route)) {
-            $resource = $this->createResources();
-            $request = $this->createRequest(true);
+        if (Route::has($route)) {
+            $resource = $this->createTestResources();
+            $request = $this->createTestRequest(true);
 
             $response = $this->withHeader('Accept-Language', $this->currentLocale)
                 ->putJson(route($route, $resource->getId()), $request);
@@ -291,7 +215,7 @@ abstract class AbstractApiControllerTest extends TestCase
     }
 
     /**
-     * Specified resource can be removed through API.
+     * Tests if a specified resource can be removed through API.
      *
      * @return void
      * @test
@@ -300,8 +224,8 @@ abstract class AbstractApiControllerTest extends TestCase
     {
         $route = $this->baseRouteName . '.destroy';
 
-        if (\Route::has($route)) {
-            $resource = $this->createResources();
+        if (Route::has($route)) {
+            $resource = $this->createTestResources();
 
             $response = $this->withHeader('Accept-Language', $this->currentLocale)
                 ->deleteJson(route($route, $resource->getId()));
@@ -313,5 +237,87 @@ abstract class AbstractApiControllerTest extends TestCase
         } else {
             $this->markTestSkipped($route . ' route is not implemented.');
         }
+    }
+
+    /**
+     * Use the model factory to generate a fake request.
+     *
+     * @param bool $failValidation make validation fail
+     * @return array
+     */
+    protected function createTestRequest(bool $failValidation = false): array
+    {
+        $validation = [];
+        if ($failValidation && !empty($this->validationRequirements)) {
+            foreach ($this->validationRequirements as $field) {
+                $validation[$field] = '';
+            }
+        }
+
+        $request = factory($this->model)->make($validation);
+
+        return $request->toArray();
+    }
+
+    /**
+     * Use the model factory to generate a fake resource.
+     *
+     * @param int $count
+     * @return mixed
+     */
+    protected function createTestResources(int $count = 1)
+    {
+        if ($count > 1) {
+            return factory($this->model, $count)->create();
+        }
+
+        return factory($this->model)->create();
+    }
+
+    /**
+     * Get the base route name from the entity.
+     *
+     * @return string
+     */
+    protected function getBaseRouteNameFromModel(): string
+    {
+        $modelArray = explode('\\', $this->model);
+
+        return Str::plural(strtolower(end($modelArray)));
+    }
+
+    /**
+     * Build the error array for required field validation failures.
+     *
+     * @return array
+     */
+    protected function getValidationRequirementErrors(): array
+    {
+        $validation = [];
+        if (!empty($this->validationRequirements)) {
+            foreach ($this->validationRequirements as $field) {
+                $validation[$field] = [
+                    'The ' . str_replace('_', ' ', $field) . ' field is required.',
+                ];
+            }
+        }
+
+        return $validation;
+    }
+
+    /**
+     * Setup the test environment.
+     *
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        if (!$this->baseRouteName) {
+            $this->baseRouteName = $this->getBaseRouteNameFromModel();
+        }
+
+        $this->currentLocale = $this->app->getLocale();
     }
 }

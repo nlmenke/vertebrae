@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Entities\Script\Script;
 
@@ -15,7 +15,7 @@ class ScriptsTableSeeder extends AbstractSeeder
      * @var array
      */
     protected $truncateTables = [
-        CreateScriptsTable::TABLENAME
+        CreateScriptsTable::TABLE
     ];
 
     /**

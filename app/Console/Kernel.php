@@ -1,4 +1,6 @@
-<?php namespace App\Console;
+<?php declare(strict_types=1);
+
+namespace App\Console;
 
 use App\Console\Commands\BuildPageFiles\BuildPageFilesCommand;
 use App\Jobs\UpdateExchangeRates;

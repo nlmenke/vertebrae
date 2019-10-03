@@ -1,4 +1,6 @@
-<?php namespace App\Http\Middleware\Localization;
+<?php declare(strict_types=1);
+
+namespace App\Http\Middleware\Localization;
 
 use Illuminate\Http\Request;
 

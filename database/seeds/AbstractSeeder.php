@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Entities\AbstractEntity;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
@@ -26,37 +26,37 @@ abstract class AbstractSeeder extends Seeder
     protected $model;
 
     /**
-     * Tables to be cleared before seeing.
+     * Tables to be cleared before seeding.
      *
      * @var array
      */
     protected $truncateTables = [];
 
     /**
-     * Clear existing data in $truncateTables array.
+     * Clear existing data from tables in $truncateTables array.
      *
      * @return void
      */
     protected function cleanDatabase(): void
     {
-        \DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
         foreach ($this->truncateTables as $table) {
-            \DB::table($table)->truncate();
+            DB::table($table)->truncate();
         }
 
-        \DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 
     /**
      * Run the seeder.
      *
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     public function run(): void
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
 
         $this->cleanDatabase();
 
@@ -66,7 +66,7 @@ abstract class AbstractSeeder extends Seeder
 
         $this->complete();
 
-        \DB::commit();
+        DB::commit();
     }
 
     /**
@@ -74,7 +74,7 @@ abstract class AbstractSeeder extends Seeder
      *
      * @return void
      */
-    public function complete(): void
+    protected function complete(): void
     {
         //
     }

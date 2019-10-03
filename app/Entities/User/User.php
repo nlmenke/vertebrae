@@ -1,4 +1,6 @@
-<?php namespace App\Entities\User;
+<?php declare(strict_types=1);
+
+namespace App\Entities\User;
 
 use App\Entities\AbstractEntity;
 use Illuminate\Auth\Authenticatable;
@@ -43,5 +45,14 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 }

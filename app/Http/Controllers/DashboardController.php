@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php declare(strict_types=1);
+
+namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
