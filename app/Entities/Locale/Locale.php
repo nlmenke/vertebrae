@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Locale Entity.
+ *
+ * @package   App\Entities\Locale
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Entities\Locale;
 
@@ -10,10 +18,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Locale
+ * The Locale entity class.
  *
- * @package App\Entities\Locale
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functions required to access and manipulate locale
+ * models.
+ *
+ * @since x.x.x introduced
  */
 class Locale extends AbstractEntity
 {

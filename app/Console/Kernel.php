@@ -1,4 +1,13 @@
 <?php declare(strict_types=1);
+/**
+ * Application Console Kernel.
+ *
+ * @package   App\Console
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Console;
 
@@ -8,10 +17,13 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 /**
- * Class Kernel
+ * The console kernel class.
  *
- * @package App\Console
- * @author  Nick Menke <nick@nlmenke.net>
+ * The console kernel is responsible for registering commands for use and
+ * scheduling various commands and tasks.
+ *
+ * @since 0.0.0-framework introduced
+ * @since x.x.x           skeleton commands/jobs
  */
 class Kernel extends ConsoleKernel
 {

@@ -1,14 +1,24 @@
 <?php declare(strict_types=1);
+/**
+ * Update Language Request.
+ *
+ * @package   App\Http\Requests\Language
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Requests\Language;
 
 use App\Http\Requests\AbstractFormRequest;
 
 /**
- * Class UpdateLanguageRequest
+ * The Update Language form request class.
  *
- * @package App\Http\Requests\Language
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class handles form validation for modifying of a new language. It also
+ * permits (or denies) a user access to modify a language.
+ *
+ * @since x.x.x introduced
  */
 class UpdateLanguageRequest extends AbstractFormRequest
 {

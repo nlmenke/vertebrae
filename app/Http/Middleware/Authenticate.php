@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Authenticate Middleware.
+ *
+ * @package   App\Http\Middleware
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Middleware;
 
@@ -6,10 +14,12 @@ use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
 
 /**
- * Class Authenticate
+ * The Authenticate middleware class.
  *
- * @package App\Http\Middleware
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class checks if a user has been authenticated and allows them to
+ * proceed to their expected page or redirects them to login.
+ *
+ * @since 0.0.0-framework introduced
  */
 class Authenticate extends Middleware
 {

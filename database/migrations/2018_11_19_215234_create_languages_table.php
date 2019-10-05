@@ -1,12 +1,23 @@
 <?php declare(strict_types=1);
+/**
+ * Create Languages Table.
+ *
+ * @package   Database Migrations
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class CreateLanguagesTable
+ * The Create Languages migration.
  *
- * @author Nick Menke <nick@nlmenke.net>
+ * This migration creates the `languages` table used to hold languages used by
+ * the application.
+ *
+ * @since x.x.x introduced
  */
 class CreateLanguagesTable extends Migration
 {

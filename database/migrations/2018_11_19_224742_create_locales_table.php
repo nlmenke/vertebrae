@@ -1,12 +1,23 @@
 <?php declare(strict_types=1);
+/**
+ * Create Locales Table.
+ *
+ * @package   Database Migrations
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class CreateLocalesTable
+ * The Create Locales migration.
  *
- * @author Nick Menke <nick@nlmenke.net>
+ * This migration creates the `locales` table used to hold locales used by the
+ * application.
+ *
+ * @since x.x.x introduced
  */
 class CreateLocalesTable extends Migration
 {

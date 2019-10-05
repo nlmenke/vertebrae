@@ -1,9 +1,26 @@
 <?php declare(strict_types=1);
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @package   Tests\Unit
+ * @author    (your name) <(your email)>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace Tests\Unit;
 
 use Tests\TestCase;
 
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @since x.x.x introduced
+ */
 class DummyTest extends TestCase
 {
     /**

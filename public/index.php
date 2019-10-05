@@ -1,10 +1,16 @@
 <?php declare(strict_types=1);
-
 /**
- * Laravel - A PHP Framework For Web Artisans
+ * Laravel - A PHP Framework For Web Artisans.
  *
- * @package Laravel
- * @author  Taylor Otwell <taylor@laravel.com>
+ * Laravel is a web application framework with expressive, elegant syntax.
+ * We've already laid the foundation - freeing you to create without sweating
+ * the small things.
+ *
+ * @package   Larvel
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     0.0.0-framework introduced
  */
 
 define('LARAVEL_START', microtime(true));

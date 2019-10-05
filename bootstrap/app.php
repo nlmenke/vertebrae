@@ -1,4 +1,13 @@
 <?php declare(strict_types=1);
+/**
+ * Creates a new app instance.
+ *
+ * @package   Bootstrap
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     0.0.0-framework introduced
+ */
 
 /*
 |--------------------------------------------------------------------------

@@ -1,14 +1,26 @@
 <?php declare(strict_types=1);
+/**
+ * Country API Controller Test Case.
+ *
+ * @package   Tests\Feature\Controllers\Api
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace Tests\Feature\Controllers\Api;
 
 use App\Entities\Country\Country;
 
 /**
- * Class CountryApiTest
+ * The Country API controller test class.
  *
- * @package Tests\Feature\Controllers\Api
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class is used to test country API route functionality.
+ *
+ * Functional tests are written from a user's perspective. These tests confirm
+ * that the system does what users are expecting it to.
+ *
+ * @since x.x.x introduced
  */
 class CountryApiControllerTest extends AbstractApiControllerTest
 {

@@ -1,9 +1,26 @@
 <?php declare(strict_types=1);
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @package   DummyRootNamespaceHttp\Requests\Dummy
+ * @author    (your name) <(your email)>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace DummyRootNamespaceHttp\Requests\Dummy;
 
 use DummyRootNamespaceHttp\Requests\AbstractFormRequest;
 
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @since x.x.x introduced
+ */
 class UpdateDummyRequest extends AbstractFormRequest
 {
     /**

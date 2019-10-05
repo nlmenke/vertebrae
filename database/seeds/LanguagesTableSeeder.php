@@ -1,11 +1,23 @@
 <?php declare(strict_types=1);
+/**
+ * Languages Table Seeder.
+ *
+ * @package   Database Seeders
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 use App\Entities\Language\Language;
 
 /**
- * Class LanguagesTableSeeder
+ * The Languages seeder class.
  *
- * @author Nick Menke <nick@nlmenke.net>
+ * This class adds the world's languages to the `languages` table. Language
+ * names are listed in English, but the native tongue can be found within
+ * `locales`.
+ *
+ * @since x.x.x introduced
  */
 class LanguagesTableSeeder extends AbstractSeeder
 {

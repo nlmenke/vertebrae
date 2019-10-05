@@ -1,14 +1,23 @@
 <?php declare(strict_types=1);
+/**
+ * Trim Strings Middleware.
+ *
+ * @package   App\Http\Middleware
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\TrimStrings as Middleware;
 
 /**
- * Class TrimStrings
+ * The Trim Strings middleware class.
  *
- * @package App\Http\Middleware
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class helps clean excess spaces from user input requests.
+ *
+ * @since 0.0.0-framework introduced
  */
 class TrimStrings extends Middleware
 {

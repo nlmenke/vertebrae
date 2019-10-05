@@ -1,10 +1,27 @@
 <?php declare(strict_types=1);
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @package   DummyRootNamespaceHttp\Controllers\Api
+ * @author    (your name) <(your email)>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace DummyRootNamespaceHttp\Controllers\Api;
 
 use App\Entities\Dummy\Dummy;
 use App\Http\Resources\Dummy\DummyResource;
 
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @since x.x.x introduced
+ */
 class DummyApiController extends AbstractApiController
 {
     /**

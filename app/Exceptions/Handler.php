@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Exception Handler.
+ *
+ * @package   App\Exceptions
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Exceptions;
 
@@ -9,10 +17,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**
- * Class Handler
+ * The exception handler class.
  *
- * @package App\Exceptions
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class handles exceptions thrown by the application.
+ *
+ * @since 0.0.0-framework introduced
  */
 class Handler extends ExceptionHandler
 {

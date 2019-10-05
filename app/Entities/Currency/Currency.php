@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Currency Entity.
+ *
+ * @package   App\Entities\Currency
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Entities\Currency;
 
@@ -9,10 +17,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Currency
+ * The Currency entity class.
  *
- * @package App\Entities\Currency
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functions required to access and manipulate currency
+ * models.
+ *
+ * @since x.x.x introduced
  */
 class Currency extends AbstractEntity
 {

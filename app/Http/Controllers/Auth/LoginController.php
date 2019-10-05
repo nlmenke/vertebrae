@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Auth/Login Controller.
+ *
+ * @package   App\Http\Controllers\Auth
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Controllers\Auth;
 
@@ -6,10 +14,13 @@ use App\Http\Controllers\AbstractController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 /**
- * Class LoginController
+ * Login Controller.
  *
- * @package App\Http\Controllers\Auth
- * @author  Nick Menke <nick@nlmenke.net>
+ * This controller handles authenticating users for the application and
+ * redirecting them to your home screen. The controller uses a trait
+ * to conveniently provide its functionality to your application.
+ *
+ * @since 0.0.0-framework introduced
  */
 class LoginController extends AbstractController
 {

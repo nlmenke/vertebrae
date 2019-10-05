@@ -1,14 +1,24 @@
 <?php declare(strict_types=1);
+/**
+ * Localization Middleware.
+ *
+ * @package   App\Http\Middleware\Localization
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Middleware\Localization;
 
 use Illuminate\Http\Request;
 
 /**
- * Class Localization
+ * The Localization middleware class.
  *
- * @package App\Http\Middleware\Localization
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class determines if a url should be localized and sets the locale
+ * (language) of the application based on the current URI.
+ *
+ * @since x.x.x introduced
  */
 class Localization
 {

@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Auth/Register Controller.
+ *
+ * @package   App\Http\Controllers\Auth
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Controllers\Auth;
 
@@ -10,10 +18,13 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Validator;
 
 /**
- * Class RegisterController
+ * Register Controller.
  *
- * @package App\Http\Controllers\Auth
- * @author  Nick Menke <nick@nlmenke.net>
+ * This controller handles the registration of new users as well as their
+ * validation and creation. By default this controller uses a trait to
+ * provide this functionality without requiring any additional code.
+ *
+ * @since 0.0.0-framework introduced
  */
 class RegisterController extends AbstractController
 {

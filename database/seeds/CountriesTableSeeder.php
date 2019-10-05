@@ -1,12 +1,22 @@
 <?php declare(strict_types=1);
+/**
+ * Countries Table Seeder.
+ *
+ * @package   Database Seeders
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 use App\Entities\Country\Country;
 use App\Entities\Currency\Currency;
 
 /**
- * Class CountriesTableSeeder
+ * The Countries seeder class.
  *
- * @author Nick Menke <nick@nlmenke.net>
+ * This class adds the world's countries to the `countries` table.
+ *
+ * @since x.x.x introduced
  */
 class CountriesTableSeeder extends AbstractSeeder
 {

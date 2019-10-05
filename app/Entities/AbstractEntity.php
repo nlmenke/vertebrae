@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Abstract Entity.
+ *
+ * @package   App\Entities
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Entities;
 
@@ -7,15 +15,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class AbstractEntity
+ * The base entity class.
  *
- * @package App\Entities
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functions that would otherwise be duplicated in
+ * other models. All other entities should extend this class.
+ *
+ * @since x.x.x introduced
  */
 abstract class AbstractEntity extends Model
 {
     /**
-     * Get the created_at attribute.
+     * Retrieves the `created_at` attribute.
+     *
+     * If the table has timestamps, we can pull the creation time of a given
+     * model. Otherwise, return a null value.
      *
      * @return Carbon|null
      */
@@ -25,7 +38,10 @@ abstract class AbstractEntity extends Model
     }
 
     /**
-     * Get the deleted_at attribute.
+     * Retrieves the `deleted_at` attribute.
+     *
+     * If the table employs soft deletes, we can pull the deletion time of a
+     * given mode. Otherwise, return a null value.
      *
      * @return Carbon|null
      */
@@ -35,7 +51,10 @@ abstract class AbstractEntity extends Model
     }
 
     /**
-     * Get the id attribute.
+     * Retrieves the `id` attribute.
+     *
+     * All models should have an `id` identifier. We can pull that value using
+     * this method.
      *
      * @return int
      */
@@ -45,7 +64,10 @@ abstract class AbstractEntity extends Model
     }
 
     /**
-     * Get the updated_at attribute.
+     * Retrieves the `updated_at` attribute.
+     *
+     * If the table has timestamps, we can pull the update time of a given
+     * model. Otherwise, return a null value.
      *
      * @return Carbon|null
      */
@@ -55,7 +77,11 @@ abstract class AbstractEntity extends Model
     }
 
     /**
-     * Determine if the model uses soft deletes.
+     * Determines if the model uses soft deletes.
+     *
+     * Rather than permanently deleting records, we can "soft delete" models
+     * by adding a `deleted_at` field. This method will determine if the model
+     * utilizes the SoftDeletes trait.
      *
      * @return bool
      */
