@@ -1,13 +1,25 @@
 <?php declare(strict_types=1);
+/**
+ * Currencies Table Seeder.
+ *
+ * @package   Database Seeders
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 use App\Entities\Currency\Currency;
 use App\Jobs\UpdateExchangeRates;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
- * Class CurrenciesTableSeeder
+ * The Currencies seeder class.
  *
- * @author Nick Menke <nick@nlmenke.net>
+ * This class adds the world's currencies to the `currencies` table. Currencies
+ * also include the symbol, decimal precision, and exchange rate in relation to
+ * the US Dollar (USD).
+ *
+ * @since x.x.x introduced
  */
 class CurrenciesTableSeeder extends AbstractSeeder
 {

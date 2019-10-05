@@ -1,14 +1,24 @@
 <?php declare(strict_types=1);
+/**
+ * Update Currency Request.
+ *
+ * @package   App\Http\Requests\Currency
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Requests\Currency;
 
 use App\Http\Requests\AbstractFormRequest;
 
 /**
- * Class UpdateCurrencyRequest
+ * The Update Currency form request class.
  *
- * @package App\Http\Requests\Currency
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class handles form validation for modifying of a new currency. It also
+ * permits (or denies) a user access to modify a currency.
+ *
+ * @since x.x.x introduced
  */
 class UpdateCurrencyRequest extends AbstractFormRequest
 {

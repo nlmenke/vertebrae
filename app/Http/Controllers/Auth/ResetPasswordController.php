@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Auth/Password Reset Controller.
+ *
+ * @package   App\Http\Controllers\Auth
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Controllers\Auth;
 
@@ -6,10 +14,13 @@ use App\Http\Controllers\AbstractController;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 /**
- * Class ResetPasswordController
+ * Reset Password Controller.
  *
- * @package App\Http\Controllers\Auth
- * @author  Nick Menke <nick@nlmenke.net>
+ * This controller is responsible for handling password reset requests
+ * and uses a simple trait to include this behavior. You're free to
+ * explore this trait and override any methods you wish to tweak.
+ *
+ * @since 0.0.0-framework introduced
  */
 class ResetPasswordController extends AbstractController
 {

@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Country Entity.
+ *
+ * @package   App\Entities\Country
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Entities\Country;
 
@@ -11,10 +19,12 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Country
+ * The Country entity class.
  *
- * @package App\Entities\Country
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functions required to access and manipulate country
+ * models.
+ *
+ * @since x.x.x introduced
  */
 class Country extends AbstractEntity
 {

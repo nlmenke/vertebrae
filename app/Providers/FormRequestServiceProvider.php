@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Form Request Service Provider.
+ *
+ * @package   App\Providers
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Providers;
 
@@ -6,10 +14,12 @@ use App\Http\Requests\AbstractFormRequest;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Class FormRequestServiceProvider
+ * The Form Request service provider.
  *
- * @package App\Providers
- * @author  Nick Menke <nick@nlmenke.net>
+ * This service provider is responsible for bootstrapping and registering the
+ * application's form requests.
+ *
+ * @since x.x.x introduced
  */
 class FormRequestServiceProvider extends ServiceProvider
 {

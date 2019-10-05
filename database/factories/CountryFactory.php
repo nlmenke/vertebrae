@@ -1,4 +1,16 @@
 <?php declare(strict_types=1);
+/**
+ * Country Factory.
+ *
+ * This file provides a convenient way to generate new model instances for
+ * testing / seeding countries to the application's database.
+ *
+ * @package   Database Factories
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     x.x.x introduced
+ */
 
 use App\Entities\Country\Country;
 use App\Entities\Currency\Currency;

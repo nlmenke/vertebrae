@@ -1,13 +1,24 @@
 <?php declare(strict_types=1);
+/**
+ * Abstract Seeder.
+ *
+ * @package   Database Seeders
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 use App\Entities\AbstractEntity;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Seeder;
 
 /**
- * Class AbstractSeeder
+ * The base database seeder class.
  *
- * @author Nick Menke <nick@nlmenke.net>
+ * This class contains any functionality that would otherwise be duplicated in
+ * other seeders. All other seeders should extend this class.
+ *
+ * @since x.x.x introduced
  */
 abstract class AbstractSeeder extends Seeder
 {

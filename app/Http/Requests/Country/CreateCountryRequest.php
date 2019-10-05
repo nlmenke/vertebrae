@@ -1,14 +1,24 @@
 <?php declare(strict_types=1);
+/**
+ * Create Country Request.
+ *
+ * @package   App\Http\Requests\Country
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Requests\Country;
 
 use App\Http\Requests\AbstractFormRequest;
 
 /**
- * Class CreateCountryRequest
+ * The Create Country form request class.
  *
- * @package App\Http\Requests\Country
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class handles form validation for creation of a new country. It also
+ * permits (or denies) a user access to create a country.
+ *
+ * @since x.x.x introduced
  */
 class CreateCountryRequest extends AbstractFormRequest
 {

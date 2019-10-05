@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Abstract API Controller Test Case.
+ *
+ * @package   Tests\Feature\Controllers\Api
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace Tests\Feature\Controllers\Api;
 
@@ -10,10 +18,16 @@ use Route;
 use Tests\TestCase;
 
 /**
- * Class AbstractApiControllerTest
+ * The base API controller test class.
  *
- * @package Tests\Feature\Controllers\Api
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functionality that would otherwise be duplicated in
+ * other API controller tests. All other API controller tests should extend
+ * this class.
+ *
+ * Functional tests are written from a user's perspective. These tests confirm
+ * that the system does what users are expecting it to.
+ *
+ * @since x.x.x introduced
  */
 abstract class AbstractApiControllerTest extends TestCase
 {
@@ -242,7 +256,7 @@ abstract class AbstractApiControllerTest extends TestCase
     /**
      * Use the model factory to generate a fake request.
      *
-     * @param bool $failValidation make validation fail
+     * @param bool $failValidation intentionally make validation fail
      * @return array
      */
     protected function createTestRequest(bool $failValidation = false): array

@@ -1,4 +1,14 @@
 /**
+ * Base Application Script.
+ *
+ * @package   Scripts
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     0.0.0-framework introduced
+ */
+
+/**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.

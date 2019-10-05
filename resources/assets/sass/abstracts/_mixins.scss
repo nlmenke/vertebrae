@@ -1,11 +1,23 @@
-// Reset List
+/**
+ * Application Mixins.
+ *
+ * This file contains all of the Sass mixins used by the application.
+ *
+ * @package   Styles - Abstracts
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     x.x.x introduced
+ */
+
+/// Resets default list styling.
 @mixin reset-list {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-// Hover
+/// Create pseudo-class for `:hover`, `:active`, and `:focus`.
 @mixin hover {
     &:hover,
     &:active,
@@ -14,13 +26,18 @@
     }
 }
 
-// Feature Detection
+/// Feature detection.
+///
+/// @param {string} feature-specific class
 @mixin supported($feature) {
     .#{$feature} & {
         @content;
     }
 }
 
+/// Feature detection.
+///
+/// @param {string} feature-specific class
 @mixin not-supported($feature) {
     .no-js &,
     .no-#{$feature} & {
@@ -28,21 +45,20 @@
     }
 }
 
+/// Micro clearfix hack.
+///
+/// @author Nicolas Gallagher
+/// @link   http://nicolasgallagher.com/micro-clearfix-hack/
 @mixin clearfix {
     *zoom: 1;
 
     &:before,
     &:after {
-        content: '';
+        content: ' ';
         display: table;
     }
 
     &:after {
         clear: both;
     }
-}
-
-@mixin hidden {
-    display: none !important;
-    visibility: hidden;
 }

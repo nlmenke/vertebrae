@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Country API Controller.
+ *
+ * @package   App\Http\Controllers\Api
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Controllers\Api;
 
@@ -6,10 +14,12 @@ use App\Entities\Country\Country;
 use App\Http\Resources\Country\CountryResource;
 
 /**
- * Class CountryController
+ * The Country API controller class.
  *
- * @package App\Http\Controllers\Api
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class allows a user to view, create, modify, or delete countries in the
+ * application.
+ *
+ * @since x.x.x introduced
  */
 class CountryApiController extends AbstractApiController
 {

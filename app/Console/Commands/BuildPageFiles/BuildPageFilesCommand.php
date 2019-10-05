@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Build Page Files Command.
+ *
+ * @package   App\Console\Commands\BuildPageFiles
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Console\Commands\BuildPageFiles;
 
@@ -11,10 +19,13 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class BuildPageFilesCommand
+ * Builds class files required for a new API/page.
  *
- * @package App\Console\Commands\BuildPageFiles
- * @author  Nick Menke <nick@nlmenke.net>
+ * This command will generate the classes and other files needed to make a new
+ * API/page for your application. You can choose whether you're building an API
+ * or a page - this will tell the generator which classes need to be created.
+ *
+ * @since x.x.x introduced
  */
 class BuildPageFilesCommand extends Command
 {

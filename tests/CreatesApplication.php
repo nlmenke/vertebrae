@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Create Application Trait.
+ *
+ * @package   Tests
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace Tests;
 
@@ -6,10 +14,12 @@ use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
 
 /**
- * Trait CreatesApplication
+ * The Creates Application Trait.
  *
- * @package Tests
- * @author  Nick Menke <nick@nlmenke.net>
+ * This trait loads the test bootstrapper. It is loaded in the `Tests\TestCase`
+ * abstract class, so all test cases are bootstrapped when it's extended.
+ *
+ * @since 0.0.0-framework introduced
  */
 trait CreatesApplication
 {

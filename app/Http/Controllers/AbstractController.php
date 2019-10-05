@@ -1,4 +1,13 @@
 <?php declare(strict_types=1);
+/**
+ * Abstract Controller.
+ *
+ * @package   App\Http\Controllers
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Controllers;
 
@@ -11,10 +20,13 @@ use Illuminate\Routing\Controller;
 use Request;
 
 /**
- * Class AbstractController
+ * The base controller class.
  *
- * @package App\Http\Controllers
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functionality that would otherwise be duplicated in
+ * other controllers. All other controllers should extend this class.
+ *
+ * @since 0.0.0-framework introduced
+ * @since x.x.x           renamed to AbstractController and added abstraction
  */
 abstract class AbstractController extends Controller
 {
@@ -25,6 +37,7 @@ abstract class AbstractController extends Controller
     /**
      * The current locale.
      *
+     * @since x.x.x introduced
      * @var string
      */
     protected $currentLocale;
@@ -32,6 +45,7 @@ abstract class AbstractController extends Controller
     /**
      * The entity instance.
      *
+     * @since x.x.x introduced
      * @var AbstractEntity|EloquentBuilder
      */
     protected $model;
@@ -39,6 +53,7 @@ abstract class AbstractController extends Controller
     /**
      * The number of results per page.
      *
+     * @since x.x.x introduced
      * @var int
      */
     protected $perPage;
@@ -46,6 +61,7 @@ abstract class AbstractController extends Controller
     /**
      * The order the results displayed.
      *
+     * @since x.x.x introduced
      * @var array
      */
     protected $sorting;
@@ -53,6 +69,7 @@ abstract class AbstractController extends Controller
     /**
      * Relationships to be returned with the results.
      *
+     * @since x.x.x introduced
      * @var array
      */
     protected $with = [];
@@ -60,6 +77,7 @@ abstract class AbstractController extends Controller
     /**
      * Creates a new controller instance.
      *
+     * @since x.x.x introduced
      * @return void
      */
     public function __construct()

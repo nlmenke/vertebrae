@@ -1,26 +1,26 @@
 <?php declare(strict_types=1);
+/**
+ * Abstract Resource.
+ *
+ * @package   App\Http\Resources
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * Class AbstractResource
+ * The base resource class.
  *
- * @package App\Http\Resources
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functionality that would otherwise be duplicated in
+ * other resources. All other resources should extend this class.
+ *
+ * @since x.x.x introduced
  */
-class AbstractResource extends JsonResource
+abstract class AbstractResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public function toArray($request): array
-    {
-        return parent::toArray($request);
-    }
+    //
 }

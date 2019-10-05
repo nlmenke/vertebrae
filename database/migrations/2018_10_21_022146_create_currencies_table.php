@@ -1,12 +1,23 @@
 <?php declare(strict_types=1);
+/**
+ * Create Currencies Table.
+ *
+ * @package   Database Migrations
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class CreateCurrenciesTable
+ * The Create Currencies migration.
  *
- * @author Nick Menke <nick@nlmenke.net>
+ * This migration creates the `currencies` table used to hold currencies used
+ * by the application.
+ *
+ * @since x.x.x introduced
  */
 class CreateCurrenciesTable extends Migration
 {

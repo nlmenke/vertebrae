@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Update Exchange Rates.
+ *
+ * @package   App\Jobs
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Jobs;
 
@@ -13,10 +21,15 @@ use Illuminate\Queue\SerializesModels;
 use Log;
 
 /**
- * Class UpdateExchangeRates
+ * The Update Exchange Rates job class.
  *
- * @package App\Jobs
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class updates currency exchange rates using the Open Exchange Rates
+ * API. It is set to run quarterly by default. To utilize this job, you will
+ * need to create an OXR account, which has a free tier for up to 1000
+ * requests/month:
+ *  - https://openexchangerates.org/
+ *
+ * @since x.x.x introduced
  */
 class UpdateExchangeRates implements ShouldQueue
 {
@@ -47,7 +60,7 @@ class UpdateExchangeRates implements ShouldQueue
                 }
             });
         } catch (Exception $e) {
-            Log::error($e);
+            Log::error($e->getMessage());
         }
     }
 }

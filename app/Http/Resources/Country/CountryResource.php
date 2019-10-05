@@ -1,4 +1,12 @@
 <?php declare(strict_types=1);
+/**
+ * Country Resource.
+ *
+ * @package   App\Http\Resources\Country
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 namespace App\Http\Resources\Country;
 
@@ -7,10 +15,11 @@ use App\Http\Resources\AbstractResource;
 use Illuminate\Http\Request;
 
 /**
- * Class CountryResource
+ * The Country resource class.
  *
- * @package App\Http\Resources\Country
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class transforms country models into JSON responses for your API.
+ *
+ * @since x.x.x introduced
  */
 class CountryResource extends AbstractResource
 {

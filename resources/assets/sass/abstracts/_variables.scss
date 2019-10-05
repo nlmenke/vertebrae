@@ -1,10 +1,44 @@
-// Font families
+/**
+ * Application Variables.
+ *
+ * This file contains all of the Sass variables used by the application.
+ *
+ * @package   Styles - Abstracts
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     x.x.x introduced
+ */
+
+/// Cursive font family.
+///
+/// @type  {list}
+/// @group font-family
 $font-family-cursive: 'Architects Daughter', cursive !default;
+
+/// Monospace font family.
+///
+/// @type  {list}
+/// @group font-family
 $font-family-monospace: 'Ubuntu Mono', monospace !default;
+
+/// Sans-serif font family.
+///
+/// @type  {list}
+/// @group font-family
 $font-family-sans-serif: 'Open Sans', sans-serif !default;
+
+/// Serif font family.
+///
+/// @type  {list}
+/// @group font-family
 $font-family-serif: 'Lora', serif !default;
 
-// Breakpoints map
+/// Breakpoints map.
+///
+/// @type {map}
+/// @prop {string} keys   identifiers mapped to a given length
+/// @prop {map}    values actual breakpoints expressed in pixels
 $breakpoints: (
     xsmall: 320px,
     small: 480px,
@@ -13,13 +47,18 @@ $breakpoints: (
     xlarge: 1280px,
 ) !default;
 
-// Relative or absolute assets URL
-$base-url: '/assets/' !default;
-
-// Google Fonts URL
+/// Google Fonts URL.
+///
+/// @type {string}
 $google-fonts-url: 'https://fonts.googleapis.com/css?family=Architects+Daughter|Lora:400,700|Open+Sans:300,400,600,700,800|Ubuntu+Mono:400,700';
 
-// Typeface map
+/// Typeface map.
+///
+/// @type {map}
+/// @prop {string} keys   the src of the font-face
+/// @prop {map}    values map of the typeface's properties
+///   @prop {string} keys   css properties (font-family, font-style, font-weight)
+///   @prop {map}    values css values
 //$typefaces: (
 //    'filename': (
 //        family: 'fontname',
@@ -28,8 +67,21 @@ $google-fonts-url: 'https://fonts.googleapis.com/css?family=Architects+Daughter|
 //    ),
 //);
 
-// FontAwesome path
-$fa-font-path: "../webfonts";
+/// FontAwesome path.
+///
+/// @type {string}
+$fa-font-path: '../webfonts';
 
-// Container's maximum width
+/// Relative or absolute assets URL.
+///
+/// @type    {string} path assets are served from
+/// @example scss when using a local path
+///   $base-url: '/assets/';
+/// @example scss when using a CDN
+///   $base-url: 'https://cdn.example.com/assets/';
+$base-url: '/assets/' !default;
+
+/// Container's maximum width.
+///
+/// @type {number}
 $max-width: 1180px !default;

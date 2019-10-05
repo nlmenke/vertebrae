@@ -1,15 +1,35 @@
 <?php declare(strict_types=1);
+/**
+ * Create Password Resets Table.
+ *
+ * @package   Database Migrations
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class CreatePasswordResetsTable
+ * The Create Password Resets migration.
  *
- * @author Nick Menke <nick@nlmenke.net>
+ * This migration creates the `password_resets` table used to keep track of
+ * tokens emailed to registered users who have forgotten their password to
+ * allow them to reset it.
+ *
+ * @since 0.0.0-framework introduced
+ * @since x.x.x           set table to a constant
  */
 class CreatePasswordResetsTable extends Migration
 {
+    /**
+     * Set the table used by the migration.
+     *
+     * @since x.x.x introduced
+     * @var string
+     */
     const TABLE = 'password_resets';
 
     /**
