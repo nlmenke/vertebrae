@@ -1,5 +1,20 @@
 #!/usr/bin/env php
-<?php
+<?php declare(strict_types=1);
+
+/**
+ * Artisan CLI.
+ *
+ * This is the command-line interface included with Laravel. It provides a
+ * number of helpful commands that can assist you while you build your
+ * application. To view a list of all available commands, you may use the list
+ * command: `php artisan list`
+ *
+ * @package   Laravel
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     0.0.0-framework introduced
+ */
 
 define('LARAVEL_START', microtime(true));
 

@@ -1,4 +1,14 @@
-<?php
+<?php declare(strict_types=1);
+
+/**
+ * Broadcasting Config.
+ *
+ * @package   Config
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     0.0.0-framework introduced
+ */
 
 return [
 
@@ -37,7 +47,7 @@ return [
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
-                'encrypted' => true,
+                'useTLS' => true,
             ],
         ],
 

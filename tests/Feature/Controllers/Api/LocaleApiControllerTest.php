@@ -1,12 +1,26 @@
-<?php namespace Tests\Feature\Controllers\Api;
+<?php declare(strict_types=1);
+/**
+ * Locale API Controller Test Case.
+ *
+ * @package   Tests\Feature\Controllers\Api
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace Tests\Feature\Controllers\Api;
 
 use App\Entities\Locale\Locale;
 
 /**
- * Class LocaleApiControllerTest
+ * The Locale API controller test class.
  *
- * @package Tests\Feature\Controllers\Api
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class is used to test locale API route functionality.
+ *
+ * Functional tests are written from a user's perspective. These tests confirm
+ * that the system does what users are expecting it to.
+ *
+ * @since x.x.x introduced
  */
 class LocaleApiControllerTest extends AbstractApiControllerTest
 {

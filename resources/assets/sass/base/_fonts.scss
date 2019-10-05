@@ -1,17 +1,30 @@
+/**
+ * Font Faces.
+ *
+ * This file contains all @font-face declarations, if any, used by the
+ * application.
+ *
+ * @package   Styles - Base
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     x.x.x introduced
+ */
+
 // Fonts
-@if variable-exists(google-fonts-url) {
+@if variable_exists(google-fonts-url) {
     @import url($google-fonts-url);
 }
 
-@if variable-exists(typefaces) {
+@if variable_exists(typefaces) {
     @each $file, $option in $typefaces {
         @font-face {
             font-family: map-get(map-get($typefaces, $file), family);
             font-style: map-get(map-get($typefaces, $file), style);
             font-weight: map-get(map-get($typefaces, $file), weight);
             src: font('#{$file}.ttf') format('truetype'),
-            font('#{$file}.woff') format('woff'),
-            font('#{$file}.woff2') format('woff2');
+                 font('#{$file}.woff') format('woff'),
+                 font('#{$file}.woff2') format('woff2');
         }
     }
 }

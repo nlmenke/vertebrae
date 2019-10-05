@@ -1,4 +1,14 @@
-<?php namespace App\Http;
+<?php declare(strict_types=1);
+/**
+ * Application HTTP Kernel.
+ *
+ * @package   App\Http
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Http;
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\CheckForMaintenanceMode;
@@ -24,10 +34,12 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 /**
- * Class Kernel
+ * The HTTP kernel class.
  *
- * @package App\Http
- * @author  Nick Menke <nick@nlmenke.net>
+ * The HTTP kernel is responsible for registering middleware classes and
+ * dispatching HTTP requests through them.
+ *
+ * @since 0.0.0-framework introduced
  */
 class Kernel extends HttpKernel
 {
@@ -39,11 +51,11 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        TrustProxies::class,
         CheckForMaintenanceMode::class,
         ValidatePostSize::class,
         TrimStrings::class,
         ConvertEmptyStringsToNull::class,
-        TrustProxies::class,
     ];
 
     /**
@@ -61,6 +73,7 @@ class Kernel extends HttpKernel
             VerifyCsrfToken::class,
             SubstituteBindings::class,
         ],
+
         'api' => [
             'throttle:60,1',
             'bindings',
@@ -90,7 +103,7 @@ class Kernel extends HttpKernel
     /**
      * The priority-sorted list of middleware.
      *
-     * This forces the listed middleware to always be in the given order.
+     * This forces non-global middleware to always be in the given order.
      *
      * @var array
      */
@@ -98,6 +111,7 @@ class Kernel extends HttpKernel
         StartSession::class,
         ShareErrorsFromSession::class,
         Authenticate::class,
+        ThrottleRequests::class,
         AuthenticateSession::class,
         SubstituteBindings::class,
         Authorize::class,

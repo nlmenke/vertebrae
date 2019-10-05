@@ -1,14 +1,25 @@
-<?php namespace App\Http\Resources\Currency;
+<?php declare(strict_types=1);
+/**
+ * Currency Resource.
+ *
+ * @package   App\Http\Resources\Currency
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Http\Resources\Currency;
 
 use App\Entities\Currency\Currency;
 use App\Http\Resources\AbstractResource;
 use Illuminate\Http\Request;
 
 /**
- * Class CurrencyResource
+ * The Currency resource class.
  *
- * @package App\Http\Resources\Currency
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class transforms currency models into JSON responses for your API.
+ *
+ * @since x.x.x introduced
  */
 class CurrencyResource extends AbstractResource
 {

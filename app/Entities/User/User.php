@@ -1,4 +1,15 @@
-<?php namespace App\Entities\User;
+<?php declare(strict_types=1);
+/**
+ * User Entity.
+ *
+ * @package   App\Entities\User
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Entities\User;
 
 use App\Entities\AbstractEntity;
 use Illuminate\Auth\Authenticatable;
@@ -11,10 +22,13 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * Class User
+ * The User entity class.
  *
- * @package App\Entities\User
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functions required to access and manipulate user
+ * models.
+ *
+ * @since 0.0.0-framework introduced
+ * @since x.x.x           modified to extend AbstractEntity
  */
 class User extends AbstractEntity implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
@@ -43,5 +57,14 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 }

@@ -1,4 +1,14 @@
-<?php
+<?php declare(strict_types=1);
+
+/**
+ * Authentication / Authorization Config.
+ *
+ * @package   Config
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     0.0.0-framework introduced
+ */
 
 return [
 
@@ -44,6 +54,7 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
+            'hash' => false,
         ],
     ],
 

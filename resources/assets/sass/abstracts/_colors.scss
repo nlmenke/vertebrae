@@ -1,355 +1,1296 @@
-// Basic
+/**
+ * Application Colors.
+ *
+ * This file contains all of the color variables used by the application. Most
+ * of these color variations will likely not be used.
+ *
+ * @package   Styles - Abstracts
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     x.x.x introduced
+ */
+
+/* Basic
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-basic
 $black: #000000;
+
+/// @type  {color}
+/// @group colors-basic
 $white: #FFFFFF;
+
+/// @type  {color}
+/// @group colors-basic
 $transparent: rgba(0, 0, 0, 0);
 
-// Laravel
+/// @type  {color}
+/// @group colors-laravel
 $body-bg: #F8FAFC;
+
+/// @type  {color}
+/// @group colors-laravel
 $text-color: #636B6F;
+
+/// @type  {color}
+/// @group colors-laravel
 $link-color: #F4645F;
 
-// Brand
+/* Brand
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-brand
 $brand-primary: #3097D1;
+
+/// @type  {color}
+/// @group colors-brand
 $brand-info: #8EB4CB;
+
+/// @type  {color}
+/// @group colors-brand
 $brand-success: #2AB27B;
+
+/// @type  {color}
+/// @group colors-brand
 $brand-warning: #CBB956;
+
+/// @type  {color}
+/// @group colors-brand
 $brand-danger: #BF5329;
 
-// Red
+/* Red
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-red
 $red-50: #FFEBEE;
+
+/// @type  {color}
+/// @group colors-red
 $red-100: #FFCDD2;
+
+/// @type  {color}
+/// @group colors-red
 $red-200: #EF9A9A;
+
+/// @type  {color}
+/// @group colors-red
 $red-300: #E57373;
+
+/// @type  {color}
+/// @group colors-red
 $red-400: #EF5350;
+
+/// @type  {color}
+/// @group colors-red
 $red-500: #F44336;
+
+/// @type  {color}
+/// @group colors-red
 $red-600: #E53935;
+
+/// @type  {color}
+/// @group colors-red
 $red-700: #D32F2F;
+
+/// @type  {color}
+/// @group colors-red
 $red-800: #C62828;
+
+/// @type  {color}
+/// @group colors-red
 $red-900: #B71C1C;
+
+/// @type  {color}
+/// @group colors-red
 $red-A100: #FF8A80;
+
+/// @type  {color}
+/// @group colors-red
 $red-A200: #FF5252;
+
+/// @type  {color}
+/// @group colors-red
 $red-A400: #FF1744;
+
+/// @type  {color}
+/// @group colors-red
 $red-A700: #D50000;
 
-// Pink
+/* Pink
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-pink
 $pink-50: #FCE4EC;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-100: #F8BBD0;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-200: #F48FB1;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-300: #F06292;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-400: #EC407A;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-500: #E91E63;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-600: #D81B60;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-700: #C2185B;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-800: #AD1457;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-900: #880E4F;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-A100: #FF80AB;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-A200: #FF4081;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-A400: #F50057;
+
+/// @type  {color}
+/// @group colors-pink
 $pink-A700: #C51162;
 
-// Purple
+/* Purple
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-purple
 $purple-50: #F3E5F5;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-100: #E1BEE7;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-200: #CE93D8;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-300: #BA68C8;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-400: #AB47BC;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-500: #9C27B0;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-600: #8E24AA;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-700: #7B1FA2;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-800: #6A1B9A;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-900: #4A148C;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-A100: #EA80FC;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-A200: #E040FB;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-A400: #D500F9;
+
+/// @type  {color}
+/// @group colors-purple
 $purple-A700: #AA00FF;
 
-// Deep Purple
+/* Deep Purple
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-50: #EDE7F6;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-100: #D1C4E9;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-200: #B39DDB;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-300: #9575CD;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-400: #7E57C2;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-500: #673AB7;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-600: #5E35B1;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-700: #512DA8;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-800: #4527A0;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-900: #311B92;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-A100: #B388FF;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-A200: #7C4DFF;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-A400: #651FFF;
+
+/// @type  {color}
+/// @group colors-deep-purple
 $deep-purple-A700: #6200EA;
 
-// Indigo
+/* Indigo
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-indigo
 $indigo-50: #E8EAF6;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-100: #C5CAE9;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-200: #9FA8DA;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-300: #7986CB;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-400: #5C6BC0;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-500: #3F51B5;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-600: #3949AB;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-700: #303F9F;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-800: #283593;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-900: #1A237E;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-A100: #8C9EFF;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-A200: #536DFE;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-A400: #3D5AFE;
+
+/// @type  {color}
+/// @group colors-indigo
 $indigo-A700: #304FFE;
 
-// Blue
+/* Blue
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-blue
 $blue-50: #E3F2FD;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-100: #BBDEFB;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-200: #90CAF9;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-300: #64B5F6;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-400: #42A5F5;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-500: #2196F3;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-600: #1E88E5;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-700: #1976D2;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-800: #1565C0;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-900: #0D47A1;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-A100: #82B1FF;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-A200: #448AFF;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-A400: #2979FF;
+
+/// @type  {color}
+/// @group colors-blue
 $blue-A700: #2962FF;
 
-// Light Blue
+/* Light Blue
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-50: #E1F5FE;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-100: #B3E5FC;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-200: #81D4FA;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-300: #4FC3F7;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-400: #29B6F6;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-500: #03A9F4;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-600: #039BE5;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-700: #0288D1;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-800: #0277BD;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-900: #01579B;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-A100: #80D8FF;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-A200: #40C4FF;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-A400: #00B0FF;
+
+/// @type  {color}
+/// @group colors-light-blue
 $light-blue-A700: #0091EA;
 
-// Cyan
+/* Cyan
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-cyan
 $cyan-50: #E0F7FA;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-100: #B2EBF2;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-200: #80DEEA;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-300: #4DD0E1;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-400: #26C6DA;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-500: #00BCD4;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-600: #00ACC1;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-700: #0097A7;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-800: #00838F;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-900: #006064;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-A100: #84FFFF;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-A200: #18FFFF;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-A400: #00E5FF;
+
+/// @type  {color}
+/// @group colors-cyan
 $cyan-A700: #00B8D4;
 
-// Teal
+/* Teal
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-teal
 $teal-50: #E0F2F1;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-100: #B2DFDB;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-200: #80CBC4;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-300: #4DB6AC;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-400: #26A69A;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-500: #009688;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-600: #00897B;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-700: #00796B;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-800: #00695C;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-900: #004D40;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-A100: #A7FFEB;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-A200: #64FFDA;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-A400: #1DE9B6;
+
+/// @type  {color}
+/// @group colors-teal
 $teal-A700: #00BFA5;
 
-// Green
+/* Green
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-green
 $green-50: #E8F5E9;
+
+/// @type  {color}
+/// @group colors-green
 $green-100: #C8E6C9;
+
+/// @type  {color}
+/// @group colors-green
 $green-200: #A5D6A7;
+
+/// @type  {color}
+/// @group colors-green
 $green-300: #81C784;
+
+/// @type  {color}
+/// @group colors-green
 $green-400: #66BB6A;
+
+/// @type  {color}
+/// @group colors-green
 $green-500: #4CAF50;
+
+/// @type  {color}
+/// @group colors-green
 $green-600: #43A047;
+
+/// @type  {color}
+/// @group colors-green
 $green-700: #388E3C;
+
+/// @type  {color}
+/// @group colors-green
 $green-800: #2E7D32;
+
+/// @type  {color}
+/// @group colors-green
 $green-900: #1B5E20;
+
+/// @type  {color}
+/// @group colors-green
 $green-A100: #B9F6CA;
+
+/// @type  {color}
+/// @group colors-green
 $green-A200: #69F0AE;
+
+/// @type  {color}
+/// @group colors-green
 $green-A400: #00E676;
+
+/// @type  {color}
+/// @group colors-green
 $green-A700: #00C853;
 
-// Light Green
+/* Light Green
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-light-green
 $light-green-50: #F1F8E9;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-100: #DCEDC8;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-200: #C5E1A5;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-300: #AED581;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-400: #9CCC65;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-500: #8BC34A;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-600: #7CB342;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-700: #689F38;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-800: #558B2F;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-900: #33691E;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-A100: #CCFF90;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-A200: #B2FF59;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-A400: #76FF03;
+
+/// @type  {color}
+/// @group colors-light-green
 $light-green-A700: #64DD17;
 
-// Lime
+/* Lime
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-lime
 $lime-50: #F9FBE7;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-100: #F0F4C3;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-200: #E6EE9C;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-300: #DCE775;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-400: #D4E157;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-500: #CDDC39;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-600: #C0CA33;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-700: #AFB42B;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-800: #9E9D24;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-900: #827717;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-A100: #F4FF81;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-A200: #EEFF41;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-A400: #C6FF00;
+
+/// @type  {color}
+/// @group colors-lime
 $lime-A700: #AEEA00;
 
-// Yellow
+/* Yellow
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-yellow
 $yellow-50: #FFFDE7;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-100: #FFF9C4;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-200: #FFF59D;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-300: #FFF176;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-400: #FFEE58;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-500: #FFEB3B;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-600: #FDD835;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-700: #FBC02D;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-800: #F9A825;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-900: #F57F17;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-A100: #FFFF8D;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-A200: #FFFF00;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-A400: #FFEA00;
+
+/// @type  {color}
+/// @group colors-yellow
 $yellow-A700: #FFD600;
 
-// Amber
+/* Amber
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-amber
 $amber-50: #FFF8E1;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-100: #FFECB3;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-200: #FFE082;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-300: #FFD54F;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-400: #FFCA28;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-500: #FFC107;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-600: #FFB300;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-700: #FFA000;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-800: #FF8F00;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-900: #FF6F00;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-A100: #FFE57F;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-A200: #FFD740;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-A400: #FFC400;
+
+/// @type  {color}
+/// @group colors-amber
 $amber-A700: #FFAB00;
 
-// Orange
+/* Orange
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-orange
 $orange-50: #FFF3E0;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-100: #FFE0B2;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-200: #FFCC80;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-300: #FFB74D;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-400: #FFA726;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-500: #FF9800;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-600: #FB8C00;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-700: #F57C00;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-800: #EF6C00;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-900: #E65100;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-A100: #FFD180;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-A200: #FFAB40;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-A400: #FF9100;
+
+/// @type  {color}
+/// @group colors-orange
 $orange-A700: #FF6D00;
 
-// Deep Orange
+/* Deep Orange
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-50: #FBE9E7;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-100: #FFCCBC;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-200: #FFAB91;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-300: #FF8A65;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-400: #FF7043;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-500: #FF5722;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-600: #F4511E;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-700: #E64A19;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-800: #D84315;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-900: #BF360C;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-A100: #FF9E80;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-A200: #FF6E40;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-A400: #FF3D00;
+
+/// @type  {color}
+/// @group colors-deep-orange
 $deep-orange-A700: #DD2C00;
 
-// Brown
+/* Brown
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-brown
 $brown-50: #EFEBE9;
+
+/// @type  {color}
+/// @group colors-brown
 $brown-100: #D7CCC8;
+
+/// @type  {color}
+/// @group colors-brown
 $brown-200: #BCAAA4;
+
+/// @type  {color}
+/// @group colors-brown
 $brown-300: #A1887F;
+
+/// @type  {color}
+/// @group colors-brown
 $brown-400: #8D6E63;
+
+/// @type  {color}
+/// @group colors-brown
 $brown-500: #795548;
+
+/// @type  {color}
+/// @group colors-brown
 $brown-600: #6D4C41;
+
+/// @type  {color}
+/// @group colors-brown
 $brown-700: #5D4037;
+
+/// @type  {color}
+/// @group colors-brown
 $brown-800: #4E342E;
+
+/// @type  {color}
+/// @group colors-brown
 $brown-900: #3E2723;
 
-// Grey
+/* Grey
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-grey
 $grey-50: #FAFAFA;
+
+/// @type  {color}
+/// @group colors-grey
 $grey-100: #F5F5F5;
+
+/// @type  {color}
+/// @group colors-grey
 $grey-200: #EEEEEE;
+
+/// @type  {color}
+/// @group colors-grey
 $grey-300: #E0E0E0;
+
+/// @type  {color}
+/// @group colors-grey
 $grey-400: #BDBDBD;
+
+/// @type  {color}
+/// @group colors-grey
 $grey-500: #9E9E9E;
+
+/// @type  {color}
+/// @group colors-grey
 $grey-600: #757575;
+
+/// @type  {color}
+/// @group colors-grey
 $grey-700: #616161;
+
+/// @type  {color}
+/// @group colors-grey
 $grey-800: #424242;
+
+/// @type  {color}
+/// @group colors-grey
 $grey-900: #212121;
 
-// Blue Grey
+/* Blue Grey
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-blue-grey
 $blue-grey-50: #ECEFF1;
+
+/// @type  {color}
+/// @group colors-blue-grey
 $blue-grey-100: #CFD8DC;
+
+/// @type  {color}
+/// @group colors-blue-grey
 $blue-grey-200: #B0BEC5;
+
+/// @type  {color}
+/// @group colors-blue-grey
 $blue-grey-300: #90A4AE;
+
+/// @type  {color}
+/// @group colors-blue-grey
 $blue-grey-400: #78909C;
+
+/// @type  {color}
+/// @group colors-blue-grey
 $blue-grey-500: #607D8B;
+
+/// @type  {color}
+/// @group colors-blue-grey
 $blue-grey-600: #546E7A;
+
+/// @type  {color}
+/// @group colors-blue-grey
 $blue-grey-700: #455A64;
+
+/// @type  {color}
+/// @group colors-blue-grey
 $blue-grey-800: #37474F;
+
+/// @type  {color}
+/// @group colors-blue-grey
 $blue-grey-900: #263238;
 
-// Social
+/* Social
+-----------------------------------------------------------------------------*/
+/// @type  {color}
+/// @group colors-social
 $social-bebo: #E04646;
+
+/// @type  {color}
+/// @group colors-social
 $social-behance: #1769FF;
+
+/// @type  {color}
+/// @group colors-social
 $social-blogger: #F57D00;
+
+/// @type  {color}
+/// @group colors-social
 $social-delicious: #3399FF;
+
+/// @type  {color}
+/// @group colors-social
 $social-deviantart: #4DC47D;
+
+/// @type  {color}
+/// @group colors-social
 $social-discord: #7289DA;
+
+/// @type  {color}
+/// @group colors-social
 $social-dribbble: #EA4C89;
+
+/// @type  {color}
+/// @group colors-social
 $social-facebook: #3B5998;
+
+/// @type  {color}
+/// @group colors-social
 $social-flickr-blue: #0063DC;
+
+/// @type  {color}
+/// @group colors-social
 $social-flickr-pink: #FF0084;
+
+/// @type  {color}
+/// @group colors-social
 $social-forrst: #5B9A68;
+
+/// @type  {color}
+/// @group colors-social
 $social-foursquare: #2D5BE3;
+
+/// @type  {color}
+/// @group colors-social
 $social-googleplus: #DD4B39;
+
+/// @type  {color}
+/// @group colors-social
 $social-gravatar: #1E8CBE;
+
+/// @type  {color}
+/// @group colors-social
 $social-hangounts: #0F9D58;
+
+/// @type  {color}
+/// @group colors-social
 $social-icq: #7EBD00;
+
+/// @type  {color}
+/// @group colors-social
 $social-instagram: #3F729B;
+
+/// @type  {color}
+/// @group colors-social
 $social-kippt: #D51007;
+
+/// @type  {color}
+/// @group colors-social
 $social-lastfm: #D51007;
+
+/// @type  {color}
+/// @group colors-social
 $social-linkedin: #0077B5;
+
+/// @type  {color}
+/// @group colors-social
 $social-myspace: #000000;
+
+/// @type  {color}
+/// @group colors-social
 $social-path: #EE3423;
+
+/// @type  {color}
+/// @group colors-social
 $social-pinterest: #BD081C;
+
+/// @type  {color}
+/// @group colors-social
 $social-playstation: #003087;
+
+/// @type  {color}
+/// @group colors-social
 $social-pocket: #EF4056;
+
+/// @type  {color}
+/// @group colors-social
 $social-quora: #A82400;
+
+/// @type  {color}
+/// @group colors-social
 $social-rdio: #007DC3;
+
+/// @type  {color}
+/// @group colors-social
 $social-reddit: #FF4500;
+
+/// @type  {color}
+/// @group colors-social
 $social-rss: #F26522;
+
+/// @type  {color}
+/// @group colors-social
 $social-skype: #00AFF0;
+
+/// @type  {color}
+/// @group colors-social
 $social-snapchat: #FFFC00;
+
+/// @type  {color}
+/// @group colors-social
 $social-soundcloud: #FF8800;
+
+/// @type  {color}
+/// @group colors-social
 $social-spotify: #1DB954;
+
+/// @type  {color}
+/// @group colors-social
 $social-steam: #0B0B0B;
+
+/// @type  {color}
+/// @group colors-social
 $social-stumbleupon: #EB4924;
+
+/// @type  {color}
+/// @group colors-social
 $social-tumblr: #35465C;
+
+/// @type  {color}
+/// @group colors-social
 $social-twitch: #6441A5;
+
+/// @type  {color}
+/// @group colors-social
 $social-twitter: #1DA1F2;
+
+/// @type  {color}
+/// @group colors-social
 $social-vimeo: #1AB7EA;
+
+/// @type  {color}
+/// @group colors-social
 $social-vine: #00B488;
+
+/// @type  {color}
+/// @group colors-social
 $social-whatsapp: #25D366;
+
+/// @type  {color}
+/// @group colors-social
 $social-wordpress: #21759B;
+
+/// @type  {color}
+/// @group colors-social
 $social-xbox: #52B043;
+
+/// @type  {color}
+/// @group colors-social
 $social-yahoo: #410093;
+
+/// @type  {color}
+/// @group colors-social
 $social-youtube: #CD201F;

@@ -1,12 +1,24 @@
-<?php namespace App\Http\Requests\Language;
+<?php declare(strict_types=1);
+/**
+ * Create Language Request.
+ *
+ * @package   App\Http\Requests\Language
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Http\Requests\Language;
 
 use App\Http\Requests\AbstractFormRequest;
 
 /**
- * Class CreateLanguageRequest
+ * The Create Language form request class.
  *
- * @package App\Http\Requests\Language
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class handles form validation for creation of a new language. It also
+ * permits (or denies) a user access to create a language.
+ *
+ * @since x.x.x introduced
  */
 class CreateLanguageRequest extends AbstractFormRequest
 {

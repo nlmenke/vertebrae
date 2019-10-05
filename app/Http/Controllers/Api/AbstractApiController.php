@@ -1,20 +1,42 @@
-<?php namespace App\Http\Controllers\Api;
+<?php declare(strict_types=1);
+/**
+ * Abstract API Controller.
+ *
+ * @package   App\Http\Controllers\Api
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AbstractController;
 use App\Http\Requests\AbstractFormRequest;
 use App\Http\Resources\AbstractResource;
+use DB;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Request;
 
 /**
- * Class AbstractApiController
+ * The base API controller class.
  *
- * @package App\Http\Controllers\Api
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functionality that would otherwise be duplicated in
+ * other API controllers. All other API controllers should extend this class.
+ *
+ * @since x.x.x introduced
  */
 abstract class AbstractApiController extends AbstractController
 {
+    /**
+     * The base route name used by the controller.
+     *
+     * @var string
+     */
+    protected $baseRouteName;
+
     /**
      * The resource instance.
      *
@@ -23,17 +45,31 @@ abstract class AbstractApiController extends AbstractController
     protected $resource;
 
     /**
-     * Create a new controller instance.
+     * Create a new API controller instance.
      *
      * @return void
      */
     public function __construct()
     {
+        $this->baseRouteName = str_replace([
+            'index',
+            'show',
+            'store',
+            'update',
+            'destroy',
+        ], '', Request::route()->getName());
+
         parent::__construct();
     }
 
     /**
-     * Display a listing of resources.
+     * Displays a listing of resources.
+     *
+     * This method is used to retrieve a full list of resources. Upon success:
+     * by default, a JSON object with ten (10) records will be returned with an
+     * HTTP response code of 200 (OK). You will also receive a listing with the
+     * total number of records as well as a listing with links to the first,
+     * last, previous (if applicable) and next (if applicable) pages.
      *
      * @return JsonResponse
      */
@@ -52,7 +88,7 @@ abstract class AbstractApiController extends AbstractController
             return $this->resource->collection($result)
                 ->response()
                 ->header('Content-Language', $this->currentLocale);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return JsonResponse::create([
                 'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
@@ -65,7 +101,13 @@ abstract class AbstractApiController extends AbstractController
     }
 
     /**
-     * Display the specified resource.
+     * Displays a specified resource.
+     *
+     * This method is used to retrieve a single record. Upon success: the
+     * resource will be returned as a JSON object with an HTTP response code of
+     * 200 (OK). If the record does not exist, you will get a 404 (Not Found)
+     * HTTP response code along with any error codes thrown by the application
+     * in attempt to assist with any debugging that may be necessary.
      *
      * @param int $id
      * @return JsonResponse
@@ -93,7 +135,7 @@ abstract class AbstractApiController extends AbstractController
             ], Response::HTTP_NOT_FOUND, [
                 'Content-Language' => $this->currentLocale,
             ]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return JsonResponse::create([
                 'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
@@ -106,27 +148,34 @@ abstract class AbstractApiController extends AbstractController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Stores a newly created resource in storage.
+     *
+     * This method is used to create a new record. A successful request will
+     * return a 201 (Created) HTTP response and the newly created entry. The
+     * response will include a `Location` header with the path to the new
+     * resource as well. If any validation errors exist, an HTTP response code
+     * of 422 (Unprocessable Entity) will be returned along with any fields
+     * that do not match the rules set by the form request.
      *
      * @param AbstractFormRequest $request
      * @return JsonResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function store(AbstractFormRequest $request): JsonResponse
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $result = $this->model->create($request->toArray());
 
-            \DB::commit();
+            DB::commit();
 
             return $this->resource->make($result)
                 ->response()
                 ->header('Content-Language', $this->currentLocale)
-                ->header('Location', route($this->baseRouteName . 'show', ['id' => $result->getId()]));
-        } catch (\Exception $e) {
-            \DB::rollBack();
+                ->header('Location', route($this->baseRouteName . 'show', $result->getId()));
+        } catch (Exception $e) {
+            DB::rollBack();
 
             return JsonResponse::create([
                 'message' => trans('exceptions.http.500_message'),
@@ -140,29 +189,34 @@ abstract class AbstractApiController extends AbstractController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Updates a specified resource in storage.
+     *
+     * This method is used to modify an existing record. Upon success: an HTTP
+     * response of 200 (OK) will be returned with the modified entry. Invalid
+     * requests will result in a 422 (Unprocessable Entity) response and any
+     * fields causing the validation failure.
      *
      * @param AbstractFormRequest $request
      * @param int                 $id
      * @return JsonResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function update(AbstractFormRequest $request, int $id): JsonResponse
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $result = $this->model->findOrFail($id);
-            $result->update($request->all());
+            $result->update($request->toArray());
 
-            \DB::commit();
+            DB::commit();
 
             return $this->resource->make($result)
                 ->response()
                 ->header('Content-Language', $this->currentLocale)
-                ->header('Location', route($this->baseRouteName . 'show', ['id' => $result->getId()]));
+                ->header('Location', route($this->baseRouteName . 'show', $result->getId()));
         } catch (ModelNotFoundException $e) {
-            \DB::rollBack();
+            DB::rollBack();
 
             return JsonResponse::create([
                 'message' => trans('exceptions.http.404_message'),
@@ -172,8 +226,8 @@ abstract class AbstractApiController extends AbstractController
             ], Response::HTTP_NOT_FOUND, [
                 'Content-Language' => $this->currentLocale,
             ]);
-        } catch (\Exception $e) {
-            \DB::rollBack();
+        } catch (Exception $e) {
+            DB::rollBack();
 
             return JsonResponse::create([
                 'message' => trans('exceptions.http.500_message'),
@@ -187,27 +241,34 @@ abstract class AbstractApiController extends AbstractController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Removes a specified resource from storage.
+     *
+     * This method is used to delete an existing record. Successful requests
+     * will result in a 204 (No Content) HTTP response code with no body, but
+     * a `Location` header with a link to the index path will be provided. A
+     * 404 (Not Found) may be returned if the record does not currently exist.
      *
      * @param int $id
      * @return JsonResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(int $id): JsonResponse
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $result = $this->model->findOrFail($id);
             $result->delete();
 
-            \DB::commit();
+            DB::commit();
 
-            return JsonResponse::create(null, Response::HTTP_NO_CONTENT)
+            return $this->resource
+                ->response()
+                ->setStatusCode(Response::HTTP_NO_CONTENT)
                 ->header('Content-Language', $this->currentLocale)
                 ->header('Location', route($this->baseRouteName . 'index'));
         } catch (ModelNotFoundException $e) {
-            \DB::rollBack();
+            DB::rollBack();
 
             return JsonResponse::create([
                 'message' => trans('exceptions.http.404_message'),
@@ -217,8 +278,8 @@ abstract class AbstractApiController extends AbstractController
             ], Response::HTTP_NOT_FOUND, [
                 'Content-Language' => $this->currentLocale,
             ]);
-        } catch (\Exception $e) {
-            \DB::rollBack();
+        } catch (Exception $e) {
+            DB::rollBack();
 
             return JsonResponse::create([
                 'message' => trans('exceptions.http.500_message'),

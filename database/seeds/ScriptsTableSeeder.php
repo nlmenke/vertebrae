@@ -1,11 +1,22 @@
-<?php
+<?php declare(strict_types=1);
+/**
+ * Scripts Table Seeder.
+ *
+ * @package   Database Seeders
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 use App\Entities\Script\Script;
 
 /**
- * Class ScriptsTableSeeder
+ * The Scripts seeder class.
  *
- * @author Nick Menke <nick@nlmenke.net>
+ * This class adds language scripts to the `scripts` table. Scripts are the
+ * writing system used by various cultures for visual communication.
+ *
+ * @since x.x.x introduced
  */
 class ScriptsTableSeeder extends AbstractSeeder
 {
@@ -15,7 +26,7 @@ class ScriptsTableSeeder extends AbstractSeeder
      * @var array
      */
     protected $truncateTables = [
-        CreateScriptsTable::TABLENAME
+        CreateScriptsTable::TABLE
     ];
 
     /**

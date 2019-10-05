@@ -1,15 +1,27 @@
-<?php namespace App\Exceptions;
+<?php declare(strict_types=1);
+/**
+ * Exception Handler.
+ *
+ * @package   App\Exceptions
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
+namespace App\Exceptions;
+
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**
- * Class Handler
+ * The exception handler class.
  *
- * @package App\Exceptions
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class handles exceptions thrown by the application.
+ *
+ * @since 0.0.0-framework introduced
  */
 class Handler extends ExceptionHandler
 {
@@ -35,11 +47,11 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param \Exception $exception
+     * @param Exception $exception
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
-    public function report(\Exception $exception): void
+    public function report(Exception $exception): void
     {
         parent::report($exception);
     }
@@ -47,11 +59,11 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param Request    $request
-     * @param \Exception $exception
-     * @return JsonResponse|Response
+     * @param Request   $request
+     * @param Exception $exception
+     * @return RedirectResponse|Response
      */
-    public function render($request, \Exception $exception)
+    public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
     }

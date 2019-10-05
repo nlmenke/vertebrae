@@ -1,4 +1,14 @@
-<?php namespace App\Entities\Script;
+<?php declare(strict_types=1);
+/**
+ * Script Entity.
+ *
+ * @package   App\Entities\Script
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Entities\Script;
 
 use App\Entities\AbstractEntity;
 use App\Entities\Locale\Locale;
@@ -6,10 +16,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Script
+ * The Script entity class.
  *
- * @package App\Entities\Script
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functions required to access and manipulate script
+ * models.
+ *
+ * @since x.x.x introduced
  */
 class Script extends AbstractEntity
 {

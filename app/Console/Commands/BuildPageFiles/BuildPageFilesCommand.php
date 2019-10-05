@@ -1,17 +1,31 @@
-<?php namespace App\Console\Commands\BuildPageFiles;
+<?php declare(strict_types=1);
+/**
+ * Build Page Files Command.
+ *
+ * @package   App\Console\Commands\BuildPageFiles
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
+namespace App\Console\Commands\BuildPageFiles;
+
+use File;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Composer;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\ConsoleOutput;
 
 /**
- * Class BuildPageFilesCommand
+ * Builds class files required for a new API/page.
  *
- * @package App\Console\Commands\BuildPageFiles
- * @author  Nick Menke <nick@nlmenke.net>
+ * This command will generate the classes and other files needed to make a new
+ * API/page for your application. You can choose whether you're building an API
+ * or a page - this will tell the generator which classes need to be created.
+ *
+ * @since x.x.x introduced
  */
 class BuildPageFilesCommand extends Command
 {
@@ -27,14 +41,28 @@ class BuildPageFilesCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Build the files needed for a new page/API.';
+    protected $description = 'Build the files needed for a new API/page.';
 
     /**
      * The Composer instance.
      *
-     * @var \Illuminate\Support\Composer
+     * @var Composer
      */
     protected $composer;
+
+    /**
+     * The default feature type.
+     *
+     * @var string
+     */
+    protected $defaultType = 'api';
+
+    /**
+     * The selected feature type.
+     *
+     * @var string
+     */
+    protected $selectedType;
 
     /**
      * Create a new command instance.
@@ -57,7 +85,7 @@ class BuildPageFilesCommand extends Command
     protected function getArguments(): array
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the page being created'],
+            ['name', InputArgument::REQUIRED, 'The name of the API/page being created'],
         ];
     }
 
@@ -69,6 +97,7 @@ class BuildPageFilesCommand extends Command
     protected function getOptions(): array
     {
         return [
+            ['type', '', InputOption::VALUE_OPTIONAL, 'Specify the feature type: `api` or `page`'],
             ['migration', 'm', InputOption::VALUE_NONE, 'Generate a migration'],
             ['seeder', 's', InputOption::VALUE_NONE, 'Generate a seeder'],
             ['factory', 'f', InputOption::VALUE_NONE, 'Generate a factory'],
@@ -88,10 +117,21 @@ class BuildPageFilesCommand extends Command
             exit;
         }
 
-        $name = studly_case(str_singular($this->argument('name')));
+        if ($this->option('type') === null || !in_array($this->option('type'), ['api', 'page'])) {
+            $this->selectedType = $this->choice('What type of feature will this be?', ['api', 'page'], $this->defaultType);
+        } else {
+            $this->selectedType = $this->option('type');
+        }
 
-        $controllerPath = app_path('Http/Controllers/Api');
-        $controllerFile = $name . 'ApiController.php';
+        $name = Str::studly(Str::singular($this->argument('name')));
+
+        $controllerPath = app_path('Http/Controllers');
+        if ($this->isApi()) {
+            $controllerPath = $controllerPath . '/Api';
+            $controllerFile = $name . 'ApiController.php';
+        } else {
+            $controllerFile = $name . 'Controller.php';
+        }
 
         $modelPath = app_path('Entities/' . $name);
         $modelFile = $name . '.php';
@@ -104,86 +144,93 @@ class BuildPageFilesCommand extends Command
         $resourceFile = $name . 'Resource.php';
 
         $stylePath = resource_path('assets/sass/pages');
-        $styleFile = '_' . str_plural(snake_case($name, '-')) . '.scss';
+        $styleFile = '_' . Str::plural(Str::snake($name, '-')) . '.scss';
 
-        $languageFile = str_plural(snake_case($name, '-')) . '.php';
+        $languageFile = Str::plural(Str::snake($name, '-')) . '.php';
 
-        $featureTestPath = base_path('tests/Feature/Controllers/Api');
-        $featureTestFile = $name . 'ApiControllerTest.php';
+        $featureTestPath = base_path('tests/Feature/Controllers');
+        if ($this->isApi()) {
+            $featureTestPath = $featureTestPath . '/Api';
+            $featureTestFile = $name . 'ApiControllerTest.php';
+        } else {
+            $featureTestFile = $name . 'ControllerTest.php';
+        }
 
         $unitTestPath = base_path('tests/Unit');
         $unitTestFile = $name . 'Test.php';
 
         // check for existing model; no need to create if files exist
-        if (\File::exists($modelFile)) {
+        if (File::exists($modelPath . '/' . $modelFile)) {
             $this->error($name . ' already exists!');
             exit;
         }
 
-        // create controller and add to git
-        $controller = $this->buildFile($name, 'controller');
+        // create controller and add to Git
+        $controller = $this->buildFile($name, ($this->isApi() ? 'controller.api' : 'controller'));
         $this->saveFile($controllerPath, $controllerFile, $controller);
         $this->gitAdd($controllerPath . '/' . $controllerFile);
 
-        // create model and add to git
+        // create model and add to Git
         $model = $this->buildFile($name, 'model');
         $this->saveFile($modelPath, $modelFile, $model);
         $this->gitAdd($modelPath . '/' . $modelFile);
 
-        // create create request and add to git
-        $requestCreate = $this->buildFile($name, 'request.create');
-        $this->saveFile($requestPath, $createRequestFile, $requestCreate);
+        // create create request and add to Git
+        $createRequest = $this->buildFile($name, 'request.create');
+        $this->saveFile($requestPath, $createRequestFile, $createRequest);
         $this->gitAdd($requestPath . '/' . $createRequestFile);
 
-        // create update request and add to git
-        $requestUpdate = $this->buildFile($name, 'request.update');
-        $this->saveFile($requestPath, $updateRequestFile, $requestUpdate);
+        // create update request and add to Git
+        $updateRequest = $this->buildFile($name, 'request.update');
+        $this->saveFile($requestPath, $updateRequestFile, $updateRequest);
         $this->gitAdd($requestPath . '/' . $updateRequestFile);
 
-        // create resource and add to git
-        $resource = $this->buildFile($name, 'resource');
-        $this->saveFile($resourcePath, $resourceFile, $resource);
-        $this->gitAdd($resourcePath . '/' . $resourceFile);
+        if ($this->isApi()) {
+            // create API resource and add to Git
+            $resource = $this->buildFile($name, 'resource');
+            $this->saveFile($resourcePath, $resourceFile, $resource);
+            $this->gitAdd($resourcePath . '/' . $resourceFile);
+        }
 
-        // create style and add to git
+        // create stylesheet and add to Git
         $this->saveFile($stylePath, $styleFile, '');
         $this->gitAdd($stylePath . '/' . $styleFile);
 
-        // create languages and add to git
-        foreach (\File::directories(resource_path('lang')) as $languagePath) {
-            $language = $this->buildFile(snake_case($name, '-'), 'lang');
+        // create languages and add to Git
+        foreach (File::directories(resource_path('lang')) as $languagePath) {
+            $language = $this->buildfile(Str::snake($name, '-'), 'lang');
             $this->saveFile($languagePath, $languageFile, $language);
             $this->gitAdd($languagePath . '/' . $languageFile);
         }
 
-        // create feature test and add to git
-        $featureTest = $this->buildFile($name, 'test.feature');
+        // create feature test and add to Git
+        $featureTest = $this->buildFile($name, ($this->isApi() ? 'test.feature.controller.api' : 'test.feature.controller'));
         $this->saveFile($featureTestPath, $featureTestFile, $featureTest);
         $this->gitAdd($featureTestPath . '/' . $featureTestFile);
 
-        // create unit test and add to git
+        // create unit test and add to Git
         $unitTest = $this->buildFile($name, 'test.unit');
         $this->saveFile($unitTestPath, $unitTestFile, $unitTest);
         $this->gitAdd($unitTestPath . '/' . $unitTestFile);
 
-        // create migration and add to git
         if ($this->option('migration')) {
+            // create migration and add to Git
             $this->buildMigration($name);
             $this->gitAdd('$(git ls-files database/migrations --other --exclude-standard)');
         }
 
-        // create seeder and add to git
         if ($this->option('seeder')) {
+            // create seeder and add to Git
             $seederPath = database_path('seeds');
-            $seederFile = str_plural($name) . 'TableSeeder.php';
+            $seederFile = Str::plural($name) . 'TableSeeder.php';
 
             $seeder = $this->buildFile($name, 'seeder');
             $this->saveFile($seederPath, $seederFile, $seeder);
             $this->gitAdd($seederPath . '/' . $seederFile);
         }
 
-        // create factory and add to git
         if ($this->option('factory')) {
+            // create factory and add to Git
             $factoryPath = database_path('factories');
             $factoryFile = $name . 'Factory.php';
 
@@ -199,7 +246,7 @@ class BuildPageFilesCommand extends Command
     }
 
     /**
-     * Get file data from stub and build the file contents.
+     * Gets the file stub and fills in the contents.
      *
      * @param string $name
      * @param string $type
@@ -208,29 +255,29 @@ class BuildPageFilesCommand extends Command
      */
     private function buildFile(string $name, string $type): string
     {
-        $file = \File::get($this->getStub($type));
+        $file = File::get($this->getStub($type));
 
         $replacements = [
             'LowerDummyRootNamespace' => strtolower($this->laravel->getNamespace()),
             'DummyRootNamespace' => $this->laravel->getNamespace(),
             'LowerDummy' => strtolower($name),
             'Dummy' => $name,
-            'LowerDummies' => strtolower(str_plural($name)),
-            'Dummies' => str_plural($name),
+            'LowerDummies' => strtolower(Str::plural($name)),
+            'Dummies' => Str::plural($name),
         ];
 
         return str_replace(array_keys($replacements), array_values($replacements), $file);
     }
 
     /**
-     * Generate migration file.
+     * Generates a migration file.
      *
      * @param string $name
      * @return void
      */
-    private function buildMigration(string $name): void
+    private function buildMigration(string $name)
     {
-        $table = str_plural(snake_case($name));
+        $table = Str::plural(Str::snake($name));
         $migration = 'create_' . $table . '_table';
 
         $this->call('make:migration', [
@@ -240,7 +287,7 @@ class BuildPageFilesCommand extends Command
     }
 
     /**
-     * Pull specified stub.
+     * Pulls the specified stub file.
      *
      * @param string $type
      * @return string
@@ -251,7 +298,7 @@ class BuildPageFilesCommand extends Command
     }
 
     /**
-     * Add file to git.
+     * Adds the file to Git.
      *
      * @param string $file
      * @return void
@@ -260,11 +307,21 @@ class BuildPageFilesCommand extends Command
     {
         exec('git add ' . $file, $output);
 
-        (new ConsoleOutput)->write($output, true);
+        $this->output->write($output, true);
     }
 
     /**
-     * Save the generated file.
+     * Checks if the feature should be an API.
+     *
+     * @return bool
+     */
+    private function isApi(): bool
+    {
+        return $this->selectedType === 'api';
+    }
+
+    /**
+     * Saves the generated file.
      *
      * @param string $path
      * @param string $filename
@@ -273,11 +330,11 @@ class BuildPageFilesCommand extends Command
      */
     private function saveFile(string $path, string $filename, string $file): void
     {
-        if (!\File::isDirectory($path)) {
-            \File::makeDirectory($path, 493, true, true);
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 493, true, true);
         }
 
-        \File::put($path . '/' . $filename, $file);
+        File::put($path . '/' . $filename, $file);
 
         $this->line('<info>Built File:</info> ' . $filename);
     }

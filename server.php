@@ -1,10 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
- * Laravel - A PHP Framework For Web Artisans
+ * Laravel - A PHP Framework For Web Artisans.
  *
- * @package Laravel
- * @author  Taylor Otwell <taylor@laravel.com>
+ * @package   Larvel
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     0.0.0-framework introduced
  */
 
 $uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));

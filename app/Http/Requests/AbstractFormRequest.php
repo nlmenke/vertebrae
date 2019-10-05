@@ -1,12 +1,24 @@
-<?php namespace App\Http\Requests;
+<?php declare(strict_types=1);
+/**
+ * Abstract Request.
+ *
+ * @package   App\Http\Requests
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class AbstractFormRequest
+ * The base request class.
  *
- * @package App\Http\Requests
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functionality that would otherwise be duplicated in
+ * other requests. All other requests should extend this class.
+ *
+ * @since x.x.x introduced
  */
 abstract class AbstractFormRequest extends FormRequest
 {

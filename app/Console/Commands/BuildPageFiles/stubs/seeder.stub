@@ -1,7 +1,24 @@
-<?php
+<?php declare(strict_types=1);
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @package   Database Seeders
+ * @author    (your name) <(your email)>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 use DummyRootNamespaceEntities\Dummy\Dummy;
 
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @since x.x.x introduced
+ */
 class DummiesTableSeeder extends AbstractSeeder
 {
     /**
@@ -10,7 +27,7 @@ class DummiesTableSeeder extends AbstractSeeder
      * @var array
      */
     protected $truncateTables = [
-        CreateDummiesTable::TABLENAME
+        CreateDummiesTable::TABLE,
     ];
 
     /**

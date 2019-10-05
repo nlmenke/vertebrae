@@ -1,4 +1,15 @@
-<?php namespace App\Http\Controllers;
+<?php declare(strict_types=1);
+/**
+ * Abstract Controller.
+ *
+ * @package   App\Http\Controllers
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Http\Controllers;
 
 use App\Entities\AbstractEntity;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
@@ -6,12 +17,16 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller;
+use Request;
 
 /**
- * Class AbstractController
+ * The base controller class.
  *
- * @package App\Http\Controllers
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functionality that would otherwise be duplicated in
+ * other controllers. All other controllers should extend this class.
+ *
+ * @since 0.0.0-framework introduced
+ * @since x.x.x           renamed to AbstractController and added abstraction
  */
 abstract class AbstractController extends Controller
 {
@@ -20,15 +35,9 @@ abstract class AbstractController extends Controller
         ValidatesRequests;
 
     /**
-     * The base route name used by the controller.
-     *
-     * @var string
-     */
-    protected $baseRouteName;
-
-    /**
      * The current locale.
      *
+     * @since x.x.x introduced
      * @var string
      */
     protected $currentLocale;
@@ -36,20 +45,23 @@ abstract class AbstractController extends Controller
     /**
      * The entity instance.
      *
+     * @since x.x.x introduced
      * @var AbstractEntity|EloquentBuilder
      */
     protected $model;
 
     /**
-     * The number of results to show per page.
+     * The number of results per page.
      *
+     * @since x.x.x introduced
      * @var int
      */
     protected $perPage;
 
     /**
-     * The order of the results.
+     * The order the results displayed.
      *
+     * @since x.x.x introduced
      * @var array
      */
     protected $sorting;
@@ -57,24 +69,24 @@ abstract class AbstractController extends Controller
     /**
      * Relationships to be returned with the results.
      *
+     * @since x.x.x introduced
      * @var array
      */
     protected $with = [];
 
     /**
-     * Create a new controller instance.
+     * Creates a new controller instance.
      *
+     * @since x.x.x introduced
      * @return void
      */
     public function __construct()
     {
-        $this->baseRouteName = str_replace(['index', 'show', 'store', 'update', 'destroy'], '', \Request::route()->getName());
-
         $this->currentLocale = app()->getLocale();
 
-        $this->perPage = (int)\Request::get('count', 10);
+        $this->perPage = (int)Request::get('count', 10);
 
-        $sortRequest = \Request::get('sorting', ['id' => 'asc']);
+        $sortRequest = Request::get('sorting', ['id' => 'asc']);
         $this->sorting = [
             'column' => array_keys($sortRequest)[0],
             'direction' => array_values($sortRequest)[0],

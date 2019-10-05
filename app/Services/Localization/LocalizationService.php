@@ -1,4 +1,14 @@
-<?php namespace App\Services\Localization;
+<?php declare(strict_types=1);
+/**
+ * Localization Service.
+ *
+ * @package   App\Services\Localization
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Services\Localization;
 
 use App\Entities\Locale\Locale;
 use App\Exceptions\Localization\ActiveLocalesNotDefinedException;
@@ -6,10 +16,11 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Class LocalizationService
+ * The Localization service class.
  *
- * @package App\Services\Localization
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class handles retrieving active locales and localizing the application.
+ *
+ * @since x.x.x introduced
  */
 class LocalizationService
 {

@@ -1,4 +1,14 @@
-<?php
+<?php declare(strict_types=1);
+/**
+ * Creates a new app instance.
+ *
+ * @package   Bootstrap
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     0.0.0-framework introduced
+ */
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -10,7 +20,9 @@
 |
 */
 
-$app = new Illuminate\Foundation\Application(dirname(__DIR__));
+$app = new Illuminate\Foundation\Application(
+    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +35,20 @@ $app = new Illuminate\Foundation\Application(dirname(__DIR__));
 |
 */
 
-$app->singleton(Illuminate\Contracts\Http\Kernel::class, App\Http\Kernel::class);
+$app->singleton(
+    Illuminate\Contracts\Http\Kernel::class,
+    App\Http\Kernel::class
+);
 
-$app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::class);
+$app->singleton(
+    Illuminate\Contracts\Console\Kernel::class,
+    App\Console\Kernel::class
+);
 
-$app->singleton(Illuminate\Contracts\Debug\ExceptionHandler::class, App\Exceptions\Handler::class);
+$app->singleton(
+    Illuminate\Contracts\Debug\ExceptionHandler::class,
+    App\Exceptions\Handler::class
+);
 
 /*
 |--------------------------------------------------------------------------

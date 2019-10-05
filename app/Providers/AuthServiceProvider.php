@@ -1,12 +1,24 @@
-<?php namespace App\Providers;
+<?php declare(strict_types=1);
+/**
+ * Auth Service Provider.
+ *
+ * @package   App\Providers
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 /**
- * Class AuthServiceProvider
+ * The Authentication / Authorization service provider.
  *
- * @package App\Providers
- * @author  Nick Menke <nick@nlmenke.net>
+ * This service provider is responsible for bootstrapping and registering the
+ * application's authentication / authorization services.
+ *
+ * @since 0.0.0-framework introduced
  */
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+//        'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**

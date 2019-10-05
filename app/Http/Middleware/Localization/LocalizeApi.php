@@ -1,13 +1,26 @@
-<?php namespace App\Http\Middleware\Localization;
+<?php declare(strict_types=1);
+/**
+ * Localize API Middleware.
+ *
+ * @package   App\Http\Middleware\Localization
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Http\Middleware\Localization;
 
 use App\Services\Localization\LocalizationService;
+use Closure;
 use Illuminate\Http\Request;
 
 /**
- * Class LocalizeApi
+ * The Localize API middleware class.
  *
- * @package App\Http\Middleware\Localization
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class determines if an API should be localized and sets the locale
+ * (language) of the application based on an `Accept-Language` header.
+ *
+ * @since x.x.x introduced
  */
 class LocalizeApi extends Localization
 {
@@ -15,10 +28,10 @@ class LocalizeApi extends Localization
      * Handle an incoming request.
      *
      * @param Request  $request
-     * @param \Closure $next
+     * @param Closure $next
      * @return mixed
      */
-    public function handle(Request $request, \Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         // requested URL should be ignored
         if ($this->shouldIgnore($request)) {

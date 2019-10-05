@@ -1,12 +1,24 @@
-<?php namespace App\Providers;
+<?php declare(strict_types=1);
+/**
+ * Facade Service Provider.
+ *
+ * @package   App\Providers
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Class FacadeServiceProvider
+ * The Facade service provider.
  *
- * @package App\Providers
- * @author  Nick Menke <nick@nlmenke.net>
+ * This service provider is responsible for bootstrapping and registering the
+ * application's facades.
+ *
+ * @since x.x.x introduced
  */
 class FacadeServiceProvider extends ServiceProvider
 {

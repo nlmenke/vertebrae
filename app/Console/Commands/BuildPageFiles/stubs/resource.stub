@@ -1,9 +1,28 @@
-<?php namespace DummyRootNamespaceHttp\Resources\Dummy;
+<?php declare(strict_types=1);
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @package   DummyRootNamespaceHttp\Resources\Dummy
+ * @author    (your name) <(your email)>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace DummyRootNamespaceHttp\Resources\Dummy;
 
 use App\Entities\Dummy\Dummy;
 use App\Http\Resources\AbstractResource;
 use Illuminate\Http\Request;
 
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @since x.x.x introduced
+ */
 class DummyResource extends AbstractResource
 {
     /**

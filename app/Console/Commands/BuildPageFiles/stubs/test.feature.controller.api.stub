@@ -1,0 +1,42 @@
+<?php declare(strict_types=1);
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @package   Tests\Feature\Controllers\Api
+ * @author    (your name) <(your email)>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace Tests\Feature\Controllers\Api;
+
+use App\Entities\Dummy\Dummy;
+use Tests\Feature\Controllers\Api\AbstractApiControllerTest;
+
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @since x.x.x introduced
+ */
+class DummyApiControllerTest extends AbstractApiControllerTest
+{
+    /**
+     * The entity used by the tests.
+     *
+     * @var Dummy
+     */
+    protected $model = Dummy::class;
+
+    /**
+     * Required fields to be cleared for testing validation.
+     *
+     * @var array
+     */
+    protected $validationRequirements = [
+        //
+    ];
+}

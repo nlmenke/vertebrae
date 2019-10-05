@@ -1,14 +1,25 @@
-<?php namespace App\Http\Resources\Language;
+<?php declare(strict_types=1);
+/**
+ * Language Resource.
+ *
+ * @package   App\Http\Resources\Language
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Http\Resources\Language;
 
 use App\Entities\Language\Language;
 use App\Http\Resources\AbstractResource;
 use Illuminate\Http\Request;
 
 /**
- * Class LanguageResource
+ * The Language resource class.
  *
- * @package App\Http\Resources\Language
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class transforms language models into JSON responses for your API.
+ *
+ * @since x.x.x introduced
  */
 class LanguageResource extends AbstractResource
 {

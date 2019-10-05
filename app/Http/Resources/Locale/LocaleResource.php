@@ -1,14 +1,25 @@
-<?php namespace App\Http\Resources\Locale;
+<?php declare(strict_types=1);
+/**
+ * Locale Resource.
+ *
+ * @package   App\Http\Resources\Locale
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Http\Resources\Locale;
 
 use App\Entities\Locale\Locale;
 use App\Http\Resources\AbstractResource;
 use Illuminate\Http\Request;
 
 /**
- * Class LocaleResource
+ * The Locale resource class.
  *
- * @package App\Http\Resources\Locale
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class transforms locale models into JSON responses for your API.
+ *
+ * @since x.x.x introduced
  */
 class LocaleResource extends AbstractResource
 {

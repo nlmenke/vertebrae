@@ -1,4 +1,15 @@
-<?php
+<?php declare(strict_types=1);
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @package   Database Factories
+ * @author    (your name) <(your email)>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ * @since     x.x.x introduced
+ */
 
 use App\Entities\Dummy\Dummy;
 use Faker\Generator as Faker;

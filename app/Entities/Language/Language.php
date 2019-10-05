@@ -1,4 +1,14 @@
-<?php namespace App\Entities\Language;
+<?php declare(strict_types=1);
+/**
+ * Language Entity.
+ *
+ * @package   App\Entities\Language
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Entities\Language;
 
 use App\Entities\AbstractEntity;
 use App\Entities\Country\Country;
@@ -8,10 +18,12 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Language
+ * The Language entity class.
  *
- * @package App\Entities\Language
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class contains any functions required to access and manipulate language
+ * models.
+ *
+ * @since x.x.x introduced
  */
 class Language extends AbstractEntity
 {

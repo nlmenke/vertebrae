@@ -1,4 +1,12 @@
-<?php
+<?php declare(strict_types=1);
+/**
+ * Locales Table Seeder.
+ *
+ * @package   Database Seeders
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
 use App\Entities\Country\Country;
 use App\Entities\Language\Language;
@@ -6,9 +14,15 @@ use App\Entities\Locale\Locale;
 use App\Entities\Script\Script;
 
 /**
- * Class LocalesTableSeeder
+ * The Locales seeder class.
  *
- * @author Nick Menke <nick@nlmenke.net>
+ * This class combines countries and languages to create locales and adds them
+ * to the `locales` table. Locales also contain the script of the language, the
+ * native word/spelling for the language, numeric styling, and the placement of
+ * the currency symbol, as well as whether or not it is a available for
+ * translation purposes.
+ *
+ * @since x.x.x introduced
  */
 class LocalesTableSeeder extends AbstractSeeder
 {
@@ -18,7 +32,7 @@ class LocalesTableSeeder extends AbstractSeeder
      * @var array
      */
     protected $truncateTables = [
-        CreateLocalesTable::TABLENAME
+        CreateLocalesTable::TABLE
     ];
 
     /**

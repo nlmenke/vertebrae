@@ -1,12 +1,26 @@
-<?php namespace App\Http\Middleware;
+<?php declare(strict_types=1);
+/**
+ * Redirect if Authenticated Middleware.
+ *
+ * @package   App\Http\Middleware
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
 
+namespace App\Http\Middleware;
+
+use Auth;
+use Closure;
 use Illuminate\Http\Request;
 
 /**
- * Class RedirectIfAuthenticated
+ * The Redirect if Authenticated middleware class.
  *
- * @package App\Http\Middleware
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class determines if a user has been authorized to view a specific page.
+ * They will be directed to the home page if they do not have clearance.
+ *
+ * @since 0.0.0-framework introduced
  */
 class RedirectIfAuthenticated
 {
@@ -14,13 +28,13 @@ class RedirectIfAuthenticated
      * Handle an incoming request.
      *
      * @param Request     $request
-     * @param \Closure    $next
+     * @param Closure     $next
      * @param string|null $guard
      * @return mixed
      */
-    public function handle(Request $request, \Closure $next, string $guard = null)
+    public function handle($request, Closure $next, $guard = null)
     {
-        if (\Auth::guard($guard)->check()) {
+        if (Auth::guard($guard)->check()) {
             return redirect('/home');
         }
 

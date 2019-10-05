@@ -1,12 +1,23 @@
-<?php namespace App\Http\Middleware;
+<?php declare(strict_types=1);
+/**
+ * Encrypt Cookies Middleware.
+ *
+ * @package   App\Http\Middleware
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as Middleware;
 
 /**
- * Class EncryptCookies
+ * The Encrypt Cookies middleware class.
  *
- * @package App\Http\Middleware
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class encrypts and decrypts cookies.
+ *
+ * @since 0.0.0-framework introduced
  */
 class EncryptCookies extends Middleware
 {

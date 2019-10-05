@@ -1,8 +1,27 @@
-<?php namespace DummyRootNamespaceEntities\Dummy;
+<?php declare(strict_types=1);
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @package   DummyRootNamespaceEntities\Dummy
+ * @author    (your name) <(your email)>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace DummyRootNamespaceEntities\Dummy;
 
 use DummyRootNamespaceEntities\AbstractEntity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @since x.x.x introduced
+ */
 class Dummy extends AbstractEntity
 {
     use SoftDeletes;

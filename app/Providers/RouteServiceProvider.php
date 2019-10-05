@@ -1,12 +1,25 @@
-<?php namespace App\Providers;
+<?php declare(strict_types=1);
+/**
+ * Route Service Provider.
+ *
+ * @package   App\Providers
+ * @author    Taylor Otwell <taylor@laravel.com>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Route;
 
 /**
- * Class RouteServiceProvider
+ * The Route service provider.
  *
- * @package App\Providers
- * @author  Nick Menke <nick@nlmenke.net>
+ * This service provider is responsible for bootstrapping and registering the
+ * application's route services.
+ *
+ * @since 0.0.0-framework introduced
  */
 class RouteServiceProvider extends ServiceProvider
 {
@@ -54,7 +67,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes(): void
     {
-        \Route::middleware('web')
+        Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
     }
@@ -68,7 +81,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes(): void
     {
-        \Route::prefix('api')
+        Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace . '\Api')
             ->group(base_path('routes/api.php'));

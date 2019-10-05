@@ -1,12 +1,27 @@
-<?php namespace App\Exceptions\Localization;
+<?php declare(strict_types=1);
+/**
+ * Active Locales Not Defined Exception.
+ *
+ * @package   App\Exceptions\Localization
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Exceptions\Localization;
+
+use Exception;
 
 /**
- * Class ActiveLocalesNotDefinedException
+ * The Active Locales Not Defined exception class.
  *
- * @package App\Exceptions\Localization
- * @author  Nick Menke <nick@nlmenke.net>
+ * This exception class notifies the user if the application does not have any
+ * active locales. If you're getting this exception, you may need to seed your
+ * database or make sure at least one (1) locale as active.
+ *
+ * @since x.x.x introduced
  */
-class ActiveLocalesNotDefinedException extends \Exception
+class ActiveLocalesNotDefinedException extends Exception
 {
     /**
      * Create a new exception instance.

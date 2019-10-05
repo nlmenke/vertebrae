@@ -1,13 +1,25 @@
-<?php namespace App\Http\Controllers\Api;
+<?php declare(strict_types=1);
+/**
+ * Locale API Controller.
+ *
+ * @package   App\Http\Controllers\Api
+ * @author    Nick Menke <nick@nlmenke.net>
+ * @copyright 2018-2019 Nick Menke
+ * @link      https://github.com/nlmenke/vertebrae
+ */
+
+namespace App\Http\Controllers\Api;
 
 use App\Entities\Locale\Locale;
 use App\Http\Resources\Locale\LocaleResource;
 
 /**
- * Class LocaleApiController
+ * The Locale API controller class.
  *
- * @package App\Http\Controllers\Api
- * @author  Nick Menke <nick@nlmenke.net>
+ * This class allows a user to view, create, modify, or delete locales in the
+ * application.
+ *
+ * @since x.x.x introduced
  */
 class LocaleApiController extends AbstractApiController
 {
