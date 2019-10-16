@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 
-class EnvironmentController  extends AbstractApiController
+class EnvironmentController extends AbstractApiController
 {
     /**
      * @param Request $request
