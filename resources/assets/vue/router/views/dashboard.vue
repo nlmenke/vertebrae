@@ -35,15 +35,29 @@
 
 <script>
     import Vue from 'vue';
+    import axios from 'axios';
 
     export default {
-        computed: {
-            laravelVersion() {
-                return '5.7.28';
-            },
-            vueVersion() {
-                return Vue.version;
-            },
+        data() {
+            return {
+                languages: {},
+                error: null,
+                laravelVersion: null,
+                vueVersion: Vue.version,
+            };
+        },
+        mounted() {
+            this.getEnvironment();
+        },
+        methods: {
+            // TODO: save this data into the state
+            getEnvironment() {
+                axios.get('meta/environment')
+                    .then(
+                        response => this.laravelVersion = response.data.laravel_version,
+                        error => this.error = error.toString()
+                    );
+            }
         },
     }
 </script>
