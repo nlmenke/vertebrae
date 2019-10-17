@@ -3,6 +3,8 @@ FROM php:${PHP_VERSION}-fpm
 
 LABEL maintainer="Nick Menke <nick@nlmenke.net>"
 
+ARG PHP_VERSION
+
 RUN set -xe; \
     apt-get update -yqq && \
     apt-get upgrade -yqq && \
@@ -71,6 +73,8 @@ RUN set -xs; php -v | head -n 1 | grep -q "PHP ${PHP_VERSION}."
 
 COPY ./laravel.ini /usr/local/etc/php/conf.d
 COPY ./xlaravel.pool.conf /usr/local/etc/php-fpm.d/
+
+###############################################################################
 
 USER root
 

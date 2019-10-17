@@ -16,8 +16,8 @@ volumes:
 
 services:
 
-  ### Adminer
-  #### Database management in a single PHP file.
+  # Adminer
+  ## Database management in a single PHP file.
   adminer:
     container_name: ADMINER
     image: adminer
@@ -30,9 +30,9 @@ services:
       - frontend
       - backend
 
-  ### MySQL
-  #### MySQL is a widely used, open source relational database management
-  #### system (RDBMS).
+  # MySQL
+  ## MySQL is a widely used, open source relational database management system
+  ## (RDBMS).
   mysql:
     container_name: ${DB_HOST}
     build:
@@ -53,10 +53,10 @@ services:
     networks:
       - backend
 
-  ### NGINX
-  #### Nginx is an open source reverse proxy server for HTTP, HTTPS, SMTP,
-  #### POP3, and IMAP protocols as well as a load balancer, HTTP cache, and a
-  #### web server.
+  # NGINX
+  ## Nginx is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3,
+  ## and IMAP protocols as well as a load balancer, HTTP cache, and a web
+  ## server.
   nginx:
     container_name: NGINX
     depends_on:
@@ -80,8 +80,8 @@ services:
       - frontend
       - backend
 
-  ### PHP-FPM
-  #### A simple and robust FastCGI Process Manager for PHP.
+  # PHP-FPM
+  ## A simple and robust FastCGI Process Manager for PHP.
   php-fpm:
     container_name: PHP-FPM
     depends_on:
@@ -108,15 +108,16 @@ services:
     links:
       - docker-in-docker
 
-  ### Redis
-  #### Redis is an open source key-value store that functions as a data
-  #### structure server.
+  # Redis
+  ## Redis is an open source key-value store that functions as a data structure
+  ## server.
   redis:
     container_name: ${REDIS_HOST}
     build:
       context: ./.docker/redis
       args:
         - REDIS_VERSION=${REDIS_VERSION}
+    command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
       - ./.docker/data/redis:/data
     ports:
@@ -124,10 +125,10 @@ services:
     networks:
       - backend
 
-  ### Workspace
-  #### Your workspace is where most of your interactions with the server will
-  #### take place. Artisan commands, composer, and npm should be run from
-  #### within this container.
+  # Workspace
+  ## Your workspace is where most of your interactions with the server will
+  ## take place. Artisan commands, composer, and npm should be run from within
+  ## this container.
   workspace:
     container_name: WORKSPACE
     build:
@@ -158,8 +159,8 @@ services:
     links:
       - docker-in-docker
 
-  ### Docker-in-Docker
-  #### Docker running within the Docker container.
+  # Docker-in-Docker
+  ## Docker running within the Docker container.
   docker-in-docker:
     container_name: DOCKER-IN-DOCKER
     image: docker:dind

@@ -3,6 +3,8 @@ FROM phusion/baseimage:latest
 
 LABEL maintainer="Nick Menke <nick@nlmenke.net>"
 
+ARG PHP_VERSION
+
 ARG LOCALE=en_US.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 ENV locale-gen ${LOCALE}
@@ -63,11 +65,12 @@ RUN curl -s http://getcomposer.org/installer | php && \
 
 RUN . ~/.bashrc
 
+###############################################################################
+
 USER root
 
 ARG PGID=1000
 ARG PUID=1000
-
 RUN set -xe; \
     apt-get update -yqq && \
     apt-get upgrade -yqq && \
@@ -80,9 +83,8 @@ RUN set -xe; \
     php -m | grep -q 'zip'
 
 ARG TZ=UTC
-
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localetime && \
-    echo $TZ > /etc/timezone
+RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localetime && \
+    echo ${TZ} > /etc/timezone
 
 COPY ./aliases.sh /root/aliases.sh
 COPY ./aliases.sh /home/vertebrae/aliases.sh
@@ -95,12 +97,16 @@ RUN sed -i 's/\r//' /root/aliases.sh && \
     echo "source ~/aliases.sh" >> ~/.bashrc && \
     echo "" >> ~/.bashrc
 
+###############################################################################
+
 USER vertebrae
 
 RUN echo "" >> ~/.bashrc && \
     echo "# Load Custom Aliases" >> ~/.bashrc && \
     echo "source ~/aliases.sh" >> ~/.bashrc && \
     echo "" >> ~/.bashrc
+
+###############################################################################
 
 USER root
 
@@ -111,6 +117,8 @@ RUN chown -R vertebrae:vertebrae /home/vertebrae/.composer
 RUN echo "" >> ~/.bashrc && \
     echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> ~/.bashrc
 
+###############################################################################
+
 USER vertebrae
 
 RUN composer global install
@@ -120,6 +128,8 @@ RUN echo "" >> ~/.bashrc && \
 
 RUN echo "" >> ~/.bashrc && \
     echo 'export PATH="/var/www/vendor/bin:$PATH"' >> ~/.bashrc
+
+###############################################################################
 
 USER root
 
@@ -138,6 +148,8 @@ COPY ./xdebug.ini /etc/php/${PHP_VERSION}/cli/conf.d/xdebug.ini
 RUN apt-get update -yqq && \
     apt-get install -yqq php-redis
 
+###############################################################################
+
 USER vertebrae
 
 ARG NODE_VERSION=node
@@ -154,6 +166,8 @@ RUN mkdir -p $NVM_DIR && \
 RUN echo "" >> ~/.bashrc && \
     echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc && \
     echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # this loads nvm' >> ~/.bashrc
+
+###############################################################################
 
 USER root
 
@@ -173,6 +187,8 @@ RUN find $NVM_DIR -type f -name node -exec ln -s {} /usr/local/bin/node \; && \
     ln -s $NODE_MODS_DIR/vue-cli/bin/vue-init /usr/local/bin/vue-init && \
     ln -s $NODE_MODS_DIR/vue-cli/bin/vue-list /usr/local/bin/vue-list
 
+###############################################################################
+
 USER vertebrae
 
 ARG INSTALL_YARN=true
@@ -187,6 +203,8 @@ RUN if [ ${INSTALL_YARN} = true ]; then \
     echo "" >> ~/.bashrc && \
     echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> ~/.bashrc; \
 fi
+
+###############################################################################
 
 USER root
 
@@ -209,7 +227,8 @@ RUN apt-get install -yqq \
     . ~/.bashrc && \
     npm install -g svgo
 
-RUN set -xs; php -v | head -n 1 | grep -q "PHP ${PHP_VERSION}."
+RUN set -xs; \
+    php -v | head -n 1 | grep -q "PHP ${PHP_VERSION}."
 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
