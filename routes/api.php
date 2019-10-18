@@ -19,7 +19,13 @@ use Illuminate\Routing\Router;
 
 /** @var Router $router */
 
-$router->resource('countries', 'CountryApiController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
-$router->resource('currencies', 'CurrencyApiController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
-$router->resource('languages', 'LanguageApiController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
-$router->resource('locales', 'LocaleApiController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
+$router->group(['prefix' => 'meta'], function (Router $router) {
+    $router->get('environment', 'EnvironmentController@getInfo');
+});
+
+$router->group(['prefix' => 'v1'], function (Router $router) {
+    $router->resource('countries', 'CountryApiController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
+    $router->resource('currencies', 'CurrencyApiController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
+    $router->resource('languages', 'LanguageApiController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
+    $router->resource('locales', 'LocaleApiController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
+});
