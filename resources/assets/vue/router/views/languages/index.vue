@@ -4,7 +4,7 @@
             <input type="text" v-model="search_term" @keyup.enter="onSearch" class="form-control" placeholder="Search...">
         </div>
 
-        <div class="error" v-if="error">
+        <div class="alert alert-danger" role="alert" v-if="error">
             <p>{{ error }}</p>
         </div>
 
