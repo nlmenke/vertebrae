@@ -1,5 +1,9 @@
 <template>
     <main id="languages" class="container">
+        <div class="input-group mb-3">
+            <input type="text" v-model="search_term" @keyup.enter="onSearch" class="form-control" placeholder="Search...">
+        </div>
+
         <div class="error" v-if="error">
             <p>{{ error }}</p>
         </div>
@@ -35,6 +39,7 @@
             return {
                 languages: {},
                 error: null,
+                search_term: null,
             };
         },
         mounted() {
@@ -46,11 +51,24 @@
                     page
                 };
 
-                axios.get('v1/languages', { params })
+                let route = 'v1/languages';
+
+                if (this.search_term) {
+                    route = 'v1/languages/search';
+                    params.search_term = this.search_term;
+                }
+
+                axios.get(route, { params })
                     .then(
-                        response => this.languages = response.data,
+                        response => {
+                            this.languages = response.data;
+                            this.error = null;
+                        },
                         error => this.error = error.toString()
                     );
+            },
+            onSearch($event) {
+                this.getLanguages(1);
             }
         },
     }
