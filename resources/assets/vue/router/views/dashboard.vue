@@ -27,7 +27,11 @@
             </div>
 
             <div class="contributors">
-                Chiropractors: <a href="https://github.com/nlmenke">nlmenke</a>
+                Chiropractors:
+                <ul class="list-group list-group-flush">
+                    <a href="https://github.com/nlmenke" class="list-group-item list-group-item-action">nlmenke</a>
+                    <a href="https://github.com/dave9011" class="list-group-item list-group-item-action">dave9011</a>
+                </ul>
             </div>
         </div>
     </div>
@@ -35,15 +39,29 @@
 
 <script>
     import Vue from 'vue';
+    import axios from 'axios';
 
     export default {
-        computed: {
-            laravelVersion() {
-                return '5.7.28';
-            },
-            vueVersion() {
-                return Vue.version;
-            },
+        data() {
+            return {
+                languages: {},
+                error: null,
+                laravelVersion: null,
+                vueVersion: Vue.version,
+            };
+        },
+        mounted() {
+            this.getEnvironment();
+        },
+        methods: {
+            // TODO: save this data into the state
+            getEnvironment() {
+                axios.get('meta/environment')
+                    .then(
+                        response => this.laravelVersion = response.data.laravel_version,
+                        error => this.error = error.toString()
+                    );
+            }
         },
     }
 </script>

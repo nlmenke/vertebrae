@@ -40,9 +40,13 @@ import Routes from '../vue/router/routes';
 
 Vue.use(VueRouter);
 
+import laravelVuePagination from 'laravel-vue-pagination'
+Vue.component('pagination', laravelVuePagination);
+
 const router = new VueRouter({
     mode: 'history',
     routes: Routes,
+    linkActiveClass: 'active',
 });
 
 const app = new Vue({
