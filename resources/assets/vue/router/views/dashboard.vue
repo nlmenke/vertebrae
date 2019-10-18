@@ -27,7 +27,11 @@
             </div>
 
             <div class="contributors">
-                Chiropractors: <a href="https://github.com/nlmenke">nlmenke</a>
+                Chiropractors:
+                <ul class="list-group list-group-flush">
+                    <a href="https://github.com/nlmenke" class="list-group-item list-group-item-action">nlmenke</a>
+                    <a href="https://github.com/dave9011" class="list-group-item list-group-item-action">dave9011</a>
+                </ul>
             </div>
         </div>
     </div>
