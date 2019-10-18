@@ -12,6 +12,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Entities\Language\Language;
 use App\Http\Resources\Language\LanguageResource;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * The Language API controller class.
@@ -50,5 +52,25 @@ class LanguageApiController extends AbstractApiController
         $this->resource = $resource;
 
         parent::__construct();
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function search(Request $request): JsonResponse
+    {
+        $searchTerm = $request->input('search_term', null);
+
+        if ($searchTerm === null) {
+            throw new \InvalidArgumentException('Missing search term');
+        }
+
+        $result = Language::search($searchTerm)->paginate($this->perPage);
+
+        return $this->resource
+            ->collection($result)
+            ->response()
+            ->header('Content-Language', $this->currentLocale);
     }
 }
