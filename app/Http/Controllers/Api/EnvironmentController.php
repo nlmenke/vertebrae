@@ -15,7 +15,8 @@ use Illuminate\Http\Request;
 /**
  * The Environment API controller class.
  *
- * This class allows a user to fetch information about the environment on which the application is deployed
+ * This class allows a user to fetch information about the environment on which
+ * the application is deployed.
  *
  * @since x.x.x introduced
  */
