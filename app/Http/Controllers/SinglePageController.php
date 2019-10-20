@@ -16,7 +16,7 @@ use Illuminate\View\View;
 /**
  * The single-page controller class.
  *
- * This class loads the view that loads the Vue front-end.
+ * This class loads the view that loads the JavaScript front-end.
  *
  * @since x.x.x introduced
  */
