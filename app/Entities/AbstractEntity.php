@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Abstract Entity.
  *
- * @package   App\Entities
+ * @package App\Entities
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Entities;
 
@@ -87,6 +91,6 @@ abstract class AbstractEntity extends Model
      */
     protected function usesSoftDeletes(): bool
     {
-        return in_array('SoftDeletingTrait', class_uses(self::class));
+        return in_array('SoftDeletingTrait', class_uses(self::class), true);
     }
 }

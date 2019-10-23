@@ -1,16 +1,21 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Locale API Controller Test Case.
  *
- * @package   Tests\Feature\Controllers\Api
+ * @package Tests\Feature\Controllers\Api
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace Tests\Feature\Controllers\Api;
 
 use App\Entities\Locale\Locale;
+use App\Http\Controllers\Api\LocaleApiController;
 
 /**
  * The Locale API controller test class.
@@ -19,6 +24,11 @@ use App\Entities\Locale\Locale;
  *
  * Functional tests are written from a user's perspective. These tests confirm
  * that the system does what users are expecting it to.
+ *
+ * @covers LocaleApiController
+ *
+ * @internal
+ * @small
  *
  * @since x.x.x introduced
  */

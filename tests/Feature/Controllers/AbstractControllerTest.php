@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Abstract Controller Test Case.
  *
- * @package   Tests\Feature\Controllers
+ * @package Tests\Feature\Controllers
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace Tests\Feature\Controllers;
 
@@ -25,5 +29,4 @@ use Tests\TestCase;
  */
 abstract class AbstractControllerTest extends TestCase
 {
-    //
 }

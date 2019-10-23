@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Trust Proxies Middleware.
  *
- * @package   App\Http\Middleware
+ * @package App\Http\Middleware
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
@@ -25,16 +29,16 @@ use Illuminate\Http\Request;
 class TrustProxies extends Middleware
 {
     /**
-     * The trusted proxies for this application.
-     *
-     * @var array|string
-     */
-    protected $proxies;
-
-    /**
      * The headers that should be used to detect proxies.
      *
      * @var int
      */
     protected $headers = Request::HEADER_X_FORWARDED_ALL;
+
+    /**
+     * The trusted proxies for this application.
+     *
+     * @var array|string
+     */
+    protected $proxies;
 }

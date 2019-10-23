@@ -1,5 +1,4 @@
-<?php declare(strict_types=1);
-
+<?php
 /**
  * Common Language Lines - EN.
  *
@@ -7,12 +6,16 @@
  * application. This file is meant for lines that do not fit in any other
  * translation file.
  *
- * @package   Languages - English
+ * @package Languages - English
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
- * @since     x.x.x introduced
+ *
+ * @link  https://github.com/nlmenke/vertebrae
+ * @since x.x.x introduced
  */
+
+declare(strict_types=1);
 
 return [
 

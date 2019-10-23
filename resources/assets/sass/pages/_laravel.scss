@@ -4,17 +4,19 @@
  * This file contains all of the styles included in the default dashboard view
  * shipped with a fresh Laravel installation.
  *
- * @package   Styles - Pages
+ * @package Styles - Pages
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
- * @since     x.x.x introduced
+ *
+ * @link  https://github.com/nlmenke/vertebrae
+ * @since x.x.x introduced
  */
 
 // Laravel overwrites
-$body-bg: #F8FAFC;
-$text-color: #636B6F;
-$link-color: #F4645F;
+$body-bg: #f8fafc;
+$text-color: #636b6f;
+$link-color: #f4645f;
 
 .laravel {
     html,

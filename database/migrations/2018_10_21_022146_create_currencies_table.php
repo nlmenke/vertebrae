@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Create Currencies Table.
  *
- * @package   Database Migrations
+ * @package Database Migrations
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,7 +25,17 @@ use Illuminate\Database\Schema\Blueprint;
  */
 class CreateCurrenciesTable extends Migration
 {
-    const TABLE = 'currencies';
+    public const TABLE = 'currencies';
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists(self::TABLE);
+    }
 
     /**
      * Run the migrations.
@@ -30,7 +44,7 @@ class CreateCurrenciesTable extends Migration
      */
     public function up(): void
     {
-        Schema::create(self::TABLE, function (Blueprint $table) {
+        Schema::create(self::TABLE, function (Blueprint $table): void {
             $table->increments('id');
             $table->string('iso_alpha', 3)->index(); // ISO 4217 alpha; 3-char
             $table->string('iso_numeric', 3)->index(); // ISO 4217 numeric; 3-number
@@ -41,15 +55,5 @@ class CreateCurrenciesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists(self::TABLE);
     }
 }

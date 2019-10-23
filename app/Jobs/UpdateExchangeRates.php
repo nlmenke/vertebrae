@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Update Exchange Rates.
  *
- * @package   App\Jobs
+ * @package App\Jobs
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Jobs;
 
@@ -51,7 +55,7 @@ class UpdateExchangeRates implements ShouldQueue
             $currencies = Currency::all();
             $exchangeRates = $exchangeRatesApiService->get('latest.json', null, ['base' => config('currency.default')]);
 
-            $currencies->each(function (Currency $currency) use ($exchangeRates) {
+            $currencies->each(function (Currency $currency) use ($exchangeRates): self {
                 if (array_key_exists($currency->getIsoAlpha(), $exchangeRates['rates'])) {
                     $currency->setAttribute('exchange_rate', $exchangeRates['rates'][$currency->getIsoAlpha()]);
                     $currency->save();

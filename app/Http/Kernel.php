@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Application HTTP Kernel.
  *
- * @package   App\Http
+ * @package App\Http
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http;
 
@@ -68,7 +72,7 @@ class Kernel extends HttpKernel
             EncryptCookies::class,
             AddQueuedCookiesToResponse::class,
             StartSession::class,
-//            AuthenticateSession::class,
+            // AuthenticateSession::class,
             ShareErrorsFromSession::class,
             VerifyCsrfToken::class,
             SubstituteBindings::class,
@@ -79,6 +83,23 @@ class Kernel extends HttpKernel
             'bindings',
             LocalizeApi::class,
         ],
+    ];
+
+    /**
+     * The priority-sorted list of middleware.
+     *
+     * This forces non-global middleware to always be in the given order.
+     *
+     * @var array
+     */
+    protected $middlewarePriority = [
+        StartSession::class,
+        ShareErrorsFromSession::class,
+        Authenticate::class,
+        ThrottleRequests::class,
+        AuthenticateSession::class,
+        SubstituteBindings::class,
+        Authorize::class,
     ];
 
     /**
@@ -98,22 +119,5 @@ class Kernel extends HttpKernel
         'signed' => ValidateSignature::class,
         'throttle' => ThrottleRequests::class,
         'verified' => EnsureEmailIsVerified::class,
-    ];
-
-    /**
-     * The priority-sorted list of middleware.
-     *
-     * This forces non-global middleware to always be in the given order.
-     *
-     * @var array
-     */
-    protected $middlewarePriority = [
-        StartSession::class,
-        ShareErrorsFromSession::class,
-        Authenticate::class,
-        ThrottleRequests::class,
-        AuthenticateSession::class,
-        SubstituteBindings::class,
-        Authorize::class,
     ];
 }

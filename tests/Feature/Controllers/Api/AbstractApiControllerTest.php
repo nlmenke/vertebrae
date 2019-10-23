@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Abstract API Controller Test Case.
  *
- * @package   Tests\Feature\Controllers\Api
+ * @package Tests\Feature\Controllers\Api
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace Tests\Feature\Controllers\Api;
 
@@ -31,9 +35,7 @@ use Tests\TestCase;
  */
 abstract class AbstractApiControllerTest extends TestCase
 {
-    /**
-     * @todo Remove the need for this trait. Mock the LocalizationService?
-     */
+    // @todo Remove the need for this trait. Mock the LocalizationService?
     use WithoutMiddleware;
 
     /**
@@ -63,6 +65,47 @@ abstract class AbstractApiControllerTest extends TestCase
      * @var array
      */
     protected $validationRequirements = [];
+
+    /**
+     * Setup the test environment.
+     *
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        if (!$this->baseRouteName) {
+            $this->baseRouteName = $this->getBaseRouteNameFromModel();
+        }
+
+        $this->currentLocale = $this->app->getLocale();
+    }
+
+    /**
+     * Tests if a specified resource can be removed through API.
+     *
+     * @return void
+     * @test
+     */
+    public function canDestroyResource(): void
+    {
+        $route = $this->baseRouteName . '.destroy';
+
+        if (Route::has($route)) {
+            $resource = $this->createTestResources();
+
+            $response = $this->withHeader('Accept-Language', $this->currentLocale)
+                ->deleteJson(route($route, $resource->getId()));
+            $response->assertStatus(Response::HTTP_NO_CONTENT);
+
+            // verify resource was deleted
+            $response = $this->get(route($this->baseRouteName . '.show', $resource->getId()));
+            $response->assertStatus(Response::HTTP_NOT_FOUND);
+        } else {
+            $this->markTestSkipped($route . ' route is not implemented.');
+        }
+    }
 
     /**
      * Tests if a listing of resources can be displayed via API.
@@ -113,6 +156,57 @@ abstract class AbstractApiControllerTest extends TestCase
     }
 
     /**
+     * Tests if the API store request validation fails gracefully.
+     *
+     * @return void
+     * @test
+     */
+    public function canFailStoreValidation(): void
+    {
+        $route = $this->baseRouteName . '.store';
+
+        if (Route::has($route)) {
+            $request = $this->createTestRequest(true);
+
+            $response = $this->withHeader('Accept-Language', $this->currentLocale)
+                ->postJson(route($route), $request);
+            $response->assertJsonValidationErrors($this->validationRequirements)
+                ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+                ->assertJson([
+                    'errors' => $this->getValidationRequirementErrors(),
+                ]);
+        } else {
+            $this->markTestSkipped($route . ' route is not implemented.');
+        }
+    }
+
+    /**
+     * Tests if the API update request validation fails gracefully.
+     *
+     * @return void
+     * @test
+     */
+    public function canFailUpdateValidation(): void
+    {
+        $route = $this->baseRouteName . '.update';
+
+        if (Route::has($route)) {
+            $resource = $this->createTestResources();
+            $request = $this->createTestRequest(true);
+
+            $response = $this->withHeader('Accept-Language', $this->currentLocale)
+                ->putJson(route($route, $resource->getId()), $request);
+            $response->assertJsonValidationErrors($this->validationRequirements)
+                ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+                ->assertJson([
+                    'errors' => $this->getValidationRequirementErrors(),
+                ]);
+        } else {
+            $this->markTestSkipped($route . ' route is not implemented.');
+        }
+    }
+
+    /**
      * Tests if a resource can be created through API.
      *
      * @return void
@@ -138,31 +232,6 @@ abstract class AbstractApiControllerTest extends TestCase
             $response->assertStatus(Response::HTTP_OK)
                 ->assertJson([
                     'data' => $request,
-                ]);
-        } else {
-            $this->markTestSkipped($route . ' route is not implemented.');
-        }
-    }
-
-    /**
-     * Tests if the API store request validation fails gracefully.
-     *
-     * @return void
-     * @test
-     */
-    public function canFailStoreValidation(): void
-    {
-        $route = $this->baseRouteName . '.store';
-
-        if (Route::has($route)) {
-            $request = $this->createTestRequest(true);
-
-            $response = $this->withHeader('Accept-Language', $this->currentLocale)
-                ->postJson(route($route), $request);
-            $response->assertJsonValidationErrors($this->validationRequirements)
-                ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-                ->assertJson([
-                    'errors' => $this->getValidationRequirementErrors(),
                 ]);
         } else {
             $this->markTestSkipped($route . ' route is not implemented.');
@@ -203,60 +272,10 @@ abstract class AbstractApiControllerTest extends TestCase
     }
 
     /**
-     * Tests if the API update request validation fails gracefully.
-     *
-     * @return void
-     * @test
-     */
-    public function canFailUpdateValidation(): void
-    {
-        $route = $this->baseRouteName . '.update';
-
-        if (Route::has($route)) {
-            $resource = $this->createTestResources();
-            $request = $this->createTestRequest(true);
-
-            $response = $this->withHeader('Accept-Language', $this->currentLocale)
-                ->putJson(route($route, $resource->getId()), $request);
-            $response->assertJsonValidationErrors($this->validationRequirements)
-                ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-                ->assertJson([
-                    'errors' => $this->getValidationRequirementErrors(),
-                ]);
-        } else {
-            $this->markTestSkipped($route . ' route is not implemented.');
-        }
-    }
-
-    /**
-     * Tests if a specified resource can be removed through API.
-     *
-     * @return void
-     * @test
-     */
-    public function canDestroyResource(): void
-    {
-        $route = $this->baseRouteName . '.destroy';
-
-        if (Route::has($route)) {
-            $resource = $this->createTestResources();
-
-            $response = $this->withHeader('Accept-Language', $this->currentLocale)
-                ->deleteJson(route($route, $resource->getId()));
-            $response->assertStatus(Response::HTTP_NO_CONTENT);
-
-            // verify resource was deleted
-            $response = $this->get(route($this->baseRouteName . '.show', $resource->getId()));
-            $response->assertStatus(Response::HTTP_NOT_FOUND);
-        } else {
-            $this->markTestSkipped($route . ' route is not implemented.');
-        }
-    }
-
-    /**
      * Use the model factory to generate a fake request.
      *
      * @param bool $failValidation intentionally make validation fail
+     *
      * @return array
      */
     protected function createTestRequest(bool $failValidation = false): array
@@ -277,6 +296,7 @@ abstract class AbstractApiControllerTest extends TestCase
      * Use the model factory to generate a fake resource.
      *
      * @param int $count
+     *
      * @return mixed
      */
     protected function createTestResources(int $count = 1)
@@ -297,7 +317,7 @@ abstract class AbstractApiControllerTest extends TestCase
     {
         $modelArray = explode('\\', $this->model);
 
-        return Str::plural(strtolower(end($modelArray)));
+        return Str::plural(mb_strtolower(end($modelArray)));
     }
 
     /**
@@ -317,21 +337,5 @@ abstract class AbstractApiControllerTest extends TestCase
         }
 
         return $validation;
-    }
-
-    /**
-     * Setup the test environment.
-     *
-     * @return void
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        if (!$this->baseRouteName) {
-            $this->baseRouteName = $this->getBaseRouteNameFromModel();
-        }
-
-        $this->currentLocale = $this->app->getLocale();
     }
 }

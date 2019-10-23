@@ -1,5 +1,4 @@
-<?php declare(strict_types=1);
-
+<?php
 /**
  * Broadcast Channels.
  *
@@ -7,12 +6,16 @@
  * application supports. The given channel authorization callbacks are
  * used to check if an authenticated user can listen to the channel.
  *
- * @package   Routes
+ * @package Routes
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
- * @since     0.0.0-framework introduced
+ *
+ * @link  https://github.com/nlmenke/vertebrae
+ * @since 0.0.0-framework introduced
  */
+
+declare(strict_types=1);
 
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int)$user->id === (int)$id;

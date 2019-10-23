@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Environment API Controller.
  *
- * @package   App\Http\Controllers\Api
+ * @package App\Http\Controllers\Api
+ *
  * @author    David Hernandez <hrdavidL@gmail.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
@@ -23,7 +27,10 @@ use Illuminate\Http\Request;
 class EnvironmentController extends AbstractApiController
 {
     /**
+     * Retrieves environment information for use on the front-end.
+     *
      * @param Request $request
+     *
      * @return array
      */
     public function getInfo(Request $request)

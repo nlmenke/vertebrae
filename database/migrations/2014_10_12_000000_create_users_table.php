@@ -1,13 +1,17 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Create Users Table.
  *
- * @package   Database Migrations
+ * @package Database Migrations
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -27,27 +31,10 @@ class CreateUsersTable extends Migration
      * Set the table used by the migration.
      *
      * @since x.x.x introduced
+     *
      * @var string
      */
-    const TABLE = 'users';
-
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up(): void
-    {
-        Schema::create(self::TABLE, function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
-    }
+    public const TABLE = 'users';
 
     /**
      * Reverse the migrations.
@@ -57,5 +44,23 @@ class CreateUsersTable extends Migration
     public function down(): void
     {
         Schema::dropIfExists(self::TABLE);
+    }
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up(): void
+    {
+        Schema::create(self::TABLE, function (Blueprint $table): void {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
     }
 }

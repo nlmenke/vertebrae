@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Abstract API Controller.
  *
- * @package   App\Http\Controllers\Api
+ * @package App\Http\Controllers\Api
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
@@ -63,6 +67,60 @@ abstract class AbstractApiController extends AbstractController
     }
 
     /**
+     * Removes a specified resource from storage.
+     *
+     * This method is used to delete an existing record. Successful requests
+     * will result in a 204 (No Content) HTTP response code with no body, but
+     * a `Location` header with a link to the index path will be provided. A
+     * 404 (Not Found) may be returned if the record does not currently exist.
+     *
+     * @param int $id
+     *
+     * @throws Exception
+     *
+     * @return JsonResponse
+     */
+    public function destroy(int $id): JsonResponse
+    {
+        DB::beginTransaction();
+
+        try {
+            $result = $this->model->findOrFail($id);
+            $result->delete();
+
+            DB::commit();
+
+            return $this->resource
+                ->response()
+                ->setStatusCode(Response::HTTP_NO_CONTENT)
+                ->header('Content-Language', $this->currentLocale)
+                ->header('Location', route($this->baseRouteName . 'index'));
+        } catch (ModelNotFoundException $e) {
+            DB::rollBack();
+
+            return JsonResponse::create([
+                'message' => trans('exceptions.http.404_message'),
+                'errors' => (object)[
+                    $e->getCode() => [$e->getMessage()],
+                ],
+            ], Response::HTTP_NOT_FOUND, [
+                'Content-Language' => $this->currentLocale,
+            ]);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return JsonResponse::create([
+                'message' => trans('exceptions.http.500_message'),
+                'errors' => (object)[
+                    $e->getCode() => [$e->getMessage()],
+                ],
+            ], Response::HTTP_INTERNAL_SERVER_ERROR, [
+                'Content-Language' => $this->currentLocale,
+            ]);
+        }
+    }
+
+    /**
      * Displays a listing of resources.
      *
      * This method is used to retrieve a full list of resources. Upon success:
@@ -110,6 +168,7 @@ abstract class AbstractApiController extends AbstractController
      * in attempt to assist with any debugging that may be necessary.
      *
      * @param int $id
+     *
      * @return JsonResponse
      */
     public function show(int $id): JsonResponse
@@ -158,8 +217,10 @@ abstract class AbstractApiController extends AbstractController
      * that do not match the rules set by the form request.
      *
      * @param AbstractFormRequest $request
-     * @return JsonResponse
+     *
      * @throws Exception
+     *
+     * @return JsonResponse
      */
     public function store(AbstractFormRequest $request): JsonResponse
     {
@@ -198,8 +259,10 @@ abstract class AbstractApiController extends AbstractController
      *
      * @param AbstractFormRequest $request
      * @param int                 $id
-     * @return JsonResponse
+     *
      * @throws Exception
+     *
+     * @return JsonResponse
      */
     public function update(AbstractFormRequest $request, int $id): JsonResponse
     {
@@ -215,58 +278,6 @@ abstract class AbstractApiController extends AbstractController
                 ->response()
                 ->header('Content-Language', $this->currentLocale)
                 ->header('Location', route($this->baseRouteName . 'show', $result->getId()));
-        } catch (ModelNotFoundException $e) {
-            DB::rollBack();
-
-            return JsonResponse::create([
-                'message' => trans('exceptions.http.404_message'),
-                'errors' => (object)[
-                    $e->getCode() => [$e->getMessage()],
-                ],
-            ], Response::HTTP_NOT_FOUND, [
-                'Content-Language' => $this->currentLocale,
-            ]);
-        } catch (Exception $e) {
-            DB::rollBack();
-
-            return JsonResponse::create([
-                'message' => trans('exceptions.http.500_message'),
-                'errors' => (object)[
-                    $e->getCode() => [$e->getMessage()],
-                ],
-            ], Response::HTTP_INTERNAL_SERVER_ERROR, [
-                'Content-Language' => $this->currentLocale,
-            ]);
-        }
-    }
-
-    /**
-     * Removes a specified resource from storage.
-     *
-     * This method is used to delete an existing record. Successful requests
-     * will result in a 204 (No Content) HTTP response code with no body, but
-     * a `Location` header with a link to the index path will be provided. A
-     * 404 (Not Found) may be returned if the record does not currently exist.
-     *
-     * @param int $id
-     * @return JsonResponse
-     * @throws Exception
-     */
-    public function destroy(int $id): JsonResponse
-    {
-        DB::beginTransaction();
-
-        try {
-            $result = $this->model->findOrFail($id);
-            $result->delete();
-
-            DB::commit();
-
-            return $this->resource
-                ->response()
-                ->setStatusCode(Response::HTTP_NO_CONTENT)
-                ->header('Content-Language', $this->currentLocale)
-                ->header('Location', route($this->baseRouteName . 'index'));
         } catch (ModelNotFoundException $e) {
             DB::rollBack();
 

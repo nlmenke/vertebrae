@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Localize API Middleware.
  *
- * @package   App\Http\Middleware\Localization
+ * @package App\Http\Middleware\Localization
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Middleware\Localization;
 
@@ -27,8 +31,9 @@ class LocalizeApi extends Localization
     /**
      * Handle an incoming request.
      *
-     * @param Request  $request
+     * @param Request $request
      * @param Closure $next
+     *
      * @return mixed
      */
     public function handle(Request $request, Closure $next)

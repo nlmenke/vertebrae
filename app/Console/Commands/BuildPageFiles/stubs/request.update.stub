@@ -1,14 +1,18 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * (add a short summary)
  *
  * (add an additional description if required)
  *
- * @package   DummyRootNamespaceHttp\Requests\Dummy
+ * @package DummyRootNamespaceHttp\Requests\Dummy
+ *
  * @author    (your name) <(your email)>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace DummyRootNamespaceHttp\Requests\Dummy;
 
@@ -24,6 +28,16 @@ use DummyRootNamespaceHttp\Requests\AbstractFormRequest;
 class UpdateDummyRequest extends AbstractFormRequest
 {
     /**
+     * Does the current user have access?
+     *
+     * @return bool
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
      * The authorization rules.
      *
      * @return array
@@ -33,15 +47,5 @@ class UpdateDummyRequest extends AbstractFormRequest
         return [
             //
         ];
-    }
-
-    /**
-     * Does the current user have access?
-     *
-     * @return bool
-     */
-    public function authorize(): bool
-    {
-        return true;
     }
 }

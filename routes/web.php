@@ -1,5 +1,4 @@
-<?php declare(strict_types=1);
-
+<?php
 /**
  * Web Routes.
  *
@@ -7,17 +6,21 @@
  * routes are loaded by the RouteServiceProvider within a group which
  * contains the `web` middleware group. Now create something great!
  *
- * @package   Routes
+ * @package Routes
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
- * @since     0.0.0-framework introduced
+ *
+ * @link  https://github.com/nlmenke/vertebrae
+ * @since 0.0.0-framework introduced
  */
+
+declare(strict_types=1);
 
 use Illuminate\Routing\Router;
 
-/** @var Router $router */
+/* @var Router $router */
 
 Auth::routes();
 

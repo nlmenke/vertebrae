@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Script Entity.
  *
- * @package   App\Entities\Script
+ * @package App\Entities\Script
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Entities\Script;
 
@@ -38,16 +42,6 @@ class Script extends AbstractEntity
         'name',
         'direction',
     ];
-
-    /**
-     * The locales relationship instance.
-     *
-     * @return HasMany
-     */
-    public function locales(): HasMany
-    {
-        return $this->hasMany(Locale::class);
-    }
 
     /**
      * Get the direction attribute.
@@ -87,5 +81,15 @@ class Script extends AbstractEntity
     public function getName(): string
     {
         return $this->getAttribute('name');
+    }
+
+    /**
+     * The locales relationship instance.
+     *
+     * @return HasMany
+     */
+    public function locales(): HasMany
+    {
+        return $this->hasMany(Locale::class);
     }
 }

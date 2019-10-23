@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Countries Table Seeder.
  *
- * @package   Database Seeders
+ * @package Database Seeders
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 use App\Entities\Country\Country;
 use App\Entities\Currency\Currency;
@@ -26,13 +30,14 @@ class CountriesTableSeeder extends AbstractSeeder
      * @var array
      */
     protected $truncateTables = [
-        CreateCountriesTable::TABLE
+        CreateCountriesTable::TABLE,
     ];
 
     /**
      * Create a new seeder instance.
      *
      * @param Country $model
+     *
      * @return void
      */
     public function __construct(Country $model)
@@ -296,6 +301,7 @@ class CountriesTableSeeder extends AbstractSeeder
      * Find and set currency_id from specified ISO 4217 code.
      *
      * @param string $isoAlpha
+     *
      * @return int|null
      */
     private function getCurrencyId(string $isoAlpha): ?int

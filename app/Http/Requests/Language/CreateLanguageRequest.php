@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Create Language Request.
  *
- * @package   App\Http\Requests\Language
+ * @package App\Http\Requests\Language
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Requests\Language;
 
@@ -23,6 +27,16 @@ use App\Http\Requests\AbstractFormRequest;
 class CreateLanguageRequest extends AbstractFormRequest
 {
     /**
+     * Does the current user have access?
+     *
+     * @return bool
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
      * The authorization rules.
      *
      * @return array
@@ -34,15 +48,5 @@ class CreateLanguageRequest extends AbstractFormRequest
             'iso_alpha_3' => 'required|string|size:3|unique:languages',
             'name' => 'required|string',
         ];
-    }
-
-    /**
-     * Does the current user have access?
-     *
-     * @return bool
-     */
-    public function authorize(): bool
-    {
-        return true;
     }
 }

@@ -1,13 +1,17 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Create Password Resets Table.
  *
- * @package   Database Migrations
+ * @package Database Migrations
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -28,23 +32,10 @@ class CreatePasswordResetsTable extends Migration
      * Set the table used by the migration.
      *
      * @since x.x.x introduced
+     *
      * @var string
      */
-    const TABLE = 'password_resets';
-
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up(): void
-    {
-        Schema::create(self::TABLE, function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
-    }
+    public const TABLE = 'password_resets';
 
     /**
      * Reverse the migrations.
@@ -54,5 +45,19 @@ class CreatePasswordResetsTable extends Migration
     public function down(): void
     {
         Schema::dropIfExists(self::TABLE);
+    }
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up(): void
+    {
+        Schema::create(self::TABLE, function (Blueprint $table): void {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
     }
 }

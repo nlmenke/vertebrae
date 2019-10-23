@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Create Locales Table.
  *
- * @package   Database Migrations
+ * @package Database Migrations
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,7 +25,17 @@ use Illuminate\Database\Schema\Blueprint;
  */
 class CreateLocalesTable extends Migration
 {
-    const TABLE = 'locales';
+    public const TABLE = 'locales';
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists(self::TABLE);
+    }
 
     /**
      * Run the migrations.
@@ -30,7 +44,7 @@ class CreateLocalesTable extends Migration
      */
     public function up(): void
     {
-        Schema::create(self::TABLE, function (Blueprint $table) {
+        Schema::create(self::TABLE, function (Blueprint $table): void {
             $table->increments('id');
             $table->unsignedInteger('country_id')->nullable();
             $table->foreign('country_id')->references('id')->on(CreateCountriesTable::TABLE);
@@ -47,15 +61,5 @@ class CreateLocalesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists(self::TABLE);
     }
 }

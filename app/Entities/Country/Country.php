@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Country Entity.
  *
- * @package   App\Entities\Country
+ * @package App\Entities\Country
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Entities\Country;
 
@@ -51,16 +55,6 @@ class Country extends AbstractEntity
     public function currency(): BelongsTo
     {
         return $this->belongsTo(Currency::class);
-    }
-
-    /**
-     * The languages relationship instance.
-     *
-     * @return HasManyThrough
-     */
-    public function languages(): HasManyThrough
-    {
-        return $this->hasManyThrough(Language::class, Locale::class, 'country_id', 'id', 'id', 'language_id');
     }
 
     /**
@@ -111,5 +105,15 @@ class Country extends AbstractEntity
     public function getName(): string
     {
         return $this->getAttribute('name');
+    }
+
+    /**
+     * The languages relationship instance.
+     *
+     * @return HasManyThrough
+     */
+    public function languages(): HasManyThrough
+    {
+        return $this->hasManyThrough(Language::class, Locale::class, 'country_id', 'id', 'id', 'language_id');
     }
 }

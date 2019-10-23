@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Encrypt Cookies Middleware.
  *
- * @package   App\Http\Middleware
+ * @package App\Http\Middleware
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
@@ -27,6 +31,6 @@ class EncryptCookies extends Middleware
      * @var array
      */
     protected $except = [
-        //
+
     ];
 }

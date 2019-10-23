@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Create Country Request.
  *
- * @package   App\Http\Requests\Country
+ * @package App\Http\Requests\Country
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Requests\Country;
 
@@ -23,6 +27,16 @@ use App\Http\Requests\AbstractFormRequest;
 class CreateCountryRequest extends AbstractFormRequest
 {
     /**
+     * Does the current user have access?
+     *
+     * @return bool
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
      * The authorization rules.
      *
      * @return array
@@ -36,15 +50,5 @@ class CreateCountryRequest extends AbstractFormRequest
             'iso_numeric' => 'required|string|size:3|unique:countries',
             'name' => 'required|string',
         ];
-    }
-
-    /**
-     * Does the current user have access?
-     *
-     * @return bool
-     */
-    public function authorize(): bool
-    {
-        return true;
     }
 }
