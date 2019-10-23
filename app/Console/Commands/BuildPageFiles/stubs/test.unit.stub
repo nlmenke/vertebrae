@@ -36,8 +36,9 @@ class DummyTest extends TestCase
      * A basic test example.
      *
      * @return void
+     * @test
      */
-    public function testBasicTest(): void
+    public function basicTest(): void
     {
         $this->assertTrue(true);
     }

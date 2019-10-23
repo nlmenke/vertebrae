@@ -8,10 +8,10 @@
  *
  * @package Larvel
  *
- * @author Taylor Otwell <taylor@laravel.com>
+ * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
  *
- * @link https://github.com/nlmenke/vertebrae
+ * @link  https://github.com/nlmenke/vertebrae
  * @since 0.0.0-framework introduced
  */
 

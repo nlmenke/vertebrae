@@ -18,7 +18,6 @@ namespace Tests\Feature\Controllers\Api;
 
 use App\Entities\Dummy\Dummy;
 use App\Http\Controllers\DummyApiController;
-use Tests\Feature\Controllers\Api\AbstractApiControllerTest;
 
 /**
  * (add a short summary)
@@ -46,7 +45,5 @@ class DummyApiControllerTest extends AbstractApiControllerTest
      *
      * @var array
      */
-    protected $validationRequirements = [
-        //
-    ];
+    protected $validationRequirements = [];
 }

@@ -44,8 +44,6 @@ class UpdateDummyRequest extends AbstractFormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }
