@@ -55,7 +55,7 @@ class UpdateExchangeRates implements ShouldQueue
             $currencies = Currency::all();
             $exchangeRates = $exchangeRatesApiService->get('latest.json', null, ['base' => config('currency.default')]);
 
-            $currencies->each(function (Currency $currency) use ($exchangeRates): self {
+            $currencies->each(function (Currency $currency) use ($exchangeRates): void {
                 if (array_key_exists($currency->getIsoAlpha(), $exchangeRates['rates'])) {
                     $currency->setAttribute('exchange_rate', $exchangeRates['rates'][$currency->getIsoAlpha()]);
                     $currency->save();
