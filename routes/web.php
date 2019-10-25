@@ -21,5 +21,7 @@ use Illuminate\Routing\Router;
 
 Auth::routes();
 
-$router->get('/', 'DashboardController@index');
-$router->get('/home', 'HomeController@index')->name('home');
+//$router->get('/', 'DashboardController@index');
+//$router->get('/home', 'HomeController@index')->name('home');
+
+$router->get('{any}', 'SinglePageController@index')->where('any', '.*');

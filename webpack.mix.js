@@ -28,7 +28,8 @@ mix.options({
         'vue'
     ]);
 
+mix.sourceMaps(false);
+
 if (mix.inProduction()) {
-    mix.version()
-        .sourceMaps();
+    mix.version();
 }

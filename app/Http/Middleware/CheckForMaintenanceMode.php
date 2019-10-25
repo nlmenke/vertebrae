@@ -10,7 +10,12 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
 use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode as Middleware;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * The Check for Maintenance Mode middleware class.
@@ -31,4 +36,29 @@ class CheckForMaintenanceMode extends Middleware
     protected $except = [
         //
     ];
+
+    /**
+     * Handle an incoming request.
+     *
+     * @param Request  $request
+     * @param \Closure $next
+     * @return JsonResponse|mixed
+     * @throws HttpException
+     */
+    public function handle($request, \Closure $next)
+    {
+        try {
+            parent::handle($request, $next);
+        } catch (MaintenanceModeException $e) {
+            if ($request->expectsJson() || $request->wantsJson()) {
+                return JsonResponse::create([
+                    'message' => $e->getMessage(),
+                ], Response::HTTP_SERVICE_UNAVAILABLE);
+            } else {
+                throw $e;
+            }
+        }
+
+        return $next($request);
+    }
 }

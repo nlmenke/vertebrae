@@ -11,6 +11,11 @@
  * @since     x.x.x introduced
  */
 
+// Laravel overwrites
+$body-bg: #F8FAFC;
+$text-color: #636B6F;
+$link-color: #F4645F;
+
 .laravel {
     html,
     body {
@@ -82,13 +87,22 @@
         position: absolute;
         right: 0;
 
-        & > a {
-            color: $text-color;
+        & > .list-group > .list-group-item {
+            background-color: $transparent;
             text-decoration: none;
             transition: .3s ease-in-out;
+            padding: 0.5rem 1rem;
+
+            &.list-group-item-action {
+                color: $text-color;
+            }
 
             &:hover {
-                color: $link-color;
+                background-color: $white;
+
+                &.list-group-item-action {
+                    color: $link-color;
+                }
             }
         }
     }

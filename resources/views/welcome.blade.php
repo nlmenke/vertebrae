@@ -17,7 +17,7 @@
     <script src="{{ asset(mix('scripts/app.js', 'assets')) }}" type="text/javascript" defer></script>
 </head>
 <body>
-<div id="app" class="laravel">
+<div class="laravel">
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
             <div class="top-right links">
@@ -39,21 +39,32 @@
             </div>
 
             <div class="subtitle m-b-md">
-                Built with Laravel {{ $appVersion = App::version() }}
+                Built with Laravel {{ App::version() }}
             </div>
 
             <div class="links m-b-md">
-                <a href="https://laravel.com/docs/{{ substr($appVersion, 0, strpos($appVersion, '.', 2)) }}">Laradocs</a>
+                <a href="https://laravel.com/docs/6.x">Laradocs</a>
                 <a href="https://github.com/nlmenke/vertebrae">GitHub</a>
             </div>
 
             <div class="badges">
-                <a href="https://travis-ci.org/nlmenke/vertebrae"><img src="https://travis-ci.org/nlmenke/vertebrae.svg"></a>
-                <a href="https://github.com/nlmenke/vertebrae/blob/master/LICENSE.md"><img src="https://poser.pugx.org/laravel/laravel/license"></a>
+                <a href="https://travis-ci.org/nlmenke/vertebrae"><img src="https://travis-ci.org/nlmenke/vertebrae.svg?branch=master" alt="travis-ci-build-status"></a>
+                <a href="https://codecov.io/gh/nlmenke/vertebrae"><img src="https://codecov.io/gh/nlmenke/vertebrae/branch/master/graph/badge.svg" alt="codecov"></a>
+                <a href="https://github.styleci.io/repos/153017543"><img src="https://github.styleci.io/repos/153017543/shield?style=flat" alt="style-ci"></a>
+                <br>
+                <a href="https://scrutinizer-ci.com/g/nlmenke/vertebrae/build-status/master"><img src="https://scrutinizer-ci.com/g/nlmenke/vertebrae/badges/build.png?b=master" alt="scrutinizer-build-status"></a>
+                <a href="https://scrutinizer-ci.com/g/nlmenke/vertebrae/?branch=master"><img src="https://scrutinizer-ci.com/g/nlmenke/vertebrae/badges/coverage.png?b=master" alt="scrutinizer-code-coverage"></a>
+                <a href="https://scrutinizer-ci.com/g/nlmenke/vertebrae/?branch=master"><img src="https://scrutinizer-ci.com/g/nlmenke/vertebrae/badges/quality-score.png?b=master" alt="scrutinizer-code-quality"></a>
+                <br>
+                <a href="https://github.com/nlmenke/vertebrae/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-428F7E.svg" alt="mit-license"></a>
             </div>
 
             <div class="contributors">
-                Chiropractors: <a href="https://github.com/nlmenke">nlmenke</a>
+                Chiropractors:
+                <div class="list-group list-group-flush">
+                    <a href="https://github.com/nlmenke" class="list-group-item list-group-item-action">nlmenke</a>
+                    <a href="https://github.com/dave9011" class="list-group-item list-group-item-action">dave9011</a>
+                </div>
             </div>
         </div>
     </div>
