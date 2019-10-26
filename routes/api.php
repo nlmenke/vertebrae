@@ -26,6 +26,9 @@ $router->group(['prefix' => 'meta'], function (Router $router) {
 $router->group(['prefix' => 'v1'], function (Router $router) {
     $router->resource('countries', 'CountryApiController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
     $router->resource('currencies', 'CurrencyApiController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
+
+    $router->get('languages/search', 'LanguageApiController@search');
     $router->resource('languages', 'LanguageApiController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
+
     $router->resource('locales', 'LocaleApiController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 });

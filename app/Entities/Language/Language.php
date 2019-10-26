@@ -16,6 +16,7 @@ use App\Entities\Locale\Locale;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 /**
  * The Language entity class.
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Language extends AbstractEntity
 {
+    use Searchable;
     use SoftDeletes;
 
     /**
