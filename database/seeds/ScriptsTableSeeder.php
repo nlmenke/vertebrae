@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Scripts Table Seeder.
  *
- * @package   Database Seeders
+ * @package Database Seeders
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 use App\Entities\Script\Script;
 
@@ -20,15 +24,6 @@ use App\Entities\Script\Script;
  */
 class ScriptsTableSeeder extends AbstractSeeder
 {
-    /**
-     * Tables that should be truncated before running.
-     *
-     * @var array
-     */
-    protected $truncateTables = [
-        CreateScriptsTable::TABLE
-    ];
-
     /**
      * Items to be added to the database.
      *
@@ -228,9 +223,19 @@ class ScriptsTableSeeder extends AbstractSeeder
     ];
 
     /**
+     * Tables that should be truncated before running.
+     *
+     * @var array
+     */
+    protected $truncateTables = [
+        CreateScriptsTable::TABLE,
+    ];
+
+    /**
      * Create a new seeder instance.
      *
      * @param Script $model
+     *
      * @return void
      */
     public function __construct(Script $model)

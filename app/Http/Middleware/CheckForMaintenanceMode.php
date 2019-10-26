@@ -1,15 +1,20 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Check for Maintenance Mode Middleware.
  *
- * @package   App\Http\Middleware
+ * @package App\Http\Middleware
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Closure;
 use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
 use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode as Middleware;
 use Illuminate\Http\JsonResponse;
@@ -33,19 +38,19 @@ class CheckForMaintenanceMode extends Middleware
      *
      * @var array
      */
-    protected $except = [
-        //
-    ];
+    protected $except = [];
 
     /**
      * Handle an incoming request.
      *
-     * @param Request  $request
-     * @param \Closure $next
-     * @return JsonResponse|mixed
+     * @param Request $request
+     * @param Closure $next
+     *
      * @throws HttpException
+     *
+     * @return JsonResponse|mixed
      */
-    public function handle($request, \Closure $next)
+    public function handle($request, Closure $next)
     {
         try {
             parent::handle($request, $next);
@@ -54,9 +59,9 @@ class CheckForMaintenanceMode extends Middleware
                 return JsonResponse::create([
                     'message' => $e->getMessage(),
                 ], Response::HTTP_SERVICE_UNAVAILABLE);
-            } else {
-                throw $e;
             }
+
+            throw $e;
         }
 
         return $next($request);

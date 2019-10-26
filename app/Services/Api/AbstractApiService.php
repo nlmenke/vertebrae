@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Abstract API Service.
  *
- * @package   App\Services\Api
+ * @package App\Services\Api
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Services\Api;
 
@@ -70,6 +74,7 @@ abstract class AbstractApiService
      * @param string       $uri
      * @param int|null     $id
      * @param Closure|null $callback
+     *
      * @return array
      */
     public function delete(string $uri, int $id = null, Closure $callback = null): array
@@ -103,6 +108,7 @@ abstract class AbstractApiService
      * @param int|null     $id
      * @param array        $query
      * @param Closure|null $callback
+     *
      * @return array
      */
     public function get(string $uri, int $id = null, array $query = [], Closure $callback = null): array
@@ -137,6 +143,7 @@ abstract class AbstractApiService
      * @param string       $uri
      * @param array        $formParams
      * @param Closure|null $callback
+     *
      * @return array
      */
     public function post(string $uri, array $formParams = [], Closure $callback = null): array
@@ -163,15 +170,16 @@ abstract class AbstractApiService
      * Submits a PUT API request.
      *
      * This method is used to send a PUT request to an external application.
-     * PUT requests can return a 200 (OK) along with a body or a 204 (No Content)
-     * if no body is included in the response, either of which may include a
-     * location header with a link to the resource. You may also receive a 404
-     * (Not Found) if the record or route does not exist.
+     * PUT requests can return a 200 (OK) along with a body or a 204 (No
+     * Content) if no body is included in the response, either of which may
+     * include a location header with a link to the resource. You may also
+     * receive a 404 (Not Found) if the record or route does not exist.
      *
      * @param string       $uri
      * @param int|null     $id
      * @param array        $formParams
      * @param Closure|null $callback
+     *
      * @return array
      */
     public function put(string $uri, int $id = null, array $formParams = [], Closure $callback = null): array
@@ -198,6 +206,7 @@ abstract class AbstractApiService
      * Adds additional headers to the headerList array.
      *
      * @param array $headerList
+     *
      * @return self
      */
     protected function headers(array $headerList): self

@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Auth/Register Controller.
  *
- * @package   App\Http\Controllers\Auth
+ * @package App\Http\Controllers\Auth
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
@@ -50,24 +54,10 @@ class RegisterController extends AbstractController
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param array $data
-     * @return ValidatorContract|Validator
-     */
-    protected function validator(array $data): Validator
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
-
-    /**
      * Create a new user instance after a valid registration.
      *
      * @param array $data
+     *
      * @return User
      */
     protected function create(array $data): User
@@ -76,6 +66,22 @@ class RegisterController extends AbstractController
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+        ]);
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param array $data
+     *
+     * @return ValidatorContract|Validator
+     */
+    protected function validator(array $data): Validator
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 }

@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Laravel - A PHP Framework For Web Artisans.
  *
@@ -6,12 +6,16 @@
  * We've already laid the foundation - freeing you to create without sweating
  * the small things.
  *
- * @package   Larvel
+ * @package Larvel
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
- * @since     0.0.0-framework introduced
+ *
+ * @link  https://github.com/nlmenke/vertebrae
+ * @since 0.0.0-framework introduced
  */
+
+declare(strict_types=1);
 
 define('LARAVEL_START', microtime(true));
 

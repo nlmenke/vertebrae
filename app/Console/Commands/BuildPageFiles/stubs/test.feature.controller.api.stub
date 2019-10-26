@@ -1,24 +1,33 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * (add a short summary)
  *
  * (add an additional description if required)
  *
- * @package   Tests\Feature\Controllers\Api
+ * @package Tests\Feature\Controllers\Api
+ *
  * @author    (your name) <(your email)>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace Tests\Feature\Controllers\Api;
 
 use App\Entities\Dummy\Dummy;
-use Tests\Feature\Controllers\Api\AbstractApiControllerTest;
+use App\Http\Controllers\DummyApiController;
 
 /**
  * (add a short summary)
  *
  * (add an additional description if required)
+ *
+ * @covers DummyApiController
+ *
+ * @internal
+ * @small
  *
  * @since x.x.x introduced
  */
@@ -36,7 +45,5 @@ class DummyApiControllerTest extends AbstractApiControllerTest
      *
      * @var array
      */
-    protected $validationRequirements = [
-        //
-    ];
+    protected $validationRequirements = [];
 }

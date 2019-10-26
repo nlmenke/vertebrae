@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Update Locale Request.
  *
- * @package   App\Http\Requests\Locale
+ * @package App\Http\Requests\Locale
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Requests\Locale;
 
@@ -23,6 +27,16 @@ use App\Http\Requests\AbstractFormRequest;
 class UpdateLocaleRequest extends AbstractFormRequest
 {
     /**
+     * Does the current user have access?
+     *
+     * @return bool
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
      * The authorization rules.
      *
      * @return array
@@ -37,15 +51,5 @@ class UpdateLocaleRequest extends AbstractFormRequest
             'native' => 'required|string',
             'currency_symbol_first' => 'boolean',
         ];
-    }
-
-    /**
-     * Does the current user have access?
-     *
-     * @return bool
-     */
-    public function authorize(): bool
-    {
-        return true;
     }
 }

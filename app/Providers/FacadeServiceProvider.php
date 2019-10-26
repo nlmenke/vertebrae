@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Facade Service Provider.
  *
- * @package   App\Providers
+ * @package App\Providers
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Providers;
 
@@ -36,9 +40,7 @@ class FacadeServiceProvider extends ServiceProvider
      */
     public function provides(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     /**
@@ -48,6 +50,5 @@ class FacadeServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
     }
 }

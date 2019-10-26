@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Exception Handler.
  *
- * @package   App\Exceptions
+ * @package App\Exceptions
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Exceptions;
 
@@ -26,15 +30,6 @@ use Illuminate\Http\Response;
 class Handler extends ExceptionHandler
 {
     /**
-     * A list of the exception types that are not reported.
-     *
-     * @var array
-     */
-    protected $dontReport = [
-        //
-    ];
-
-    /**
      * A list of the inputs that are never flashed for validation exceptions.
      *
      * @var array
@@ -45,26 +40,36 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Report or log an exception.
+     * A list of the exception types that are not reported.
      *
-     * @param Exception $exception
-     * @return void
-     * @throws Exception
+     * @var array
      */
-    public function report(Exception $exception): void
-    {
-        parent::report($exception);
-    }
+    protected $dontReport = [];
 
     /**
      * Render an exception into an HTTP response.
      *
      * @param Request   $request
      * @param Exception $exception
+     *
      * @return RedirectResponse|Response
      */
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Report or log an exception.
+     *
+     * @param Exception $exception
+     *
+     * @throws Exception
+     *
+     * @return void
+     */
+    public function report(Exception $exception): void
+    {
+        parent::report($exception);
     }
 }

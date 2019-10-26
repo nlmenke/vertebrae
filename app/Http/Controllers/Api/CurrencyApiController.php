@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Currency API Controller.
  *
- * @package   App\Http\Controllers\Api
+ * @package App\Http\Controllers\Api
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
@@ -42,6 +46,7 @@ class CurrencyApiController extends AbstractApiController
      *
      * @param Currency         $model
      * @param CurrencyResource $resource
+     *
      * @return void
      */
     public function __construct(Currency $model, CurrencyResource $resource)

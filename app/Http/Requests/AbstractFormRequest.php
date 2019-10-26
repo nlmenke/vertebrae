@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Abstract Request.
  *
- * @package   App\Http\Requests
+ * @package App\Http\Requests
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Requests;
 
@@ -22,5 +26,4 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 abstract class AbstractFormRequest extends FormRequest
 {
-    //
 }

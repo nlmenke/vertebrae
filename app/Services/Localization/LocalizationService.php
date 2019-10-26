@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Localization Service.
  *
- * @package   App\Services\Localization
+ * @package App\Services\Localization
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Services\Localization;
 
@@ -42,8 +46,10 @@ class LocalizationService
      * Create new service instance.
      *
      * @param Locale $localeModel
-     * @return void
+     *
      * @throws ActiveLocalesNotDefinedException
+     *
+     * @return void
      */
     public function __construct(Locale $localeModel)
     {
@@ -53,25 +59,11 @@ class LocalizationService
     }
 
     /**
-     * Check if the locale exists in the active locales array.
-     *
-     * @param string|null $locale
-     * @return bool
-     */
-    public function localeIsActive(string $locale = null): bool
-    {
-        if ($locale === null || !$this->activeLocales->has($locale)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Return an array of all active locales.
      *
-     * @return Locale[]|Collection
      * @throws ActiveLocalesNotDefinedException
+     *
+     * @return Locale[]|Collection
      */
     public function getActiveLocales()
     {
@@ -84,11 +76,27 @@ class LocalizationService
             ->keyBy('code');
 
         if ($locales->isEmpty()) {
-            throw new ActiveLocalesNotDefinedException;
+            throw new ActiveLocalesNotDefinedException();
         }
 
         $this->activeLocales = $locales;
 
         return $locales;
+    }
+
+    /**
+     * Check if the locale exists in the active locales array.
+     *
+     * @param string|null $locale
+     *
+     * @return bool
+     */
+    public function localeIsActive(string $locale = null): bool
+    {
+        if ($locale === null || !$this->activeLocales->has($locale)) {
+            return false;
+        }
+
+        return true;
     }
 }

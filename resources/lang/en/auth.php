@@ -1,20 +1,23 @@
-<?php declare(strict_types=1);
-
+<?php
 /**
- * Authentication Language Lines - EN
+ * Authentication Language Lines - EN.
  *
  * The following language lines are used during authentication for various
  * messages that we need to display to the user. You are free to modify
  * these language lines according to your application's requirements.
  *
- * @package   Languages - English
- * @author    Taylor Otwell <taylor@laravel.com>
- * @author    Nick Menke <nick@nlmenke.net>
+ * @package Languages - English
+ *
+ * @author              Taylor Otwell <taylor@laravel.com>
+ * @author              Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
- * @since     0.0.0-framework introduced
- * @since     x.x.x           added auth view strings
+ *
+ * @link                  https://github.com/nlmenke/vertebrae
+ * @since 0.0.0-framework introduced
+ * @since x.x.x           added auth view strings
  */
+
+declare(strict_types=1);
 
 return [
 

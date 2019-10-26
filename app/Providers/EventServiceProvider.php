@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Event Service Provider.
  *
- * @package   App\Providers
+ * @package App\Providers
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Providers;
 
@@ -43,7 +47,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         parent::boot();
-
-        //
     }
 }

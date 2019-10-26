@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Localization Middleware.
  *
- * @package   App\Http\Middleware\Localization
+ * @package App\Http\Middleware\Localization
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Middleware\Localization;
 
@@ -33,6 +37,7 @@ class Localization
      * Determine if the requested URI should not be localized.
      *
      * @param Request $request
+     *
      * @return bool
      */
     protected function shouldIgnore(Request $request): bool

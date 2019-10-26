@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Authenticate Middleware.
  *
- * @package   App\Http\Middleware
+ * @package App\Http\Middleware
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
@@ -27,6 +31,7 @@ class Authenticate extends Middleware
      * Get the path the user should be redirected to when they are not authenticated.
      *
      * @param Request $request
+     *
      * @return string|null
      */
     protected function redirectTo($request): ?string
