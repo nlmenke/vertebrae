@@ -1,13 +1,17 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Application Console Kernel.
  *
- * @package   App\Console
+ * @package App\Console
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Console;
 
@@ -37,17 +41,6 @@ class Kernel extends ConsoleKernel
     ];
 
     /**
-     * Define the application's command schedule.
-     *
-     * @param Schedule $schedule
-     * @return void
-     */
-    protected function schedule(Schedule $schedule): void
-    {
-        $schedule->job(new UpdateExchangeRates)->quarterly();
-    }
-
-    /**
      * Register the commands for the application.
      *
      * @return void
@@ -57,5 +50,17 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
+    }
+
+    /**
+     * Define the application's command schedule.
+     *
+     * @param Schedule $schedule
+     *
+     * @return void
+     */
+    protected function schedule(Schedule $schedule): void
+    {
+        $schedule->job(new UpdateExchangeRates())->quarterly();
     }
 }

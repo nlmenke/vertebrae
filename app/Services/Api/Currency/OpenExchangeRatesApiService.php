@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Open Exchange Rates API Service.
  *
- * @package   App\Services\Api\Currency
+ * @package App\Services\Api\Currency
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Services\Api\Currency;
 
@@ -26,8 +30,9 @@ class OpenExchangeRatesApiService extends AbstractApiService
     /**
      * Create a new API service instance.
      *
-     * @return void
      * @throws Exception
+     *
+     * @return void
      */
     public function __construct()
     {

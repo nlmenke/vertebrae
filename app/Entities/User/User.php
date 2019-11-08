@@ -1,13 +1,17 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * User Entity.
  *
- * @package   App\Entities\User
+ * @package App\Entities\User
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Entities\User;
 
@@ -39,6 +43,15 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
         Notifiable;
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -57,14 +70,5 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     protected $hidden = [
         'password',
         'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 }

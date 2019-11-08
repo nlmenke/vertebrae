@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Currency Entity.
  *
- * @package   App\Entities\Currency
+ * @package App\Entities\Currency
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Entities\Currency;
 

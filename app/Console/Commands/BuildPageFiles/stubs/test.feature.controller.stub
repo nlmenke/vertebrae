@@ -1,24 +1,33 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * (add a short summary)
  *
  * (add an additional description if required)
  *
- * @package   Tests\Feature\Controllers
+ * @package Tests\Feature\Controllers
+ *
  * @author    (your name) <(your email)>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace Tests\Feature\Controllers;
 
 use App\Entities\Dummy\Dummy;
-use Tests\Feature\Controllers\AbstractControllerTest;
+use App\Http\Controllers\DummyController;
 
 /**
  * (add a short summary)
  *
  * (add an additional description if required)
+ *
+ * @covers DummyController
+ *
+ * @internal
+ * @small
  *
  * @since x.x.x introduced
  */
@@ -36,7 +45,5 @@ class DummyControllerTest extends AbstractControllerTest
      *
      * @var array
      */
-    protected $validationRequirements = [
-        //
-    ];
+    protected $validationRequirements = [];
 }

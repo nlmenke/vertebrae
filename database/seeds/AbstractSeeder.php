@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Abstract Seeder.
  *
- * @package   Database Seeders
+ * @package Database Seeders
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 use App\Entities\AbstractEntity;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
@@ -44,26 +48,11 @@ abstract class AbstractSeeder extends Seeder
     protected $truncateTables = [];
 
     /**
-     * Clear existing data from tables in $truncateTables array.
-     *
-     * @return void
-     */
-    protected function cleanDatabase(): void
-    {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-
-        foreach ($this->truncateTables as $table) {
-            DB::table($table)->truncate();
-        }
-
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
-    }
-
-    /**
      * Run the seeder.
      *
-     * @return void
      * @throws Exception
+     *
+     * @return void
      */
     public function run(): void
     {
@@ -81,12 +70,27 @@ abstract class AbstractSeeder extends Seeder
     }
 
     /**
+     * Clear existing data from tables in $truncateTables array.
+     *
+     * @return void
+     */
+    protected function cleanDatabase(): void
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+
+        foreach ($this->truncateTables as $table) {
+            DB::table($table)->truncate();
+        }
+
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+    }
+
+    /**
      * Additional tasks to be completed after seeding has completed.
      *
      * @return void
      */
     protected function complete(): void
     {
-        //
     }
 }

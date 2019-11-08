@@ -1,5 +1,4 @@
-<?php declare(strict_types=1);
-
+<?php
 /**
  * Bootstrap The Test Environment.
  *
@@ -7,12 +6,16 @@
  * run. You are free to add your own additional commands or logic into
  * this file as needed in order to help your test suite run quicker.
  *
- * @package   Tests
+ * @package Tests
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
- * @since     0.0.0-framework introduced
+ *
+ * @link  https://github.com/nlmenke/vertebrae
+ * @since 0.0.0-framework introduced
  */
+
+declare(strict_types=1);
 
 use Illuminate\Contracts\Console\Kernel;
 

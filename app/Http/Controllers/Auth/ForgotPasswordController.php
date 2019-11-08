@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Auth/Forgot Password Controller.
  *
- * @package   App\Http\Controllers\Auth
+ * @package App\Http\Controllers\Auth
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 

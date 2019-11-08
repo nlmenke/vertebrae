@@ -1,20 +1,19 @@
-<?php declare(strict_types=1);
-
+<?php
 /**
  * Country Language Lines - EN.
  *
  * The following language lines are used for country-related messages that need
  * to be displayed to the user.
  *
- * @package   Languages - English
+ * @package Languages - English
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
- * @since     x.x.x introduced
+ *
+ * @link  https://github.com/nlmenke/vertebrae
+ * @since x.x.x introduced
  */
 
-return [
+declare(strict_types=1);
 
-    //
-
-];
+return [];

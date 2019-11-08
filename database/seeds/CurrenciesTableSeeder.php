@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Currencies Table Seeder.
  *
- * @package   Database Seeders
+ * @package Database Seeders
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 use App\Entities\Currency\Currency;
 use App\Jobs\UpdateExchangeRates;
@@ -31,13 +35,14 @@ class CurrenciesTableSeeder extends AbstractSeeder
      * @var array
      */
     protected $truncateTables = [
-        CreateCurrenciesTable::TABLE
+        CreateCurrenciesTable::TABLE,
     ];
 
     /**
      * Create a new seeder instance.
      *
      * @param Currency $model
+     *
      * @return void
      */
     public function __construct(Currency $model)
@@ -211,6 +216,6 @@ class CurrenciesTableSeeder extends AbstractSeeder
      */
     public function complete(): void
     {
-        $this->dispatch(new UpdateExchangeRates);
+        $this->dispatch(new UpdateExchangeRates());
     }
 }

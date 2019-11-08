@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Locale Entity.
  *
- * @package   App\Entities\Locale
+ * @package App\Entities\Locale
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Entities\Locale;
 
@@ -54,26 +58,6 @@ class Locale extends AbstractEntity
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class);
-    }
-
-    /**
-     * The language relationship instance.
-     *
-     * @return BelongsTo
-     */
-    public function language(): BelongsTo
-    {
-        return $this->belongsTo(Language::class);
-    }
-
-    /**
-     * The script relationship instance.
-     *
-     * @return BelongsTo
-     */
-    public function script(): BelongsTo
-    {
-        return $this->belongsTo(Script::class);
     }
 
     /**
@@ -164,5 +148,25 @@ class Locale extends AbstractEntity
     public function isActive(): bool
     {
         return $this->getAttribute('active');
+    }
+
+    /**
+     * The language relationship instance.
+     *
+     * @return BelongsTo
+     */
+    public function language(): BelongsTo
+    {
+        return $this->belongsTo(Language::class);
+    }
+
+    /**
+     * The script relationship instance.
+     *
+     * @return BelongsTo
+     */
+    public function script(): BelongsTo
+    {
+        return $this->belongsTo(Script::class);
     }
 }

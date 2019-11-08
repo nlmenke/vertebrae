@@ -1,23 +1,25 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * (add a short summary)
  *
  * (add an additional description if required)
  *
- * @package   Database Factories
+ * @package Database Factories
+ *
  * @author    (your name) <(your email)>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
- * @since     x.x.x introduced
+ *
+ * @link  https://github.com/nlmenke/vertebrae
+ * @since x.x.x introduced
  */
+
+declare(strict_types=1);
 
 use App\Entities\Dummy\Dummy;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
-/** @var Factory $factory */
+/* @var Factory $factory */
 $factory->define(Dummy::class, function (Faker $faker) {
-    return [
-        //
-    ];
+    return [];
 });

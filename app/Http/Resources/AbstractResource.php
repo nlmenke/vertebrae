@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Abstract Resource.
  *
- * @package   App\Http\Resources
+ * @package App\Http\Resources
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Resources;
 
@@ -22,5 +26,4 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 abstract class AbstractResource extends JsonResource
 {
-    //
 }

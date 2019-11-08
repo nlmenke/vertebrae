@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Build Page Files Command.
  *
- * @package   App\Console\Commands\BuildPageFiles
+ * @package App\Console\Commands\BuildPageFiles
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Console\Commands\BuildPageFiles;
 
@@ -30,20 +34,6 @@ use Symfony\Component\Console\Input\InputOption;
 class BuildPageFilesCommand extends Command
 {
     /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'build:files';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Build the files needed for a new API/page.';
-
-    /**
      * The Composer instance.
      *
      * @var Composer
@@ -58,6 +48,20 @@ class BuildPageFilesCommand extends Command
     protected $defaultType = 'api';
 
     /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Build the files needed for a new API/page.';
+
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
+    protected $name = 'build:files';
+
+    /**
      * The selected feature type.
      *
      * @var string
@@ -68,6 +72,7 @@ class BuildPageFilesCommand extends Command
      * Create a new command instance.
      *
      * @param Composer $composer
+     *
      * @return void
      */
     public function __construct(Composer $composer)
@@ -78,37 +83,11 @@ class BuildPageFilesCommand extends Command
     }
 
     /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments(): array
-    {
-        return [
-            ['name', InputArgument::REQUIRED, 'The name of the API/page being created'],
-        ];
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions(): array
-    {
-        return [
-            ['type', '', InputOption::VALUE_OPTIONAL, 'Specify the feature type: `api` or `page`'],
-            ['migration', 'm', InputOption::VALUE_NONE, 'Generate a migration'],
-            ['seeder', 's', InputOption::VALUE_NONE, 'Generate a seeder'],
-            ['factory', 'f', InputOption::VALUE_NONE, 'Generate a factory'],
-        ];
-    }
-
-    /**
      * Execute the console command.
      *
-     * @return void
      * @throws FileNotFoundException
+     *
+     * @return void
      */
     public function handle(): void
     {
@@ -117,7 +96,7 @@ class BuildPageFilesCommand extends Command
             exit;
         }
 
-        if ($this->option('type') === null || !in_array($this->option('type'), ['api', 'page'])) {
+        if ($this->option('type') === null || !in_array($this->option('type'), ['api', 'page'], true)) {
             $this->selectedType = $this->choice('What type of feature will this be?', ['api', 'page'], $this->defaultType);
         } else {
             $this->selectedType = $this->option('type');
@@ -246,23 +225,52 @@ class BuildPageFilesCommand extends Command
     }
 
     /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments(): array
+    {
+        return [
+            ['name', InputArgument::REQUIRED, 'The name of the API/page being created'],
+        ];
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions(): array
+    {
+        return [
+            ['type', '', InputOption::VALUE_OPTIONAL, 'Specify the feature type: `api` or `page`'],
+            ['migration', 'm', InputOption::VALUE_NONE, 'Generate a migration'],
+            ['seeder', 's', InputOption::VALUE_NONE, 'Generate a seeder'],
+            ['factory', 'f', InputOption::VALUE_NONE, 'Generate a factory'],
+        ];
+    }
+
+    /**
      * Gets the file stub and fills in the contents.
      *
      * @param string $name
      * @param string $type
-     * @return string
+     *
      * @throws FileNotFoundException
+     *
+     * @return string
      */
     private function buildFile(string $name, string $type): string
     {
         $file = File::get($this->getStub($type));
 
         $replacements = [
-            'LowerDummyRootNamespace' => strtolower($this->laravel->getNamespace()),
+            'LowerDummyRootNamespace' => mb_strtolower($this->laravel->getNamespace()),
             'DummyRootNamespace' => $this->laravel->getNamespace(),
-            'LowerDummy' => strtolower($name),
+            'LowerDummy' => mb_strtolower($name),
             'Dummy' => $name,
-            'LowerDummies' => strtolower(Str::plural($name)),
+            'LowerDummies' => mb_strtolower(Str::plural($name)),
             'Dummies' => Str::plural($name),
         ];
 
@@ -273,9 +281,10 @@ class BuildPageFilesCommand extends Command
      * Generates a migration file.
      *
      * @param string $name
+     *
      * @return void
      */
-    private function buildMigration(string $name)
+    private function buildMigration(string $name): void
     {
         $table = Str::plural(Str::snake($name));
         $migration = 'create_' . $table . '_table';
@@ -290,6 +299,7 @@ class BuildPageFilesCommand extends Command
      * Pulls the specified stub file.
      *
      * @param string $type
+     *
      * @return string
      */
     private function getStub(string $type): string
@@ -301,6 +311,7 @@ class BuildPageFilesCommand extends Command
      * Adds the file to Git.
      *
      * @param string $file
+     *
      * @return void
      */
     private function gitAdd(string $file): void
@@ -326,6 +337,7 @@ class BuildPageFilesCommand extends Command
      * @param string $path
      * @param string $filename
      * @param string $file
+     *
      * @return void
      */
     private function saveFile(string $path, string $filename, string $file): void

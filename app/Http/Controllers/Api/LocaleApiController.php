@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Locale API Controller.
  *
- * @package   App\Http\Controllers\Api
+ * @package App\Http\Controllers\Api
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
@@ -46,6 +50,7 @@ class LocaleApiController extends AbstractApiController
      *
      * @param Locale         $model
      * @param LocaleResource $resource
+     *
      * @return void
      */
     public function __construct(Locale $model, LocaleResource $resource)

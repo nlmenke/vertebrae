@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Languages Table Seeder.
  *
- * @package   Database Seeders
+ * @package Database Seeders
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 use App\Entities\Language\Language;
 
@@ -21,15 +25,6 @@ use App\Entities\Language\Language;
  */
 class LanguagesTableSeeder extends AbstractSeeder
 {
-    /**
-     * Tables that should be truncated before running.
-     *
-     * @var array
-     */
-    protected $truncateTables = [
-        CreateLanguagesTable::TABLE
-    ];
-
     /**
      * Items to be added to the database.
      *
@@ -223,9 +218,19 @@ class LanguagesTableSeeder extends AbstractSeeder
     ];
 
     /**
+     * Tables that should be truncated before running.
+     *
+     * @var array
+     */
+    protected $truncateTables = [
+        CreateLanguagesTable::TABLE,
+    ];
+
+    /**
      * Create a new seeder instance.
      *
      * @param Language $model
+     *
      * @return void
      */
     public function __construct(Language $model)

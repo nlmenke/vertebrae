@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Redirect if Authenticated Middleware.
  *
- * @package   App\Http\Middleware
+ * @package App\Http\Middleware
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
@@ -30,6 +34,7 @@ class RedirectIfAuthenticated
      * @param Request     $request
      * @param Closure     $next
      * @param string|null $guard
+     *
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)

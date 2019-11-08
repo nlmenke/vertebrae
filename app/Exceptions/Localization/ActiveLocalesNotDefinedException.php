@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Active Locales Not Defined Exception.
  *
- * @package   App\Exceptions\Localization
+ * @package App\Exceptions\Localization
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Exceptions\Localization;
 
@@ -27,6 +31,7 @@ class ActiveLocalesNotDefinedException extends Exception
      * Create a new exception instance.
      *
      * @param string $message
+     *
      * @return void
      */
     public function __construct(string $message = null)

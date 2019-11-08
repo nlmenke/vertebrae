@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Verify CSRF Token Middleware.
  *
- * @package   App\Http\Middleware
+ * @package App\Http\Middleware
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
@@ -35,7 +39,5 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array
      */
-    protected $except = [
-        //
-    ];
+    protected $except = [];
 }

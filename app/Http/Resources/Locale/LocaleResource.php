@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Locale Resource.
  *
- * @package   App\Http\Resources\Locale
+ * @package App\Http\Resources\Locale
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Resources\Locale;
 
@@ -27,6 +31,7 @@ class LocaleResource extends AbstractResource
      * Create a new resource instance.
      *
      * @param Locale $resource
+     *
      * @return void
      */
     public function __construct(Locale $resource)
@@ -38,6 +43,7 @@ class LocaleResource extends AbstractResource
      * Transform the resource into an array.
      *
      * @param Request $request
+     *
      * @return array
      */
     public function toArray($request): array

@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Locales Table Seeder.
  *
- * @package   Database Seeders
+ * @package Database Seeders
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 use App\Entities\Country\Country;
 use App\Entities\Language\Language;
@@ -32,13 +36,14 @@ class LocalesTableSeeder extends AbstractSeeder
      * @var array
      */
     protected $truncateTables = [
-        CreateLocalesTable::TABLE
+        CreateLocalesTable::TABLE,
     ];
 
     /**
      * Create a new seeder instance.
      *
      * @param Locale $model
+     *
      * @return void
      */
     public function __construct(Locale $model)
@@ -1053,6 +1058,7 @@ class LocalesTableSeeder extends AbstractSeeder
      * Find and set country_id from the specified ISO 3166-1 alpha-2 code.
      *
      * @param string $isoAlpha2
+     *
      * @return int|null
      */
     private function getCountryId(string $isoAlpha2): ?int
@@ -1068,6 +1074,7 @@ class LocalesTableSeeder extends AbstractSeeder
      * Find and set language_id from the specified ISO 639-1 code.
      *
      * @param string $isoAlpha2
+     *
      * @return int|null
      */
     private function getLanguageId(string $isoAlpha2): ?int
@@ -1083,6 +1090,7 @@ class LocalesTableSeeder extends AbstractSeeder
      * Find and set script_id from the specified ISO 639-1 code.
      *
      * @param string $isoAlpha
+     *
      * @return int|null
      */
     private function getScriptId(string $isoAlpha): ?int

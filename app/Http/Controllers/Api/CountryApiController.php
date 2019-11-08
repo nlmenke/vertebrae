@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Country API Controller.
  *
- * @package   App\Http\Controllers\Api
+ * @package App\Http\Controllers\Api
+ *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @link https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
@@ -40,10 +44,11 @@ class CountryApiController extends AbstractApiController
     ];
 
     /**
-     * Create a new controller instance.
+     * Create a new API controller instance.
      *
      * @param Country         $model
      * @param CountryResource $resource
+     *
      * @return void
      */
     public function __construct(Country $model, CountryResource $resource)

@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Route Service Provider.
  *
- * @package   App\Providers
+ * @package App\Providers
+ *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2019 Nick Menke
- * @link      https://github.com/nlmenke/vertebrae
+ *
+ * @lin https://github.com/nlmenke/vertebrae
  */
+
+declare(strict_types=1);
 
 namespace App\Providers;
 
@@ -39,8 +43,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
-
         parent::boot();
     }
 
@@ -54,22 +56,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-
-        //
-    }
-
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapWebRoutes(): void
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/web.php'));
     }
 
     /**
@@ -85,5 +71,19 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace . '\Api')
             ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define the "web" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapWebRoutes(): void
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
     }
 }
