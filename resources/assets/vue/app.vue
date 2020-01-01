@@ -29,7 +29,7 @@
 
         <footer v-if="!isHomeRoute()" class="container">
             <p class="float-right"><a href="#">Back to top</a></p>
-            <p>&copy; 2019 nlmenke</p>
+            <p>&copy; 2018-2020 <a href="/">n.l.menke</a></p>
         </footer>
     </div>
 </template>
