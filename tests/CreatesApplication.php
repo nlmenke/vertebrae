@@ -5,7 +5,7 @@
  * @package Tests
  *
  * @author    Taylor Otwell <taylor@laravel.com>
- * @copyright 2018-2019 Nick Menke
+ * @copyright 2018-2020 Nick Menke
  *
  * @link https://github.com/nlmenke/vertebrae
  */

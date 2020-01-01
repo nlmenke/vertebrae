@@ -76,7 +76,7 @@
 
     <footer class="container">
         <p class="float-right"><a href="#">{{ trans('common.back_to_top') }}</a></p>
-        <p>&copy; 2019{{ (date('Y') > 2019) ? '-' . date('Y') : '' }} <a href="{{ url('/') }}">n.l.menke</a></p>
+        <p>&copy; 2018{{ (date('Y') > 2018) ? '-' . date('Y') : '' }} <a href="{{ url('/') }}">n.l.menke</a></p>
     </footer>
 </div>
 </body>
