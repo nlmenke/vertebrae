@@ -1287,6 +1287,41 @@ let ESLintBestPractices = {
 };
 
 /**
+ * These rules relate to strict mode directives.
+ *
+ * @type {object}
+ */
+let ESLintStrictMode = {
+    /**
+     * This rule requires or disallows strict mode directives.
+     *
+     * This rule disallows strict mode directives, no matter which option is specified, if ESLint configuration
+     * specifies either of the following as parser options:
+     *   - `"sourceType": "module"` that is, files are ECMAScript modules
+     *   - `"impliedStrict": true` property in the `ecmaFeatures` object
+     *
+     * This rule disallows strict mode directives, no matter which option is specified, in functions with non-simple
+     * parameter lists (for example, parameter lists with default parameter values) because that is a syntax error in
+     * ECMAScript 2016 and later. See the examples of the function option.
+     *
+     * The `--fix` option on the command line does not insert new "use strict" statements, but only removes unneeded
+     * statements.
+     *
+     * @property {string} option
+     *                           - `safe`     Corresponds either of the following options:
+     *                                        - `global`   If ESLint considers a file to be a CommonJS module
+     *                                        - `function` Otherwise
+     *                           - `global`   Requires one strict mode directive in the global scope (and disallows any
+     *                                        other strict mode directives)
+     *                           - `function` Requires one strict mode directive in each top-level function declaration
+     *                                        or expression (and disallows any other strict mode directives)
+     *                           - `never`    Disallows strict mode directives
+     *                           default: `safe`
+     */
+    'strict': 'off',
+};
+
+/**
  * Merge rule objects into a single object.
  *
  * @type {object}
@@ -1294,6 +1329,7 @@ let ESLintBestPractices = {
 let rules = Object.assign(
     ESLintPossibleErrors,
     ESLintBestPractices,
+    ESLintStrictMode,
 );
 
 /**
