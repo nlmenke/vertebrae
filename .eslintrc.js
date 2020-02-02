@@ -1322,6 +1322,189 @@ let ESLintStrictMode = {
 };
 
 /**
+ * These rules relate to variable declarations.
+ *
+ * @type {object}
+ */
+let ESLintVariables = {
+    /**
+     * This rule is aimed at enforcing or eliminating variable initializations during declaration.
+     *
+     * @property {string} initDeclaration
+     *                                    - `always` Enforce initialization at declaration
+     *                                    - `never`  Disallow initialization during declaration
+     *                                    default: `always`
+     * @property {object} exceptions
+     *                                    - `ignoreForLoopInit` {bool} Initialization at declaration is allowed for
+     *                                                                 loops when `never` is set
+     */
+    'init-declarations': 'off',
+
+    /**
+     * This rule disallows the use of the delete operator on variables.
+     *
+     * If ESLint parses code in strict mode, the parser (instead of this rule) reports the error.
+     */
+    'no-delete-var': 'error',
+
+    /**
+     * This rule aims to create clearer code by disallowing the bad practice of creating a label that shares a name
+     * with a variable that is in scope.
+     */
+    'no-label-var': 'off',
+
+    /**
+     * This rule allows you to specify global variable names that you don't want to use in your application.
+     *
+     * @property {string|object} This rule takes a list of strings, where each string is a global to be restricted, or
+     *                           objects, where the global name and the optional custom message are specified
+     */
+    'no-restricted-globals': 'off',
+
+    /**
+     * This rule aims to eliminate shadowed variable declarations.
+     *
+     * @property {object} options
+     *                            - `builtinGlobals` {bool}   Prevents shadowing of built-in global variables: e.g.:
+     *                                                        `Object`, `Array`, `Number`, etc.;
+     *                                                        default: false
+     *                            - `hoist`          {string}
+     *                                                        - `functions` Reports shadowing before the outer
+     *                                                                      functions are defined
+     *                                                        - `all`       Reports all shadowing before the outer
+     *                                                                      variables/functions are defined
+     *                                                        - `never`     Never report shadowing before the outer
+     *                                                                      variables/functions are defined
+     *                                                        default: `functions`
+     *                            - `allow`          {array}  Identifier names for which shadowing is allowed;
+     *                                                        default: []
+     */
+    'no-shadow': 'off',
+
+    /**
+     * This rule disallows identifiers from shadowing restricted names.
+     */
+    'no-shadow-restricted-names': 'error',
+
+    /**
+     * Any reference to an undeclared variable causes a warning, unless the variable is explicitly mentioned in a
+     * global comment, or specified in the `globals` key in the configuration file. A common use case for these is if
+     * you intentionally use globals that are defined elsewhere (e.g.: in a script sourced from HTML).
+     *
+     * Note that this rule does not disallow assignments to read-only global variables. See no-global-assign if you
+     * also want to disallow those assignments.
+     *
+     * This rule also does not disallow re-declarations of global variables. See no-redeclare if you also want to
+     * disallow those re-declarations.
+     *
+     * @property {object} options
+     *                            - `typeof` {bool} Warn for variables used inside `typeof` check;
+     *                                              default: false
+     */
+    'no-undef': [
+        'error',
+        {
+            'typeof': false,
+        },
+    ],
+
+    /**
+     * This rule aims to eliminate variable declarations that initialize to undefined.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'no-undef-init': 'error',
+
+    /**
+     * This rule aims to eliminate the use of `undefined`, and as such, generates a warning whenever it is used.
+     */
+    'no-undefined': 'off',
+
+    /**
+     * This rule is aimed at eliminating unused variables, functions, and function parameters.
+     *
+     * A variable `foo` is considered to be used if any of the following are true:
+     *   - it is called `(foo())` or constructed `(new foo())`
+     *   - it is read (`var bar = foo`)
+     *   - it is passed into a function as an argument (`doSomething(foo)`)
+     *   - it is read inside of a function that is passed to another function (`doSomething(function() { foo(); })`)
+     *
+     * A variable is not considered to be used if it is only ever declared (`var foo = 5`) or assigned to (`foo = 7`).
+     *
+     * @property {string|object} options This rule takes one argument which can be a string or an object. The string
+     *                                   settings are the same as those of the `vars` property (explained below)
+     *                                   - `vars`                      {string}
+     *                                                                          - `all`   Checks all variables for
+     *                                                                                    usage, including those in the
+     *                                                                                    global scope
+     *                                                                          - `local` Checks only that locally-
+     *                                                                                    declared variables are used,
+     *                                                                                    but will allow global
+     *                                                                                    variables to be used
+     *                                                                          default: `all`
+     *                                   - `varsIgnorePattern`         {string} Specifies exceptions not to check for
+     *                                                                          usage: variables whose names match a
+     *                                                                          regexp pattern
+     *                                   - `args`                      {string}
+     *                                                                          - `after-used` Unused positional
+     *                                                                                         arguments that occur
+     *                                                                                         before the last used
+     *                                                                                         argument will not be
+     *                                                                                         checked, but all named
+     *                                                                                         arguments and all
+     *                                                                                         positional arguments
+     *                                                                                         after the last used
+     *                                                                                         argument will be checked
+     *                                                                          - `all`        All named arguments must
+     *                                                                                         be used
+     *                                                                          - `none`       Do not check arguments
+     *                                   - `ignoreRestSiblings`        {bool}   Specifies exceptions not to check for
+     *                                                                          usage: arguments whose names match a
+     *                                                                          regexp pattern
+     *                                   - `caughtErrors`              {string} Used for `catch` block arguments
+     *                                                                          validation
+     *                                                                          - `none` Do not check error objects
+     *                                                                          - `all`  All named arguments must be
+     *                                                                                   used
+     *                                                                          default: `none`
+     *                                   - `caughtErrorsIgnorePattern` {string} Specifies exceptions not to check for
+     *                                                                          usage: catch arguments whose names
+     *                                                                          match a regexp pattern
+     */
+    'no-unused-vars': [
+        'error',
+        {
+            'vars': 'all',
+            'args': 'none',
+            'ignoreRestSiblings': true,
+        },
+    ],
+
+    /**
+     * This rule will warn when it encounters a reference to an identifier that has not yet been declared.
+     *
+     * @property {object} options
+     *                            - `functions` {bool} Warns of every reference to a function before the function
+     *                                                 declaration;
+     *                                                 default: true
+     *                            - `classes`   {bool} Warns of every reference to a class before the class
+     *                                                 declaration;
+     *                                                 default: true
+     *                            - `variables` {bool} Warns of every reference to a variable before the variable
+     *                                                 declaration;
+     *                                                 default: true
+     */
+    'no-use-before-define': [
+        'error',
+        {
+            'functions': false,
+            'classes': false,
+            'variables': false,
+        },
+    ],
+};
+
+/**
  * Merge rule objects into a single object.
  *
  * @type {object}
@@ -1330,6 +1513,7 @@ let rules = Object.assign(
     ESLintPossibleErrors,
     ESLintBestPractices,
     ESLintStrictMode,
+    ESLintVariables,
 );
 
 /**
@@ -1340,6 +1524,7 @@ module.exports = {
     env: {
         browser: true,
         es6: true,
+        node: true,
     },
     parserOptions: {
         ecmaFeatures: {
