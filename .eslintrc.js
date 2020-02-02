@@ -1505,6 +1505,107 @@ let ESLintVariables = {
 };
 
 /**
+ * These rules relate to code running in Node.js, or in browsers with CommonJS.
+ *
+ * @type {object}
+ */
+let ESLintNodeJsAndCommonJs = {
+    /**
+     * This rule is aimed at ensuring that callbacks used outside of the main function block are always part-of or
+     * immediately preceding a `return` statement. This rule decides what is a callback based on the name of the
+     * function being called.
+     *
+     * @property {array} possibleCallbackNames List of possible callback names which may include object methods;
+     *                                         default: ['callback', 'cb', 'next']
+     */
+    'callback-return': 'off',
+
+    /**
+     * This rule requires all calls to `require()` to be at the top level of the module, similar to ES6 `import` and
+     * `export` statements, which also can occur only at the top level.
+     */
+    'global-require': 'off',
+
+    /**
+     * This rule expects that when you're using the callback pattern in Node.js you'll handle the error.
+     *
+     * @property {string} errorParameter The name of the error parameter;
+     *                                   default: `err`
+     */
+    'handle-callback-err': [
+        'error',
+        '^(err|error)$',
+    ],
+
+    /**
+     * This rule disallows calling and constructing the `Buffer()` constructor.
+     */
+    'no-buffer-constructor': 'off',
+
+    /**
+     * When this rule is enabled, each `var` statement must satisfy the following conditions:
+     *   - either none or all variable declarations must be require declarations (default)
+     *   - all `require` declarations must be of the same type (grouping)
+     *
+     * This rule distinguishes between six kinds of variable declaration types:
+     *   - `core`: declaration of a required core module
+     *   - `file`: declaration of a required file module
+     *   - `module`: declaration of a required module from the node_modules folder
+     *   - `computed`: declaration of a required module whose type could not be determined (either because it is
+     *     computed or because require was called without an argument)
+     *   - `uninitialized`: a declaration that is not initialized
+     *   - `other`: any other kind of declaration
+     *
+     * @property {object} options
+     *                            - `grouping`  All `require` declarations must be of the same type;
+     *                                          default: false
+     *                            - `allowCall` Allow modules to be called from `require` declarations(?);
+     *                                          default: false
+     */
+    'no-mixed-requires': 'off',
+
+    /**
+     * This rule aims to eliminate use of the `new require` expression.
+     */
+    'no-new-require': 'error',
+
+    /**
+     * This rule aims to prevent string concatenation of directory paths in Node.js.
+     */
+    'no-path-concat': 'error',
+
+    /**
+     * This rule is aimed at discouraging use of `process.env` to avoid global dependencies. As such, it will warn
+     * whenever `process.env` is used.
+     */
+    'no-process-env': 'off',
+
+    /**
+     * This rule aims to prevent the use of `process.exit()` in Node.js JavaScript. As such, it warns whenever
+     * `process.exit()` is found in code.
+     */
+    'no-process-exit': 'off',
+
+    /**
+     * This rule allows you to specify modules that you don’t want to use in your application.
+     *
+     * @property {strings|objects} The names of restricted modules
+     */
+    'no-restricted-modules': 'off',
+
+    /**
+     * This rule is aimed at preventing synchronous methods from being called in Node.js. It looks specifically for the
+     * method suffix "`Sync`" (as is the convention with Node.js operations).
+     *
+     * @property {object} options
+     *                            - `allowAtRootLevel` {bool} Determines whether synchronous methods should be allowed
+     *                                                        at the top level of a file, outside of any functions;
+     *                                                        default: false
+     */
+    'no-sync': 'off',
+};
+
+/**
  * Merge rule objects into a single object.
  *
  * @type {object}
@@ -1514,10 +1615,10 @@ let rules = Object.assign(
     ESLintBestPractices,
     ESLintStrictMode,
     ESLintVariables,
+    ESLintNodeJsAndCommonJs,
 );
 
 /**
- *
  * @type {object}
  */
 module.exports = {
