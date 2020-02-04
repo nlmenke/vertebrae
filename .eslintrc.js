@@ -135,8 +135,8 @@ let ESLintPossibleErrors = {
      * regardless of errors).
      *
      * @property {object} exceptions
-     *                               - `allowEmptyCatch` {bool} Allows empty `catch` clauses (that is, which do not contain a
-     *                                                          comment);
+     *                               - `allowEmptyCatch` {bool} Allows empty `catch` clauses (that is, which do not
+     *                                                          contain a comment);
      *                                                          default: false
      */
     'no-empty': [
@@ -252,7 +252,8 @@ let ESLintPossibleErrors = {
      *                                                        default: true
      *                               - `skipComments`  {bool} Allows any whitespace characters in comments;
      *                                                        default: false
-     *                               - `skipRegExps`   {bool} Allows any whitespace characters in regular expression literals;
+     *                               - `skipRegExps`   {bool} Allows any whitespace characters in regular expression
+     *                                                        literals;
      *                                                        default: false
      *                               - `skipTemplates` {bool} Allows any whitespace characters in template literals;
      *                                                        default: false
@@ -770,7 +771,8 @@ let ESLintBestPractices = {
     'no-global-assign': 'error',
 
     /**
-     * This rule is aimed to flag shorter notations for the type conversion, then suggest a more self-explanatory notation.
+     * This rule is aimed to flag shorter notations for the type conversion, then suggest a more self-explanatory
+     * notation.
      *
      * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
      *
@@ -918,11 +920,14 @@ let ESLintBestPractices = {
      * @property {object} options
      *                            - `ignore`             {array} An array of numbers to ignore;
      *                                                           default: []
-     *                            - `ignoreArrayIndexes` {bool}  Specifies if numbers used as array indexes are considered okay;
+     *                            - `ignoreArrayIndexes` {bool}  Specifies if numbers used as array indexes are
+     *                                                           considered okay;
      *                                                           default: false
-     *                            - `enforceConst`       {bool}  Specifies if we should check for the const keyword in variable declaration of numbers;
+     *                            - `enforceConst`       {bool}  Specifies if we should check for the const keyword in
+     *                                                           variable declaration of numbers;
      *                                                           default: false
-     *                            - detectObjects`       {bool}  Specifies if we should detect numbers when setting object properties for example;
+     *                            - detectObjects`       {bool}  Specifies if we should detect numbers when setting
+     *                                                           object properties for example;
      *                                                           default: false
      */
     'no-magic-numbers': 'off',
@@ -1606,6 +1611,2005 @@ let ESLintNodeJsAndCommonJs = {
 };
 
 /**
+ * These rules relate to style guidelines, and are therefore quite subjective.
+ *
+ * @type {object}
+ */
+let ESLintStylisticIssues = {
+    /**
+     * This rule enforces line breaks after opening and before closing array brackets.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string|object} options
+     *                                   - `always`            Requires line breaks inside brackets
+     *                                   - `never`             Disallows line breaks inside brackets
+     *                                   - `consistent`        Requires consistent usage of linebreaks for each pair of
+     *                                                         brackets; it reports an error if one bracket in the pair
+     *                                                         has a linebreak inside it and the other bracket does not
+     *                                   - `multiline`  {bool} Requires line breaks if there are line breaks inside
+     *                                                         elements or between elements;
+     *                                                         default: true
+     *                                   - `minItems`   {int}  Requires line breaks if the number of elements is at
+     *                                                         least the given integer; if this is 0, this condition
+     *                                                         will act the same as the option `always` - if it is
+     *                                                         `null`, this condition is disabled;
+     *                                                         default: null
+     */
+    'array-bracket-newline': [
+        'error',
+        {
+            'multiline': true,
+            'minItems': null,
+        },
+    ],
+
+    /**
+     * This rule enforces consistent spacing inside array brackets.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} options
+     *                               - `never`  Disallows spaces inside array brackets
+     *                               - `always` Requires one or more spaces or newlines inside array brackets
+     *                               default: `never`
+     * @property {object} exceptions
+     *                               - exceptions to the `never` option
+     *                                 - `singleValue`     {bool} Requires one or more spaces or newlines inside of
+     *                                                            brackets of array literals that contain a single
+     *                                                            element (if true)
+     *                                 - `objectsInArrays` {bool} Requires one or more spaces or newlines between
+     *                                                            brackets of array literals and braces of their object
+     *                                                            literal elements `[ {` or `} ]` (if true)
+     *                                 - `arraysInArrays`  {bool} Requires one or more spaces or newlines between
+     *                                                            brackets of array literals and brackets of their
+     *                                                            array literal elements `[ [` or `] ]` (if true)
+     *                               - exceptions to the `always` option
+     *                                 - `singleValue`     {bool} Disallows spaces inside brackets of array literals
+     *                                                            that contain a single element (if false)
+     *                                 - `objectsInArrays` {bool} Disallows spaces between brackets of array literals
+     *                                                            and braces of their object literal elements `[ {` or
+     *                                                            `} ]` (if false)
+     *                                 - `arraysInArrays`  {bool} Disallows spaces between brackets of array literals
+     *                                                            and brackets of their array literal elements `[ [` or
+     *                                                            `] ]` (if false)
+     */
+    'array-bracket-spacing': [
+        'error',
+        'never',
+    ],
+
+    /**
+     * This rule enforces line breaks between array elements.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string|object} options
+     *                                   - `always`            Requires line breaks between array elements
+     *                                   - `never`             Disallows line breaks between array elements
+     *                                   - `consistent`        Requires consistent usage of linebreaks between array
+     *                                                         elements
+     *                                   - `multiline`  {bool} Requires line breaks if there are line breaks inside
+     *                                                         elements
+     *                                   - `minItems`   {int}  Requires line breaks if the number of elements is at
+     *                                                         least the given integer; if this is 0, this condition
+     *                                                         will act the same as the option `always` - if it is
+     *                                                         `null`, this condition is disabled;
+     *                                                         default: null
+     *                                   default: `always`
+     */
+    'array-element-newline': [
+        'error',
+        {
+            'multiline': true,
+            'minItems': null,
+        },
+    ],
+
+    /**
+     * This rule enforces consistent spacing inside an open block token and the next token on the same line. This rule
+     * also enforces consistent spacing inside a close block token and previous token on the same line.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} option
+     *                           - `always` Requires one or more spaces
+     *                           - `never`  Disallows spaces
+     *                           default: `always`
+     */
+    'block-spacing': [
+        'error',
+        'always',
+    ],
+
+    /**
+     * This rule enforces consistent brace style for blocks.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} option
+     *                              - `1tbs`       Enforces one true brace style
+     *                              - `stroustrup` Enforces Stroustrup style
+     *                              - `allman`     Enforces Allman style
+     *                              default: `1tbs`
+     * @property {object} exception
+     *                              - `allowSingleLine` Allows the opening and closing braces for a block to be on the
+     *                                                  same line;
+     *                                                  default: false
+     */
+    'brace-style': [
+        'error',
+        '1tbs',
+        {
+            'allowSingleLine': false,
+        },
+    ],
+
+    /**
+     * This rule looks for any underscores (`_`) located within the source code. It ignores leading and trailing
+     * underscores and only checks those in the middle of a variable name. If ESLint decides that the variable is a
+     * constant (all uppercase), then no warning will be thrown. Otherwise, a warning will be thrown. This rule only
+     * flags definitions and assignments but not function calls. In case of ES6 `import` statements, this rule only
+     * targets the name of the variable that will be imported into the local module scope.
+     *
+     * @property {object} options
+     *                            - `properties`          {string} When to enforce camelcase style for property names;
+     *                                                             values: `always` / `never`;
+     *                                                             default: `always`
+     *                            - `ignoreDestructuring` {bool}   Whether to ignore camelcase style for destructured
+     *                                                             identifiers;
+     *                                                             default: false
+     *                            - `ignoreImports`       {bool}   Whether to ignore camelcase style for ES2015
+     *                                                             imports;
+     *                                                             default: false
+     *                            - `allow`               {string} List of properties to accept;
+     *                                                             accepts regex
+     */
+    'camelcase': [
+        'error',
+        {
+            'properties': 'never',
+        },
+    ],
+
+    /**
+     * This rule aims to enforce a consistent style of comments across your codebase, specifically by either requiring
+     * or disallowing a capitalized letter as the first word character in a comment. This rule will not issue warnings
+     * when non-cased letters are used.
+     *
+     * By default, this rule will require a non-lowercase letter at the beginning of comments.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} enforce Whether capitalization of the first word of a comment should be required or forbidden
+     * @property {object} options
+     *                            - `ignorePattern`             {string} Regular expression pattern of words that
+     *                                                                   should be ignored
+     *                            - `ignoreInlineComments`      {bool}   Whether to ignore comments in the middle of
+     *                                                                   code;
+     *                                                                   default: false
+     *                            - `ignoreConsecutiveComments` {bool}   Whether to ignore comments immediately
+     *                                                                   following another comment;
+     *                                                                   default: false
+     *
+     */
+    'capitalized-comments': 'off',
+
+    /**
+     * This rule enforces consistent use of trailing commas in object and array literals.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string|object} options
+     *                                   - 'never`                     Disallows trailing commas
+     *                                   - `always`                    Requires trailing commas
+     *                                   - `always-multiline`          Requires trailing commas when the last element
+     *                                                                 or property is in a different line than the
+     *                                                                 closing `]` or `}` and disallows trailing commas
+     *                                                                 when the last element or property is on the same
+     *                                                                 line as the closing `]` or `}`
+     *                                   - `only-multiline`            Allows (but does not require) trailing commas
+     *                                                                 when the last element or property is in a
+     *                                                                 different line than the closing `]` or `}` and
+     *                                                                 disallows trailing commas when the last element
+     *                                                                 or property is on the same line as the closing
+     *                                                                 `]` or `}`
+     *                                   - `arrays`           {string} Array literals and array patterns of
+     *                                                                 destructuring (e.g.: `let [a,] = [1,];`);
+     *                                                                 default: `never`
+     *                                   - `objects`          {string} Object literals and object patterns of
+     *                                                                 destructuring (e.g.: `let {a,} = {a: 1};`);
+     *                                                                 default: `never`
+     *                                   - `imports`          {string} Import declarations of ES Modules (e.g.: `import
+     *                                                                {a,} from 'foo';`);
+     *                                                                 default: `never`
+     *                                   - `exports`          {string} Export declarations of ES Modules (e.g.: `export
+     *                                                                 {a,};`);
+     *                                                                 default: `never`
+     *                                   - `functions`        {string} Function declarations and function calls (e.g.:
+     *                                                                 `(function(a,){ })(b,);`);
+     *                                                                 default: `never`
+     *                                   default: `never`
+     */
+    'comma-dangle': [
+        'error',
+        {
+            'arrays': 'always-multiline',
+            'objects': 'always-multiline',
+            'imports': 'always-multiline',
+            'exports': 'always-multiline',
+            'functions': 'never',
+        },
+    ],
+
+    /**
+     * This rule enforces consistent spacing before and after commas in variable declarations, array literals, object
+     * literals, function parameters, and sequences.
+     *
+     * This rule does not apply in an `ArrayExpression` or `ArrayPattern` in either of the following cases:
+     *   - adjacent null elements
+     *   - an initial null element, to avoid conflicts with the `array-bracket-spacing` rule
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `after`  {bool} Whether to require/disallow spaces after commas;
+     *                                              default: true
+     *                            - `before` {bool} Whether to require/disallow spaces before commas;
+     *                                              default: false
+     */
+    'comma-spacing': [
+        'error',
+        {
+            'after': true,
+            'before': false,
+        },
+    ],
+
+    /**
+     * This rule enforce consistent comma style in array literals, object literals, and variable declarations.
+     *
+     * This rule does not apply in either of the following cases:
+     *   - comma preceded and followed by linebreak (lone comma)
+     *   - single-line array literals, object literals, and variable declarations
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} location
+     *                               - `last`  Requires a comma after and on the same line as an array element, object
+     *                                         property, or variable declaration
+     *                               - `first` Requires a comma before and on the same line as an array element, object
+     *                                         property, or variable declaration
+     *                               default: `last`
+     * @property {object} exceptions
+     *                               - `ArrayExpression`         {bool} Whether to ignore comma style in array literals
+     *                               - `ArrayPattern`            {bool} Whether to ignore comma style in array patterns
+     *                                                                  of destructuring
+     *                               - `ArrowFunctionExpression` {bool} Whether to ignore comma style in the parameters
+     *                                                                  of arrow function expression
+     *                               - `CallExpression`          {bool} Whether to ignore comma style in the arguments
+     *                                                                  of function calls
+     *                               - `FunctionDeclaration`     {bool} Whether to ignore comma style in the parameters
+     *                                                                  of function declarations
+     *                               - `FunctionExpression`      {bool} Whether to ignore comma style in the parameters
+     *                                                                  of function expressions
+     *                               - `ImportDeclaration`       {bool} Whether to ignore comma style in the specifiers
+     *                                                                  of import declarations
+     *                               - `ObjectExpression`        {bool} Whether to ignore comma style in object
+     *                                                                  literals
+     *                               - `ObjectPattern`           {bool} Whether to ignore comma style in object
+     *                                                                  patterns of destructuring
+     *                               - `VariableDeclaration`     {bool} Whether to ignore comma style in variable
+     *                                                                  declarations
+     *                               - `NewExpression`           {bool} Whether to ignore comma style in the parameters
+     *                                                                  of constructor expressions
+     */
+    'comma-style': [
+        'error',
+        'last',
+    ],
+
+    /**
+     * This rule enforces consistent spacing inside computed property brackets.
+     *
+     * It either requires or disallows spaces between the brackets and the values inside of them. This rule does not
+     * apply to brackets that are separated from the adjacent value by a newline.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} spacing
+     *                            - `never`  Disallows spaces inside computed property brackets
+     *                            - `always` Requires one or more spaces inside computed property brackets
+     *                            default: `never`
+     * @property {object} options
+     *                            - `enforceForClassMembers` {bool} Whether to additionally apply this rule to class
+     *                                                              members;
+     *                                                              default: false
+     */
+    'computed-property-spacing': [
+        'error',
+        'never',
+    ],
+
+    /**
+     * This rule enforces two things about variables with the designated alias names for `this`:
+     *   - if a variable with a designated name is declared, it must be either initialized (in the declaration) or
+     *     assigned (in the same scope as the declaration) the value `this`.
+     *   - if a variable is initialized or assigned the value `this`, the name of the variable must be a designated
+     *     alias.
+     *
+     * @property {string} aliasNames List of designated alias names for `this`;
+     *                               default: `that`
+     */
+    'consistent-this': 'off',
+
+    /**
+     * This rule enforces at least one newline (or absence thereof) at the end of non-empty files.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} option
+     *                           - `always` Enforces that files end with a newline (LF)
+     *                           - `never`  Enforces that files do not end with a newline
+     *                           default: `always`
+     */
+    'eol-last': [
+        'error',
+        'always',
+    ],
+
+    /**
+     * This rule requires or disallows spaces between the function name and the opening parenthesis that calls it.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} option
+     *                           - `never`  Disallows space between the function name and the opening parenthesis
+     *                           - `always` Requires space between the function name and the opening parenthesis
+     *                           default: `never`
+     */
+    'func-call-spacing': [
+        'error',
+        'never',
+    ],
+
+    /**
+     * This rule requires function names to match the name of the variable or property to which they are assigned. The
+     * rule will ignore property assignments where the property name is a literal that is not a valid identifier in the
+     * ECMAScript version specified in your configuration (default ES5).
+     *
+     * @property {string} require
+     *                            - `always` Require function names to match the name of the variable or property to
+     *                                       which they are assigned
+     *                            - `never`  The opposite of `always`
+     *                            default: `always`
+     * @property {object} options
+     *                            - `considerPropertyDescriptor`   {bool} The check will take into account the use of
+     *                                                                    `Object.create`, `Object.defineProperty`,
+     *                                                                    `Object.defineProperties`, and
+     *                                                                    `Reflect.defineProperty`;
+     *                                                                    default: false
+     *                            - `includeCommonJSModuleExports` {bool} The check will check `module.exports` and
+     *                                                                    `module['exports']`;
+     *                                                                    default: false
+     */
+    'func-name-matching': 'off',
+
+    /**
+     * This rule can enforce or disallow the use of named function expressions.
+     *
+     * @property {string} require
+     *                            - `always`    Requires function expressions to have a name
+     *                            - `as-needed` Requires function expressions to have a name if the name cannot be
+     *                                          assigned automatically in an ES6 environment
+     *                            - `never`     Disallows named function expressions, except in recursive functions,
+     *                                          where a name is needed
+     *                            default: `always`
+     * @property {object} options
+     *                            - `generators` {string}
+     *                                                    - `always`    Require named generators
+     *                                                    - `as-needed` Require named generators if the name cannot be
+     *                                                                  assigned automatically in an ES6 environment
+     *                                                    - `never`     Disallow named generators where possible
+     */
+    'func-names': 'off',
+
+    /**
+     * This rule enforces a particular type of function style throughout a JavaScript file, either declarations or
+     * expressions. You can specify which you prefer in the configuration.
+     *
+     * @property {string} type
+     *                           - `expression`  Requires the use of function expressions instead of function
+     *                                           declarations
+     *                           - `declaration` Requires the use of function declarations instead of function
+     *                                           expressions
+     *                           default: `expression`
+     * @property {object} option
+     *                           - `allowArrowFunctions` {bool} Allow the use of arrow functions (honored only when
+     *                                                          using `declaration`);
+     *                                                          default: false
+     */
+    'func-style': 'off',
+
+    /**
+     * This rule enforces line breaks between arguments of a function call.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} option
+     *                           - `always`     Requires line breaks between arguments
+     *                           - `never`      Disallows line breaks between arguments
+     *                           - `consistent` Requires consistent usage of line breaks between arguments
+     *                           default: `always`
+     */
+    'function-call-argument-newline': [
+        'error',
+        'consistent',
+    ],
+
+    /**
+     * This rule enforces consistent line breaks inside parentheses of function parameters or arguments.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string|object} options
+     *                                   - `always`                    Requires line breaks inside all function
+     *                                                                 parentheses
+     *                                   - `never`                     Disallows line breaks inside all function
+     *                                                                 parentheses
+     *                                   - `multiline`                 Requires linebreaks inside function parentheses
+     *                                                                 if any of the parameters/arguments have a line
+     *                                                                 break between them - otherwise, it disallows
+     *                                                                 linebreaks
+     *                                   - `multiline-arguments`       Works like `multiline` but allows linebreaks
+     *                                                                 inside function parentheses if there is only one
+     *                                                                 parameter/argument
+     *                                   - `consistent`                Requires consistent usage of linebreaks for
+     *                                                                 each pair of parentheses - it reports an error
+     *                                                                 if one parenthesis in the pair has a linebreak
+     *                                                                 inside it and the other does not
+     *                                   - `minItems`            {int} Requires linebreaks inside function parentheses
+     *                                                                 if the number of parameters/arguments is at
+     *                                                                 least the min - otherwise, it disallows
+     *                                                                 linebreaks
+     *                                   default: `multiline`
+     */
+    'function-paren-newline': [
+        'error',
+        'consistent',
+    ],
+
+    /**
+     * This rule disallows specified identifiers in assignments and function definitions.
+     *
+     * This rule will catch blacklisted identifiers that are:
+     *   - variable declarations
+     *   - function declarations
+     *   - object properties assigned to during object creation
+     *
+     * It will not catch blacklisted identifiers that are:
+     *   - function calls (so you can still use functions you do not have control over)
+     *   - object properties (so you can still use objects you do not have control over)
+     *
+     * @property {strings} restrictedIdentifiers List of names of restricted identifiers
+     */
+    'id-blacklist': 'off',
+
+    /**
+     * This rule enforces a minimum and/or maximum identifier length convention.
+     *
+     * @property {object} options
+     *                            - `min`        {int}    Enforces a minimum identifier length;
+     *                                                    default: 2
+     *                            - `max`        {int}    Enforces a maximum identifier length;
+     *                                                    default: infinity
+     *                            - `properties` {string} Enforces identifier length convention for property names;
+     *                                                    default: `always`
+     *                            - `exceptions` {array}  Array of exempt identifier names
+     */
+    'id-length': 'off',
+
+    /**
+     * This rule requires identifiers in assignments and `function` definitions to match a specified regular
+     * expression.
+     *
+     * @property {string} regex Regular expression specifying a naming convention
+     * @property {object} options
+     *                            - `properties`          {bool} Requires object properties to match the specified
+     *                                                           regular expression;
+     *                                                           default: false
+     *                            - `onlyDeclarations`    {bool} Requires only `var`, `function`, and `class`
+     *                                                           declarations to match the specified regular
+     *                                                           expression;
+     *                                                           default: false
+     *                            - `ignoreDestructuring` {bool} Whether to ignore destructured identifiers;
+     *                                                           default: false
+     */
+    'id-match': 'off',
+
+    /**
+     * This rule aims to enforce a consistent location for an arrow function containing an implicit return.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} option
+     *                           - `beside` Disallows a newline before an arrow function body
+     *                           - `below`  Requires a newline before an arrow function body
+     *                           default: `beside`
+     */
+    'implicit-arrow-linebreak': [
+        'error',
+        'beside',
+    ],
+
+    /**
+     * This rule enforces a consistent indentation style. The default style is `4 spaces`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {int|string} type    Indentation type;
+     *                                default: 4
+     * @property {object}     options;
+     *                                - `SwitchCase`             {int}        Enforces indentation level for `case`
+     *                                                                        clauses in `switch` statements;
+     *                                                                        default: 0
+     *                                - `VariableDeclarator`     {int|string} Enforces indentation level for `var`
+     *                                                                        declarators; can also take an object to
+     *                                                                        define separate rules for `var`, `let`
+     *                                                                        and `const` declarations. It can also be
+     *                                                                        `first`, indicating all the declarators
+     *                                                                        should be aligned with the first
+     *                                                                        declarator;
+     *                                                                        default: 1
+     *                                - `outerIIFEBody`          {int}        Enforces indentation level for file-level
+     *                                                                        IIFEs;
+     *                                                                        default: 1
+     *                                - `MemberExpression`       {int|string} Enforces indentation level for multi-line
+     *                                                                        property chains. This can also be set to
+     *                                                                        `off` to disable checking for
+     *                                                                        `MemberExpression` indentation;
+     *                                                                        default: 1
+     *                                - `FunctionDeclaration`    {object}     Takes an object to define rules for
+     *                                                                        function declarations
+     *                                                                        - `parameters` {int|string} Enforces
+     *                                                                                                    indentation
+     *                                                                                                    level for
+     *                                                                                                    parameters in
+     *                                                                                                    a function
+     *                                                                                                    declaration.
+     *                                                                                                    This can
+     *                                                                                                    either be a
+     *                                                                                                    number
+     *                                                                                                    indicating
+     *                                                                                                    indentation
+     *                                                                                                    level, or the
+     *                                                                                                    string
+     *                                                                                                    `first`
+     *                                                                                                    indicating
+     *                                                                                                    that all
+     *                                                                                                    parameters of
+     *                                                                                                    the
+     *                                                                                                    declaration
+     *                                                                                                    must be
+     *                                                                                                    aligned with
+     *                                                                                                    the first
+     *                                                                                                    parameter.
+     *                                                                                                    This can also
+     *                                                                                                    be set to
+     *                                                                                                    `off` to
+     *                                                                                                    disable
+     *                                                                                                    checking for
+     *                                                                                                    `FunctionDeclaration`
+     *                                                                                                    parameters;
+     *                                                                                                    default: 1
+     *                                                                        - `body`       {int}        Enforces
+     *                                                                                                    indentation
+     *                                                                                                    level for the
+     *                                                                                                    body of a
+     *                                                                                                    function
+     *                                                                                                    declaration;
+     *                                                                                                    default: 1
+     *                                - `FunctionExpression`     {object}     Takes an object to define rules for
+     *                                                                        function expressions;
+     *                                                                        - `parameters` {int|string} Enforces
+     *                                                                                                    indentation
+     *                                                                                                    level for
+     *                                                                                                    parameters in
+     *                                                                                                    a function
+     *                                                                                                    expression.
+     *                                                                                                    This can
+     *                                                                                                    either be a
+     *                                                                                                    number
+     *                                                                                                    indicating
+     *                                                                                                    indentation
+     *                                                                                                    level, or the
+     *                                                                                                    string
+     *                                                                                                    `first`
+     *                                                                                                    indicating
+     *                                                                                                    that all
+     *                                                                                                    parameters of
+     *                                                                                                    the
+     *                                                                                                    expression
+     *                                                                                                    must be
+     *                                                                                                    aligned with
+     *                                                                                                    the first
+     *                                                                                                    parameter.
+     *                                                                                                    This can also
+     *                                                                                                    be set to
+     *                                                                                                    `off` to
+     *                                                                                                    disable
+     *                                                                                                    checking for
+     *                                                                                                    `FunctionExpression`
+     *                                                                                                    parameters;
+     *                                                                                                    default: 1
+     *                                                                        - `body`       {int}        Enforces
+     *                                                                                                    indentation
+     *                                                                                                    level for the
+     *                                                                                                    body of a
+     *                                                                                                    function
+     *                                                                                                    expression;
+     *                                                                                                    default: 1
+     *                                - `CallExpression`         {object}     Takes an object to define rules for
+     *                                                                        function call expressions;
+     *                                                                        - `arguments` {int} Enforces indentation
+     *                                                                                            level for arguments
+     *                                                                                            in a call expression.
+     *                                                                                            This can either be a
+     *                                                                                            number indicating
+     *                                                                                            indentation level, or
+     *                                                                                            the string `first`
+     *                                                                                            indicating that all
+     *                                                                                            arguments of the
+     *                                                                                            expression must be
+     *                                                                                            aligned with the
+     *                                                                                            first argument. This
+     *                                                                                            can also be set to
+     *                                                                                            `off` to disable
+     *                                                                                            checking for
+     *                                                                                            `CallExpression`
+     *                                                                                            arguments;
+     *                                                                                            default: 1
+     *                                - `ArrayExpression`        {int}        Enforces indentation level for elements
+     *                                                                        in arrays. It can also be set to the
+     *                                                                        string `first`, indicating that all the
+     *                                                                        elements in the array should be aligned
+     *                                                                        with the first element. This can also be
+     *                                                                        set to `off` to disable checking for
+     *                                                                        array elements;
+     *                                                                        default: 1
+     *                                - `ObjectExpression`       {int}        Enforces indentation level for properties
+     *                                                                        in objects. It can be set to the string
+     *                                                                        `first`, indicating that all properties
+     *                                                                        in the object should be aligned with the
+     *                                                                        first property. This can also be set to
+     *                                                                        `off` to disable checking for object
+     *                                                                        properties;
+     *                                                                        default: 1
+     *                                - `ImportDeclaration`      {int}        Enforces indentation level for import
+     *                                                                        statements. It can be set to the string
+     *                                                                        `first`, indicating that all imported
+     *                                                                        members from a module should be aligned
+     *                                                                        with the first member in the list. This
+     *                                                                        can also be set to `off` to disable
+     *                                                                        checking for imported module members;
+     *                                                                        default: 1
+     *                                - `flatTernaryExpressions` {bool}       Requires no indentation for ternary
+     *                                                                        expressions which are nested in other
+     *                                                                        ternary expressions;
+     *                                                                        default: false
+     *                                - `ignoredNodes`           {array}      Accepts an array of selectors. If an AST
+     *                                                                        node is matched by any of the selectors,
+     *                                                                        the indentation of tokens which are
+     *                                                                        direct children of that node will be
+     *                                                                        ignored. This can be used as an escape
+     *                                                                        hatch to relax the rule if you disagree
+     *                                                                        with the indentation that it enforces for
+     *                                                                        a particular syntactic pattern;
+     *                                - `ignoreComments`         {bool}       Can be used when comments do not need to
+     *                                                                        be aligned with nodes on the previous or
+     *                                                                        next line
+     *                                                                        default: false
+     */
+    'indent': [
+        'error',
+        4,
+        {
+            'SwitchCase': 1,
+            'VariableDeclarator': {
+                'var': 1,
+                'let': 1,
+                'const': 1,
+            },
+            'outerIIFEBody': 1,
+            'MemberExpression': 1,
+            'FunctionDeclaration': {
+                'parameters': 1,
+                'body': 1,
+            },
+            'FunctionExpression': {
+                'parameters': 1,
+                'body': 1,
+            },
+            'CallExpression': {
+                'arguments': 1,
+            },
+            'ArrayExpression': 1,
+            'ObjectExpression': 1,
+            'ImportDeclaration': 1,
+            'flatTernaryExpressions': false,
+            'ignoreComments': false,
+            'ignoredNodes': [
+                'TemplateLiteral *',
+            ],
+        },
+    ],
+
+    /**
+     * This rule enforces the consistent use of either double or single quotes in JSX attributes.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} options
+     *                            - `prefer-double` Enforce the use of double quotes for all JSX attribute values that
+     *                                              don't contain a double quote
+     *                            - `prefer-single` Enforce the use of single quotes for all JSX attribute values that
+     *                                              don't contain a single quote
+     *                            default: `prefer-double`
+     */
+    'jsx-quotes': 'off',
+
+    /**
+     * This rule enforces consistent spacing between keys and values in object literal properties. In the case of long
+     * lines, it is acceptable to add a new line wherever whitespace is allowed.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `beforeColon` {bool}          Require/Disallow spaces between the key and the colon
+     *                                                            in object literals;
+     *                            default: false
+     *                            - `afterColon`  {bool}          Require/Disallow spaces between the colon and the
+     *                                                            value in object literals;
+     *                            default: true
+     *                            - `mode`        {string}
+     *                                                            - `strict`  Enforces exactly one space before or
+     *                                                                        after colons in object literals
+     *                                                            - `minimum` Enforces one or more spaces before or
+     *                                                                        after colons in object literals
+     *                                                            default: `strict`
+     *                            - `align`       {string|object}
+     *                                                            - `value`  Enforces horizontal alignment of values in
+     *                                                                       object literals
+     *                                                            - `colon`  Enforces horizontal alignment of both
+     *                                                                       colons and values in object literals
+     *                                                            - {object} Allows for fine-grained spacing when
+     *                                                                       values are being aligned in object
+     *                                                                       literals;
+     *                                                                       keys: `beforeColon`, `afterColon`, `mode`,
+     *                                                                       `on`
+     *                            - `singleLine`  {object}        Specifies a spacing style for single-line object
+     *                                                            literals;
+     *                                                            keys: `beforeColon`, `afterColon`, `mode`, `on`
+     *                            - `multiLine`   {object}        Specifies a spacing style for multi-line object
+     *                                                            literals;
+     *                                                            keys: `beforeColon`, `afterColon`, `mode`, `on`,
+     *                                                            `align`
+     *
+     */
+    'key-spacing': [
+        'error',
+        {
+            'beforeColon': false,
+            'afterColon': true,
+        },
+    ],
+
+    /**
+     * This rule enforces consistent spacing around keywords and keyword-like tokens: `as` (in module declarations),
+     * `async` (of async functions), `await` (of await expressions), `break`, `case`, `catch`, `class`, `const`,
+     * `continue`, `debugger`, `default`, `delete`, `do`, `else`, `export`, `extends`, `finally`, `for`, `from` (in
+     * module declarations), `function`, `get` (of getters), `if`, `import`, `in`, `instanceof`, `let`, `new`, `of` (in
+     * for-of statements), `return`, `set` (of setters), `static`, `super`, `switch`, `this`, `throw`, `try`, `typeof`,
+     * `var`, `void`, `while`, `with`, and `yield`. This rule is designed carefully not to conflict with other spacing
+     * rules: it does not apply to spacing where other rules report problems.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `after`     {bool}   Requires/Disallows spaces after keywords;
+     *                                                   default: true
+     *                            - `before`    {bool}   Requires/Disallows spaces before keywords;
+     *                                                   default: true
+     *                            - `overrides` {object} Allows overriding spacing style for specified keywords
+     */
+    'keyword-spacing': [
+        'error',
+        {
+            'after': true,
+            'before': true,
+        },
+    ],
+
+    /**
+     * This rule enforces consistent position of line comments. Block comments are not affected by this rule. By
+     * default, this rule ignores comments starting with the following words: `eslint`, `jshint`, `jslint`, `istanbul`,
+     * `global`, `exported`, `jscs`, `falls through`.
+     *
+     * @property {string|object} options
+     *                                   - `position`                   {object}
+     *                                                                                 - `above`  Enforces line
+     *                                                                                            comments only above
+     *                                                                                            code, in its own line
+     *                                                                                 - `beside` Enforces line
+     *                                                                                            comments only at the
+     *                                                                                            end of code lines
+     *                                   - `ignorePattern`              {string|regex} Ignore comments starting with
+     *                                                                                 the provided string/regular
+     *                                                                                 expression
+     *                                   - `applyDefaultIgnorePatterns` {bool}         Default ignore patterns are
+     *                                                                                 applied even when
+     *                                                                                 `ignorePattern` is provided;
+     *                                                                                 default: true
+     */
+    'line-comment-position': [
+        'error',
+        {
+            'position': 'above',
+            'applyDefaultIgnorePatterns': true,
+        },
+    ],
+
+    /**
+     * This rule enforces consistent line endings independent of operating system, VCS, or editor used across your
+     * codebase.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} style
+     *                          - `unix`    Enforces the usage of Unix line endings: `\n` for LF.
+     *                          - `windows` Enforces the usage of Windows line endings: `\r\n` for CRLF.
+     *                          default: `unix`
+     */
+    'linebreak-style': [
+        'error',
+        'unix',
+    ],
+
+    /**
+     * This rule requires empty lines before and/or after comments. It can be enabled separately for both block (`/*`)
+     * and line (`//`) comments. This rule does not apply to comments that appear on the same line as code and does not
+     * require empty lines at the beginning or end of a file.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `beforeBlockComment`         {bool}  Requires an empty line before block comments;
+     *                                                                   default: true
+     *                            - `afterBlockComment`          {bool}  Requires an empty line after block comments
+     *                            - `beforeLineComment`          {bool}  Requires an empty line before line comments
+     *                            - `afterLineComment`           {bool}  Requires an empty line after line comments
+     *                            - `allowBlockStart`            {bool}  Allows comments to appear at the start of
+     *                                                                   block statements
+     *                            - `allowBlockEnd`              {bool}  Allows comments to appear at the end of block
+     *                                                                   statements
+     *                            - `allowObjectStart`           {bool}  Allows comments to appear at the start of
+     *                                                                   object literals
+     *                            - `allowObjectEnd`             {bool}  Allows comments to appear at the end of object
+     *                                                                   literals
+     *                            - `allowArrayStart`            {bool}  Allows comments to appear at the start of
+     *                                                                   array literals
+     *                            - `allowArrayEnd`              {bool}  Allows comments to appear at the end of array
+     *                                                                   literals
+     *                            - `allowClassStart`            {bool}  Allows comments to appear at the start of
+     *                                                                   classes
+     *                            - `allowClassEnd`              {bool}  Allows comments to appear at the end of
+     *                                                                   classes
+     *                            - `applyDefaultIgnorePatterns` {bool}  Enables the default comment patterns to be
+     *                                                                   ignored
+     *                            - `ignorePattern`              {regex} Custom patterns to be ignored
+     */
+    'lines-around-comment': 'off',
+
+    /**
+     * This rule improves readability by enforcing lines between class members. It will not check empty lines before
+     * the first member and after the last member, since that is already taken care of by padded-blocks.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} emptyLine
+     *                              - `always` Require an empty line after class members
+     *                              - `never`  Disallows an empty line after class members
+     *                              default: `always`
+     * @property {object} options
+     *                              - `exceptAfterSingleLine` {bool} Whether to skip checking empty lines after single-
+     *                                                               line class members;
+     *                                                               default: false
+     */
+    'lines-between-class-members': [
+        'error',
+        'always',
+        {
+            'exceptAfterSingleLine': false,
+        },
+    ],
+
+    /**
+     * This rule enforces a maximum depth that blocks can be nested to reduce code complexity.
+     *
+     * @property {int|object} options
+     *                                - `max` {int} Enforces a maximum depth that blocks can be nested;
+     *                                              default: 4
+     */
+    'max-depth': 'off',
+
+    /**
+     * This rule enforces a maximum line length to increase code readability and maintainability. The length of a line
+     * is defined as the number of Unicode characters in the line.
+     *
+     * @property {int|object} options
+     *                                - `code`                   {int}        Enforces a maximum line length;
+     *                                                                        default: 80
+     *                                - `tabWidth`               {int}        Specifies the character width for tab
+     *                                                                        characters;
+     *                                                                        default: 4
+     *                                - `comments`               {int|string} Enforces a maximum line length for
+     *                                                                        comments;
+     *                                                                        default: `code`
+     *                                - `ignorePattern`          {regex}      Ignores lines matching a regular
+     *                                                                        expression; can only match a single line
+     *                                                                        and need to be double escaped when
+     *                                                                        written in YAML or JSON
+     *                                - `ignoreComments`         {bool}       Ignores all trailing comments and
+     *                                                                        comments on their own line;
+     *                                                                        default: false
+     *                                - `ignoreTrailingComments` {bool}       Ignores only trailing comments;
+     *                                                                        default: false
+     *                                - `ignoreUrls`             {bool}       Ignores lines that contain a URL;
+     *                                                                        default: false
+     *                                - `ignoreStrings`          {bool}       Ignores lines that contain double-quoted
+     *                                                                        or single-quoted string;
+     *                                                                        default: false
+     *                                - `ignoreTemplateLiterals` {bool}       Ignores lines that contain a template
+     *                                                                        literal;
+     *                                                                        default: false
+     *                                - `ignoreRegExpLiterals`   {bool}       Ignores lines that contain a RegExp
+     *                                                                        literal;
+     *                                                                        default: false
+     */
+    'max-len': 'off',
+
+    /**
+     * This rule enforces a maximum number of lines per file, in order to aid in maintainability and reduce complexity.
+     *
+     * @property {int|object} options
+     *                                - `max`            {int}  Enforces a maximum number of lines in a file;
+     *                                                          default: 300
+     *                                - `skipBlankLines` {bool} Ignore lines made up purely of whitespace;
+     *                                                          default: false
+     *                                - `skipComments`   {bool} Ignore lines containing just comments;
+     *                                                          default: false
+     */
+    'max-lines': 'off',
+
+    /**
+     * This rule enforces a maximum number of lines per function, in order to aid in maintainability and reduce
+     * complexity.
+     *
+     * @property {object} options
+     *                            - `max`            {int}  Enforces a maximum number of lines in a function;
+     *                                                      default: 50
+     *                            - `skipBlankLines` {bool} Ignore lines made up purely of whitespace;
+     *                                                      default: false
+     *                            - `skipComments`   {bool} Ignore lines containing just comments;
+     *                                                      default: false
+     *                            - `IIFEs`          {bool} Include any code included in IIFEs;
+     *                                                      default: false
+     */
+    'max-lines-per-function': 'off',
+
+    /**
+     * This rule enforces a maximum depth that callbacks can be nested to increase code clarity.
+     *
+     * @property {int|object} options
+     *                                - `max` {int} Enforces a maximum depth that callbacks can be nested;
+     *                                              default: 10
+     */
+    'max-nested-callbacks': 'off',
+
+    /**
+     * This rule enforces a maximum number of parameters allowed in function definitions.
+     *
+     * @property {int|object} options
+     *                                - `max` {int} Enforces a maximum number of parameters in function definitions;
+     *                                              default: 3
+     */
+    'max-params': 'off',
+
+    /**
+     * This rule enforces a maximum number of statements allowed in function blocks.
+     *
+     * @property {int|object} options
+     *                                - `max` {int} Enforces a maximum number of statements allowed in function blocks;
+     *                                              default: 10
+     * @property {object}     ignore
+     *                                - `ignoreTopLevelFunctions` {bool} Ignores top-level functions;
+     *                                                                   default: false
+     */
+    'max-statements': 'off',
+
+    /**
+     * This rule enforces a maximum number of statements allowed per line.
+     *
+     * @property {object} options
+     *                            - `max` {int} Enforces a maximum number of statements allowed per line;
+     *                                          default: 1
+     */
+    'max-statements-per-line': 'off',
+
+    /**
+     * This rule aims to enforce a particular style for multiline comments.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} style
+     *                          - `starred-block`  Disallows consecutive line comments in favor of block comments.
+     *                                             Additionally, requires block comments to have an aligned `*`
+     *                                             character before each line
+     *                          - `bare-block`     Disallows consecutive line comments in favor of block comments, and
+     *                                             disallows block comments from having a `*` character before each
+     *                                             line
+     *                          - `separate-lines` Disallows block comments in favor of consecutive line comments
+     *                          default: `starred-block`
+     */
+    'multiline-comment-style': 'off',
+
+    /**
+     * This rule enforces or disallows newlines between operands of a ternary expression.
+     *
+     * @property {string} options
+     *                            - `always`           Enforces newlines between the operands of a ternary expression
+     *                            - `always-multiline` Enforces newlines between the operands of a ternary expression
+     *                                                 if the expression spans multiple lines
+     *                            - `never`            Disallows newlines between the operands of a ternary expression
+     *                                                 (enforcing that the entire ternary expression is on one line)
+     *                            default: `always`
+     */
+    'multiline-ternary': 'off',
+
+    /**
+     * This rule requires constructor names to begin with a capital letter. Certain built-in identifiers are exempt
+     * from this rule. These identifiers are:
+     *   - `Array`
+     *   - `Boolean`
+     *   - `Date`
+     *   - `Error`
+     *   - `Function`
+     *   - `Number`
+     *   - `Object`
+     *   - `RegExp`
+     *   - `String`
+     *   - `Symbol`
+     *
+     * @property {object} options
+     *                            - `newIsCap`                 {bool}  Require all `new` operators to be called with
+     *                                                                 uppercase-started functions;
+     *                                                                 default: true
+     *                            - `newIsCapExceptions`       {array} Allows specified lowercase-started function
+     *                                                                 names to be called with the `new` operator
+     *                            - `newIsCapExceptionPattern` {regex} Allows any lowercase-started function names that
+     *                                                                 match the specified regex pattern to be called
+     *                                                                 with the `new` operator
+     *                            - `capIsNew`                 {bool}  Require all uppercase-started functions to be
+     *                                                                 called with `new` operators;
+     *                                                                 default: true
+     *                            - `capIsNewExceptions`       {array} Allows specified uppercase-started function
+     *                                                                 names to be called without the `new` operator
+     *                            - `capIsNewExceptionPattern` {regex} Allows any uppercase-started function names that
+     *                                                                 match the specified regex pattern to be called
+     *                                                                 without the `new` operator
+     *                            - `properties`               {bool}  Enable/Disable checks on object properties;
+     *                                                                 default: true
+     */
+    'new-cap': [
+        'error',
+        {
+            'newIsCap': true,
+            'capIsNew': false,
+            'properties': true,
+        },
+    ],
+
+    /**
+     * This rule can enforce or disallow parentheses when invoking a constructor with no arguments using the `new`
+     * keyword.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} option
+     *                           - `always` Enforces parentheses after new constructor with no arguments
+     *                           - `never`  Enforces no parentheses after a new constructor with no arguments
+     *                           default: `always`
+     */
+    'new-parens': [
+        'error',
+        'always',
+    ],
+
+    /**
+     * This rule requires a newline after each call in a method chain or deep member access. Computed property accesses
+     * such as `instance[something]` are excluded.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `ignoreChainWithDepth` {int} Allows chains up to a specified depth;
+     *                                                           default: 2
+     */
+    'newline-per-chained-call': [
+        'error',
+        {
+            'ignoreChainWithDepth': 2,
+        },
+    ],
+
+    /**
+     * This rule disallows `Array` constructors.
+     */
+    'no-array-constructor': 'error',
+
+    /**
+     * This rule disallows bitwise operators.
+     *
+     * @property {object} options
+     *                            - `allow`     {array} Allow a list of bitwise operators to be used as exceptions
+     *                            - `int32Hint` {bool}  Allow the use of bitwise OR in `|0` pattern for type casting
+     */
+    'no-bitwise': 'off',
+
+    /**
+     * This rule disallows continue statements.
+     */
+    'no-continue': 'off',
+
+    /**
+     * This rule disallows comments on the same line as code.
+     */
+    'no-inline-comments': 'error',
+
+    /**
+     * This rule disallows `if` statements as the only statement in `else` blocks.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'no-lonely-if': 'off',
+
+    /**
+     * This rule checks `BinaryExpression`, `LogicalExpression`, and `ConditionalExpression`.
+     *
+     * @property {object} options
+     *                            - `groups`              {array} Specifies operator groups to be checked. The `groups`
+     *                                                            option is a list of groups, and a group is a list of
+     *                                                            binary operators. Default operator groups are defined
+     *                                                            as arithmetic, bitwise, comparison, logical, and
+     *                                                            relational operators. Note: Ternary operator (`?:`
+     *                                                            can be part of any group and by default is allowed to
+     *                                                            be mixed with other operators
+     *                            - `allowSamePrecedence` {bool}  Specifies whether to allow mixed operators if they
+     *                                                            are of equal precedence;
+     *                                                            default: true
+     */
+    'no-mixed-operators': [
+        'error',
+        {
+            'groups': [
+                ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
+                ['&&', '||'],
+                ['in', 'instanceof'],
+            ],
+            'allowSamePrecedence': true,
+        },
+    ],
+
+    /**
+     * This rule disallows mixed spaces and tabs for indentation.
+     *
+     * @property {string} option
+     *                           - `smart-tabs` Allows mixed tabs and spaces when the spaces are used for alignment
+     */
+    'no-mixed-spaces-and-tabs': 'error',
+
+    /**
+     * This rule disallows using multiple assignments within a single statement.
+     */
+    'no-multi-assign': 'off',
+
+    /**
+     * This rule aims to reduce the scrolling required when reading through your code. It will warn when the maximum
+     * amount of empty lines has been exceeded.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `max`    {int} Enforces a maximum number of consecutive empty lines;
+     *                                             default: 2
+     *                            - `maxEOF` {int} Enforces a maximum number of consecutive empty lines at the end of
+     *                                             files
+     *                            - `maxBOF` {int} Enforces a maximum number of consecutive empty lines at the
+     *                                             beginning of files
+     */
+    'no-multiple-empty-lines': [
+        'error',
+        {
+            'max': 1,
+            'maxEOF': 1,
+        },
+    ],
+
+    /**
+     * This rule disallows negated conditions in either of the following:
+     *   - `if` statements which have an `else` branch
+     *   - ternary expressions
+     */
+    'no-negated-condition': 'off',
+
+    /**
+     * This rule disallows nested ternary expressions.
+     */
+    'no-nested-ternary': 'off',
+
+    /**
+     * This rule disallows `Object` constructors.
+     */
+    'no-new-object': 'error',
+
+    /**
+     * This rule disallows the unary operators `++` and `--`.
+     *
+     * @property {object} options
+     *                            - `allowForLoopAfterthoughts` {bool} Allows unary operators `++` and `--` in the
+     *                                                                 afterthought (final expression) of a `for` loop
+     */
+    'no-plusplus': 'off',
+
+    /**
+     * This rule disallows specified (that is, user-defined) syntax.
+     *
+     * @property {array|object} astSelectors List of strings that should not be allowed
+     */
+    'no-restricted-syntax': 'off',
+
+    /**
+     * This rule looks for tabs anywhere inside a file: code, comments or anything else.
+     *
+     * @property {object} options
+     *                            - `allowIndentationTabs` {bool} Ignore tabs used for indentation;
+     *                                                            default: false
+     */
+    'no-tabs': 'error',
+
+    /**
+     * This rule disallows ternary operators.
+     */
+    'no-ternary': 'off',
+
+    /**
+     * This rule disallows trailing whitespace (spaces, tabs, and other Unicode whitespace characters) at the end of
+     * lines.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `skipBlankLines` {bool} Ignore trailing whitespace on empty lines;
+     *                                                      default: false
+     *                            - `ignoreComments` {bool} Ignore trailing whitespace in comment blocks;
+     *                                                      default: false
+     */
+    'no-trailing-spaces': [
+        'error',
+        {
+            'skipBlankLines': false,
+            'ignoreComments': false,
+        },
+    ],
+
+    /**
+     * This rule disallows dangling underscores in identifiers.
+     *
+     * @property {object} options
+     *                            - `allow`                     {array} Allows specified identifiers to have dangling
+     *                                                                  underscores;
+     *                                                                  default: []
+     *                            - `allowAfterThis`            {bool}  Allow dangling underscores in members of the
+     *                                                                  `this` object;
+     *                                                                  default: false
+     *                            - `allowAfterSuper`           {bool}  Allow dangling underscores in members of the
+     *                                                                  `super` object;
+     *                                                                  default: false
+     *                            - `allowAfterThisConstructor` {bool}  Allow dangling underscores in members of the
+     *                                                                  `this.constructor` object;
+     *                                                                  default: false
+     *                            - `enforceInMethodNames`      {bool}  Disallow dangling underscores in method names;
+     *                                                                  default: false
+     */
+    'no-underscore-dangle': 'off',
+
+    /**
+     * This rule disallow ternary operators when simpler alternatives exist.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `defaultAssignment` Allow the conditional expression as a default assignment
+     *                                                  pattern;
+     *                                                  default: true
+     */
+    'no-unneeded-ternary': [
+        'error',
+        {
+            'defaultAssignment': false,
+        },
+    ],
+
+    /**
+     * This rule disallows whitespace around the dot or before the opening bracket before properties of objects if they
+     * are on the same line. This rule allows whitespace when the object and property are on separate lines, as it is
+     * common to add newlines to longer chains of properties.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'no-whitespace-before-property': 'error',
+
+    /**
+     * This rule aims to enforce a consistent location for single-line statements.
+     *
+     * Note that this rule does not enforce the usage of single-line statements in general.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} location
+     *                              - `beside` Disallows a newline before a single-line statement
+     *                              - `below`  Requires a newline before a single-line statement
+     *                              - `any`    Does not enforce the position of a single-line statement
+     * @property {object} overrides Used to specify a location for particular statements that override the default
+     */
+    'nonblock-statement-body-position': 'off',
+
+    /**
+     * This rule enforces consistent line breaks inside braces of object literals or destructuring assignments.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string|object} options
+     *                                   - `always`                            Requires line breaks inside braces
+     *                                   - `never`                             Disallows line breaks inside braces
+     *                                   - `multiline`         {bool}          Require line breaks if there are line
+     *                                                                         breaks inside properties or between
+     *                                                                         properties
+     *                                   - `minProperties`     {int}           Require line breaks if the number of
+     *                                                                         properties is at least the given integer
+     *                                   - `consistent`        {bool}          Requires that either both curly braces,
+     *                                                                         or neither, directly enclose new lines;
+     *                                                                         default: true
+     *                                   - `ObjectExpression`  {string|object} Configuration for object literals
+     *                                   - `ObjectPattern`     {string|object} Configuration for object patterns of
+     *                                                                         destructuring assignments
+     *                                   - `ImportDeclaration` {string|object} Configuration for named imports
+     *                                   - `ExportDeclaration` {string|object} Configuration for named exports
+     */
+    'object-curly-newline': [
+        'error',
+        {
+            'multiline': true,
+            'consistent': true,
+        },
+    ],
+
+    /**
+     * This rule enforces consistent spacing inside braces of object literals, destructuring assignments, and import/
+     * export specifiers.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} spacing
+     *                            - `always` Requires spacing inside of braces (except `{}`)
+     *                            - `never`  Disallows spacing inside of braces;
+     *                            default: `never`
+     * @property {object} options
+     *                            - `arraysInObjects`  {bool} Require spacing inside of braces of objects beginning
+     *                                                        and/or ending with an array element
+     *                            - `objectsInObjects` {bool} Require spacing inside of braces of objects beginning
+     *                                                        and/or ending with an object element
+     */
+    'object-curly-spacing': [
+        'error',
+        'always',
+    ],
+
+    /**
+     * This rule makes it possible to ensure, as some style guides require, that property specifications appear on
+     * separate lines for better readability.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} exceptions
+     *                               - `allowAllPropertiesOnSameLine` {bool} Allow properties to be on the same line as
+     *                                                                       long as all are on the same line
+     */
+    'object-property-newline': [
+        'error',
+        {
+            'allowAllPropertiesOnSameLine': true,
+        },
+    ],
+
+    /**
+     * This rule enforces variables to be declared either together or separately per function (for `var`) or block (for
+     * `let` and `const`) scope.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string|object} options
+     *                                   - `always`                    Requires one variable declaration per scope
+     *                                   - `never`                     Requires multiple variable declarations per
+     *                                                                 scope
+     *                                   - `consecutive`               Allows multiple variable declarations per scope
+     *                                                                 but requires consecutive variable declarations
+     *                                                                 to be combined into a single declaration
+     *                                   - `var`              {string} See `always`/`never`/`consecutive` - for `var`
+     *                                   - `let`              {string} See `always`/`never`/`consecutive` - for `let`
+     *                                   - `const`            {string} See `always`/`never`/`consecutive` - for `const`
+     *                                   - `separateRequires` {bool}   Enforce `requires` to be separate from
+     *                                                                 declarations
+     *                                   - `initialized`      {string} See `always`/`never`/`consecutive` - for
+     *                                                                 initialized variables
+     *                                   - `uninitialized`    {string} See `always`/`never`/`consecutive` - for
+     *                                                                 uninitialized variables
+     *                                   default: `always`
+     */
+    'one-var': [
+        'error',
+        {
+            'initialized': 'never',
+        },
+    ],
+
+    /**
+     * This rule enforces a consistent newlines around variable declarations. This rule ignores variable declarations
+     * inside `for` loop conditionals.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} option
+     *                           - `initializations` Enforces a newline around variable initializations
+     *                           - `always`          Enforces a newline around variable declarations
+     *                           default: `initializations`
+     */
+    'one-var-declaration-per-line': 'off',
+
+    /**
+     * This rule requires or disallows assignment operator shorthand where possible.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} option
+     *                           - `always` Requires assignment operator shorthand where possible
+     *                           - `never`  Disallows assignment operator shorthand
+     */
+    'operator-assignment': 'off',
+
+    /**
+     * This rule enforces a consistent linebreak style for operators.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} options
+     *                              - `after`  Requires linebreaks to be placed after the operator
+     *                              - `before` Requires linebreaks to be placed before the operator
+     *                              - `none`   Disallows linebreaks on either side of the operator
+     * @property {object} overrides
+     *                              - `overrides` {object} Overrides the global setting for specified operators
+     */
+    'operator-linebreak': [
+        'error',
+        'after',
+        {
+            'overrides': {
+                '?': 'before',
+                ':': 'before',
+                '|>': 'before',
+            },
+        },
+    ],
+
+    /**
+     * This rule enforces consistent empty line padding within blocks.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string|object} options
+     *                                      - `always`            Require empty lines at the beginning and ending of
+     *                                                            block statements and classes
+     *                                      - `never`             Disallows empty lines at the beginning and ending of
+     *                                                            block statements and classes
+     *                                      - `blocks`   {string} Require/Disallow padding within block statements
+     *                                      - `classes`  {string} Require/Disallow padding within classes
+     *                                      - `switches` {string} Require/Disallow padding within `switch` statements
+     *                                      default: `always`
+     * @property {object}        exceptions
+     *                                     - `allowSingleLineBlocks` {bool} Allow single-line blocks
+     */
+    'padded-blocks': [
+        'error',
+        {
+            'blocks': 'never',
+            'classes': 'never',
+            'switches': 'never',
+        },
+    ],
+
+    /**
+     * This rule does nothing if no configurations are provided.
+     *
+     * A configuration is an object which has 3 properties: `blankLine`, `prev` and `next`. For example:
+     * `{ blankLine: "always", prev: "var", next: "return" }` means "one or more blank lines are required between a
+     * variable declaration and a `return` statement." You can supply any number of configurations. If a statement pair
+     * matches multiple configurations, the last matched configuration will be used.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @todo set this properly
+     */
+    'padding-line-between-statements': 'off',
+
+    /**
+     * This rule disallows calls to `Math.pow` and suggests using the `**` operator instead.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'prefer-exponentiation-operator': 'off',
+
+    /**
+     * This rule disallows using `Object.assign` with an object literal as the first argument and requires using the
+     * object spread syntax instead.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'prefer-object-spread': 'off',
+
+    /**
+     * This rule requires quotes around object literal property names.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always`               Requires quotes around all object literal property names
+     *                            - `as-needed`            Disallows quotes around object literal property names that
+     *                                                     are not strictly required
+     *                            - `consistent`           Enforces a consistent quote style; in a given object, either
+     *                                                     all of the properties should be quoted, or none of the
+     *                                                     properties should be quoted
+     *                            - `consistent-as-needed` Requires quotes around literal property names if any name
+     *                                                     strictly requires quotes, otherwise disallows quotes around
+     *                                                     object property names
+     *                            default: `always`
+     * @property {object} options
+     *                            - `keywords`    {bool} Require quotes around language keywords used as object
+     *                                                   property names (only applies when using `as-needed` or
+     *                                                   `consistent-as-needed`)
+     *                                                   default: false
+     *                            - `unnecessary` {bool} Disallows quotes around object literal property names that are
+     *                                                   not strictly required (only applies when using `as-needed`)
+     *                                                   default: true
+     *                            - `numbers`     {bool} Requires quotes round numbers used as object property names
+     *                                                   (only applies when using `as-needed`)
+     *                                                   default: false
+     */
+    'quote-props': [
+        'error',
+        'consistent-as-needed',
+        {
+            'keywords': false,
+            'unnecessary': true,
+            'numbers': false,
+        },
+    ],
+
+    /**
+     * This rule enforces the consistent use of either backticks, double, or single quotes.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} type
+     *                            - `double`   Requires the use of double quotes wherever possible
+     *                            - `single`   Requires the use of single quotes wherever possible
+     *                            - `backtick` Requires the use of backticks wherever possible
+     *                            default: `double`
+     * @property {object} options
+     *                            - `avoidEscape`          {bool} Allow strings to use single-quotes or double-quotes
+     *                                                            so long as the string contains a quote that would
+     *                                                            have to be escaped otherwise
+     *                                                            default: false
+     *                            - `allowTemplateLiterals {bool} Allow strings to use backticks
+     *                                                            default: false
+     */
+    'quotes': [
+        'error',
+        'single',
+        {
+            'avoidEscape': true,
+            'allowTemplateLiterals': false,
+        },
+    ],
+
+    /**
+     * This rule enforces consistent use of semicolons.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always` Requires semicolons at the end of statements
+     *                            - `never`  Disallows semicolons as the end of statements (except to disambiguate
+     *                                       statements beginning with `[`, `(`, `/`, `+`, or `-`)
+     *                            default: `always`
+     * @property {object} options
+     *                            - `omitLastInOneLineBlock`            {bool}   Ignore the last semicolon in a block
+     *                                                                           in which its braces (and therefore the
+     *                                                                           content of the block) are in the same
+     *                                                                           line;
+     *                                                                           only used when `always`;
+     *                                                                           default: false
+     *                            - ` beforeStatementContinuationChars` {string}
+     *                                                                           - `any`    Ignore semicolons (or
+     *                                                                                      lacking semicolon) at the
+     *                                                                                      end of statements if the
+     *                                                                                      next line starts with `[`,
+     *                                                                                      `(`, `/`, `+`, or `-`.
+     *                                                                           - `always` Require semicolons at the
+     *                                                                                      end of statements if the
+     *                                                                                      next line starts with `[`,
+     *                                                                                      `(`, `/`, `+`, or `-`.
+     *                                                                           - `never`  Disallows semicolons as the
+     *                                                                                      end of statements if it
+     *                                                                                      doesn't make ASI hazard
+     *                                                                                      even if the next line
+     *                                                                                      starts with `[`, `(`, `/`,
+     *                                                                                      `+`, or `-`.
+     *                                                                           only used when `never`;
+     *                                                                           default: `any`
+     */
+    'semi': [
+        'error',
+        'always',
+        {
+            'omitLastInOneLineBlock': false,
+        },
+    ],
+
+    /**
+     * This rule aims to enforce spacing around a semicolon. This rule prevents the use of spaces before a semicolon in
+     * expressions.
+     *
+     * This rule doesn't check spacing in the following cases:
+     *   - the spacing after the semicolon if it is the first token in the line
+     *   - the spacing before the semicolon if it is after an opening parenthesis (`(` or `{`), or the spacing after
+     *     the semicolon if it is before a closing parenthesis (`)` or `}`). That spacing is checked by
+     *     `space-in-parens` or `block-spacing`
+     *   - the spacing around the semicolon in a for loop with an empty condition (`for(;;)`)
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `after`  {bool} Allow spacing after semicolons
+     *                                              default: true
+     *                            - `before` {bool} Allow spacing before semicolons
+     *                                              default: false
+     */
+    'semi-spacing': [
+        'error',
+        {
+            'after': true,
+            'before': false,
+        },
+    ],
+
+    /**
+     * This rule reports line terminators around semicolons.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} location
+     *                             - `first` Enforces that semicolons are at the beginning of statements; semicolons of
+     *                                       `for` loop heads (`for(a;b;c){}` should be at the end of lines even if you
+     *                                       use this option
+     *                             - `last`  Enforces that semicolons are at the end of statements
+     *                             default: `last`
+     */
+    'semi-style': [
+        'error',
+        'last',
+    ],
+
+    /**
+     * This rule checks all property definitions of object expressions and verifies that all variables are sorted
+     * alphabetically.
+     *
+     * @property {string} direction
+     *                              - `asc`  Enforce properties to be in ascending order
+     *                              - `desc` Enforce properties to be in descending order
+     *                              default: `asc`
+     * @property {object} options
+     *                              - `caseSensitive` {bool} Enforce properties to be in case-sensitive order;
+     *                                                       default: true
+     *                              - `minKeys`       {int}  Specifies the minimum number of keys that an object should
+     *                                                       have in order for the object's unsorted keys to produce an
+     *                                                       error;
+     *                                                       default: 2
+     *                              - `natural`       {bool} Enforce properties to be in natural order. Natural Order
+     *                                                       compares strings containing combination of letters and
+     *                                                       numbers in a way a human being would sort;
+     *                                                       default: false
+     */
+    'sort-keys': [
+        'error',
+        'asc',
+        {
+            'caseSensitive': true,
+            'minKeys': 2,
+            'natural': true,
+        },
+    ],
+
+    /**
+     * This rule checks all variable declaration blocks and verifies that all variables are sorted alphabetically.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `ignoreCase` {bool} Ignore the case-sensitivity of the variables order;
+     *                                                  default: false
+     */
+    'sort-vars': [
+        'error',
+        {
+            'ignoreCase': false,
+        }
+    ],
+
+    /**
+     * This rule will enforce consistency of spacing before blocks. It is only applied on blocks that don’t begin on a
+     * new line.
+     *   - this rule ignores spacing which is between `=>` and a block
+     *   - this rule ignores spacing which is between a keyword and a block
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string|object} options
+     *                                   - `always`             Blocks must always have at least one preceding space
+     *                                   - `never`              Blocks should never have any preceding space
+     *                                   - `classes`   {string} Spacing specifically for classes
+     *                                   - `functions` {string} Spacing specifically for functions
+     *                                   - `keywords`  {string} Spacing specifically for keywords
+     *                                   default: `always`
+     */
+    'space-before-blocks': [
+        'error',
+        {
+            'classes': 'always',
+            'functions': 'always',
+            'keywords': 'always',
+        },
+    ],
+
+    /**
+     * This rule aims to enforce consistent spacing before function parentheses and as such, will warn whenever
+     * whitespace doesn't match the preferences specified.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string|object} options
+     *                                   - `always` Require a space followed by the `(` of arguments
+     *                                   - `never`  Disallow any space followed by the `(` of arguments
+     *                                   - `anonymous`  {string} Anonymous function expressions (e.g.:
+     *                                                           `function () {}`);
+     *                                                           default: `always`
+     *                                   - `asyncArrow` {string} Async arrow function expressions e.g.:
+     *                                                           `async () => {}`);
+     *                                                           default: `always`
+     *                                   - `named`      {string} Named function expressions (e.g.:
+     *                                                           `function foo () {}`);
+     *                                                           default: `always`
+     *                                   default: `always`
+     */
+    'space-before-function-paren': [
+        'error',
+        {
+            'anonymous': 'never',
+            'asyncArrow': 'always',
+            'named': 'never',
+        },
+    ],
+
+    /**
+     * This rule will enforce consistent spacing directly inside of parentheses, by disallowing or requiring one or
+     * more spaces to the right of `(` and to the left of `)`.
+     *
+     * As long as you do not explicitly disallow empty parentheses using the `"empty"` exception, `()` will be allowed.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} allow
+     *                            - `always` Enforce a space inside of parentheses
+     *                            - `never`  Enforces zero spaces inside of parentheses
+     *                            default: `never`
+     * @property {object} options
+     *                            - `exceptions` {array} Array of exceptions for the above option
+     */
+    'space-in-parens': [
+        'error',
+        'never',
+        {
+            'exceptions': [],
+        },
+    ],
+
+    /**
+     * This rule is aimed at ensuring there are spaces around infix operators.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `int32Hint` {bool} Allow write `a|0` without space
+     *                                                 default: false
+     */
+    'space-infix-ops': [
+        'error',
+        {
+            'int32Hint': false,
+        },
+    ],
+
+    /**
+     * This rule enforces consistency regarding the spaces after `words` unary operators and after/before `nonwords`
+     * unary operators.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `words`     {bool}   Applies to unary word operators such as: `new`, `delete`,
+     *                                                   `typeof`, `void`, and `yield`
+     *                            - `nonwords`  {bool}   Applies to unary operators such as: `-`, `+`, `--`, `++`, `!`,
+     *                                                   and `!!`
+     *                            - `overrides` {object} Specifies overwriting usage of spacing for each operator,
+     *                                                   word, or non-word
+     */
+    'space-unary-ops': [
+        'error',
+        {
+            'words': true,
+            'nonwords': false,
+            'overrides': {},
+        },
+    ],
+
+    /**
+     * This rule will enforce consistency of spacing after the start of a comment `//` or `/*`. It also provides
+     * several exceptions for various documentation styles.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always` The start of the comment (`//` or `/*`) must be followed by at least one
+     *                                       whitespace
+     *                            - `never`  There should be no whitespace following
+     * @property {object} options
+     *                            - (comment type) {object}
+     *                                                      - `balanced`   {bool}  Specify if inline block comments
+     *                                                                             should have balanced spacing;
+     *                                                                             only used for block comments;
+     *                                                                             default: false
+     *                                                      - `markers`    {array} Array of string patterns which are
+     *                                                                             considered markers for docblock-
+     *                                                                             style comments, such as an
+     *                                                                             additional `/`, used to denote
+     *                                                                             documentation read by doxygen,
+     *                                                                             vsdoc, etc. which must have
+     *                                                                             additional characters
+     *                                                      - `exceptions` {array} Array of string patterns which are
+     *                                                                             considered exceptions to the rule
+     */
+    'spaced-comment': [
+        'error',
+        'always',
+        {
+            'line': {
+                'markers': [
+                    '*package',
+                    '!',
+                    '/',
+                    ',',
+                    '=',
+                ],
+            },
+            'block': {
+                'balanced': true,
+                'markers': [
+                    '*package',
+                    '!',
+                    ',',
+                    ':',
+                    '::',
+                    'flow-include',
+                ],
+                'exceptions': [
+                    '*',
+                ],
+            },
+        },
+    ],
+
+    /**
+     * This rule controls spacing around colons of `case` and `default` clauses in `switch` statements. This rule does
+     * the check only if the consecutive tokens exist on the same line.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `after`  {bool} Require one or more spaces after colons
+     *                                              default: true
+     *                            - `before` {bool} Require one or more spaces before colons
+     *                                              default: false
+     */
+    'switch-colon-spacing': [
+        'error',
+        {
+            'after': true,
+            'before': false,
+        },
+    ],
+
+    /**
+     * This rule aims to maintain consistency around the spacing between template tag functions and their template
+     * literals.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always` Requires one or more spaces between a tag function and its template
+     *                                       literal
+     *                            - `never`  Disallows spaces between a tag function and its template literal
+     *                            default: `never`
+     */
+    'template-tag-spacing': [
+        'error',
+        'never',
+    ],
+
+    /**
+     * If the `"always"` option is used, this rule requires that files always begin with the Unicode BOM character
+     * U+FEFF. If `"never"` is used, files must never begin with U+FEFF.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always` Files must begin with the Unicode BOM
+     *                            - `never`  Files must not begin with the Unicode BOM
+     *                            default: `never`
+     */
+    'unicode-bom': [
+        'error',
+        'never',
+    ],
+
+
+    /**
+     * This is used to disambiguate the slash operator and facilitates more readable code.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'wrap-regex': 'error',
+};
+
+/**
  * Merge rule objects into a single object.
  *
  * @type {object}
@@ -1616,6 +3620,7 @@ let rules = Object.assign(
     ESLintStrictMode,
     ESLintVariables,
     ESLintNodeJsAndCommonJs,
+    ESLintStylisticIssues,
 );
 
 /**
