@@ -1,7 +1,7 @@
 /**
  * Base Application Script.
  *
- * @package  Scripts
+ * @package Scripts
  *
  * @author    Taylor Otwell <taylor@laravel.com>
  * @copyright 2018-2020 Nick Menke
@@ -22,7 +22,7 @@ import Vue from 'vue';
 import App from '../vue/app';
 import VueRouter from 'vue-router';
 import Routes from '../vue/router/routes';
-import laravelVuePagination from 'laravel-vue-pagination'
+import laravelVuePagination from 'laravel-vue-pagination';
 
 /*
  * The following block of code may be used to automatically register your
@@ -46,12 +46,12 @@ Vue.use(VueRouter);
 Vue.component('pagination', laravelVuePagination);
 
 const router = new VueRouter({
+    linkActiveClass: 'active',
     mode: 'history',
     routes: Routes,
-    linkActiveClass: 'active',
 });
 
 new Vue({
+    render: h => h(App),
     router,
-    render: (h) => h(App),
 }).$mount('#app');

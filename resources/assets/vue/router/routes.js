@@ -1,7 +1,13 @@
 /**
  * Front-end routing.
  *
- * router/routes.js
+ * @package Vue - Router
+ *
+ * @author    Nick Menke <nick@nlmenke.net
+ * @copyright 2018-2020 Nick Menke
+ *
+ * @link  https://github.com/nlmenke/vertebrae
+ * @since x.x.x introduced
  */
 
 import Dashboard from './views/dashboard';
@@ -12,28 +18,28 @@ import LocaleIndex from './views/locales/index';
 
 export default [
     {
-        path: '/',
-        name: 'dashboard',
         component: Dashboard,
+        name: 'dashboard',
+        path: '/',
     },
     {
-        path: '/countries',
-        name: 'countries.index',
         component: CountryIndex,
+        name: 'countries.index',
+        path: '/countries',
     },
     {
-        path: '/currencies',
-        name: 'currencies.index',
         component: CurrencyIndex,
+        name: 'currencies.index',
+        path: '/currencies',
     },
     {
-        path: '/languages',
-        name: 'languages.index',
         component: LanguageIndex,
+        name: 'languages.index',
+        path: '/languages',
     },
     {
-        path: '/locales',
-        name: 'locales.index',
         component: LocaleIndex,
+        name: 'locales.index',
+        path: '/locales',
     },
-]
+];

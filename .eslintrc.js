@@ -3610,6 +3610,443 @@ let ESLintStylisticIssues = {
 };
 
 /**
+ * These rules relate to ES6, also known as ES2015.
+ *
+ * @type {object}
+ */
+let ESLintECMAScript6 = {
+    /**
+     * This rule can enforce or disallow the use of braces around arrow function body.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always`    Enforces braces around the function body
+     *                            - `as-needed` Enforces no braces where they can be omitted
+     *                            - `never`     Enforces no braces around the function body (constrains arrow functions
+     *                                          to the role of returning an expression)
+     *                            default: `as-needed`
+     * @property {object} options
+     *                            - `requireReturnForObjectLiteral` {bool} Require braces and an explicit return for
+     *                                                                     object literals;
+     *                                                                     only applicable with the `as-needed` option
+     *                                                                     default: false
+     */
+    'arrow-body-style': [
+        'error',
+        'as-needed',
+        {
+            'requireReturnForObjectLiteral': true,
+        },
+    ],
+
+    /**
+     * This rule enforces parentheses around arrow function parameters regardless of arity.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always`    Require parentheses around arguments in all cases
+     *                            - `as-needed` Enforces no braces where they can be omitted
+     *                            default: `always`
+     * @property {object} options
+     *                            - `requireForBlockBody` {bool} Modifies the `as-needed` rule in order to require
+     *                                                           parentheses if the function body is in an instructions
+     *                                                           block (surrounded by braces);
+     *                                                           default: false
+     */
+    'arrow-parens': [
+        'error',
+        'as-needed',
+        {
+            'requireForBlockBody': true,
+        },
+    ],
+
+    /**
+     * This rule normalize style of spacing before/after an arrow function's arrow (`=>`).
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `after`  {bool} Require one or more spaces after the arrow;
+     *                                              default: true
+     *                            - `before` {bool} Require one or more spaces before the arrow;
+     *                                              default: true
+     */
+    'arrow-spacing': [
+        'error',
+        {
+            'after': true,
+            'before': true,
+        },
+    ],
+
+    /**
+     * This rule is aimed to flag invalid/missing `super()` calls.
+     */
+    'constructor-super': 'error',
+
+    /**
+     * This rule aims to enforce spacing around the `*` of generator functions.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `after`     {bool}   Enforce spacing between the `*` and the `function` keyword;
+     *                                                   default: false
+     *                            - `before`    {bool}   Enforces spacing between the `*` and the function name (or the
+     *                                                   opening parenthesis for anonymous generator functions;
+     *                                                   default: true
+     *                            - `named`     {object} Provides overrides for named functions
+     *                            - `anonymous` {object} Provides overrides for anonymous functions
+     *                            - `method`    {object} Provides overrides for class methods or property function
+     *                                                   shorthand
+     */
+    'generator-star-spacing': [
+        'error',
+        {
+            'after': true,
+            'before': true,
+        },
+    ],
+
+    /**
+     * This rule is aimed to flag modifying variables of class declarations.
+     */
+    'no-class-assign': 'error',
+
+    /**
+     * This rule disallows arrow functions where they could be confused with comparisons.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `allowParens` {bool} Relax the rule and accept parenthesis as a valid "confusion-
+     *                                                   preventing" syntax;
+     *                                                   default: true
+     */
+    'no-confusing-arrow': 'off',
+
+    /**
+     * This rule is aimed to flag modifying variables that are declared using `const` keyword.
+     */
+    'no-const-assign': 'error',
+
+    /**
+     * This rule is aimed to flag the use of duplicate names in class members.
+     */
+    'no-dupe-class-members': 'error',
+
+    /**
+     * This rule requires that all imports from a single module exists in a single `import` statement.
+     *
+     * @property {object} options
+     *                            - `includeExports` {bool} If re-exporting from an imported module, imports should be
+     *                                                      added to the `import`-statement, and exported directly;
+     *                                                      default: false
+     */
+    'no-duplicate-imports': 'off',
+
+    /**
+     * This rule is aimed at preventing the accidental calling of `Symbol` with the `new` operator.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'no-new-symbol': 'error',
+
+    /**
+     * This rule disallows specified names from being used as exported names.
+     *
+     * @property {object} options
+     *                            - `restrictedNamedExports` {array} Array of names to be restricted
+     */
+    'no-restricted-exports': 'off',
+
+    /**
+     * This rule allows you to specify imports that you don't want to use in your application.
+     *
+     * @property {object} options
+     *                            - `paths`    {array} Array of imports that should be restricted
+     *                            - `patterns` {array} Array of gitignore-style patterns to be restricted
+     */
+    'no-restricted-imports': 'off',
+
+    /**
+     * This rule is aimed to flag `this`/`super` keywords before `super()` callings.
+     */
+    'no-this-before-super': 'error',
+
+    /**
+     * This rule disallows unnecessary usage of computed property keys.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `enforceForClassMembers` {bool} Additionally apply this rule to class members;
+     *                                                              default: false
+     */
+    'no-useless-computed-key': [
+        'error',
+        {
+            'enforceForClassMembers': false,
+        },
+    ],
+
+    /**
+     * This rule flags class constructors that can be safely removed without changing how the class works.
+     */
+    'no-useless-constructor': 'error',
+
+    /**
+     * This rule disallows the renaming of import, export, and destructured assignments to the same name.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `ignoreDestructuring` {bool} Do not check destructuring assignments;
+     *                                                           default: false
+     *                            - `ignoreExport`        {bool} Do not check exports;
+     *                                                           default: false
+     *                            - `ignoreImport`        {bool} Do not check imports;
+     *                                                           default: false
+     */
+    'no-useless-rename': [
+        'error',
+        {
+            'ignoreDestructuring': false,
+            'ignoreExport': false,
+            'ignoreImport': false,
+        },
+    ],
+
+    /**
+     * This rule is aimed at discouraging the use of `var` and encouraging the use of `const` or `let` instead.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'no-var': 'error',
+
+    /**
+     * This rule enforces the use of the shorthand syntax. This applies to all methods (including generators) defined
+     * in object literals and any properties defined where the key name matches name of the assigned variable.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always`               Expects that the shorthand will be used whenever possible
+     *                            - `methods`              Ensures the method shorthand is used (also applies to
+     *                                                     generators)
+     *                            - `properties`           Ensures the property shorthand is used (where the key and
+     *                                                     variable name match)
+     *                            - `never`                Ensures that no property or method shorthand is used in any
+     *                                                     object literal
+     *                            - `consistent`           Ensures that either all shorthand or all long-form will be
+     *                                                     used in an object literal
+     *                            - `consistent-as-needed` Ensures that either all shorthand or all long-form will be
+     *                                                     used in an object literal, but ensures all shorthand
+     *                                                     whenever possible
+     *                            default: `always`
+     * @property {object} options
+     *                            - `avoidQuotes`               {bool} Indicates that long-form syntax is preferred
+     *                                                                 whenever the object key is a string literal;
+     *                                                                 note that this option can only be enabled when
+     *                                                                 the string option is set to `always`, `methods`,
+     *                                                                 or `properties`;
+     *                                                                 default: false
+     *                            - `ignoreConstructors`        {bool} Prevent the rule from reporting errors for
+     *                                                                 constructor functions;
+     *                                                                 note that this option can only be enabled when
+     *                                                                 the string option is set to `always` or
+     *                                                                 `methods`;
+     *                                                                 default: false
+     *                            - `avoidExplicitReturnArrows` {bool} Indicates that methods are preferred over
+     *                                                                 explicit-return arrow functions for function
+     *                                                                 properties;
+     *                                                                 note that this option can only be enabled when
+     *                                                                 the string option is set to `always` or
+     *                                                                 `methods`;
+     *                                                                 default: false
+     */
+    'object-shorthand': 'off',
+
+    /**
+     * This rule locates function expressions used as callbacks or function arguments. An error will be produced for
+     * any that could be replaced by an arrow function without changing the result.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `allowNamedFunctions` {bool} Allow the use of named functions as callbacks or
+     *                                                           function arguments;
+     *                                                           default: false
+     *                            - `allowUnboundThis`    {bool} Allow function expressions containing `this` to be
+     *                                                           used as callbacks, as long as the function in question
+     *                                                           has not been explicitly bound;
+     *                                                           default: true
+     */
+    'prefer-arrow-callback': 'off',
+
+    /**
+     * This rule is aimed at flagging variables that are declared using `let` keyword, but never reassigned after the
+     * initial assignment.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `destructuring`          {string} The kind of the way to address variables in
+     *                                                                destructuring
+     *                                                                - `any` If any variables in destructuring should
+     *                                                                        be `const`
+     *                                                                - `all` If all variables in destructuring should
+     *                                                                        be `const`
+     *                                                                default: `any`
+     *                            - `ignoreReadBeforeAssign` {bool}   Ignore variables that are read between the
+     *                                                                declaration and the first assignment;
+     *                                                                default: false
+     */
+    'prefer-const': [
+        'error',
+        {
+            'destructuring': 'all',
+            'ignoreReadBeforeAssign': false,
+        },
+    ],
+
+    /**
+     * Prefer destructuring from arrays and objects.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} types
+     *                            - `array`  {bool} Turn on/off the destructuring requirement for arrays;
+     *                                              default: true
+     *                            - `object` {bool} Turn on/off the destructuring requirement for objects;
+     *                                              default: true
+     * @property {object} options
+     *                            - `enforceForRenamedProperties` {bool} Determine whether the `object` destructuring
+     *                                                                   applies to renamed variables;
+     *                                                                   default: false
+     */
+    'prefer-destructuring': 'off',
+
+    /**
+     * This rule disallows calls to `parseInt()` or `Number.parseInt()` if called with two arguments: a string; and a
+     * radix option of 2 (binary), 8 (octal), or 16 (hexadecimal).
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'prefer-numeric-literals': 'off',
+
+    /**
+     * This rule is aimed to flag usage of `arguments` variables.
+     */
+    'prefer-rest-params': 'off',
+
+    /**
+     * This rule is aimed to flag usage of `Function.prototype.apply()` in situations where spread syntax could be used
+     * instead.
+     */
+    'prefer-spread': 'off',
+
+    /**
+     * This rule is aimed to flag usage of `+` operators with strings.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'prefer-template': 'off',
+
+    /**
+     * This rule generates warnings for generator functions that do not have the `yield` keyword.
+     */
+    'require-yield': 'off',
+
+    /**
+     * This rule aims to enforce consistent spacing between rest and spread operators and their expressions. The rule
+     * also supports object rest and spread properties in ES2018.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always` Whitespace is required between spread operators and their expressions
+     *                            - `never`  Whitespace is not allowed between spread operators and their expressions
+     *                            default: `never`
+     */
+    'rest-spread-spacing': [
+        'error',
+        'never',
+    ],
+
+    /**
+     * This rule checks all import declarations and verifies that all imports are first sorted by the used member
+     * syntax and then alphabetically by the first member or alias name.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `ignoreCase`            {bool}  Ignore the case-sensitivity of the imports local
+     *                                                              name;
+     *                                                              default: false
+     *                            - `ignoreDeclarationSort` {bool}  Ignore the sorting of import declaration
+     *                                                              statements;
+     *                                                              default: false
+     *                            - `ignoreMemberSort`      {bool}  Ignore the member sorting within a `multiple`
+     *                                                              member import declaration;
+     *                                                              default: false
+     *                            - `memberSyntaxSortOrder` {array} There are four different styles; all items must be
+     *                                                              present in the array, but the order can be
+     *                                                              customized:
+     *                                                              - `none`     Import module without exported
+     *                                                                           bindings
+     *                                                              - `all`      Import all members provided by
+     *                                                                           exported bindings
+     *                                                              - `multiple` Import multiple members
+     *                                                              - `single`   Import single member
+     *                                                              default: ['none', 'all', 'multiple', 'single']
+     */
+    'sort-imports': 'off',
+
+    /**
+     * This rules requires a description when creating symbols.
+     */
+    'symbol-description': 'error',
+
+    /**
+     * This rule aims to maintain consistency around the spacing inside of template literals.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always` Requires one or more spaces inside of the curly brace pair
+     *                            - `never`  Disallows spaces inside of the curly brace pair
+     *                            default: `never`
+     */
+    'template-curly-spacing': [
+        'error',
+        'never',
+    ],
+
+    /**
+     * This rule enforces spacing around the `*` in `yield*` expressions.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `after`  {bool} Enforce spacing between the `*` and the argument;
+     *                                              default: false
+     *                            - `before` {bool} Enforce spacing between the `yield` and the `*`;
+     *                                              default: true
+     */
+    'yield-star-spacing': [
+        'error',
+        {
+            'after': true,
+            'before': true,
+        },
+    ],
+};
+
+/**
  * Merge rule objects into a single object.
  *
  * @type {object}
@@ -3621,6 +4058,7 @@ let rules = Object.assign(
     ESLintVariables,
     ESLintNodeJsAndCommonJs,
     ESLintStylisticIssues,
+    ESLintECMAScript6,
 );
 
 /**
