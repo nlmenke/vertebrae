@@ -37,8 +37,8 @@
     export default {
         data() {
             return {
-                locales: {},
                 error: null,
+                locales: {},
             };
         },
         mounted() {
@@ -47,15 +47,15 @@
         methods: {
             getLocales(page = 1, callback) {
                 const params = {
-                    page
+                    page,
                 };
 
                 axios.get('v1/locales', { params })
                     .then(
-                        response => this.locales = response.data,
-                        error => this.error = error.toString()
+                        response => (this.locales = response.data),
+                        error => (this.error = error.toString())
                     );
-            }
+            },
         },
-    }
+    };
 </script>

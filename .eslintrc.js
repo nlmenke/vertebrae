@@ -4047,6 +4047,27 @@ let ESLintECMAScript6 = {
 };
 
 /**
+ * Base Rules (Enabling Correct ESLint Parsing).
+ *
+ * @type {object}
+ */
+let VueBaseRules = {
+    /**
+     * ESLint doesn't provide any API to enhance `eslint-disable` functionality and ESLint rules cannot affect other
+     * rules. But ESLint provides processors API.
+     *
+     * This rule sends all `eslint-disable`-like comments as errors to the post-process of the `.vue` file processor,
+     * then the post-process removes all `vue/comment-directive` errors and the reported errors in disabled areas.
+     */
+    'vue/comment-directive': 'error',
+
+    /**
+     * This rule will find variables used in JSX and mark them as used.
+     */
+    'vue/jsx-uses-vars': 'error',
+};
+
+/**
  * Merge rule objects into a single object.
  *
  * @type {object}
@@ -4059,6 +4080,8 @@ let rules = Object.assign(
     ESLintNodeJsAndCommonJs,
     ESLintStylisticIssues,
     ESLintECMAScript6,
+
+    VueBaseRules,
 );
 
 /**
@@ -4070,6 +4093,18 @@ module.exports = {
         es6: true,
         node: true,
     },
+    overrides: [
+        {
+            files: [
+                '*.vue',
+            ],
+            rules: {
+                'indent': 'off',
+                'sort-keys': 'off',
+            },
+        },
+    ],
+    parser: require.resolve('vue-eslint-parser'),
     parserOptions: {
         ecmaFeatures: {
             jsx: true,
@@ -4077,5 +4112,8 @@ module.exports = {
         ecmaVersion: 2020,
         sourceType: 'module',
     },
+    plugins: [
+        'vue',
+    ],
     rules: rules,
 };

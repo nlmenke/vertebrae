@@ -47,15 +47,15 @@
         methods: {
             getCountries(page = 1, callback) {
                 const params = {
-                    page
+                    page,
                 };
 
                 axios.get('v1/countries', { params })
                     .then(
-                        response => this.countries = response.data,
-                        error => this.error = error.toString()
+                        response => (this.countries = response.data),
+                        error => (this.error = error.toString())
                     );
-            }
+            },
         },
-    }
+    };
 </script>

@@ -49,15 +49,15 @@
         methods: {
             getCurrencies(page = 1, callback) {
                 const params = {
-                    page
+                    page,
                 };
 
                 axios.get('v1/currencies', { params })
                     .then(
-                        response => this.currencies = response.data,
-                        error => this.error = error.toString()
+                        response => (this.currencies = response.data),
+                        error => (this.error = error.toString())
                     );
-            }
+            },
         },
-    }
+    };
 </script>

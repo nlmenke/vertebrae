@@ -51,8 +51,8 @@
     export default {
         data() {
             return {
-                languages: {},
                 error: null,
+                languages: {},
                 laravelVersion: null,
                 vueVersion: Vue.version,
             };
@@ -65,10 +65,10 @@
             getEnvironment() {
                 axios.get('meta/environment')
                     .then(
-                        response => this.laravelVersion = response.data.laravel_version,
-                        error => this.error = error.toString()
+                        response => (this.laravelVersion = response.data.laravel_version),
+                        error => (this.error = error.toString())
                     );
-            }
+            },
         },
-    }
+    };
 </script>

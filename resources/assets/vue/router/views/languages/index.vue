@@ -33,8 +33,8 @@
     export default {
         data() {
             return {
-                languages: {},
                 error: null,
+                languages: {},
             };
         },
         mounted() {
@@ -43,15 +43,15 @@
         methods: {
             getLanguages(page = 1, callback) {
                 const params = {
-                    page
+                    page,
                 };
 
                 axios.get('v1/languages', { params })
                     .then(
-                        response => this.languages = response.data,
-                        error => this.error = error.toString()
+                        response => (this.languages = response.data),
+                        error => (this.error = error.toString())
                     );
-            }
+            },
         },
-    }
+    };
 </script>

@@ -41,5 +41,5 @@
                 return this.$route.name === 'dashboard';
             },
         },
-    }
+    };
 </script>
