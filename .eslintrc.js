@@ -4068,6 +4068,294 @@ let VueBaseRules = {
 };
 
 /**
+ * Priority A: Essential (error Prevention).
+ *
+ * @type {object}
+ */
+let VueEssential = {
+    /**
+     * This rule is aimed at preventing asynchronous methods from being called in computed properties.
+     */
+    'vue/no-async-in-computed-properties': 'error',
+
+    /**
+     * This rule is aimed at preventing duplicated property names.
+     *
+     * @property {object} options
+     *                            - `group` {string[]} Array of additional groups to search for duplicates;
+     *                                                 default: []
+     */
+    'vue/no-dupe-keys': [
+        'error',
+        {
+            'groups': [],
+        },
+    ],
+
+    /**
+     * This rule reports duplicate attributes.
+     *
+     * @property {object} options
+     *                            - `allowCoexistClass` {bool} Enables `v-bind:class` directive can coexist with the
+     *                                                         plain `class` attribute;
+     *                                                         default: true
+     *                            - `allowCoexistStyle` {bool} Enables `v-bind:style` directive can coexist with the
+     *                                                         plain `style` attribute;
+     *                                                         default: true
+     */
+    'vue/no-duplicate-attributes': [
+        'error',
+        {
+            'allowCoexistClass': true,
+            'allowCoexistStyle': true,
+        },
+    ],
+
+    /**
+     * This rule tries to parse directives/mustaches in `<template>` by the parser which parses `<script>`. Then
+     * reports syntax errors if exist.
+     *
+     * @property {object} options
+     */
+    'vue/no-parsing-error': [
+        'error',
+        {
+            'abrupt-closing-of-empty-comment': true,
+            'absence-of-digits-in-numeric-character-reference': true,
+            'cdata-in-html-content': true,
+            'character-reference-outside-unicode-range': true,
+            'control-character-in-input-stream': true,
+            'control-character-reference': true,
+            'duplicate-attribute': true,
+            'end-tag-with-attributes': true,
+            'end-tag-with-trailing-solidus': true,
+            'eof-before-tag-name': true,
+            'eof-in-cdata': true,
+            'eof-in-comment': true,
+            'eof-in-tag': true,
+            'incorrectly-closed-comment': true,
+            'incorrectly-opened-comment': true,
+            'invalid-first-character-of-tag-name': true,
+            'missing-attribute-value': true,
+            'missing-end-tag-name': true,
+            'missing-semicolon-after-character-reference': true,
+            'missing-whitespace-between-attributes': true,
+            'nested-comment': true,
+            'non-void-html-element-start-tag-with-trailing-solidus': false,
+            'noncharacter-character-reference': true,
+            'noncharacter-in-input-stream': true,
+            'null-character-reference': true,
+            'surrogate-character-reference': true,
+            'surrogate-in-input-stream': true,
+            'unexpected-character-in-attribute-name': true,
+            'unexpected-character-in-unquoted-attribute-value': true,
+            'unexpected-equals-sign-before-attribute-name': true,
+            'unexpected-null-character': true,
+            'unexpected-question-mark-instead-of-tag-name': true,
+            'unexpected-solidus-in-tag': true,
+            'unknown-named-character-reference': true,
+            'x-invalid-end-tag': true,
+            'x-invalid-namespace': true,
+        },
+    ],
+
+    /**
+     * This rule prevents the use reserved names to avoid conflicts and unexpected behavior.
+     *
+     * @property {object} options
+     *                            - `groups`   {string[]} Array of additional restricted attributes inside `groups`;
+     *                                                    default: []
+     *                            - `reserved` {string[]} Array of additional group names to search for duplicates in;
+     *                                                    default: []
+     */
+    'vue/no-reserved-keys': [
+        'error',
+        {
+            'groups': [],
+            'reserved': [],
+        },
+    ],
+
+    /**
+     * When using the data property on a component (i.e.: anywhere except on `new Vue`), the value must be a function
+     * that returns an object.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'vue/no-shared-component-data': 'error',
+
+    /**
+     * This rule is aimed at preventing the code which makes side effects in computed properties.
+     */
+    'vue/no-side-effects-in-computed-properties': 'error',
+
+    /**
+     * This rule reports the `<template>` elements which have key attribute.
+     */
+    'vue/no-template-key': 'error',
+
+    /**
+     * This rule reports mustaches in `<textarea>`.
+     */
+    'vue/no-textarea-mustache': 'error',
+
+    /**
+     * This rule reports components that haven't been used in the template.
+     *
+     * @property {object} options
+     *                            - `ignoreWhenBindingPresent` {bool} Suppresses all errors if binding has been
+     *                                                                detected in the template;
+     *                                                                default: true
+     */
+    'vue/no-unused-components': [
+        'error',
+        {
+            'ignoreWhenBindingPresent': true,
+        },
+    ],
+
+    /**
+     * This rule reports variable definitions of `v-for` directives or scope attributes if they are not used.
+     */
+    'vue/no-unused-vars': 'error',
+
+    /**
+     * This rule is aimed at preventing the use of `v-for` directives together with `v-for` directives on the same
+     * element.
+     *
+     * @property {object} options
+     *                            - `allowUsingIterationVar` {bool} Allows the `v-if` directive to use variables which
+     *                                                              are defined by the `v-for` directive;
+     *                                                              default: false
+     */
+    'vue/no-use-v-if-with-v-for': [
+        'error',
+        {
+            'allowUsingIterationVar': false,
+        },
+    ],
+
+    /**
+     * This rule reports the `<component>` elements which do not have `v-bind:is` attributes.
+     */
+    'vue/require-component-is': 'error',
+
+    /**
+     * This rule reports prop types that can't be presumed as constructors.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'vue/require-prop-type-constructor': 'error',
+
+    /**
+     * This rule aims to enforce render functions to always return a value.
+     */
+    'vue/require-render-return': 'error',
+
+    /**
+     * This rule reports the elements which have a `v-for` directives that do not have `v-bind:key`, with the exception
+     * of custom components.
+     */
+    'vue/require-v-for-key': 'error',
+
+    /**
+     * This rule checks whether the default value of each prop is valid for the given type. It should report an error
+     * when default value for type `Array` or `Object` is ot returned using function.
+     */
+    'vue/require-valid-default-prop': 'error',
+
+    /**
+     * This rule enforces that a `return` statement is present in `computed` properties.
+     *
+     * @property {object} options
+     *                            - `treatUndefinedAsUnspecified` {bool} Disallows implicitly returning undefined with
+     *                                                                   a `return` statement;
+     *                                                                   default: true
+     */
+    'vue/return-in-computed-property': [
+        'error',
+        {
+            'treatUndefinedAsUnspecified': true,
+        },
+    ],
+
+    /**
+     * This rule enforces usage of the `exact` modifier on `v-on` when there is another `v-on` with a modifier.
+     */
+    'vue/use-v-on-exact': 'error',
+
+    /**
+     * This rule checks whether every template root is valid.
+     */
+    'vue/valid-template-root': 'error',
+
+    /**
+     * This rule checks whether all `v-bind` directives are valid.
+     */
+    'vue/valid-v-bind': 'error',
+
+    /**
+     * This rule check whether every `v-cloak` directive is valid.
+     */
+    'vue/valid-v-cloak': 'error',
+
+    /**
+     * This rule checks whether every `v-else-if` directive is valid.
+     */
+    'vue/valid-v-else-if': 'error',
+
+    /**
+     * This rule checks whether every `v-else` directive is valid.
+     */
+    'vue/valid-v-else': 'error',
+
+    /**
+     * This rule checks whether every `v-for` directive is valid.
+     */
+    'vue/valid-v-for': 'error',
+
+    /**
+     * This rule checks whether every `v-html` directive is valid.
+     */
+    'vue/valid-v-html': 'error',
+
+    /**
+     * This rule checks whether every `v-if` directive is valid.
+     */
+    'vue/valid-v-if': 'error',
+
+    /**
+     * This rule checks whether every `v-model` directive is valid.
+     */
+    'vue/valid-v-model': 'error',
+
+    /**
+     * This rule checks whether every `v-on` directive is valid.
+     */
+    'vue/valid-v-on': 'error',
+
+    /**
+     * This rule checks whether every `v-once` directive is valid.
+     */
+    'vue/valid-v-once': 'error',
+
+    /**
+     * This rule checks whether every `v-pre` directive is valid.
+     */
+    'vue/valid-v-pre': 'error',
+
+    /**
+     * This rule checks whether every `v-show` directive is valid.
+     */
+    'vue/valid-v-show': 'error',
+
+    /**
+     * This rule checks whether every `v-text` directive is valid.
+     */
+    'vue/valid-v-text': 'error',
+};
+
+/**
  * Merge rule objects into a single object.
  *
  * @type {object}
@@ -4082,6 +4370,7 @@ let rules = Object.assign(
     ESLintECMAScript6,
 
     VueBaseRules,
+    VueEssential,
 );
 
 /**

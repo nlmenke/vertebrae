@@ -16,7 +16,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="country in countries.data">
+                <tr v-for="country in countries.data" :key="country.id">
                     <td>{{ country.iso_alpha_2 }}</td>
                     <td>{{ country.iso_alpha_3 }}</td>
                     <td>{{ country.iso_numeric }}</td>

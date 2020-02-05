@@ -14,7 +14,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="language in languages.data">
+                <tr v-for="language in languages.data" :key="language.id">
                     <td>{{ language.iso_alpha_2 }}</td>
                     <td>{{ language.iso_alpha_3 }}</td>
                     <td>{{ language.name }}</td>

@@ -16,7 +16,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="locale in locales.data">
+                <tr v-for="locale in locales.data" :key="locale.id">
                     <td>{{ locale.code }}</td>
                     <td>{{ locale.native }}</td>
                     <td>{{ locale.language.name }}</td>

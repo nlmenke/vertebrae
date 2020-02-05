@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="currency in currencies.data">
+                    <tr v-for="currency in currencies.data" :key="currency.id">
                         <td>{{ currency.iso_alpha }}</td>
                         <td>{{ currency.iso_numeric }}</td>
                         <td>{{ currency.name }}</td>
