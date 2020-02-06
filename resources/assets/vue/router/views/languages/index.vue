@@ -7,23 +7,28 @@
         <div class="table-responsive">
             <table v-if="languages" class="table table-striped table-bordered table-hover">
                 <thead>
-                <tr>
-                    <th>ISO Alpha 2</th>
-                    <th>ISO Alpha 3</th>
-                    <th>Name</th>
-                </tr>
+                    <tr>
+                        <th>ISO Alpha 2</th>
+                        <th>ISO Alpha 3</th>
+                        <th>Name</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr v-for="language in languages.data" :key="language.id">
-                    <td>{{ language.iso_alpha_2 }}</td>
-                    <td>{{ language.iso_alpha_3 }}</td>
-                    <td>{{ language.name }}</td>
-                </tr>
+                    <tr v-for="language in languages.data" :key="language.id">
+                        <td>{{ language.iso_alpha_2 }}</td>
+                        <td>{{ language.iso_alpha_3 }}</td>
+                        <td>{{ language.name }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
-        <pagination :data="languages" @pagination-change-page="getLanguages" :limit=4 align="center"></pagination>
+        <pagination
+            :data="languages"
+            @pagination-change-page="getLanguages"
+            :limit="4"
+            align="center"
+        ></pagination>
     </main>
 </template>
 

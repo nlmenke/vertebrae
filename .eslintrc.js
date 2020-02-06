@@ -4356,6 +4356,468 @@ let VueEssential = {
 };
 
 /**
+ * Priority B: Strongly Recommended (Improving Readability).
+ *
+ * @type {object}
+ */
+let VueStronglyRecommended = {
+    /**
+     * This rule enforces using hyphenated attribute names on custome components in Vue templates.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always` Use hyphenated name
+     *                            - `never`  Don't use hyphenated name except `data-`, `aria-`, and `slot-scope`
+     *                            default: `always`
+     * @property {object} options
+     *                            - `ignore` {string[]} Array of ignored names
+     */
+    'vue/attribute-hyphenation': [
+        'error',
+        'always',
+        {
+            'ignore': [],
+        },
+    ],
+
+    /**
+     * This rule enforces a line break (or no line break) before tag's closing brackets.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `multiline`  {string} The configuration for multi-line elements
+     *                                                    - `always` Require one line break before the closing bracket
+     *                                                    - `never`  Disallow line breaks before the closing bracket
+     *                                                    default: `always`
+     *                            - `singleline` {string} The configuration for single-line elements
+     *                                                    - `always` Require one line break before the closing bracket
+     *                                                    - `never`  Disallow line breaks before the closing bracket
+     *                                                    default: `never`
+     */
+    'vue/html-closing-bracket-newline': [
+        'error',
+        {
+            'multiline': 'always',
+            'singleline': 'never',
+        },
+    ],
+
+    /**
+     * This rule aims to enforce consistent spacing style before closing brackets `>` of tags.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `startTag`       {string} Setting for the `>` of start tags (e.g.: `<div>`)
+     *                                                        - `always` Requires one or more spaces
+     *                                                        - `never`  Disallows spaces
+     *                                                        default: `never`
+     *                            - `endTag`         {string} Setting for the `>` of end tags (e.g.: `</div>`)
+     *                                                        - `always` Requires one or more spaces
+     *                                                        - `never`  Disallows spaces
+     *                                                        default: `never`
+     *                            - `selfClosingTag` {string} `Setting for the `/>` of self-closing tags (e.g.:
+     *                                                        `<div/>`)
+     *                                                        - `always` Requires one or more spaces
+     *                                                        - `never`  Disallows spaces
+     *                                                        default: `always`
+     */
+    'vue/html-closing-bracket-spacing': [
+        'error',
+        {
+            'startTag': 'never',
+            'endTag': 'never',
+            'selfClosingTag': 'always',
+        },
+    ],
+
+    /**
+     * This rule aims to disallow lacking end tags.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'vue/html-end-tags': 'error',
+
+    /**
+     * This rule enforces a consistent indentation style in `template`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {int|string} type The type of indentation;
+     *                             string variant can only be `tab`, which will use a single `tab` character to indent;
+     *                             default: 2
+     * @property {object}     options
+     *                                - `attribute`                 {int}   The multiplier of indentation for
+     *                                                                      attributes;
+     *                                                                      default: 1
+     *                                - `baseIndent`                {int}   The multiplier of indentation for top-level
+     *                                                                      statements;
+     *                                                                      default: 1
+     *                                - `closeBracket`              {int}   The multiplier of indentation for right
+     *                                                                      brackets;
+     *                                                                      default: 0
+     *                                - `alignAttributesVertically` {bool}  Condition for whether attributes should be
+     *                                                                      vertically aligned to the first attribute
+     *                                                                      in multiline case or not;
+     *                                                                      default: true
+     *                                - `ignores`                   {array} The selector to ignore nodes;
+     *                                                                      default: []
+     */
+    'vue/html-indent': [
+        'error',
+        4,
+        {
+            'attribute': 1,
+            'baseIndent': 1,
+            'closeBracket': 0,
+            'alignAttributesVertically': true,
+            'ignores': [],
+        },
+    ],
+
+    /**
+     * This rule reports the quotes of attributes if it is different to configured quotes.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} type
+     *                         - `double` Requires double quotes
+     *                         - `single` Requires single quotes
+     *                         default: `double`
+     */
+    'vue/html-quotes': [
+        'error',
+        'double',
+    ],
+
+    /**
+     * This rule aims to enforce the self-closing sign as the configured style.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `html` {object}
+     *                                              - `component` {string} The style of Vue.js custom components;
+     *                                                                     - `always` Require self-closing at elements
+     *                                                                                which don't have their content
+     *                                                                     - `any`    Don't enforce self-closing style
+     *                                                                     - `never`  Disallow self-closing
+     *                                                                     default: `always`
+     *                                              - `normal`    {string} The style of well-known HTML elements except
+     *                                                                     void elements;
+     *                                                                     - `always` Require self-closing at elements
+     *                                                                                which don't have their content
+     *                                                                     - `any`    Don't enforce self-closing style
+     *                                                                     - `never`  Disallow self-closing
+     *                                                                     default: `always`
+     *                                              - `void`      {string} The style of well-known HTML elements;
+     *                                                                     - `always` Require self-closing at elements
+     *                                                                                which don't have their content
+     *                                                                     - `any`    Don't enforce self-closing style
+     *                                                                     - `never`  Disallow self-closing
+     *                                                                     default: `never`
+     *                            - `math` {string} The style of well-known MathML elements;
+     *                                              - `always` Require self-closing at elements which don't have their
+     *                                                         content
+     *                                              - `any`    Don't enforce self-closing style
+     *                                              - `never`  Disallow self-closing
+     *                                              default: `always`
+     *                            - `svg`  {string} The style of well-known SVG elements;
+     *                                              - `always` Require self-closing at elements which don't have their
+     *                                                         content
+     *                                              - `any`    Don't enforce self-closing style
+     *                                              - `never`  Disallow self-closing
+     *                                              default: `always`
+     */
+    'vue/html-self-closing': [
+        'error',
+        {
+            'html': {
+                'component': 'never',
+                'normal': 'never',
+                'void': 'never',
+            },
+            'math': 'never',
+            'svg': 'never',
+        },
+    ],
+
+    /**
+     * This rule aims to enforce a number of attributes per line in templates. It checks all the elements in a template
+     * and verifies that the number of attributes per line does not exceed the defined maximum. An attribute is
+     * considered to be in a new line when there is a line break between two attributes.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `singleline` {int}    The maximum number of attributes per line when the opening
+     *                                                    tag is in a single line;
+     *                                                    default: 1
+     *                            - `multiline`  {object}
+     *                                                    - `max`              {int}  The max number of attributes per
+     *                                                                                line when the opening tag in in
+     *                                                                                multiple lines;
+     *                                                                                default: 1
+     *                                                    - `allowedFirstLine` {bool} Allow attributes on the same line
+     *                                                                                as the tag name;
+     *                                                                                default: false
+     */
+    'vue/max-attributes-per-line': [
+        'error',
+        {
+            'singleline': 2,
+            'multiline': {
+                'max': 1,
+                'allowFirstLine': false,
+            },
+        },
+    ],
+
+    /**
+     * This rule enforces a line break before and after the contents of a multiline element.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `allowEmptyLines` {bool}  Allow empty lines around content;
+     *                                                        default: false
+     *                            - `ignoreWhenEmpty` {bool}  Disable reporting when an element has no content;
+     *                                                        default: true
+     *                            - `ignores`         {array} The configuration for element names to ignore line break
+     *                                                        style;
+     *                                                        default: ['pre', 'textarea', ...INLINE_ELEMENTS]
+     */
+    'vue/multiline-html-element-content-newline': [
+        'error',
+        {
+            'allowEmptyLines': false,
+            'ignoreWhenEmpty': true,
+            'ignores': [
+                'a',
+                'abbr',
+                'audio',
+                'b',
+                'bdi',
+                'bdo',
+                'canvas',
+                'cite',
+                'code',
+                'data',
+                'del',
+                'dfn',
+                'em',
+                'i',
+                'iframe',
+                'ins',
+                'kbd',
+                'label',
+                'map',
+                'mark',
+                'noscript',
+                'object',
+                'output',
+                'picture',
+                'pre',
+                'q',
+                'ruby',
+                's',
+                'samp',
+                'small',
+                'span',
+                'strong',
+                'sub',
+                'sup',
+                'svg',
+                'textarea',
+                'time',
+                'u',
+                'var',
+                'video',
+            ],
+        },
+    ],
+
+    /**
+     * This rule aims at enforcing unified spacing in mustache interpolations.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always` Expect one space between expression and curly brackets
+     *                            - `never`  Expect no spaces between expression and curly brackets
+     *                            default: `always`
+     */
+    'vue/mustache-interpolation-spacing': [
+        'error',
+        'always',
+    ],
+
+    /**
+     * This rule aims at enforcing the style for the `name` property casing for consistency purposes.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} case
+     *                         - `kebab-case`  Enforce the `name` property to be kebab case
+     *                         - `PascaleCase` Enforce the `name` property to be Pascal case
+     *                         default: `PascalCase`
+     */
+    'vue/name-property-casing': [
+        'error',
+        'PascalCase',
+    ],
+
+    /**
+     * This rule aims at removing multiple spaces in tags, which are not used for indentation.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `ignoreProperties` {bool} Whether objects' properties should be ignored;
+     *                                                        default: false
+     */
+    'vue/no-multi-spaces': [
+        'error',
+        {
+            'ignoreProperties': false,
+        },
+    ],
+
+    /**
+     * This rule disallows spaces around equal signs in attributes.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'vue/no-spaces-around-equal-signs-in-attribute': 'error',
+
+    /**
+     * This rule aims to eliminate shadowed variable declarations of `v-for` directives or scope attributes.
+     */
+    'vue/no-template-shadow': 'error',
+
+    /**
+     * This rule enforces proper casing of props in vue components.
+     *
+     * @property {string} case
+     *                         - `camelCase`  Enforce property names in `props` to be camel case
+     *                         - `snake_case` Enforce property names in `props` to be snake case
+     *                         default: `camelCase`
+     */
+    'vue/prop-name-casing': [
+        'error',
+        'camelCase',
+    ],
+
+    /**
+     * This rule requires a default value to be set for each `props` that are not marked as `required` (except
+     * `boolean` props).
+     */
+    'vue/require-default-prop': 'error',
+
+    /**
+     * This rule enforces that a `props` statement contains type definition.
+     */
+    'vue/require-prop-types': 'error',
+
+    /**
+     * This rule enforces a line break before and after the contents of a singleine element.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `ignoreWhenEmpty`        {bool}  Disable reporting when an element has no content;
+     *                                                               default: true
+     *                            - `ignoreWhenNoAttributes` {bool}  Allow having contents in one line, when a given
+     *                                                               element has no attributes;
+     *                                                               default: true
+     *                            - `ignores`                {array} The configuration for element names to ignore line
+     *                                                               breaks style;
+     *                                                               default: ['pre', 'textarea', ...INLINE_ELEMENTS]
+     */
+    'vue/singleline-html-element-content-newline': [
+        'error',
+        {
+            'ignoreWhenEmpty': true,
+            'ignoreWhenNoAttributes': true,
+            'ignores': [
+                'a',
+                'abbr',
+                'audio',
+                'b',
+                'bdi',
+                'bdo',
+                'canvas',
+                'cite',
+                'code',
+                'data',
+                'del',
+                'dfn',
+                'em',
+                'i',
+                'iframe',
+                'ins',
+                'kbd',
+                'label',
+                'map',
+                'mark',
+                'noscript',
+                'object',
+                'output',
+                'picture',
+                'pre',
+                'q',
+                'ruby',
+                's',
+                'samp',
+                'small',
+                'span',
+                'strong',
+                'sub',
+                'sup',
+                'svg',
+                'textarea',
+                'time',
+                'u',
+                'var',
+                'video',
+            ],
+        },
+    ],
+
+    /**
+     * This rule enforces `v-bind` directive style consistency.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} style
+     *                          - `longform`  Requires using long form
+     *                          - `shorthand` Requires using shorthand
+     *                          default: `shorthand`
+     */
+    'vue/v-bind-style': [
+        'error',
+        'shorthand',
+    ],
+
+    /**
+     * This rule enforces `v-on` directive style consistency.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} style
+     *                          - `longform`  Requires using long form
+     *                          - `shorthand` Requires using shorthand
+     *                          default: `shorthand
+     */
+    'vue/v-on-style': [
+        'error',
+        'shorthand',
+    ],
+};
+
+/**
  * Merge rule objects into a single object.
  *
  * @type {object}
@@ -4371,6 +4833,7 @@ let rules = Object.assign(
 
     VueBaseRules,
     VueEssential,
+    VueStronglyRecommended,
 );
 
 /**

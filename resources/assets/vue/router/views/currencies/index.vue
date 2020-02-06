@@ -29,7 +29,12 @@
             </table>
         </div>
 
-        <pagination :data="currencies" @pagination-change-page="getCurrencies" :limit=4 align="center"></pagination>
+        <pagination
+            :data="currencies"
+            @pagination-change-page="getCurrencies"
+            :limit="4"
+            align="center"
+        ></pagination>
     </main>
 </template>
 

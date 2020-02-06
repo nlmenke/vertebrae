@@ -7,27 +7,32 @@
         <div class="table-responsive">
             <table v-if="locales" class="table table-striped table-bordered table-hover">
                 <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Language (Native)</th>
-                    <th>Language (English)</th>
-                    <th>Script</th>
-                    <th>Active?</th>
-                </tr>
+                    <tr>
+                        <th>Code</th>
+                        <th>Language (Native)</th>
+                        <th>Language (English)</th>
+                        <th>Script</th>
+                        <th>Active?</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr v-for="locale in locales.data" :key="locale.id">
-                    <td>{{ locale.code }}</td>
-                    <td>{{ locale.native }}</td>
-                    <td>{{ locale.language.name }}</td>
-                    <td>{{ locale.script.name }}</td>
-                    <td>{{ locale.active ? 'Yes' : 'No' }}</td>
-                </tr>
+                    <tr v-for="locale in locales.data" :key="locale.id">
+                        <td>{{ locale.code }}</td>
+                        <td>{{ locale.native }}</td>
+                        <td>{{ locale.language.name }}</td>
+                        <td>{{ locale.script.name }}</td>
+                        <td>{{ locale.active ? 'Yes' : 'No' }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
-        <pagination :data="locales" @pagination-change-page="getLocales" :limit=4 align="center"></pagination>
+        <pagination
+            :data="locales"
+            @pagination-change-page="getLocales"
+            :limit="4"
+            align="center"
+        ></pagination>
     </main>
 </template>
 
