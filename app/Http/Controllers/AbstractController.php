@@ -34,9 +34,9 @@ use Request;
  */
 abstract class AbstractController extends Controller
 {
-    use AuthorizesRequests,
-        DispatchesJobs,
-        ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     /**
      * The current locale.
