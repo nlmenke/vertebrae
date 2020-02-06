@@ -1,6 +1,6 @@
 <template>
     <main id="languages" class="container">
-        <div class="error" v-if="error">
+        <div v-if="error" class="error">
             <p>{{ error }}</p>
         </div>
 
@@ -25,9 +25,9 @@
 
         <pagination
             :data="languages"
-            @pagination-change-page="getLanguages"
             :limit="4"
             align="center"
+            @pagination-change-page="getLanguages"
         ></pagination>
     </main>
 </template>

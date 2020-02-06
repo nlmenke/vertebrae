@@ -4818,6 +4818,129 @@ let VueStronglyRecommended = {
 };
 
 /**
+ * Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead).
+ *
+ * @type {object}
+ */
+let VueRecommended = {
+    /**
+     * This rule aims to enforce ordering of component attributes.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `order` {string|string[]} The order of attributes;
+     *                                                        default: [DEFINITION, LIST_RENDERING, CONDITIONALS,
+     *                                                        RENDER_MODIFIERS, GLOBAL, UNIQUE, TWO_WAY_BINDING,
+     *                                                        OTHER_DIRECTIVES, OTHER_ATTR, EVENTS, CONTENT]
+     */
+    'vue/attributes-order': [
+        'error',
+        {
+            'order': [
+                'DEFINITION',
+                'LIST_RENDERING',
+                'CONDITIONALS',
+                'RENDER_MODIFIERS',
+                'GLOBAL',
+                'UNIQUE',
+                'TWO_WAY_BINDING',
+                'OTHER_DIRECTIVES',
+                'OTHER_ATTR',
+                'EVENTS',
+                'CONTENT',
+            ],
+        },
+    ],
+
+    /**
+     * This rule reports all uses of the `v-html` directive in order to reduce the risk of injecting potentially
+     * unsafe/unescaped html into the browser leading to Cross-Site Scripting (XSS) attacks.
+     */
+    'vue/no-v-html': 'error',
+
+    /**
+     * This rule makes sure you keep declared order of properties in components.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `order` {string|string[]} The order of properties;
+     *                                                        default: ['el', 'name', 'parent', 'functional',
+     *                                                        ['delimiters', 'comments'], ['components', 'directives',
+     *                                                        'filters'], 'extends', 'mixins', 'inheritAttrs', 'model',
+     *                                                        ['props', 'propsData'], 'fetch', 'asyncData', 'data',
+     *                                                        'computed', 'watch', 'LIFECYCLE_HOOKS', 'methods',
+     *                                                        'head', ['template', 'render'], 'renderError']
+     */
+    'vue/order-in-components': [
+        'error',
+        {
+            'order': [
+                'el',
+                'name',
+                'parent',
+                'functional',
+                [
+                    'delimiters',
+                    'comments',
+                ],
+                [
+                    'components',
+                    'directives',
+                    'filters',
+                ],
+                'extends',
+                'mixins',
+                'inheritAttrs',
+                'model',
+                [
+                    'props',
+                    'propsData',
+                ],
+                'fetch',
+                'asyncData',
+                'data',
+                'computed',
+                'watch',
+                [
+                    'beforeCreate',
+                    'created',
+                    'beforeMount',
+                    'mounted',
+                    'beforeUpdate',
+                    'updated',
+                    'activated',
+                    'deactivated',
+                    'beforeDestroy',
+                    'destroyed',
+                ],
+                'methods',
+                'head',
+                [
+                    'template',
+                    'render',
+                ],
+                'renderError',
+            ],
+        },
+    ],
+
+    /**
+     * This rule aims at preventing usage of `this` in Vue templates.
+     *
+     * @property {string} require
+     *                            - `always` Always use `this` while accessing properties from Vue
+     *                            - `never`  Never use `this` keyword in expressions
+     *                            default: `never`
+     */
+    'vue/this-in-template': [
+        'error',
+        'never',
+    ],
+};
+
+/**
  * Merge rule objects into a single object.
  *
  * @type {object}
@@ -4834,6 +4957,7 @@ let rules = Object.assign(
     VueBaseRules,
     VueEssential,
     VueStronglyRecommended,
+    VueRecommended,
 );
 
 /**

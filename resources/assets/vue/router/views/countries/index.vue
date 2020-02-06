@@ -1,6 +1,6 @@
 <template>
     <main id="countries" class="container">
-        <div class="error" v-if="error">
+        <div v-if="error" class="error">
             <p>{{ error }}</p>
         </div>
 
@@ -29,9 +29,9 @@
 
         <pagination
             :data="countries"
-            @pagination-change-page="getCountries"
             :limit="4"
             align="center"
+            @pagination-change-page="getCountries"
         ></pagination>
     </main>
 </template>

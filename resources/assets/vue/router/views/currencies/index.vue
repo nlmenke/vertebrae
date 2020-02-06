@@ -1,6 +1,6 @@
 <template>
     <main id="currencies" class="container">
-        <div class="error" v-if="error">
+        <div v-if="error" class="error">
             <p>{{ error }}</p>
         </div>
 
@@ -31,9 +31,9 @@
 
         <pagination
             :data="currencies"
-            @pagination-change-page="getCurrencies"
             :limit="4"
             align="center"
+            @pagination-change-page="getCurrencies"
         ></pagination>
     </main>
 </template>
