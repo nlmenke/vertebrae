@@ -5,7 +5,7 @@
         </div>
 
         <div class="table-responsive">
-            <table v-if="locales" class="table table-striped table-bordered table-hover">
+            <table v-if="locales" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Code</th>

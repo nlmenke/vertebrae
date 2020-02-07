@@ -5,7 +5,7 @@
         </div>
 
         <div class="table-responsive">
-            <table v-if="countries" class="table table-striped table-bordered table-hover">
+            <table v-if="countries" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
                         <th>ISO Alpha 2</th>

@@ -1,6 +1,6 @@
 <template>
     <div id="app" :class="{ 'laravel': isHomeRoute() }">
-        <nav v-if="!isHomeRoute()" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <nav v-if="!isHomeRoute()" class="bg-dark fixed-top navbar navbar-dark navbar-expand-md">
             <RouterLink :to="{ path: '/' }" class="navbar-brand">
                 Vertebrae
             </RouterLink>
@@ -18,7 +18,7 @@
             </button>
 
             <div id="navbar" class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto">
+                <ul class="mr-auto navbar-nav">
                     <li class="nav-item">
                         <RouterLink :to="{ path: 'countries' }" class="nav-link">
                             Countries

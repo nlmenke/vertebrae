@@ -1,6 +1,6 @@
 <template>
-    <div class="flex-center position-ref full-height">
-        <div class="top-right links">
+    <div class="flex-center full-height position-ref">
+        <div class="links top-right">
             <RouterLink :to="{ path: 'countries' }">
                 Countries
             </RouterLink>
@@ -20,7 +20,7 @@
                 Vertebrae
             </div>
 
-            <div class="subtitle m-b-md">
+            <div class="m-b-md subtitle">
                 Built with Laravel {{ laravelVersion }} and Vue {{ vueVersion }}
             </div>
 

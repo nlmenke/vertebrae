@@ -4941,6 +4941,533 @@ let VueRecommended = {
 };
 
 /**
+ * Uncategorized.
+ *
+ * @type {object}
+ */
+let VueUncategorized = {
+    /**
+     * This rule is the same as core `array-bracket-spacing`, but it applies to the expressions in `<template>`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @see ESLintStylisticIssues.array-bracket-spacing
+     */
+    'vue/array-bracket-spacing': [
+        'error',
+        'never',
+    ],
+
+    /**
+     * This rule is the same as core `array-spacing`, but it applies to the expressions in `<template>`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @see ESLintECMAScript6.arrow-spacing
+     */
+    'vue/arrow-spacing': [
+        'error',
+        {
+            'after': true,
+            'before': true,
+        },
+    ],
+
+    /**
+     * This rule is the same as core `block-spacing`, but it applies to the expressions in `<template>`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @see ESLintStylisticIssues.block-spacing
+     */
+    'vue/block-spacing': [
+        'error',
+        'always',
+    ],
+
+    /**
+     * This rule is the same as core `brace-style`, but it applies to the expressions in `<template>`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @see ESLintStylisticIssues.brace-style
+     */
+    'vue/brace-style': [
+        'error',
+        '1tbs',
+        {
+            'allowSingleLine': false,
+        },
+    ],
+
+    /**
+     * This rule is the same as core `camelcase`, but it applies to the expressions in `<template>`.
+     *
+     * @see ESLintStylisticIssues.camelcase
+     */
+    'vue/camelcase': [
+        'error',
+        {
+            'properties': 'never',
+        },
+    ],
+
+    /**
+     * This rule is the same as core `comma-dangle`, but it applies to the expressions in `<template>`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @see ESLintStylisticIssues.comma-dangle
+     */
+    'vue/comma-dangle': [
+        'error',
+        {
+            'arrays': 'always-multiline',
+            'objects': 'always-multiline',
+            'imports': 'always-multiline',
+            'exports': 'always-multiline',
+            'functions': 'never',
+        },
+    ],
+
+    /**
+     * This rule aims to warn of component definition names other than the configured casing.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} case
+     *                         - `kebab-case` Enforce component definition names to kebab case
+     *                         - `PascalCase` Enforce component definition names to pascal case
+     *                         default: `PascalCase`
+     */
+    'vue/component-definition-name-casing': [
+        'error',
+        'PascalCase',
+    ],
+
+    /**
+     * This rule aims to warn of tag names other than the configured casing in Vue.js templates.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} case
+     *                            - `kebab-case` Enforce tag names to kebab case
+     *                            - `PascalCase` Enforce tag names to pascal case
+     *                            default: `PascalCase`
+     * @property {object} options
+     *                            - `ignores`                  {string[]} The element names to ignore;
+     *                                                                    default: []
+     *                            - `registeredComponentsOnly` {bool}     Only registered components are checked;
+     *                                                                    default: true
+     */
+    'vue/component-name-in-template-casing': [
+        'error',
+        'PascalCase',
+        {
+            'ignores': [],
+            'registeredComponentsOnly': true,
+        },
+    ],
+
+    /**
+     * This rule warns about the order of the `<script>`, `<template>`, and `<style>` tags.
+     *
+     * @property {object} options
+     *                            - `order` {string[]} The order of top-level element names;
+     *                                                 default: ['script', 'template', 'style']
+     */
+    'vue/component-tags-order': [
+        'error',
+        {
+            'order': [
+                'template',
+                'script',
+                'style',
+            ],
+        },
+    ],
+
+    /**
+     * This rule is the same as core `dot-location`, but it applies to the expressions in `<template>`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @see ESLintBestPractices.dot-location
+     */
+    'vue/dot-location': [
+        'error',
+        'property',
+    ],
+
+    /**
+     * This rule is the same as core `eqeqeq`, but it applies to the expressions in `<template>`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @see ESLintBestPractices.eqeqeq
+     */
+    'vue/eqeqeq': [
+        'error',
+        'always',
+        {
+            'null': 'ignore',
+        },
+    ],
+
+    /**
+     * This rule is the same as core `key-spacing`, but it applies to the expressions in `<template>`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @see ESLintStylisticIssues.key-spacing
+     */
+    'vue/key-spacing': [
+        'error',
+        {
+            'beforeColon': false,
+            'afterColon': true,
+        },
+    ],
+
+    /**
+     * This rule is the same as core `keyword-spacing`, but it applies to the expressions in `<template>`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @see ESLintStylisticIssues.keyword-spacing
+     */
+    'vue/keyword-spacing': [
+        'error',
+        {
+            'after': true,
+            'before': true,
+        },
+    ],
+
+    /**
+     * This rule reports if a component `name` property does not match its file name.
+     *
+     * @property {object} options
+     *                            - `extensions`      {string[]} Array of file extensions to be verified;
+     *                                                           default: ['jsx']
+     *                            - `shouldMatchCase` {bool}     Component's name should also match its file name case;
+     *                                                           default: false
+     */
+    'vue/match-component-file-name': [
+        'error',
+        {
+            'extensions': [
+                'vue',
+            ],
+            'shouldMatchCase': true,
+        },
+    ],
+
+    /**
+     * This rule enforces a maximum line length to increase code readability and maintainability.
+     *
+     * This rule is similar to the core `max-len` rule, but it applies to the source code in `.vue` files.
+     *
+     * @property {object} options
+     *                            - `code`                      {int}   Enforces a maximum line length;
+     *                                                                  default: 80
+     *                            - `template`                  {int}   Enforces a maximum line length for
+     *                                                                  `<template>`;
+     *                                                                  default: (value of `code`)
+     *                            - `tabWidth`                  {int}   Specifies the character width for tab
+     *                                                                  characters;
+     *                                                                  default: 2
+     *                            - `comments`                  {int}   Enforces a maximum line length for comments;
+     *                                                                  default: (value of `code`)
+     *                            - `ignorePattern`             {regex} Ignore lines matching a regular expression;
+     *                                                                  can only match a single line and needs to be
+     *                                                                  double escaped when written in YAML or JSON;
+     *                                                                  default: ''
+     *                            - `ignoreComments`            {bool}  Ignore trailing comments and comments on their
+     *                                                                  own line;
+     *                                                                  default: false
+     *                            - `ignoreTrailingComments`    {bool}  Ignore only trailing comments;
+     *                                                                  default: false
+     *                            -  `ignoreUrls`               {bool}  Ignores lines that contain a URL;
+     *                                                                  default: false
+     *                            - `ignoreStrings`             {bool}  Ignores lines that contain a double-quoted or
+     *                                                                  single-quoted string;
+     *                                                                  default: false
+     *                            - `ignoreTemplateLiterals`    {bool}  Ignore lines that contain a template literal;
+     *                                                                  default: false
+     *                            - `ignoreRegExpLiterals`      {bool}  Ignore lines that contain a RegExp literal;
+     *                                                                  default: false
+     *                            - `ignoreHTMLAttributeValues` {bool}  Ignore lines that contain an HTML attribute
+     *                                                                  value;
+     *                                                                  default: false
+     *                            - `ignoreHTMLTextContents`    {bool}  Ignore lines that contain an HTML text content;
+     *                                                                  default: false
+     * @see ESLintStylisticIssues.max-len
+     */
+    'vue/max-len': 'off',
+
+    /**
+     * This rule prevents boolean props from having a default value.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} enforce
+     *                            - `default-false` Enforces that the default can be set but must be set to `false`
+     *                            - `no-default`    Allows a prop definition object, but enforces that the `default`
+     *                                              property not be defined
+     */
+    'vue/no-boolean-default': 'off',
+
+    /**
+     * This rule reports deprecated `scope` attributes in Vue.js v2.5.0+.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'vue/no-deprecated-scope-attribute': 'error',
+
+    /**
+     * This rule reports deprecated `slot` attribute in Vue.js v2.6.0+.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'vue/no-deprecated-slot-attribute': 'error',
+
+    /**
+     * This rule reports deprecated `slot-scope` attribute in Vue.js v2.6.0+.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'vue/no-deprecated-slot-scope-attribute': 'error',
+
+    /**
+     * This rule is the same as core `no-empty-pattern`, but it applies to the expressions in `<template>`.
+     *
+     * @see ESLintBestPractices.no-empty-pattern
+     */
+    'vue/no-empty-pattern': 'error',
+
+    /**
+     * This rule is aimed at catching invalid whitespace that is not a normal tab and space. Some of these characters
+     * may cause issues in modern browsers and other will be a debugging issue to spot.
+     *
+     * This rule is similar to the core `no-irregular-whitespace` rule, but it applies to source code in `.vue` files.
+     *
+     * @property {object} options
+     *                            - `skipStrings`             {bool} Allow any whitespace characters in string
+     *                                                               literals;
+     *                                                               default: true
+     *                            - `skipComments`            {bool} Allow any whitespace characters in comments;
+     *                                                               default: false
+     *                            - `skipRegExps`             {bool} Allow any whitespace characters in regular
+     *                                                               expressions;
+     *                                                               default: false
+     *                            - `skipTemplates`           {bool} Allow any whitespace characters in template
+     *                                                               literals;
+     *                                                               default: false
+     *                            - `skipHTMLAttributeValues` {bool} Allow any whitespace characters in HTML attribute
+     *                                                               values;
+     *                                                               default: false
+     *                            - `skipHTMLTextContents`    {bool} Allow any whitespace characters in HTML text
+     *                                                               contents;
+     *                                                               default: false
+     * @see ESLintPossibleErrors.no-irregular-whitespace
+     */
+    'vue/no-irregular-whitespace': [
+        'error',
+        {
+            'skipStrings': true,
+            'skipComments': false,
+            'skipRegExps': false,
+            'skipTemplates': false,
+            'skipHTMLAttributeValues': false,
+            'skipHTMLTextContents': false,
+        },
+    ],
+
+    /**
+     * This rule prevents name collisions between vue components and standard HTML elements.
+     */
+    'vue/no-reserved-component-names': 'error',
+
+    /**
+     * This rule is the same as core `no-restricted-syntax`, but it applies to the expressions in `<template>`.
+     *
+     * @see ESLintStylisticIssues.no-restricted-syntax
+     */
+    'vue/no-restricted-syntax': 'off',
+
+    /**
+     * This rule reports static inline `style` bindings and `style` attributes.
+     *
+     * @property {object} options
+     *                            - `allowBinding` {bool} Allow binding static inline `style`;
+     *                                                    default: false
+     */
+    'vue/no-static-inline-styles': [
+        'error',
+        {
+            'allowBinding': false,
+        },
+    ],
+
+    /**
+     * This rule reports unsupported Vue.js syntax on the specified version.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `version` {string}   Set this to the version of Vue.js being used;
+     *                                                   required
+     *                            - `ignores` {string[]} Ignore specific features;
+     *                                                   default: []
+     */
+    'vue/no-unsupported-features': [
+        'error',
+        {
+            'version': '^2.6.0',
+            'ignores': [],
+        },
+    ],
+
+    /**
+     * This rule is the same as core `object-curly-spacing`, but it applies to the expressions in `<template>`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @see ESLintStylisticIssues.object-curly-spacing
+     */
+    'vue/object-curly-spacing': [
+        'error',
+        'always',
+    ],
+
+    /**
+     * This rule aims to require that the component object be directly exported.
+     */
+    'vue/require-direct-export': 'error',
+
+    /**
+     * This rule requires a `name` property to be set on components.
+     */
+    'vue/require-name-property': 'off',
+
+    /**
+     * This rule is similar to core indent rule, but it has an option for inside of `<script>` tag.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {int|string} type    The type of indentation;
+     *                                default: 2
+     * @property {object}     options
+     *                                - `baseIndent` {int}      The multiplier of indentation for top-level statements;
+     *                                                          default: 0
+     *                                - `switchCase  {int}      The multiplier of indentation for `case` / `default`
+     *                                                          clauses;
+     *                                                          default: 0
+     *                                - `ignores`    {string[]} The selector to ignore notes;
+     *                                                          default: []
+     */
+    'vue/script-indent': [
+        'error',
+        4,
+        {
+            'baseIndent': 1,
+            'switchCase': 1,
+            'ignores': [],
+        },
+    ],
+
+    /**
+     * This rule is the same as core `space-infix-ops`, but it applies to the expressions in `<template>`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @see ESLintStylisticIssues.space-infix-ops
+     */
+    'vue/space-infix-ops': [
+        'error',
+        {
+            'int32Hint': false,
+        },
+    ],
+
+    /**
+     * This rule is the same as core `space-unary-ops`, but it applies to the expressions in `<template>`.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @see ESLintStylisticIssues.space-unary-ops
+     */
+    'vue/space-unary-ops': [
+        'error',
+        {
+            'words': true,
+            'nonwords': false,
+            'overrides': {},
+        },
+    ],
+
+    /**
+     * This rule aims to enforce the order of static class names.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     */
+    'vue/static-class-names-order': 'error',
+
+    /**
+     * This rule aims to enforce to bind methods to `v-on` or call methods on `v-on` when without arguments.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {string} require
+     *                            - `always` Always use parentheses in `v-on` directives
+     *                            - `never`  Never use parentheses in `v-on` directives for method calls without
+     *                                       arguments
+     *                            default: `never`
+     */
+    'vue/v-on-function-call': [
+        'error',
+        'never',
+    ],
+
+    /**
+     * This rule enforces `v-slot` directly style.
+     *
+     * The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+     *
+     * @property {object} options
+     *                            - `atComponent` {string} The style for the default slot at custom components
+     *                                                     directly;
+     *                                                     values: `longform`, `shorthand`, `v-slot`
+     *                                                     default: `v-slot`
+     *                            - `default`     {string} The style for the default slot at template wrappers;
+     *                                                     values: `longform`, `shorthand`, `v-slot`
+     *                                                     default: `shorthand`
+     *                            - `named`       {string} The style for named slots;
+     *                                                     values: `longform`, `shorthand`, `v-slot`
+     *                                                     default: `shorthand`
+     */
+    'vue/v-slot-style': [
+        'error',
+        {
+            'atComponent': 'v-slot',
+            'default': 'shorthand',
+            'named': 'shorthand',
+        },
+    ],
+
+    /**
+     * This rule checks whether every `.sync` modifier on `v-bind` directives is valid.
+     */
+    'vue/valid-v-bind-sync': 'error',
+
+    /**
+     * This rule checks whether every `v-slot` directive is valid.
+     */
+    'vue/valid-v-slot': 'error',
+};
+
+/**
  * Merge rule objects into a single object.
  *
  * @type {object}
@@ -4958,6 +5485,7 @@ let rules = Object.assign(
     VueEssential,
     VueStronglyRecommended,
     VueRecommended,
+    VueUncategorized,
 );
 
 /**
