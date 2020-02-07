@@ -44,10 +44,10 @@ window.axios.defaults.baseURL = '/api/';
  * a simple convenience so we don't have to attach every token manually.
  */
 
-const TOKEN = document.head.querySelector('meta[name="csrf-token"]');
+const token = document.head.querySelector('meta[name="csrf-token"]');
 
-if (TOKEN) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = TOKEN.content;
+if (token) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }

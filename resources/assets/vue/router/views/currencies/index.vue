@@ -52,7 +52,7 @@
             this.getCurrencies();
         },
         methods: {
-            getCurrencies(page = 1, callback) {
+            getCurrencies(page = 1) {
                 const params = {
                     page,
                 };

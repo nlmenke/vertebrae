@@ -50,7 +50,7 @@
             this.getLocales();
         },
         methods: {
-            getLocales(page = 1, callback) {
+            getLocales(page = 1) {
                 const params = {
                     page,
                 };

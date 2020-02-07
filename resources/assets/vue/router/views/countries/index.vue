@@ -50,7 +50,7 @@
             this.getCountries();
         },
         methods: {
-            getCountries(page = 1, callback) {
+            getCountries(page = 1) {
                 const params = {
                     page,
                 };

@@ -46,7 +46,7 @@
             this.getLanguages();
         },
         methods: {
-            getLanguages(page = 1, callback) {
+            getLanguages(page = 1) {
                 const params = {
                     page,
                 };

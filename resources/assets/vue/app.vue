@@ -59,7 +59,7 @@
 <script>
     export default {
         methods: {
-            isHomeRoute(route) {
+            isHomeRoute() {
                 return this.$route.name === 'dashboard';
             },
         },
