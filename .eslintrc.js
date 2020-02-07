@@ -257,12 +257,14 @@ let ESLintPossibleErrors = {
      *                                                        default: false
      *                               - `skipTemplates` {bool} Allows any whitespace characters in template literals;
      *                                                        default: false
-     *                               default: `"skipStrings": true`
      */
     'no-irregular-whitespace': [
         'error',
         {
-            "skipStrings": true,
+            'skipStrings': true,
+            'skipComments': false,
+            'skipRegExps': false,
+            'skipTemplates': false,
         },
     ],
 
@@ -4068,7 +4070,7 @@ let VueBaseRules = {
 };
 
 /**
- * Priority A: Essential (error Prevention).
+ * Priority A: Essential (Error Prevention).
  *
  * @type {object}
  */
@@ -4698,7 +4700,7 @@ let VueStronglyRecommended = {
     'vue/no-template-shadow': 'error',
 
     /**
-     * This rule enforces proper casing of props in vue components.
+     * This rule enforces proper casing of props in Vue components.
      *
      * @property {string} case
      *                         - `camelCase`  Enforce property names in `props` to be camel case
