@@ -36,11 +36,11 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends AbstractEntity implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable,
-        Authorizable,
-        CanResetPassword,
-        MustVerifyEmail,
-        Notifiable;
+    use Authenticatable;
+    use Authorizable;
+    use CanResetPassword;
+    use MustVerifyEmail;
+    use Notifiable;
 
     /**
      * The attributes that should be cast to native types.
