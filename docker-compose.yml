@@ -97,8 +97,8 @@ services:
     environment:
       - DOCKER_HOST=tcp://docker-in-docker:2375
     volumes:
-      - ./.docker/php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
       - ./:/var/www:cached
+      - ./.docker/php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
     networks:
       - backend
     extra_hosts:
@@ -107,6 +107,27 @@ services:
       - '9000'
     links:
       - docker-in-docker
+
+  # PHP-Worker
+  ## A queue worker using supervisord.
+  php-worker:
+    container_name: PHP-WORKER
+    depends_on:
+      - workspace
+    build:
+      context: ./.docker/php-worker
+      args:
+        - PHP_VERSION=${PHP_VERSION}
+        - PUID=${WORKER_PUID}
+        - PGID=${WORKER_PGID}
+    volumes:
+      - ./:/var/www:cached
+      - ./.docker/logs/php-worker/:/var/log/php-worker
+      - ./.docker/php-worker/supervisord.d:/etc/supervisord.d
+    networks:
+      - backend
+    extra_hosts:
+      - 'dockerhost:${DOCKER_HOST_IP}'
 
   # Redis
   ## Redis is an open source key-value store that functions as a data structure
@@ -148,6 +169,7 @@ services:
       - DOCKER_HOST=tcp://docker-in-docker:2375
     volumes:
       - ./:/var/www:cached
+      - ./.docker/php-worker/supervisord.d:/etc/supervisord.d
     ports:
       - '${WORKSPACE_SSH_PORT}:22'
     networks:
