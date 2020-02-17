@@ -1,10 +1,18 @@
 <template>
-    <div class="flex-center position-ref full-height">
-        <div class="top-right links">
-            <RouterLink :to="{ path: 'countries' }">Countries</RouterLink>
-            <RouterLink :to="{ path: 'currencies' }">Currencies</RouterLink>
-            <RouterLink :to="{ path: 'languages' }">Languages</RouterLink>
-            <RouterLink :to="{ path: 'locales' }">Locales</RouterLink>
+    <div class="flex-center full-height position-ref">
+        <div class="links top-right">
+            <RouterLink :to="{ path: 'countries' }">
+                Countries
+            </RouterLink>
+            <RouterLink :to="{ path: 'currencies' }">
+                Currencies
+            </RouterLink>
+            <RouterLink :to="{ path: 'languages' }">
+                Languages
+            </RouterLink>
+            <RouterLink :to="{ path: 'locales' }">
+                Locales
+            </RouterLink>
         </div>
 
         <div class="content">
@@ -12,7 +20,7 @@
                 Vertebrae
             </div>
 
-            <div class="subtitle m-b-md">
+            <div class="m-b-md subtitle">
                 Built with Laravel {{ laravelVersion }} and Vue {{ vueVersion }}
             </div>
 
@@ -51,8 +59,8 @@
     export default {
         data() {
             return {
-                languages: {},
                 error: null,
+                languages: {},
                 laravelVersion: null,
                 vueVersion: Vue.version,
             };
@@ -65,10 +73,10 @@
             getEnvironment() {
                 axios.get('meta/environment')
                     .then(
-                        response => this.laravelVersion = response.data.laravel_version,
-                        error => this.error = error.toString()
+                        response => (this.laravelVersion = response.data.laravel_version),
+                        error => (this.error = error.toString())
                     );
-            }
+            },
         },
-    }
+    };
 </script>

@@ -1,11 +1,11 @@
 <template>
     <main id="currencies" class="container">
-        <div class="error" v-if="error">
+        <div v-if="error" class="error">
             <p>{{ error }}</p>
         </div>
 
         <div class="table-responsive">
-            <table v-if="currencies" class="table table-striped table-bordered table-hover">
+            <table v-if="currencies" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
                         <th>ISO Alpha</th>
@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="currency in currencies.data">
+                    <tr v-for="currency in currencies.data" :key="currency.id">
                         <td>{{ currency.iso_alpha }}</td>
                         <td>{{ currency.iso_numeric }}</td>
                         <td>{{ currency.name }}</td>
@@ -29,7 +29,12 @@
             </table>
         </div>
 
-        <pagination :data="currencies" @pagination-change-page="getCurrencies" :limit=4 align="center"></pagination>
+        <pagination
+            :data="currencies"
+            :limit="4"
+            align="center"
+            @pagination-change-page="getCurrencies"
+        ></pagination>
     </main>
 </template>
 
@@ -47,17 +52,17 @@
             this.getCurrencies();
         },
         methods: {
-            getCurrencies(page = 1, callback) {
+            getCurrencies(page = 1) {
                 const params = {
-                    page
+                    page,
                 };
 
                 axios.get('v1/currencies', { params })
                     .then(
-                        response => this.currencies = response.data,
-                        error => this.error = error.toString()
+                        response => (this.currencies = response.data),
+                        error => (this.error = error.toString())
                     );
-            }
+            },
         },
-    }
+    };
 </script>
