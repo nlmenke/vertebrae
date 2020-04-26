@@ -6,6 +6,7 @@ matrix:
 php:
     - '7.2'
     - '7.3'
+    - '7.4'
 
 mysql:
     - database: ci_vertebrae
