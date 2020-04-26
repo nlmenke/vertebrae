@@ -45,7 +45,7 @@ class CreateCurrenciesTable extends Migration
     public function up(): void
     {
         Schema::create(self::TABLE, function (Blueprint $table): void {
-            $table->increments('id');
+            $table->id();
             $table->string('iso_alpha', 3)->index(); // ISO 4217 alpha; 3-char
             $table->string('iso_numeric', 3)->index(); // ISO 4217 numeric; 3-number
             $table->string('name');

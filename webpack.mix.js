@@ -14,9 +14,9 @@
  * @since     x.x.x           setup new structure
  */
 
-const mix = require('laravel-mix');
+const MIX = require('laravel-mix');
 
-mix.options({
+MIX.options({
         publicPath: 'public/assets/',
         resourceRoot: '/assets/'
     })
@@ -28,8 +28,8 @@ mix.options({
         'vue'
     ]);
 
-mix.sourceMaps(false);
+MIX.sourceMaps(false);
 
-if (mix.inProduction()) {
-    mix.version();
+if (MIX.inProduction()) {
+    MIX.version();
 }

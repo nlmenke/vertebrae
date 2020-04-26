@@ -6,6 +6,7 @@ matrix:
 php:
     - '7.2'
     - '7.3'
+    - '7.4'
 
 mysql:
     - database: ci_vertebrae
@@ -26,8 +27,8 @@ install:
     - composer install --no-ansi --no-interaction --no-progress --no-scripts --no-suggest
     - php artisan key:generate
     - php artisan migrate:fresh --seed
-    - yarn install --pure-lockfile
-    - yarn run production --progress false
+    - npm ci
+    - npm run production --progress false
 
 script:
     - vendor/bin/phpunit --coverage-clover=coverage.xml
