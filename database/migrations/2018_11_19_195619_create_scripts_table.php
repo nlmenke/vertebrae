@@ -45,7 +45,7 @@ class CreateScriptsTable extends Migration
     public function up(): void
     {
         Schema::create(self::TABLE, function (Blueprint $table): void {
-            $table->increments('id');
+            $table->id();
             $table->string('iso_alpha', 4); // ISO 15924 alpha; 4-char
             $table->string('iso_numeric', 3); // ISO 15924 numeric; 3-number
             $table->string('name');

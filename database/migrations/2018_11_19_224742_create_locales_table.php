@@ -45,12 +45,12 @@ class CreateLocalesTable extends Migration
     public function up(): void
     {
         Schema::create(self::TABLE, function (Blueprint $table): void {
-            $table->increments('id');
-            $table->unsignedInteger('country_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('country_id')->nullable();
             $table->foreign('country_id')->references('id')->on(CreateCountriesTable::TABLE);
-            $table->unsignedInteger('language_id');
+            $table->unsignedBigInteger('language_id');
             $table->foreign('language_id')->references('id')->on(CreateLanguagesTable::TABLE);
-            $table->unsignedInteger('script_id');
+            $table->unsignedBigInteger('script_id');
             $table->foreign('script_id')->references('id')->on(CreateScriptsTable::TABLE);
             $table->string('code', 11)->index(); // IETF language tag; see https://www.w3.org/International/articles/language-tags/#rfc
             $table->string('native'); // language name in the language and script

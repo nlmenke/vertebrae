@@ -25,27 +25,35 @@
             </div>
 
             <div class="links m-b-md">
-                <a href="https://laravel.com/docs/6.x">Laradocs</a>
-                <a href="https://github.com/nlmenke/vertebrae">GitHub</a>
+                <a :href="laravelDocsLink" target="_blank">Laradocs</a>
+                <a href="https://github.com/nlmenke/vertebrae" target="_blank">GitHub</a>
             </div>
 
             <div class="badges">
-                <a href="https://travis-ci.org/nlmenke/vertebrae"><img src="https://travis-ci.org/nlmenke/vertebrae.svg?branch=master" alt="travis-ci-build-status"></a>
-                <a href="https://codecov.io/gh/nlmenke/vertebrae"><img src="https://codecov.io/gh/nlmenke/vertebrae/branch/master/graph/badge.svg" alt="codecov"></a>
-                <a href="https://github.styleci.io/repos/153017543"><img src="https://github.styleci.io/repos/153017543/shield?style=flat" alt="style-ci"></a>
+                <a href="https://travis-ci.org/nlmenke/vertebrae" target="_blank"><img src="https://travis-ci.org/nlmenke/vertebrae.svg?branch=master" alt="travis-ci-build-status"></a>
+                <a href="https://codecov.io/gh/nlmenke/vertebrae" target="_blank"><img src="https://codecov.io/gh/nlmenke/vertebrae/branch/master/graph/badge.svg" alt="codecov"></a>
+                <a href="https://github.styleci.io/repos/153017543" target="_blank"><img src="https://github.styleci.io/repos/153017543/shield?style=flat" alt="style-ci"></a>
                 <br>
-                <a href="https://scrutinizer-ci.com/g/nlmenke/vertebrae/build-status/master"><img src="https://scrutinizer-ci.com/g/nlmenke/vertebrae/badges/build.png?b=master" alt="scrutinizer-build-status"></a>
-                <a href="https://scrutinizer-ci.com/g/nlmenke/vertebrae/?branch=master"><img src="https://scrutinizer-ci.com/g/nlmenke/vertebrae/badges/coverage.png?b=master" alt="scrutinizer-code-coverage"></a>
-                <a href="https://scrutinizer-ci.com/g/nlmenke/vertebrae/?branch=master"><img src="https://scrutinizer-ci.com/g/nlmenke/vertebrae/badges/quality-score.png?b=master" alt="scrutinizer-code-quality"></a>
+                <a href="https://scrutinizer-ci.com/g/nlmenke/vertebrae/build-status/master" target="_blank"><img src="https://scrutinizer-ci.com/g/nlmenke/vertebrae/badges/build.png?b=master" alt="scrutinizer-build-status"></a>
+                <a href="https://scrutinizer-ci.com/g/nlmenke/vertebrae/?branch=master" target="_blank"><img src="https://scrutinizer-ci.com/g/nlmenke/vertebrae/badges/coverage.png?b=master" alt="scrutinizer-code-coverage"></a>
+                <a href="https://scrutinizer-ci.com/g/nlmenke/vertebrae/?branch=master" target="_blank"><img src="https://scrutinizer-ci.com/g/nlmenke/vertebrae/badges/quality-score.png?b=master" alt="scrutinizer-code-quality"></a>
                 <br>
-                <a href="https://github.com/nlmenke/vertebrae/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-428F7E.svg" alt="mit-license"></a>
+                <a href="https://github.com/nlmenke/vertebrae/blob/master/LICENSE.md" target="_blank"><img src="https://img.shields.io/badge/license-MIT-428F7E.svg" alt="mit-license"></a>
             </div>
 
             <div class="contributors">
                 Chiropractors:
                 <div class="list-group list-group-flush">
-                    <a href="https://github.com/nlmenke" class="list-group-item list-group-item-action">nlmenke</a>
-                    <a href="https://github.com/dave9011" class="list-group-item list-group-item-action">dave9011</a>
+                    <a
+                        href="https://github.com/nlmenke"
+                        class="list-group-item list-group-item-action"
+                        target="_blank"
+                    >nlmenke</a>
+                    <a
+                        href="https://github.com/dave9011"
+                        class="list-group-item list-group-item-action"
+                        target="_blank"
+                    >dave9011</a>
                 </div>
             </div>
         </div>
@@ -61,6 +69,7 @@
             return {
                 error: null,
                 languages: {},
+                laravelDocsLink: null,
                 laravelVersion: null,
                 vueVersion: Vue.version,
             };
@@ -73,7 +82,10 @@
             getEnvironment() {
                 axios.get('meta/environment')
                     .then(
-                        response => (this.laravelVersion = response.data.laravel_version),
+                        (response) => {
+                            this.laravelVersion = response.data.laravel_version;
+                            this.laravelDocsLink = 'https://laravel.com/docs/' + this.laravelVersion.split('.')[0] + '.x';
+                        },
                         error => (this.error = error.toString())
                     );
             },

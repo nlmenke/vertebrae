@@ -45,8 +45,8 @@ class CreateCountriesTable extends Migration
     public function up(): void
     {
         Schema::create(self::TABLE, function (Blueprint $table): void {
-            $table->increments('id');
-            $table->unsignedInteger('currency_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('currency_id')->nullable();
             $table->foreign('currency_id')->references('id')->on(CreateCurrenciesTable::TABLE);
             $table->string('iso_alpha_2', 2)->index(); // ISO 3166-1 alpha-2; 2-char
             $table->string('iso_alpha_3', 3)->index(); // ISO 3166-1 alpha-3; 3-char
