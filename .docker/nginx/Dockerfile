@@ -5,8 +5,8 @@ LABEL maintainer="Nick Menke <nick@nlmenke.net>"
 
 COPY nginx.conf /etc/nginx/
 
-RUN apk update -yqq && \
-    apk upgrade -yqq && \
+RUN apk update && \
+    apk upgrade && \
     apk --update add logrotate && \
     apk add --no-cache openssl && \
     apk add --no-cache bash

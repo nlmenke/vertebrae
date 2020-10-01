@@ -19,7 +19,12 @@ RUN apk --update add wget \
     libgsasl-dev \
     supervisor
 
-RUN docker-php-ext-install mysqli mbstring pdo pdo_mysql tokenizer xml pcntl
+RUN docker-php-ext-install mysqli pdo pdo_mysql tokenizer xml pcntl
+
+RUN if [ $(php -r "echo PHP_MINOR_VERSION;") = "2" ]; then \
+    # PHP_VERSION is 7.2
+    docker-php-ext-install mbstring; \
+fi
 
 RUN pecl channel-update pecl.php.net && \
     pecl install memcached mcrypt-1.0.1 && \
@@ -32,23 +37,26 @@ RUN docker-php-ext-enable memcached && \
 
 RUN set -eux; \
     apk --update add libzip-dev && \
-    if [ ${PHP_VERSION} = "7.3" ] || [ ${PHP_VERSION} = "7.4" ]; then \
+    if [ $(php -r "echo PHP_MINOR_VERSION;") = "3" || $(php -r "echo PHP_MINOR_VERSION;") = "4" ]; then \
+      # PHP_VERSION is 7.3 or 7.4
       docker-php-ext-configure zip; \
     else \
       docker-php-ext-configure zip --with-libzip; \
     fi && \
     docker-php-ext-install zip
 
-ARG PUID=1000
-ARG PGID=1000
-RUN addgroup -g ${PGID} vertebrae && \
-    adduser -D -G vertebrae -u ${PUID} vertebrae
+ARG UID=1000
+ARG UNAME=vertebrae
+ARG GID=1000
+ARG GNAME=vertebrae
+RUN addgroup -g ${GID} ${GNAME} && \
+    adduser -D -G ${GNAME} -u ${UID} ${UNAME}
 
 COPY supervisord.conf /etc/supervisord.conf
 
 ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
 
-RUN set -xs; \
+RUN set -xe; \
     php -v | head -n 1 | grep -q "PHP ${PHP_VERSION}."
 
 RUN rm /var/cache/apk/* && \

@@ -1,5 +1,5 @@
 ARG PHP_VERSION=7.2
-FROM phusion/baseimage:latest
+FROM phusion/baseimage:0.11
 
 LABEL maintainer="Nick Menke <nick@nlmenke.net>"
 
@@ -69,15 +69,17 @@ RUN . ~/.bashrc
 
 USER root
 
-ARG PGID=1000
-ARG PUID=1000
+ARG GID=1000
+ARG GNAME=vertebrae
+ARG UID=1000
+ARG UNAME=vertebrae
 RUN set -xe; \
     apt-get update -yqq && \
     apt-get upgrade -yqq && \
     pecl channel-update pecl.php.net && \
-    groupadd -g ${PGID} vertebrae && \
-    useradd -u ${PUID} -g vertebrae -m vertebrae -G docker_env && \
-    usermod -p "*" vertebrae -s /bin/bash && \
+    groupadd -g ${GID} ${GNAME} && \
+    useradd -u ${UID} -g ${GNAME} -m ${UNAME} -G docker_env && \
+    usermod -p "*" ${UNAME} -s /bin/bash && \
     apt-get install -yqq \
         nasm && \
     php -m | grep -q 'zip'
@@ -87,11 +89,11 @@ RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localetime && \
     echo ${TZ} > /etc/timezone
 
 COPY ./aliases.sh /root/aliases.sh
-COPY ./aliases.sh /home/vertebrae/aliases.sh
+COPY ./aliases.sh /home/${UNAME}/aliases.sh
 
 RUN sed -i 's/\r//' /root/aliases.sh && \
-    sed -i 's/\r//' /home/vertebrae/aliases.sh && \
-    chown vertebrae:vertebrae /home/vertebrae/aliases.sh && \
+    sed -i 's/\r//' /home/${UNAME}/aliases.sh && \
+    chown ${UNAME}:${GNAME} /home/${UNAME}/aliases.sh && \
     echo "" >> ~/.bashrc && \
     echo "# Load Custom Aliases" >> ~/.bashrc && \
     echo "source ~/aliases.sh" >> ~/.bashrc && \
@@ -99,7 +101,7 @@ RUN sed -i 's/\r//' /root/aliases.sh && \
 
 ###############################################################################
 
-USER vertebrae
+USER ${UNAME}
 
 RUN echo "" >> ~/.bashrc && \
     echo "# Load Custom Aliases" >> ~/.bashrc && \
@@ -110,16 +112,16 @@ RUN echo "" >> ~/.bashrc && \
 
 USER root
 
-COPY ./composer.json /home/vertebrae/.composer/composer.json
+COPY ./composer.json /home/${UNAME}/.composer/composer.json
 
-RUN chown -R vertebrae:vertebrae /home/vertebrae/.composer
+RUN chown -R ${UNAME}:${GNAME} /home/${UNAME}/.composer
 
 RUN echo "" >> ~/.bashrc && \
     echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> ~/.bashrc
 
 ###############################################################################
 
-USER vertebrae
+USER ${UNAME}
 
 RUN composer global install
 
@@ -150,10 +152,10 @@ RUN apt-get update -yqq && \
 
 ###############################################################################
 
-USER vertebrae
+USER ${UNAME}
 
 ARG NODE_VERSION=node
-ENV NVM_DIR /home/vertebrae/.nvm
+ENV NVM_DIR /home/${UNAME}/.nvm
 
 RUN mkdir -p $NVM_DIR && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | bash && \
@@ -161,7 +163,7 @@ RUN mkdir -p $NVM_DIR && \
     nvm install ${NODE_VERSION} && \
     nvm use ${NODE_VERSION} && \
     nvm alias ${NODE_VERSION} && \
-    ln -s `npm bin --global` /home/vertebrae/.node-bin
+    ln -s `npm bin --global` /home/${UNAME}/.node-bin
 
 RUN echo "" >> ~/.bashrc && \
     echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc && \
@@ -172,10 +174,10 @@ RUN echo "" >> ~/.bashrc && \
 USER root
 
 RUN echo "" >> ~/.bashrc && \
-    echo 'export NVM_DIR="/home/vertebrae/.nvm"' >> ~/.bashrc && \
+    echo 'export NVM_DIR="/home/${UNAME}/.nvm"' >> ~/.bashrc && \
     echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # this loads nvm' >> ~/.bashrc
 
-ENV PATH $PATH:/home/vertebrae/.node-bin
+ENV PATH $PATH:/home/${UNAME}/.node-bin
 
 RUN find $NVM_DIR -type f -name node -exec ln -s {} /usr/local/bin/node \; && \
     NODE_MODS_DIR="$NVM_DIR/versions/node/$(node -v)/lib/node_modules" && \
@@ -189,32 +191,14 @@ RUN find $NVM_DIR -type f -name node -exec ln -s {} /usr/local/bin/node \; && \
 
 ###############################################################################
 
-USER vertebrae
+USER root
 
-ARG INSTALL_YARN=true
-ARG YARN_VERSION=latest
-RUN if [ ${INSTALL_YARN} = true ]; then \
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && \
-    if [ ${YARN_VERSION} = "latest" ]; then \
-        curl -o- -L https://yarnpkg.com/install.sh | bash; \
-    else \
-        curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version ${YARN_VERSION}; \
-    fi && \
-    echo "" >> ~/.bashrc && \
-    echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> ~/.bashrc; \
+ARG INSTALL_FFMPEG=false
+RUN if [ ${INSTALL_FFMPEG} = true ]; then \
+    apt-get -y install ffmpeg; \
 fi
 
 ###############################################################################
-
-USER root
-
-RUN if [ ${INSTALL_YARN} = true ]; then \
-    echo "" >> ~/.bashrc && \
-    echo 'export YARN_DIR="/home/vertebrae/.yarn"' >> ~/.bashrc && \
-    echo 'export PATH="$YARN_DIR/bin:$PATH"' >> ~/.bashrc; \
-fi
-
-ENV PATH $PATH:/home/vertebrae/.yarn/bin
 
 RUN apt-get install -yqq \
         jpegoptim \
@@ -227,7 +211,7 @@ RUN apt-get install -yqq \
     . ~/.bashrc && \
     npm install -g svgo
 
-RUN set -xs; \
+RUN set -xe; \
     php -v | head -n 1 | grep -q "PHP ${PHP_VERSION}."
 
 RUN apt-get clean && \
