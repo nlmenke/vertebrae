@@ -40,12 +40,24 @@ RUN pecl install imagick && \
 
 RUN docker-php-ext-install pdo_mysql && \
     docker-php-ext-install pdo_pgsql && \
-    docker-php-ext-configure gd \
-        --with-jpeg-dir=/usr/lib \
-        --with-freetype-dir=/usr/include/freetype2 && \
+    if [ $(php -r "echo PHP_MINOR_VERSION;") = "3" || $(php -r "echo PHP_MINOR_VERSION;") = "4" ]; then \
+      # PHP_BERSION is 7.3 or 7.4
+      docker-php-ext-configure gd \
+          --with-jpeg \
+          --with-freetype; \
+    else \
+      docker-php-ext-configure gd \
+          --with-jpeg-dir=/usr/lib \
+          --with-freetype-dir=/usr/include/freetype2; \
+    fi && \
     docker-php-ext-install gd && \
-    docker-php-ext-configure zip \
-        --with-libzip && \
+    if [ $(php -r "echo PHP_MINOR_VERSION;") = "3" || $(php -r "echo PHP_MINOR_VERSION;") = "4" ]; then \
+      # PHP_VERSION is 7.3 or 7.4
+      docker-php-ext-configure zip; \
+    else \
+      docker-php-ext-configure zip \
+          --with-libzip; \
+    fi && \
     docker-php-ext-install zip && \
     php -m | grep -q 'zip' && \
     docker-php-ext-install bcmath && \
@@ -61,15 +73,11 @@ COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 ARG INSTALL_XDEBUG=false
 RUN if [ ${INSTALL_XDEBUG} = true ]; then \
-    if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
-        pecl install xdebug-2.5.5; \
-    else \
-        pecl install xdebug; \
-    fi && \
+    pecl install xdebug; \
     docker-php-ext-enable xdebug; \
 fi
 
-RUN set -xs; \
+RUN set -xe; \
     php -v | head -n 1 | grep -q "PHP ${PHP_VERSION}."
 
 COPY ./laravel.ini /usr/local/etc/php/conf.d

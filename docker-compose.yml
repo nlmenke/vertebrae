@@ -118,8 +118,10 @@ services:
       context: ./.docker/php-worker
       args:
         - PHP_VERSION=${PHP_VERSION}
-        - PUID=${WORKER_PUID}
-        - PGID=${WORKER_PGID}
+        - GID=${WORKER_GID}
+        - GNAME=${WORKER_GNAME}
+        - UID=${WORKER_UID}
+        - UNAME=${WORKER_UNAME}
     volumes:
       - ./:/var/www:cached
       - ./.docker/logs/php-worker/:/var/log/php-worker
@@ -156,12 +158,14 @@ services:
       context: ./.docker/workspace
       args:
         - PHP_VERSION=${PHP_VERSION}
-        - PGID=${WORKSPACE_PGID}
-        - PUID=${WORKSPACE_PUID}
+        - UID=${WORKSPACE_UID}
+        - UNAME=${WORKSPACE_UNAME}
+        - GID=${WORKSPACE_GID}
+        - GNAME=${WORKSPACE_UNAME}
         - TZ=${TIMEZONE}
         - NODE_VERSION=${NODE_VERSION}
-        - INSTALL_YARN=${INSTALL_YARN}
-        - YARN_VERSION=${YARN_VERSION}
+        - INSTALL_FFMPEG=${INSTALL_FFMPEG}
+        - INSTALL_XDEBUG=${INSTALL_XDEBUG}
         - http_proxy
         - https_proxy
         - no_proxy
