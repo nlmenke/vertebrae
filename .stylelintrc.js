@@ -912,6 +912,33 @@ let stylelintLimitLanguageFeatures = {
 };
 
 /**
+ * @type {object}
+ */
+let stylelintStylisticIssues = {
+    /**
+     * Specify lowercase or uppercase for hex colors.
+     *
+     * The `--fix` option can automatically fix all of the problems reported by this rule.
+     *
+     * @property {string}
+     *                    - `lower` Hex colors must be lowercase
+     *                    - `upper` Hex colors must be uppercase
+     */
+    'color-hex-case': 'lower',
+
+    /**
+     * Specify short or long notation for hex colors.
+     *
+     * The `--fix` option can automatically fix all of the problems reported by this rule.
+     *
+     * @property {string}
+     *                    - `short` Hex colors must be in short notation
+     *                    - `long`  Hex colors must be in long notation
+     */
+    'color-hex-length': 'short',
+};
+
+/**
  * Merge rule objects into a single object.
  *
  * @type {object}
@@ -919,6 +946,7 @@ let stylelintLimitLanguageFeatures = {
 let rules = Object.assign(
     stylelintPossibleErrors,
     stylelintLimitLanguageFeatures,
+    stylelintStylisticIssues,
 );
 
 /**
