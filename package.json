@@ -9,8 +9,7 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "lint": "node_modules/.bin/eslint resources/assets/scripts/** resources/assets/vue/** --ext .js,.vue --fix",
-        "stylelint": "npx stylelint resources/assets/sass/**/*.scss",
-        "__additional": "--fix"
+        "stylelint": "npx stylelint resources/assets/sass/**/*.scss --fix"
     },
     "devDependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
