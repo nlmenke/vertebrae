@@ -16,7 +16,6 @@ namespace App\Console\Commands\BuildPageFiles;
 
 use File;
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Composer;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
@@ -84,8 +83,6 @@ class BuildPageFilesCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @throws FileNotFoundException
      *
      * @return void
      */
@@ -200,7 +197,7 @@ class BuildPageFilesCommand extends Command
 
         if ($this->option('seeder')) {
             // create seeder and add to Git
-            $seederPath = database_path('seeds');
+            $seederPath = database_path('seeders');
             $seederFile = Str::plural($name) . 'TableSeeder.php';
 
             $seeder = $this->buildFile($name, 'seeder');
@@ -256,8 +253,6 @@ class BuildPageFilesCommand extends Command
      *
      * @param string $name
      * @param string $type
-     *
-     * @throws FileNotFoundException
      *
      * @return string
      */

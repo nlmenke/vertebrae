@@ -40,24 +40,11 @@ RUN pecl install imagick && \
 
 RUN docker-php-ext-install pdo_mysql && \
     docker-php-ext-install pdo_pgsql && \
-    if [ $(php -r "echo PHP_MINOR_VERSION;") = "3" || $(php -r "echo PHP_MINOR_VERSION;") = "4" ]; then \
-      # PHP_BERSION is 7.3 or 7.4
-      docker-php-ext-configure gd \
-          --with-jpeg \
-          --with-freetype; \
-    else \
-      docker-php-ext-configure gd \
-          --with-jpeg-dir=/usr/lib \
-          --with-freetype-dir=/usr/include/freetype2; \
-    fi && \
+    docker-php-ext-configure gd \
+        --with-jpeg \
+        --with-freetype && \
     docker-php-ext-install gd && \
-    if [ $(php -r "echo PHP_MINOR_VERSION;") = "3" || $(php -r "echo PHP_MINOR_VERSION;") = "4" ]; then \
-      # PHP_VERSION is 7.3 or 7.4
-      docker-php-ext-configure zip; \
-    else \
-      docker-php-ext-configure zip \
-          --with-libzip; \
-    fi && \
+    docker-php-ext-configure zip && \
     docker-php-ext-install zip && \
     php -m | grep -q 'zip' && \
     docker-php-ext-install bcmath && \

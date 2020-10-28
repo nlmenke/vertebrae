@@ -14,7 +14,10 @@
 
 declare(strict_types=1);
 
+namespace Database\Seeders;
+
 use DummyRootNamespaceEntities\Dummy\Dummy;
+use CreateDummiesTable;
 
 /**
  * (add a short summary)

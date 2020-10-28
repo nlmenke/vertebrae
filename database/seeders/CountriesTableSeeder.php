@@ -12,8 +12,11 @@
 
 declare(strict_types=1);
 
+namespace Database\Seeders;
+
 use App\Entities\Country\Country;
 use App\Entities\Currency\Currency;
+use CreateCountriesTable;
 
 /**
  * The Countries seeder class.

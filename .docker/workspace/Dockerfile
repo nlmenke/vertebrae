@@ -1,4 +1,4 @@
-ARG PHP_VERSION=7.2
+ARG PHP_VERSION=7.4
 FROM phusion/baseimage:0.11
 
 LABEL maintainer="Nick Menke <nick@nlmenke.net>"

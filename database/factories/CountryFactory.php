@@ -16,18 +16,34 @@
 
 declare(strict_types=1);
 
+namespace Database\Factories;
+
 use App\Entities\Country\Country;
 use App\Entities\Currency\Currency;
-use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
-/* @var Factory $factory */
-$factory->define(Country::class, function (Faker $faker) {
-    return [
-        'currency_id' => factory(Currency::class)->create()->getId(),
-        'iso_alpha_2' => $faker->unique()->countryCode,
-        'iso_alpha_3' => $faker->unique()->countryISOAlpha3,
-        'iso_numeric' => str_pad((string)$faker->unique()->randomNumber(2), 3, '0', STR_PAD_LEFT),
-        'name' => $faker->country,
-    ];
-});
+class CountryFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Country::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        return [
+            'currency_id' => factory(Currency::class)->create()->getId(),
+            'iso_alpha_2' => $this->faker->unique()->countryCode,
+            'iso_alpha_3' => $this->faker->unique()->countryISOAlpha3,
+            'iso_numeric' => str_pad((string)$this->faker->unique()->randomNumber(2), 3, '0', STR_PAD_LEFT),
+            'name' => $this->faker->country,
+        ];
+    }
+}

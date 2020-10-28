@@ -12,7 +12,10 @@
 
 declare(strict_types=1);
 
+namespace Database\Seeders;
+
 use App\Entities\Language\Language;
+use CreateLanguagesTable;
 
 /**
  * The Languages seeder class.

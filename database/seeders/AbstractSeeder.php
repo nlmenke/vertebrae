@@ -12,9 +12,14 @@
 
 declare(strict_types=1);
 
+namespace Database\Seeders;
+
 use App\Entities\AbstractEntity;
+use DB;
+use Exception;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Seeder;
+use Throwable;
 
 /**
  * The base database seeder class.
@@ -51,6 +56,7 @@ abstract class AbstractSeeder extends Seeder
      * Run the seeder.
      *
      * @throws Exception
+     * @throws Throwable
      *
      * @return void
      */

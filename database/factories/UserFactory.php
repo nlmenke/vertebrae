@@ -18,19 +18,36 @@
 
 declare(strict_types=1);
 
+namespace Database\Factories;
+
 use App\Entities\User\User;
-use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\Str;
 
-/* @var Factory $factory */
-$factory->define(User::class, function (Faker $faker) {
-    $name = $faker->unique()->name;
+class UserFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = User::class;
 
-    return [
-        'name' => $name,
-        'email' => Str::snake($name, '.') . '@' . $faker->safeEmailDomain,
-        'email_verified_at' => now(),
-        'password' => bcrypt($name),
-        'remember_token' => Str::random(10),
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        $name = $this->faker->unique()->name;
+
+        return [
+            'name' => $name,
+            'email' => Str::snake($name, '.') . '@' . $this->faker->safeEmailDomain,
+            'email_verified_at' => now(),
+            'password' => bcrypt($name),
+            'remember_token' => Str::random(10),
+        ];
+    }
+}

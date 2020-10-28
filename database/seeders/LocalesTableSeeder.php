@@ -12,10 +12,13 @@
 
 declare(strict_types=1);
 
+namespace Database\Seeders;
+
 use App\Entities\Country\Country;
 use App\Entities\Language\Language;
 use App\Entities\Locale\Locale;
 use App\Entities\Script\Script;
+use CreateLocalesTable;
 
 /**
  * The Locales seeder class.

@@ -16,16 +16,32 @@
 
 declare(strict_types=1);
 
+namespace Database\Factories;
+
 use App\Entities\Script\Script;
-use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
-/* @var Factory $factory */
-$factory->define(Script::class, function (Faker $faker) {
-    return [
-        'iso_alpha' => $faker->randomLetter . $faker->randomLetter . $faker->randomLetter . $faker->randomLetter,
-        'iso_numeric' => str_pad((string)$faker->unique()->randomNumber(2), 3, '0', STR_PAD_LEFT),
-        'name' => $faker->word,
-        'direction' => $faker->randomElement(['l-r', 'r-l', 't-b']),
-    ];
-});
+class ScriptFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Script::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        return [
+            'iso_alpha' => $this->faker->randomLetter . $this->faker->randomLetter . $this->faker->randomLetter . $this->faker->randomLetter,
+            'iso_numeric' => str_pad((string)$this->faker->unique()->randomNumber(2), 3, '0', STR_PAD_LEFT),
+            'name' => $this->faker->word,
+            'direction' => $this->faker->randomElement(['l-r', 'r-l', 't-b']),
+        ];
+    }
+}
