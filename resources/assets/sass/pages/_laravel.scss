@@ -70,10 +70,10 @@ $link-color: #f4645f;
         padding: 0 25px;
         font-size: 12px;
         font-weight: 700;
-        letter-spacing: .1rem;
+        letter-spacing: 0.1rem;
         text-decoration: none;
         text-transform: uppercase;
-        transition: .3s ease-in-out;
+        transition: 0.3s ease-in-out;
 
         &:hover {
             color: $link-color;
@@ -92,7 +92,7 @@ $link-color: #f4645f;
         & > .list-group > .list-group-item {
             background-color: $transparent;
             text-decoration: none;
-            transition: .3s ease-in-out;
+            transition: 0.3s ease-in-out;
             padding: 0.5rem 1rem;
 
             &.list-group-item-action {

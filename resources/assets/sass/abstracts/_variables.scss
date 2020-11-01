@@ -59,7 +59,8 @@ $google-fonts-url: 'https://fonts.googleapis.com/css?family=Architects+Daughter|
 /// @type {map}
 /// @prop {string} keys   the src of the font-face
 /// @prop {map}    values map of the typeface's properties
-///   @prop {string} keys   css properties (font-family, font-style, font-weight)
+///   @prop {string} keys   css properties (font-family, font-style,
+///                         font-weight)
 ///   @prop {map}    values css values
 //$typefaces: (
 //    'filename': (

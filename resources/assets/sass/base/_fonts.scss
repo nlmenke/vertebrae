@@ -24,9 +24,10 @@
             font-family: map-get(map-get($typefaces, $file), family);
             font-style: map-get(map-get($typefaces, $file), style);
             font-weight: map-get(map-get($typefaces, $file), weight);
-            src: font('#{$file}.ttf') format('truetype'),
-                 font('#{$file}.woff') format('woff'),
-                 font('#{$file}.woff2') format('woff2');
+            src:
+                font('#{$file}.ttf') format('truetype'),
+                font('#{$file}.woff') format('woff'),
+                font('#{$file}.woff2') format('woff2');
         }
     }
 }
