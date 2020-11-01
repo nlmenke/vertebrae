@@ -2,7 +2,7 @@
 /**
  * Locale Test Case.
  *
- * @package Tests\Unit
+ * @package Unit Tests
  *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2020 Nick Menke
@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Unit;
 
 use Tests\TestCase;
 

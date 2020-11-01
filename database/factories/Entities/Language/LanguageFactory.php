@@ -16,11 +16,20 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace Database\Factories\Entities\Language;
 
 use App\Entities\Language\Language;
-use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * The Language factory class.
+ *
+ * This class gives the ability to create database entries in the languages
+ * table. Factories should only be used in feature tests or any time you
+ * require dummy data.
+ *
+ * @since 0.0.0-framework introduced
+ */
 class LanguageFactory extends Factory
 {
     /**

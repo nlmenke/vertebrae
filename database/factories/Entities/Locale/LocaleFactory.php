@@ -16,14 +16,23 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace Database\Factories\Entities\Locale;
 
 use App\Entities\Country\Country;
 use App\Entities\Language\Language;
 use App\Entities\Locale\Locale;
 use App\Entities\Script\Script;
-use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * The Locale factory class.
+ *
+ * This class gives the ability to create database entries in the locales
+ * table. Factories should only be used in feature tests or any time you
+ * require dummy data.
+ *
+ * @since 0.0.0-framework introduced
+ */
 class LocaleFactory extends Factory
 {
     /**
@@ -41,9 +50,9 @@ class LocaleFactory extends Factory
     public function definition(): array
     {
         return [
-            'country_id' => factory(Country::class)->create()->id,
-            'language_id' => factory(Language::class)->create()->id,
-            'script_id' => factory(Script::class)->create()->id,
+            'country_id' => Country::factory()->create()->id,
+            'language_id' => Language::factory()->create()->id,
+            'script_id' => Script::factory()->create()->id,
             'code' => $this->faker->locale,
             'native' => $this->faker->word,
             'currency_symbol_first' => $this->faker->boolean,

@@ -207,7 +207,7 @@ class BuildPageFilesCommand extends Command
 
         if ($this->option('factory')) {
             // create factory and add to Git
-            $factoryPath = database_path('factories');
+            $factoryPath = database_path('factories/Entities/' . $name);
             $factoryFile = $name . 'Factory.php';
 
             $factory = $this->buildFile($name, 'factory');

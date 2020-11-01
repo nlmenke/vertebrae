@@ -2,7 +2,7 @@
 /**
  * Abstract Controller Test Case.
  *
- * @package Tests\Feature\Controllers
+ * @package Feature Tests
  *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2020 Nick Menke
@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Controllers;
+namespace Feature\Controllers;
 
 use Tests\TestCase;
 

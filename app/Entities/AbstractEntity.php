@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace App\Entities;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -28,6 +29,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 abstract class AbstractEntity extends Model
 {
+    use HasFactory;
+
     /**
      * Retrieves the `created_at` attribute.
      *

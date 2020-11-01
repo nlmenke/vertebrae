@@ -15,11 +15,18 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace Database\Factories\Entities\Dummy;
 
 use App\Entities\Dummy\Dummy;
-use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * (add a short summary)
+ *
+ * (add an additional description if required)
+ *
+ * @since 0.0.0-framework introduced
+ */
 class DummyFactory extends Factory
 {
     /**

@@ -16,12 +16,21 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace Database\Factories\Entities\Country;
 
 use App\Entities\Country\Country;
 use App\Entities\Currency\Currency;
-use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * The Country factory class.
+ *
+ * This class gives the ability to create database entries in the countries
+ * table. Factories should only be used in feature tests or any time you
+ * require dummy data.
+ *
+ * @since 0.0.0-framework introduced
+ */
 class CountryFactory extends Factory
 {
     /**
@@ -39,7 +48,7 @@ class CountryFactory extends Factory
     public function definition(): array
     {
         return [
-            'currency_id' => factory(Currency::class)->create()->getId(),
+            'currency_id' => Currency::factory()->create()->getId(),
             'iso_alpha_2' => $this->faker->unique()->countryCode,
             'iso_alpha_3' => $this->faker->unique()->countryISOAlpha3,
             'iso_numeric' => str_pad((string)$this->faker->unique()->randomNumber(2), 3, '0', STR_PAD_LEFT),

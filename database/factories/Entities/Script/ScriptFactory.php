@@ -16,11 +16,20 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace Database\Factories\Entities\Script;
 
 use App\Entities\Script\Script;
-use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * The Script factory class.
+ *
+ * This class gives the ability to create database entries in the scripts
+ * table. Factories should only be used in feature tests or any time you
+ * require dummy data.
+ *
+ * @since 0.0.0-framework introduced
+ */
 class ScriptFactory extends Factory
 {
     /**

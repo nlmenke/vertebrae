@@ -16,11 +16,20 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace Database\Factories\Entities\Currency;
 
 use App\Entities\Currency\Currency;
-use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * The Currency factory class.
+ *
+ * This class gives the ability to create database entries in the currencies
+ * table. Factories should only be used in feature tests or any time you
+ * require dummy data.
+ *
+ * @since 0.0.0-framework introduced
+ */
 class CurrencyFactory extends Factory
 {
     /**

@@ -2,7 +2,7 @@
 /**
  * Locale API Controller Test Case.
  *
- * @package Tests\Feature\Controllers\Api
+ * @package Feature Tests
  *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2020 Nick Menke
@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Controllers\Api;
+namespace Feature\Controllers\Api;
 
 use App\Entities\Locale\Locale;
 use App\Http\Controllers\Api\LocaleApiController;

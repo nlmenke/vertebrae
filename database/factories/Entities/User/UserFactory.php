@@ -18,12 +18,21 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace Database\Factories\Entities\User;
 
 use App\Entities\User\User;
-use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
+/**
+ * The Currency factory class.
+ *
+ * This class gives the ability to create database entries in the users table.
+ * Factories should only be used in feature tests or any time you require dummy
+ * data.
+ *
+ * @since 0.0.0-framework introduced
+ */
 class UserFactory extends Factory
 {
     /**
