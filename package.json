@@ -8,27 +8,31 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "lint": "node_modules/.bin/eslint --fix resources/assets/scripts/** resources/assets/vue/** --ext .js,.vue"
+        "lint": "node_modules/.bin/eslint resources/assets/scripts/** resources/assets/vue/** --ext .js,.vue --fix",
+        "stylelint": "npx stylelint resources/assets/sass/**/*.scss --fix"
     },
     "devDependencies": {
-        "@fortawesome/fontawesome-free": "^5.13.0",
+        "@fortawesome/fontawesome-free": "^5.15.1",
         "axios": "^0.19",
-        "bootstrap": "^4.4.1",
+        "bootstrap": "^4.5.2",
         "cross-env": "^7.0",
         "eslint": "^6.8.0",
         "eslint-plugin-vue": "^6.2.2",
-        "jquery": "^3.5.0",
-        "laravel-mix": "^5.0.4",
+        "jquery": "^3.5.1",
+        "laravel-mix": "^5.0.7",
         "laravel-vue-pagination": "^2.3.1",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.20",
         "popper.js": "^1.16.1",
         "resolve-url-loader": "^3.1.0",
-        "sass": "^1.26.5",
+        "sass": "^1.27.0",
         "sass-loader": "^8.0.0",
-        "vue": "^2.6.11",
-        "vue-meta": "^2.3.3",
-        "vue-router": "^3.1.6",
-        "vue-template-compiler": "^2.6.11",
-        "vuex": "^3.3.0"
+        "stylelint": "^13.7.2",
+        "stylelint-order": "^4.1.0",
+        "stylelint-scss": "^3.18.0",
+        "vue": "^2.6.12",
+        "vue-meta": "^2.4.0",
+        "vue-router": "^3.4.6",
+        "vue-template-compiler": "^2.6.12",
+        "vuex": "^3.5.1"
     }
 }

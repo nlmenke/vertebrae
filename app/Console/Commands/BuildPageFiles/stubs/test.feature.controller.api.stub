@@ -4,7 +4,7 @@
  *
  * (add an additional description if required)
  *
- * @package Tests\Feature\Controllers\Api
+ * @package Feature Tests
  *
  * @author    (your name) <(your email)>
  * @copyright 2018-2020 Nick Menke
@@ -14,10 +14,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Controllers\Api;
+namespace Feature\Controllers\Api;
 
 use App\Entities\Dummy\Dummy;
-use App\Http\Controllers\DummyApiController;
+use App\Http\Controllers\Api\DummyApiController;
 
 /**
  * (add a short summary)

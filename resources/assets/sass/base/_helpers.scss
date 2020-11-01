@@ -14,7 +14,7 @@
 
 /// Clear inner floats
 .clearfix {
-    @include clearfix
+    @include clearfix;
 }
 
 /// Main content container.

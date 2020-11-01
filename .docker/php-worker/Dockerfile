@@ -21,11 +21,6 @@ RUN apk --update add wget \
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql tokenizer xml pcntl
 
-RUN if [ $(php -r "echo PHP_MINOR_VERSION;") = "2" ]; then \
-    # PHP_VERSION is 7.2
-    docker-php-ext-install mbstring; \
-fi
-
 RUN pecl channel-update pecl.php.net && \
     pecl install memcached mcrypt-1.0.1 && \
     printf "\n" | pecl install -o -f redis && \
@@ -37,12 +32,7 @@ RUN docker-php-ext-enable memcached && \
 
 RUN set -eux; \
     apk --update add libzip-dev && \
-    if [ $(php -r "echo PHP_MINOR_VERSION;") = "3" || $(php -r "echo PHP_MINOR_VERSION;") = "4" ]; then \
-      # PHP_VERSION is 7.3 or 7.4
-      docker-php-ext-configure zip; \
-    else \
-      docker-php-ext-configure zip --with-libzip; \
-    fi && \
+    docker-php-ext-configure zip && \
     docker-php-ext-install zip
 
 ARG UID=1000

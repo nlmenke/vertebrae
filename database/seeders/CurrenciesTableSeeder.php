@@ -12,8 +12,11 @@
 
 declare(strict_types=1);
 
+namespace Database\Seeders;
+
 use App\Entities\Currency\Currency;
 use App\Jobs\UpdateExchangeRates;
+use CreateCurrenciesTable;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**

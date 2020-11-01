@@ -12,7 +12,10 @@
 
 declare(strict_types=1);
 
+namespace Database\Seeders;
+
 use App\Entities\Script\Script;
+use CreateScriptsTable;
 
 /**
  * The Scripts seeder class.
