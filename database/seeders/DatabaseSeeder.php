@@ -13,6 +13,8 @@
 
 declare(strict_types=1);
 
+namespace Database\Seeders;
+
 /**
  * The base database seeder class.
  *

@@ -2,7 +2,7 @@
 /**
  * Abstract API Controller Test Case.
  *
- * @package Tests\Feature\Controllers\Api
+ * @package Feature Tests
  *
  * @author    Nick Menke <nick@nlmenke.net>
  * @copyright 2018-2020 Nick Menke
@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Controllers\Api;
+namespace Feature\Controllers\Api;
 
 use App\Entities\AbstractEntity;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -287,7 +287,7 @@ abstract class AbstractApiControllerTest extends TestCase
             }
         }
 
-        $request = factory($this->model)->make($validation);
+        $request = $this->model::factory()->make($validation);
 
         return $request->toArray();
     }
@@ -302,10 +302,10 @@ abstract class AbstractApiControllerTest extends TestCase
     protected function createTestResources(int $count = 1)
     {
         if ($count > 1) {
-            return factory($this->model, $count)->create();
+            return $this->model::factory()->count($count)->create();
         }
 
-        return factory($this->model)->create();
+        return $this->model::factory()->create();
     }
 
     /**
