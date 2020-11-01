@@ -1,16 +1,15 @@
 ---
-name: Bugfix template
-about: Create a bugfix pull request
+name: Bugfix
+about: Create a pull request to fix a bug
 title: ''
 labels: bugfix
 assignees: ''
-
 ---
 
 ## Changes
 
 <!--
-Describe in detail what your merge request does, why it does that, etc. Pull
+Describe in detail what your pull request does, why it does that, etc. Pull
 requests without an adequate description will not be reviewed until one is
 added.
 
@@ -23,5 +22,7 @@ Fixes #x
 
 ## Checklist
 
-- [x] Conforms to the project's [coding standards](/docs/coding_standards.md) (run `composer cs-fix`, `npm run lint`, and/or `npm run stylelint`, depending on what you were working on)
+- [x] Conforms to the project's [coding standards](/docs/coding_standards.md)
+(run `composer cs-fix`, `npm run lint`, and/or `npm run stylelint`, depending
+on what you were working on)
 <!-- todo: need to finish documentation and add to this checklist -->
