@@ -5,7 +5,7 @@
  * @package App\Http\Controllers\Api
  *
  * @author    Nick Menke <nick@nlmenke.net>
- * @copyright 2018-2020 Nick Menke
+ * @copyright 2018-2023 Nick Menke
  *
  * @link https://github.com/nlmenke/vertebrae
  */
@@ -21,8 +21,8 @@ use DB;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Request;
 
 /**
  * The base API controller class.
@@ -61,7 +61,7 @@ abstract class AbstractApiController extends AbstractController
             'store',
             'update',
             'destroy',
-        ], '', Request::route()->getName());
+        ], '', (new Request())->route() ? (new Request())->route()->getName() : '');
 
         parent::__construct();
     }

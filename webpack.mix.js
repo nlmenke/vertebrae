@@ -8,7 +8,7 @@
  * @package   Laravel
  * @author    Taylor Otwell <taylor@laravel.com>
  * @author    Nick Menke <nick@nlmenke.net>
- * @copyright 2018-2020 Nick Menke
+ * @copyright 2018-2023 Nick Menke
  * @link      https://github.com/nlmenke/vertebrae
  * @since     0.0.0-framework introduced
  * @since     x.x.x           setup new structure
