@@ -62,9 +62,9 @@ abstract class AbstractSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::beginTransaction();
-
         $this->cleanDatabase();
+
+        DB::beginTransaction();
 
         foreach ($this->itemList as $item) {
             $this->model->create($item);
