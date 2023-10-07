@@ -19,7 +19,7 @@
         "barryvdh/laravel-ide-helper": "^2.13",
         "codedungeon/phpunit-result-printer": "^0.30.1",
         "fakerphp/faker": "^1.9.1",
-        "friendsofphp/php-cs-fixer": "^3.21",
+        "friendsofphp/php-cs-fixer": "^3.34",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
@@ -57,7 +57,7 @@
     "prefer-stable": true,
     "scripts": {
         "cs-fix": [
-            "php-cs-fixer fix ---verbose --config=.php_cs"
+            "php-cs-fixer fix --verbose --config=.php-cs-fixer.php"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

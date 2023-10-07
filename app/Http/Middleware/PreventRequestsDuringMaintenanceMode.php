@@ -14,7 +14,13 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Closure;
+use ErrorException;
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance as Middleware;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * The Prevent Requests During Maintenance Mode middleware class.
@@ -33,30 +39,25 @@ class PreventRequestsDuringMaintenanceMode extends Middleware
      */
     protected $except = [];
 
-//    /**
-//     * Handle an incoming request.
-//     *
-//     * @param Request $request
-//     * @param Closure $next
-//     *
-//     * @throws HttpException
-//     *
-//     * @return JsonResponse|mixed
-//     */
-//    public function handle($request, Closure $next)
-//    {
-//        try {
-//            parent::handle($request, $next);
-//        } catch (MaintenanceModeException $e) {
-//            if ($request->expectsJson() || $request->wantsJson()) {
-//                return new JsonResponse([
-//                    'message' => $e->getMessage(),
-//                ], Response::HTTP_SERVICE_UNAVAILABLE);
-//            }
-//
-//            throw $e;
-//        }
-//
-//        return $next($request);
-//    }
+    /**
+     * Handle an incoming request.
+     *
+     * @param Request $request
+     * @param Closure $next
+     *
+     * @throws ErrorException
+     * @throws HttpException
+     *
+     * @return mixed
+     */
+    public function handle($request, Closure $next): mixed
+    {
+        if ($this->app->isDownForMaintenance() && $request->expectsJson()) {
+            return new JsonResponse([
+                'message' => 'This application is currently undergoing maintenance.',
+            ], Response::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        return parent::handle($request, $next);
+    }
 }
