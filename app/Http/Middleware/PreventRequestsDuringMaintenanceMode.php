@@ -49,7 +49,7 @@ class PreventRequestsDuringMaintenanceMode extends Middleware
 //            parent::handle($request, $next);
 //        } catch (MaintenanceModeException $e) {
 //            if ($request->expectsJson() || $request->wantsJson()) {
-//                return JsonResponse::create([
+//                return new JsonResponse([
 //                    'message' => $e->getMessage(),
 //                ], Response::HTTP_SERVICE_UNAVAILABLE);
 //            }

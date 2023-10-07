@@ -98,7 +98,7 @@ abstract class AbstractApiController extends AbstractController
         } catch (ModelNotFoundException $e) {
             DB::rollBack();
 
-            return JsonResponse::create([
+            return new JsonResponse([
                 'message' => trans('exceptions.http.404_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
@@ -109,7 +109,7 @@ abstract class AbstractApiController extends AbstractController
         } catch (Exception $e) {
             DB::rollBack();
 
-            return JsonResponse::create([
+            return new JsonResponse([
                 'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
@@ -147,7 +147,7 @@ abstract class AbstractApiController extends AbstractController
                 ->response()
                 ->header('Content-Language', $this->currentLocale);
         } catch (Exception $e) {
-            return JsonResponse::create([
+            return new JsonResponse([
                 'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
@@ -186,7 +186,7 @@ abstract class AbstractApiController extends AbstractController
                 ->response()
                 ->header('Content-Language', $this->currentLocale);
         } catch (ModelNotFoundException $e) {
-            return JsonResponse::create([
+            return new JsonResponse([
                 'message' => trans('exceptions.http.404_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
@@ -195,7 +195,7 @@ abstract class AbstractApiController extends AbstractController
                 'Content-Language' => $this->currentLocale,
             ]);
         } catch (Exception $e) {
-            return JsonResponse::create([
+            return new JsonResponse([
                 'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
@@ -238,7 +238,7 @@ abstract class AbstractApiController extends AbstractController
         } catch (Exception $e) {
             DB::rollBack();
 
-            return JsonResponse::create([
+            return new JsonResponse([
                 'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
@@ -281,7 +281,7 @@ abstract class AbstractApiController extends AbstractController
         } catch (ModelNotFoundException $e) {
             DB::rollBack();
 
-            return JsonResponse::create([
+            return new JsonResponse([
                 'message' => trans('exceptions.http.404_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
@@ -292,7 +292,7 @@ abstract class AbstractApiController extends AbstractController
         } catch (Exception $e) {
             DB::rollBack();
 
-            return JsonResponse::create([
+            return new JsonResponse([
                 'message' => trans('exceptions.http.500_message'),
                 'errors' => (object)[
                     $e->getCode() => [$e->getMessage()],
