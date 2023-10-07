@@ -5,7 +5,7 @@
  * @package Feature Tests
  *
  * @author    Nick Menke <nick@nlmenke.net>
- * @copyright 2018-2020 Nick Menke
+ * @copyright 2018-2023 Nick Menke
  *
  * @link https://github.com/nlmenke/vertebrae
  */
