@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Active Locales Not Defined Exception.
  *

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Locale API Controller.
  *

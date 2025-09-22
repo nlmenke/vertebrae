@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Broadcasting Config.
  *

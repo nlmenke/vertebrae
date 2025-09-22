@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Currency Language Lines - EN.
  *

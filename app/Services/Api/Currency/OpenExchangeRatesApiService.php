@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Open Exchange Rates API Service.
  *

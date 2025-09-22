@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Check for Maintenance Mode Middleware.
  *

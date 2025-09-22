@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Create Countries Table.
  *

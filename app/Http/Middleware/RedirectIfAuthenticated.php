@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Redirect if Authenticated Middleware.
  *

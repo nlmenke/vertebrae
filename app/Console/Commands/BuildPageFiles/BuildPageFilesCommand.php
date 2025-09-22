@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Build Page Files Command.
  *

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Pagination Language Lines - EN.
  *

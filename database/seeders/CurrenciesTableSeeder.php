@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Currencies Table Seeder.
  *

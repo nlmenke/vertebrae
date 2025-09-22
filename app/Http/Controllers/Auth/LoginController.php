@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Auth/Login Controller.
  *

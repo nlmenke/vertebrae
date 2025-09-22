@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Creates a new app instance.
  *

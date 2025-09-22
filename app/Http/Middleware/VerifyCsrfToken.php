@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Verify CSRF Token Middleware.
  *

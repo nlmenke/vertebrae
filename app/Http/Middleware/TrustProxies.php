@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Trust Proxies Middleware.
  *

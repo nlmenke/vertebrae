@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Password Reset Language Lines - EN.
  *

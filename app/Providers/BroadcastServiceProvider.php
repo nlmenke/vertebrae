@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Broadcast Service Provider.
  *
