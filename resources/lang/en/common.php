@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Common Language Lines - EN.
  *

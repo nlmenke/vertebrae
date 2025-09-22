@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Create Failed Jobs Table.
  *

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Create Password Resets Table.
  *

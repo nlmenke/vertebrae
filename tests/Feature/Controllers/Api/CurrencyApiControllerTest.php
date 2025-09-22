@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Currency API Controller Test Case.
  *

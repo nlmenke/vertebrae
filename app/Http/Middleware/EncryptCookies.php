@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Encrypt Cookies Middleware.
  *

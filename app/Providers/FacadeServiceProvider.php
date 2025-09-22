@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Facade Service Provider.
  *

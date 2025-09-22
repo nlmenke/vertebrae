@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Trim Strings Middleware.
  *

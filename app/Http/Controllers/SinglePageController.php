@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Single-Page Controller.
  *

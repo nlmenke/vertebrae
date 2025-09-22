@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Script Test Case.
  *

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Scripts Table Seeder.
  *

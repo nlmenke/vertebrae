@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Localize API Middleware.
  *

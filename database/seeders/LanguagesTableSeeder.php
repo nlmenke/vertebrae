@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Languages Table Seeder.
  *

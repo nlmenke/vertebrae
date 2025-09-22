@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Auth/Forgot Password Controller.
  *

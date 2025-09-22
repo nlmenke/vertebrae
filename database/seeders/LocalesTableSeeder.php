@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Locales Table Seeder.
  *

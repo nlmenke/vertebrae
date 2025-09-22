@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Route Service Provider.
  *
