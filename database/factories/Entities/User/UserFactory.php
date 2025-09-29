@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * The Currency factory class.
+ * The User factory class.
  *
  * This class gives the ability to create database entries in the users table.
  * Factories should only be used in feature tests or any time you require dummy
