@@ -1,8 +1,8 @@
 ---
-name: Bugfix
-about: Create a pull request to fix a bug
+name: Documentation
+about: Create a pull request to add documentation
 title: ''
-labels: bugfix
+labels: documentation
 assignees: ''
 ---
 
@@ -19,14 +19,12 @@ place so that reviewers can understand your intent. This is especially
 important if they didn't participate in the discussion.
 -->
 
-Fixes #x
+Resolves #x
 
 ### Checklist
 
 - [ ] pull request title and description are up to date, accurate, and
   descriptive
 - [ ] pull request is targeting the appropriate branch
-- [ ] conforms to the project's
-  [code styles](/docs/contributing/coding_style.md)
-- [ ] tests created/updated
-- [ ] documentation created/updated
+- [ ] pull request only includes documentation changes
+- [ ] documentation is clear, accurate, and descriptive

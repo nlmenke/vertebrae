@@ -1,18 +1,18 @@
 ---
-name: Bug Report
-about: Create a report to help us improve
+name: Question
+about: Ask a question about the project
 title: ''
-labels: bug
+labels: question
 assignees: ''
 ---
 
 <!---
-Before opening a new request, make sure to search for keywords in the issues
-filtered by the "bug" label:
+Before opening a new question, make sure to search for keywords in the issues
+filtered by the "question" label:
 
-- /issues?q=is:issue+state:open+label:bug
+- /issues?q=is:issue+state:open+label:question
 
-and verify the issue you're about to submit isn't a duplicate.
+and verify the question you're about to ask isn't a duplicate.
 --->
 
 ### Summary
