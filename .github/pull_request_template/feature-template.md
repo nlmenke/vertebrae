@@ -1,8 +1,8 @@
 ---
-name: Bugfix
-about: Create a pull request to fix a bug
+name: Feature
+about: Create a pull request for a new feature
 title: ''
-labels: bugfix
+labels: ''
 assignees: ''
 ---
 
@@ -19,7 +19,7 @@ place so that reviewers can understand your intent. This is especially
 important if they didn't participate in the discussion.
 -->
 
-Fixes #x
+Resolves #x
 
 ### Checklist
 
