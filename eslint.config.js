@@ -7,7 +7,15 @@ export default defineConfigWithVueTs(
     vue.configs['flat/essential'],
     vueTsConfigs.recommended,
     {
-        ignores: ['vendor', 'node_modules', 'public', 'bootstrap/ssr', 'tailwind.config.js', 'resources/js/components/ui/*'],
+        ignores: [
+            '.coverage',
+            'bootstrap/ssr',
+            'node_modules',
+            'public',
+            'resources/js/components/ui/*',
+            'tailwind.config.js',
+            'vendor',
+        ],
     },
     {
         rules: {
