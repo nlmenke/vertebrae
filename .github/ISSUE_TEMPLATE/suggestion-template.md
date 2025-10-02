@@ -1,6 +1,6 @@
 ---
-name: Suggest a feature/fix
-about: Create a report to help us improve
+name: Suggest a Feature/Fix
+about: Suggest an idea for this project
 title: ''
 labels: suggestion
 assignees: ''

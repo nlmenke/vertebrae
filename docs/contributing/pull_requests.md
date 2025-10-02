@@ -6,9 +6,9 @@ Please only create pull requests on GitHub as the GitLab repository is only
 being used to test CI/CD pipelines and will not be monitored.
 
 A new pull request should use one of the templates provided.
-- [bugfix](/.github/pull_request_template/bugfix-template.md)
-- [documentation](/.github/pull_request_template/documentation-template.md)
-- [feature](/.github/pull_request_template/feature-template.md)
+- [bugfix](/.github/PULL_REQUEST_TEMPLATE/bugfix-template.md)
+- [documentation](/.github/PULL_REQUEST_TEMPLATE/documentation-template.md)
+- [feature](/.github/PULL_REQUEST_TEMPLATE/feature-template.md)
 
 Each of these templates contains a section to allow for you to describe what
 the changes do and a checklist of items that should be completed before

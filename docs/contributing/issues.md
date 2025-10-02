@@ -6,9 +6,9 @@ only create issues on GitHub as the GitLab repository is only being used to
 test CI/CD pipelines and will not be monitored.
 
 A new issue should use one of the templates provided:
-- [bug](/.github/issue_template/bug-template.md)
-- [question](/.github/issue_template/question-template.md)
-- [suggestion](/.github/issue_template/suggestion-template.md)
+- [bug](/.github/ISSUE_TEMPLATE/bug-template.md)
+- [question](/.github/ISSUE_TEMPLATE/question-template.md)
+- [suggestion](/.github/ISSUE_TEMPLATE/suggestion-template.md)
 
 Bug tickets include a section to describe the issue, steps to reproduce,
 current and expected behavior, logs/screenshots, and possible fixes (if the
