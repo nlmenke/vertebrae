@@ -24,7 +24,7 @@ use function Pest\Laravel\freezeTime;
 pest()
     ->extend(TestCase::class)
     ->use(RefreshDatabase::class)
-    ->beforeEach(function () {
+    ->beforeEach(function (): void {
         Str::createRandomStringsNormally();
         Str::createUuidsNormally();
         Http::preventStrayRequests();
@@ -59,7 +59,7 @@ expect()
 |
 */
 
-function something()
+function something(): void
 {
     // ..
 }

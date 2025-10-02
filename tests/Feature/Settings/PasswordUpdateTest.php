@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use function Pest\Laravel\actingAs;
 use function PHPUnit\Framework\assertTrue;
 
-test('password update page is displayed', function () {
+test('password update page is displayed', function (): void {
     $user = User::factory()->create();
 
     actingAs($user)
@@ -16,7 +16,7 @@ test('password update page is displayed', function () {
         ->assertOk();
 });
 
-test('password can be updated', function () {
+test('password can be updated', function (): void {
     $user = User::factory()->create();
 
     actingAs($user)
@@ -32,7 +32,7 @@ test('password can be updated', function () {
     assertTrue(Hash::check('new-password', $user->refresh()->password));
 });
 
-test('correct password must be provided to update password', function () {
+test('correct password must be provided to update password', function (): void {
     $user = User::factory()->create();
 
     actingAs($user)

@@ -22,6 +22,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",
         "barryvdh/laravel-ide-helper": "^3.6",
+        "driftingly/rector-laravel": "^2.0",
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.7.2",
         "laravel/pail": "^1.2.3",
@@ -78,11 +79,13 @@
             "npm run format",
             "npm run lint"
         ],
+        "refactor": "rector",
         "test:lint": [
             "pint --parallel --test",
             "npm run test:format",
             "npm run test:lint"
         ],
+        "test:refactor": "rector --dry-run",
         "test:type-coverage": [
             "pest --parallel --type-coverage --min=100",
             "npm run test:type-coverage"
@@ -96,7 +99,8 @@
             "@test:unit",
             "@test:typos",
             "@test:lint",
-            "@test:types"
+            "@test:types",
+            "@test:refactor"
         ]
     },
     "extra": {

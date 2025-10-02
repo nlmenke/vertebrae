@@ -20,7 +20,9 @@ final class TwoFactorAuthenticationController extends Controller implements HasM
     public static function middleware(): array
     {
         return Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')
-            ? [new Middleware('password.confirm', only: ['show'])]
+            ? [
+                new Middleware('password.confirm', only: ['show']),
+            ]
             : [];
     }
 

@@ -40,7 +40,11 @@ final class NewPasswordController extends Controller
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => [
+                'required',
+                'confirmed',
+                Rules\Password::defaults(),
+            ],
         ]);
 
         // Here we will attempt to reset the user's password. If it is successful we
@@ -49,7 +53,7 @@ final class NewPasswordController extends Controller
         /** @var Password::INVALID_TOKEN|Password::INVALID_USER|Password::PASSWORD_RESET|Password::RESET_THROTTLED $status */
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user) use ($request) {
+            function (User $user) use ($request): void {
                 $user->forceFill([
                     'password' => Hash::make($request->string('password')->toString()),
                     'remember_token' => Str::random(60),
@@ -67,7 +71,9 @@ final class NewPasswordController extends Controller
         }
 
         throw ValidationException::withMessages([
-            'email' => [__($status)],
+            'email' => [
+                __($status),
+            ],
         ]);
     }
 }

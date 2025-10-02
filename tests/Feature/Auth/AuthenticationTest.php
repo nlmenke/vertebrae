@@ -14,12 +14,12 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function PHPUnit\Framework\assertStringContainsString;
 
-test('login screen can be rendered', function () {
+test('login screen can be rendered', function (): void {
     get(route('login'))
         ->assertOk();
 });
 
-test('users can authenticate using the login screen', function () {
+test('users can authenticate using the login screen', function (): void {
     $user = User::factory()->create();
 
     post(route('login.store'), [
@@ -31,7 +31,7 @@ test('users can authenticate using the login screen', function () {
     assertAuthenticated();
 });
 
-test('users with two factor enabled are redirected to two factor challenge', function () {
+test('users with two factor enabled are redirected to two factor challenge', function (): void {
     if (! Features::canManageTwoFactorAuthentication()) {
         $this->markTestSkipped('Two-factor authentication is not enabled.');
     }
@@ -59,7 +59,7 @@ test('users with two factor enabled are redirected to two factor challenge', fun
     assertGuest();
 });
 
-test('users cannot authenticate with invalid password', function () {
+test('users cannot authenticate with invalid password', function (): void {
     $user = User::factory()->create();
 
     post(route('login.store'), [
@@ -71,7 +71,7 @@ test('users cannot authenticate with invalid password', function () {
     assertGuest();
 });
 
-test('users can logout', function () {
+test('users can logout', function (): void {
     $user = User::factory()->create();
 
     actingAs($user)
@@ -81,7 +81,7 @@ test('users can logout', function () {
     assertGuest();
 });
 
-test('users are rate limited', function () {
+test('users are rate limited', function (): void {
     $user = User::factory()->create();
 
     RateLimiter::increment(

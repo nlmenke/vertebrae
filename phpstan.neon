@@ -14,6 +14,7 @@ parameters:
     - routes
     - tests
     - artisan
+    - rector.php
 
   excludePaths:
     - tests/Pest.php

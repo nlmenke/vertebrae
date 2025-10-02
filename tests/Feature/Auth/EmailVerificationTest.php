@@ -11,7 +11,7 @@ use function Pest\Laravel\actingAs;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertTrue;
 
-test('email verification screen can be rendered', function () {
+test('email verification screen can be rendered', function (): void {
     $user = User::factory()->unverified()->create();
 
     actingAs($user)
@@ -19,7 +19,7 @@ test('email verification screen can be rendered', function () {
         ->assertOk();
 });
 
-test('email can be verified', function () {
+test('email can be verified', function (): void {
     $user = User::factory()->unverified()->create();
 
     Event::fake();
@@ -29,7 +29,7 @@ test('email can be verified', function () {
         now()->addMinutes(60),
         [
             'id' => $user->id,
-            'hash' => sha1($user->email),
+            'hash' => sha1((string) $user->email),
         ]
     );
 
@@ -44,7 +44,7 @@ test('email can be verified', function () {
     assertTrue($user->fresh()?->hasVerifiedEmail());
 });
 
-test('email is not verified with invalid hash', function () {
+test('email is not verified with invalid hash', function (): void {
     $user = User::factory()->unverified()->create();
 
     Event::fake();
@@ -66,7 +66,7 @@ test('email is not verified with invalid hash', function () {
     assertFalse($user->fresh()?->hasVerifiedEmail());
 });
 
-test('email is not verified with invalid user id', function () {
+test('email is not verified with invalid user id', function (): void {
     $user = User::factory()->unverified()->create();
 
     Event::fake();
@@ -76,7 +76,7 @@ test('email is not verified with invalid user id', function () {
         now()->addMinutes(60),
         [
             'id' => 123,
-            'hash' => sha1($user->email),
+            'hash' => sha1((string) $user->email),
         ]
     );
 
@@ -88,7 +88,7 @@ test('email is not verified with invalid user id', function () {
     assertFalse($user->fresh()?->hasVerifiedEmail());
 });
 
-test('verified user is redirected to dashboard from verification prompt', function () {
+test('verified user is redirected to dashboard from verification prompt', function (): void {
     $user = User::factory()->create();
 
     Event::fake();
@@ -100,7 +100,7 @@ test('verified user is redirected to dashboard from verification prompt', functi
     Event::assertNotDispatched(Verified::class);
 });
 
-test('already verified user visiting verification link is redirected without firing event again', function () {
+test('already verified user visiting verification link is redirected without firing event again', function (): void {
     $user = User::factory()->create();
 
     Event::fake();
@@ -110,7 +110,7 @@ test('already verified user visiting verification link is redirected without fir
         now()->addMinutes(60),
         [
             'id' => $user->id,
-            'hash' => sha1($user->email),
+            'hash' => sha1((string) $user->email),
         ]
     );
 
