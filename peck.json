@@ -177,6 +177,7 @@
             "nav",
             "pgsql",
             "php",
+            "phpstorm",
             "ssr",
             "supervisord",
             "tooltip",

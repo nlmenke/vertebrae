@@ -44,11 +44,12 @@ class NewPasswordController extends Controller
         // Here we will attempt to reset the user's password. If it is successful we
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
+        /** @var Password::INVALID_TOKEN|Password::INVALID_USER|Password::PASSWORD_RESET|Password::RESET_THROTTLED $status */
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function (User $user) use ($request) {
                 $user->forceFill([
-                    'password' => Hash::make($request->password),
+                    'password' => Hash::make($request->string('password')),
                     'remember_token' => Str::random(60),
                 ])->save();
 

@@ -38,7 +38,7 @@ test('email can be verified', function () {
 
     Event::assertDispatched(Verified::class);
 
-    assertTrue($user->fresh()->hasVerifiedEmail());
+    assertTrue($user->fresh()?->hasVerifiedEmail());
 });
 
 test('email is not verified with invalid hash', function () {
@@ -60,7 +60,7 @@ test('email is not verified with invalid hash', function () {
 
     Event::assertNotDispatched(Verified::class);
 
-    assertFalse($user->fresh()->hasVerifiedEmail());
+    assertFalse($user->fresh()?->hasVerifiedEmail());
 });
 
 test('email is not verified with invalid user id', function () {
@@ -82,7 +82,7 @@ test('email is not verified with invalid user id', function () {
 
     Event::assertNotDispatched(Verified::class);
 
-    assertFalse($user->fresh()->hasVerifiedEmail());
+    assertFalse($user->fresh()?->hasVerifiedEmail());
 });
 
 test('verified user is redirected to dashboard from verification prompt', function () {
@@ -119,5 +119,5 @@ test('already verified user visiting verification link is redirected without fir
 
     Event::assertNotDispatched(Verified::class);
 
-    assertTrue($user->fresh()->hasVerifiedEmail());
+    assertTrue($user->fresh()?->hasVerifiedEmail());
 });

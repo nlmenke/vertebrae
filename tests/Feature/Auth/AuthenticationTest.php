@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\ViewErrorBag;
 use Laravel\Fortify\Features;
 
 use function Pest\Laravel\{actingAs,assertAuthenticated,assertGuest,get,post};
@@ -90,6 +91,7 @@ test('users are rate limited', function () {
     ])
         ->assertSessionHasErrors('email');
 
+    /** @var ViewErrorBag $errors */
     $errors = session('errors');
 
     assertStringContainsString('Too many login attempts', $errors->first('email'));
