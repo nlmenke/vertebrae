@@ -17,11 +17,11 @@
         "laravel/scout": "^10.19",
         "laravel/tinker": "^2.10.1",
         "laravel/wayfinder": "^0.1.12",
+        "league/flysystem-aws-s3-v3": "^3.29",
         "typesense/typesense-php": "^5.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",
-        "barryvdh/laravel-ide-helper": "^3.6",
         "driftingly/rector-laravel": "^2.0.7",
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.7.2",
