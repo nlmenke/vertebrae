@@ -1,56 +1,50 @@
 <?php
 
-namespace Tests\Feature\Auth;
+declare(strict_types=1);
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Inertia\Testing\AssertableInertia as Assert;
+use Inertia\Testing\AssertableInertia;
 use Laravel\Fortify\Features;
-use Tests\TestCase;
 
-class TwoFactorChallengeTest extends TestCase
-{
-    use RefreshDatabase;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
-    public function test_two_factor_challenge_redirects_to_login_when_not_authenticated(): void
-    {
-        if (! Features::canManageTwoFactorAuthentication()) {
-            $this->markTestSkipped('Two-factor authentication is not enabled.');
-        }
-
-        $response = $this->get(route('two-factor.login'));
-
-        $response->assertRedirect(route('login'));
+test('two factor challenge redirects to login when not authenticated', function (): void {
+    if (! Features::canManageTwoFactorAuthentication()) {
+        $this->markTestSkipped('Two-factor authentication is not enabled.');
     }
 
-    public function test_two_factor_challenge_can_be_rendered(): void
-    {
-        if (! Features::canManageTwoFactorAuthentication()) {
-            $this->markTestSkipped('Two-factor authentication is not enabled.');
-        }
+    get(route('two-factor.login'))
+        ->assertRedirect(route('login'));
+});
 
-        Features::twoFactorAuthentication([
-            'confirm' => true,
-            'confirmPassword' => true,
-        ]);
+test('two factor challenge can be rendered', function (): void {
+    if (! Features::canManageTwoFactorAuthentication()) {
+        $this->markTestSkipped('Two-factor authentication is not enabled.');
+    }
 
-        $user = User::factory()->create();
+    Features::twoFactorAuthentication([
+        'confirm' => true,
+        'confirmPassword' => true,
+    ]);
 
-        $user->forceFill([
-            'two_factor_secret' => encrypt('test-secret'),
-            'two_factor_recovery_codes' => encrypt(json_encode(['code1', 'code2'])),
-            'two_factor_confirmed_at' => now(),
-        ])->save();
+    $user = User::factory()->create();
 
-        $this->post(route('login'), [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+    $user->forceFill([
+        'two_factor_secret' => encrypt('test-secret'),
+        'two_factor_recovery_codes' => encrypt(json_encode(['code1', 'code2'])),
+        'two_factor_confirmed_at' => now(),
+    ])->save();
 
-        $this->get(route('two-factor.login'))
-            ->assertOk()
-            ->assertInertia(fn (Assert $page) => $page
+    post(route('login'), [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    get(route('two-factor.login'))
+        ->assertOk()
+        ->assertInertia(
+            fn (AssertableInertia $page): AssertableInertia => $page
                 ->component('auth/TwoFactorChallenge')
-            );
-    }
-}
+        );
+});

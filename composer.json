@@ -10,25 +10,31 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
-        "inertiajs/inertia-laravel": "^2.0",
-        "laravel/fortify": "^1.30",
-        "laravel/framework": "^12.0",
+        "php": "^8.4",
+        "inertiajs/inertia-laravel": "^2.0.10",
+        "laravel/fortify": "^1.31",
+        "laravel/framework": "^12.32.5",
         "laravel/scout": "^10.19",
         "laravel/tinker": "^2.10.1",
-        "laravel/wayfinder": "^0.1.9",
+        "laravel/wayfinder": "^0.1.12",
         "typesense/typesense-php": "^5.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",
         "barryvdh/laravel-ide-helper": "^3.6",
-        "fakerphp/faker": "^1.23",
-        "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.18",
+        "driftingly/rector-laravel": "^2.0.7",
+        "fakerphp/faker": "^1.24.1",
+        "larastan/larastan": "^3.7.2",
+        "laravel/pail": "^1.2.3",
+        "laravel/pint": "^1.25.1",
         "laravel/sail": "^1.46",
-        "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.6",
-        "pestphp/pest": "^3.8"
+        "mockery/mockery": "^1.6.12",
+        "nunomaduro/collision": "^8.8.2",
+        "peckphp/peck": "^0.1.3",
+        "pestphp/pest": "^4.1.1",
+        "pestphp/pest-plugin-browser": "^4.1.1",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "pestphp/pest-plugin-type-coverage": "^4.0.2"
     },
     "autoload": {
         "psr-4": {
@@ -48,7 +54,8 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan clear"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -67,9 +74,33 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"php artisan inertia:start-ssr\" --names=server,queue,logs,ssr --kill-others"
         ],
+        "lint": [
+            "pint --parallel",
+            "npm run format",
+            "npm run lint"
+        ],
+        "refactor": "rector",
+        "test:lint": [
+            "pint --parallel --test",
+            "npm run test:format",
+            "npm run test:lint"
+        ],
+        "test:refactor": "rector --dry-run",
+        "test:type-coverage": [
+            "pest --parallel --type-coverage --min=100",
+            "npm run test:type-coverage"
+        ],
+        "test:types": "phpstan analyse",
+        "test:typos": "peck",
+        "test:unit": "pest --parallel --coverage",
         "test": [
             "@php artisan config:clear --ansi",
-            "@php artisan test"
+            "@test:type-coverage",
+            "@test:unit",
+            "@test:typos",
+            "@test:lint",
+            "@test:types",
+            "@test:refactor"
         ]
     },
     "extra": {
@@ -78,6 +109,7 @@
         }
     },
     "config": {
+        "bump-after-update": true,
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,

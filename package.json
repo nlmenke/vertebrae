@@ -6,9 +6,11 @@
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",
-        "format": "prettier --write resources/",
-        "format:check": "prettier --check resources/",
-        "lint": "eslint . --fix"
+        "format": "prettier --write --list-different resources/",
+        "lint": "eslint . --fix",
+        "test:format": "prettier --check resources/",
+        "test:lint": "eslint .",
+        "test:type-coverage": "vue-tsc --noEmit"
     },
     "devDependencies": {
         "@eslint/js": "^9.19.0",
@@ -36,6 +38,7 @@
         "clsx": "^2.1.1",
         "laravel-vite-plugin": "^2.0.0",
         "lucide-vue-next": "^0.468.0",
+        "playwright": "^1.55.1",
         "reka-ui": "^2.4.1",
         "tailwind-merge": "^3.2.0",
         "tailwindcss": "^4.1.1",

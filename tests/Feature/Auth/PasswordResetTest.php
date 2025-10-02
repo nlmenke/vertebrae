@@ -1,87 +1,79 @@
 <?php
 
-namespace Tests\Feature\Auth;
+declare(strict_types=1);
 
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
-use Tests\TestCase;
 
-class PasswordResetTest extends TestCase
-{
-    use RefreshDatabase;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
-    public function test_reset_password_link_screen_can_be_rendered()
-    {
-        $response = $this->get(route('password.request'));
+test('reset password link screen can be rendered', function (): void {
+    get(route('password.request'))
+        ->assertOk();
+});
 
-        $response->assertStatus(200);
-    }
+test('reset password link can be requested', function (): void {
+    Notification::fake();
 
-    public function test_reset_password_link_can_be_requested()
-    {
-        Notification::fake();
+    $user = User::factory()->create();
 
-        $user = User::factory()->create();
+    post(route('password.email'), [
+        'email' => $user->email,
+    ]);
 
-        $this->post(route('password.email'), ['email' => $user->email]);
+    Notification::assertSentTo($user, ResetPassword::class);
+});
 
-        Notification::assertSentTo($user, ResetPassword::class);
-    }
+test('reset password screen can be rendered', function (): void {
+    Notification::fake();
 
-    public function test_reset_password_screen_can_be_rendered()
-    {
-        Notification::fake();
+    $user = User::factory()->create();
 
-        $user = User::factory()->create();
+    post(route('password.email'), [
+        'email' => $user->email,
+    ]);
 
-        $this->post(route('password.email'), ['email' => $user->email]);
+    Notification::assertSentTo($user, ResetPassword::class, function (ResetPassword $notification): bool {
+        get(route('password.reset', $notification->token))
+            ->assertOk();
 
-        Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
-            $response = $this->get(route('password.reset', $notification->token));
+        return true;
+    });
+});
 
-            $response->assertStatus(200);
+test('password can be reset with valid token', function (): void {
+    Notification::fake();
 
-            return true;
-        });
-    }
+    $user = User::factory()->create();
 
-    public function test_password_can_be_reset_with_valid_token()
-    {
-        Notification::fake();
+    post(route('password.email'), [
+        'email' => $user->email,
+    ]);
 
-        $user = User::factory()->create();
-
-        $this->post(route('password.email'), ['email' => $user->email]);
-
-        Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
-            $response = $this->post(route('password.store'), [
-                'token' => $notification->token,
-                'email' => $user->email,
-                'password' => 'password',
-                'password_confirmation' => 'password',
-            ]);
-
-            $response
-                ->assertSessionHasNoErrors()
-                ->assertRedirect(route('login'));
-
-            return true;
-        });
-    }
-
-    public function test_password_cannot_be_reset_with_invalid_token(): void
-    {
-        $user = User::factory()->create();
-
-        $response = $this->post(route('password.store'), [
-            'token' => 'invalid-token',
+    Notification::assertSentTo($user, ResetPassword::class, function (ResetPassword $notification) use ($user): bool {
+        post(route('password.store'), [
+            'token' => $notification->token,
             'email' => $user->email,
-            'password' => 'newpassword123',
-            'password_confirmation' => 'newpassword123',
-        ]);
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ])
+            ->assertSessionHasNoErrors()
+            ->assertRedirect(route('login'));
 
-        $response->assertSessionHasErrors('email');
-    }
-}
+        return true;
+    });
+});
+
+test('password cannot be reset with invalid token', function (): void {
+    $user = User::factory()->create();
+
+    post(route('password.store'), [
+        'token' => 'invalid-token',
+        'email' => $user->email,
+        'password' => 'newpassword123',
+        'password_confirmation' => 'newpassword123',
+    ])
+        ->assertSessionHasErrors('email');
+});

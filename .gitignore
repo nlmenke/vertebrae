@@ -4,6 +4,7 @@
 /.vscode
 /.zed
 
+/.coverage
 /.phpunit.cache
 /auth.json
 /bootstrap/ssr
@@ -11,11 +12,12 @@
 /public/build
 /public/hot
 /public/storage
-/storage/*.key
-/storage/pail
 /resources/js/actions
 /resources/js/routes
 /resources/js/wayfinder
+/storage/*.key
+/storage/pail
+/tests/Browser/Screenshots
 /vendor
 
 .DS_Store

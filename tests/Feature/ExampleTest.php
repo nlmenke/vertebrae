@@ -1,18 +1,10 @@
 <?php
 
-namespace Tests\Feature;
+declare(strict_types=1);
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use function Pest\Laravel\get;
 
-class ExampleTest extends TestCase
-{
-    use RefreshDatabase;
-
-    public function test_returns_a_successful_response()
-    {
-        $response = $this->get(route('home'));
-
-        $response->assertStatus(200);
-    }
-}
+test('returns a successful response', function (): void {
+    get(route('home'))
+        ->assertOk();
+});

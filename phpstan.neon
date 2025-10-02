@@ -1,0 +1,22 @@
+includes:
+  - vendor/larastan/larastan/extension.neon
+  - vendor/nesbot/carbon/extension.neon
+
+parameters:
+
+  paths:
+    - app
+    - bootstrap
+    - config
+    - database
+    - public/index.php
+    - resources
+    - routes
+    - tests
+    - artisan
+    - rector.php
+
+  excludePaths:
+    - tests/Pest.php
+
+  level: max

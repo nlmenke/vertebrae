@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Laravel\Fortify\Features;
 
 return [
@@ -101,7 +103,9 @@ return [
     |
     */
 
-    'middleware' => ['web'],
+    'middleware' => [
+        'web',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -152,7 +156,7 @@ return [
         Features::twoFactorAuthentication([
             'confirm' => true,
             'confirmPassword' => true,
-            // 'window' => 0
+            // 'window' => 0,
         ]),
     ],
 

@@ -1,31 +1,24 @@
 <?php
 
-namespace Tests\Feature\Auth;
+declare(strict_types=1);
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use function Pest\Laravel\assertAuthenticated;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
-class RegistrationTest extends TestCase
-{
-    use RefreshDatabase;
+test('registration screen can be rendered', function (): void {
+    get(route('register'))
+        ->assertOk();
+});
 
-    public function test_registration_screen_can_be_rendered()
-    {
-        $response = $this->get(route('register'));
+test('new users can register', function (): void {
+    post(route('register.store'), [
+        'name' => 'Test User',
+        'email' => 'test@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+    ])
+        ->assertRedirect(route('dashboard', absolute: false));
 
-        $response->assertStatus(200);
-    }
-
-    public function test_new_users_can_register()
-    {
-        $response = $this->post(route('register.store'), [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
-        ]);
-
-        $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
-    }
-}
+    assertAuthenticated();
+});
