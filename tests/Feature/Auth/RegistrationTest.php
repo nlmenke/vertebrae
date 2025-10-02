@@ -1,6 +1,10 @@
 <?php
 
-use function Pest\Laravel\{assertAuthenticated,get,post};
+declare(strict_types=1);
+
+use function Pest\Laravel\assertAuthenticated;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
 test('registration screen can be rendered', function () {
     get(route('register'))

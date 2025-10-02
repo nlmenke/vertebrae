@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\User;
 
-use function Pest\Laravel\{actingAs,assertGuest};
-use function PHPUnit\Framework\{assertNotNull,assertNull,assertSame};
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertGuest;
+use function PHPUnit\Framework\assertNotNull;
+use function PHPUnit\Framework\assertNull;
+use function PHPUnit\Framework\assertSame;
 
 test('profile page is displayed', function () {
     $user = User::factory()->create();

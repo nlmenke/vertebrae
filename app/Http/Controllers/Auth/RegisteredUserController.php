@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -13,7 +15,7 @@ use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class RegisteredUserController extends Controller
+final class RegisteredUserController extends Controller
 {
     /**
      * Show the registration page.
@@ -39,7 +41,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->string('password')),
+            'password' => Hash::make($request->string('password')->toString()),
         ]);
 
         event(new Registered($user));

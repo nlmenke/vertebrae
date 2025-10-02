@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 
 use function Pest\Laravel\actingAs;
-use function PHPUnit\Framework\{assertFalse,assertTrue};
+use function PHPUnit\Framework\assertFalse;
+use function PHPUnit\Framework\assertTrue;
 
 test('email verification screen can be rendered', function () {
     $user = User::factory()->unverified()->create();
@@ -33,7 +36,7 @@ test('email can be verified', function () {
     actingAs($user)
         ->get($verificationUrl)
         ->assertRedirect(route('dashboard', [
-            'verified' => true
+            'verified' => true,
         ], false));
 
     Event::assertDispatched(Verified::class);

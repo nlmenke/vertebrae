@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\User;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ViewErrorBag;
 use Laravel\Fortify\Features;
 
-use function Pest\Laravel\{actingAs,assertAuthenticated,assertGuest,get,post};
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertAuthenticated;
+use function Pest\Laravel\assertGuest;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 use function PHPUnit\Framework\assertStringContainsString;
 
 test('login screen can be rendered', function () {

@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\User;
 use Inertia\Testing\AssertableInertia as Assert;
 use Laravel\Fortify\Features;
 
-use function Pest\Laravel\{get,post};
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
 test('two factor challenge redirects to login when not authenticated', function () {
     if (! Features::canManageTwoFactorAuthentication()) {
