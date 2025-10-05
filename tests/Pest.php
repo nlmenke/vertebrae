@@ -1,4 +1,11 @@
 <?php
+/**
+ * Base Pest configuration.
+ *
+ * @author Nuno Maduro <enunomaduro@gmail.com>
+ *
+ * @since 0.0.0-framework introduced
+ */
 
 declare(strict_types=1);
 
@@ -6,7 +13,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Sleep;
 use Illuminate\Support\Str;
-use Tests\TestCase;
+use Tests\AbstractTestCase;
 
 use function Pest\Laravel\freezeTime;
 
@@ -22,7 +29,7 @@ use function Pest\Laravel\freezeTime;
 */
 
 pest()
-    ->extend(TestCase::class)
+    ->extend(AbstractTestCase::class)
     ->use(RefreshDatabase::class)
     ->beforeEach(function (): void {
         Str::createRandomStringsNormally();

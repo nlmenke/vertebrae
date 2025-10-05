@@ -1,4 +1,13 @@
 <?php
+/**
+ * Authentication routes.
+ *
+ * These routes are included in the "web" routes file.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ *
+ * @since 0.0.0-framework introduced
+ */
 
 declare(strict_types=1);
 
@@ -36,7 +45,10 @@ Route::middleware('guest')->group(function (): void {
 Route::middleware('auth')->group(function (): void {
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
-    Route::middleware(['signed', 'throttle:6,1'])
+    Route::middleware([
+        'signed',
+        'throttle:6,1',
+    ])
         ->get('verify-email/{id}/{hash}', VerifyEmailController::class)
         ->name('verification.verify');
 

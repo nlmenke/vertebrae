@@ -1,4 +1,11 @@
 <?php
+/**
+ * Session configuration.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ *
+ * @since 0.0.0-framework introduced
+ */
 
 declare(strict_types=1);
 
@@ -45,7 +52,7 @@ return [
     |
     | This option allows you to easily specify that all of your session data
     | should be encrypted before it's stored. All encryption is performed
-    | automatically by Laravel and you may use the session like normal.
+    | automatically by Laravel, and you may use the session like normal.
     |
     */
 
@@ -95,7 +102,7 @@ return [
     | Session Cache Store
     |--------------------------------------------------------------------------
     |
-    | When using one of the framework's cache driven session backends, you may
+    | When using one of the framework's cache-driven session backends, you may
     | define the cache store which should be used to store the session data
     | between requests. This must match one of your defined cache stores.
     |
@@ -172,7 +179,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | By setting this option to true, session cookies will only be sent back
-    | to the server if the browser has a HTTPS connection. This will keep
+    | to the server if the browser has an HTTPS connection. This will keep
     | the cookie from being sent to you when it can't be done securely.
     |
     */
@@ -185,7 +192,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Setting this value to true will prevent JavaScript from accessing the
-    | value of the cookie and the cookie will only be accessible through
+    | value of the cookie, and the cookie will only be accessible through
     | the HTTP protocol. It's unlikely you should disable this option.
     |
     */

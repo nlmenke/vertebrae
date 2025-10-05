@@ -1,18 +1,29 @@
 <?php
+/**
+ * Store Authenticated Session request.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ */
 
 declare(strict_types=1);
 
 namespace App\Http\Requests\Auth;
 
+use App\Http\Requests\AbstractFormRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
 
-final class LoginRequest extends FormRequest
+/**
+ * Handles validation and authentication of user login requests.
+ *
+ * @since 0.0.0-framework introduced
+ * @since 0.0.0-vertebrae renamed to StoreAuthenticatedSessionRequest
+ */
+final class StoreAuthenticatedSessionRequest extends AbstractFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +36,7 @@ final class LoginRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|list<ValidationRule|string>|string>
      */
     public function rules(): array
     {

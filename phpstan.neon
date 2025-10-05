@@ -17,6 +17,7 @@ parameters:
     - rector.php
 
   excludePaths:
+    - tests/Unit/ArchTest.php
     - tests/Pest.php
 
   level: max

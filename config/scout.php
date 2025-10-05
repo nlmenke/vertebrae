@@ -1,4 +1,11 @@
 <?php
+/**
+ * Scout configuration.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ *
+ * @since 0.0.0-framework introduced
+ */
 
 declare(strict_types=1);
 
@@ -65,7 +72,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | These options allow you to control the maximum chunk size when you are
-    | mass importing data into the search engine. This allows you to fine
+    | mass-importing data into the search engine. This allows you to fine
     | tune each of these chunk sizes based on the power of the servers.
     |
     */
@@ -80,7 +87,7 @@ return [
     | Soft Deletes
     |--------------------------------------------------------------------------
     |
-    | This option allows to control whether to keep soft deleted records in
+    | This option allows controlling whether to keep soft deleted records in
     | the search indexes. Maintaining soft deleted records can be useful
     | if your application still needs to search for the records later.
     |
@@ -108,7 +115,7 @@ return [
     | Algolia Configuration
     |--------------------------------------------------------------------------
     |
-    | Here you may configure your Algolia settings. Algolia is a cloud hosted
+    | Here you may configure your Algolia settings. Algolia is a cloud-hosted
     | search engine which works great with Scout out of the box. Just plug
     | in your application ID and admin API key to get started searching.
     |

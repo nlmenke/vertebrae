@@ -1,4 +1,16 @@
 <?php
+/**
+ * Laravel - The PHP Framework For Web Artisans.
+ *
+ * Laravel is a web application framework with expressive, elegant syntax. A
+ * web framework provides a structure and starting point for creating your
+ * application, allowing you to focus on creating something amazing while we
+ * sweat the details.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ *
+ * @since 0.0.0-framework introduced
+ */
 
 declare(strict_types=1);
 

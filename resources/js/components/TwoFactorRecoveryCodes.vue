@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import AlertError from '@/components/AlertError.vue';
 import { Button } from '@/components/ui/button';
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 import { regenerateRecoveryCodes } from '@/routes/two-factor';
 import { Form } from '@inertiajs/vue3';
@@ -41,25 +35,23 @@ onMounted(async () => {
 <template>
     <Card class="w-full">
         <CardHeader>
-            <CardTitle class="flex gap-3">
-                <LockKeyhole class="size-4" />2FA Recovery Codes
-            </CardTitle>
+            <CardTitle class="flex gap-3"> <LockKeyhole class="size-4" />2FA Recovery Codes </CardTitle>
             <CardDescription>
-                Recovery codes let you regain access if you lose your 2FA
-                device. Store them in a secure password manager.
+                Recovery codes let you regain access if you lose your 2FA device. Store them in a secure password
+                manager.
             </CardDescription>
         </CardHeader>
         <CardContent>
-            <div
-                class="flex flex-col gap-3 select-none sm:flex-row sm:items-center sm:justify-between"
-            >
-                <Button @click="toggleRecoveryCodesVisibility" class="w-fit">
+            <div class="flex flex-col gap-3 select-none sm:flex-row sm:items-center sm:justify-between">
+                <Button
+                    @click="toggleRecoveryCodesVisibility"
+                    class="w-fit"
+                >
                     <component
                         :is="isRecoveryCodesVisible ? EyeOff : Eye"
                         class="size-4"
                     />
-                    {{ isRecoveryCodesVisible ? 'Hide' : 'View' }} Recovery
-                    Codes
+                    {{ isRecoveryCodesVisible ? 'Hide' : 'View' }} Recovery Codes
                 </Button>
 
                 <Form
@@ -82,20 +74,27 @@ onMounted(async () => {
             <div
                 :class="[
                     'relative overflow-hidden transition-all duration-300',
-                    isRecoveryCodesVisible
-                        ? 'h-auto opacity-100'
-                        : 'h-0 opacity-0',
+                    isRecoveryCodesVisible ? 'h-auto opacity-100' : 'h-0 opacity-0',
                 ]"
             >
-                <div v-if="errors?.length" class="mt-6">
+                <div
+                    v-if="errors?.length"
+                    class="mt-6"
+                >
                     <AlertError :errors="errors" />
                 </div>
-                <div v-else class="mt-3 space-y-3">
+                <div
+                    v-else
+                    class="mt-3 space-y-3"
+                >
                     <div
                         ref="recoveryCodeSectionRef"
                         class="grid gap-1 rounded-lg bg-muted p-4 font-mono text-sm"
                     >
-                        <div v-if="!recoveryCodesList.length" class="space-y-2">
+                        <div
+                            v-if="!recoveryCodesList.length"
+                            class="space-y-2"
+                        >
                             <div
                                 v-for="n in 8"
                                 :key="n"
@@ -111,9 +110,8 @@ onMounted(async () => {
                         </div>
                     </div>
                     <p class="text-xs text-muted-foreground select-none">
-                        Each recovery code can be used once to access your
-                        account and will be removed after use. If you need more,
-                        click
+                        Each recovery code can be used once to access your account and will be removed after use. If you
+                        need more, click
                         <span class="font-bold">Regenerate Codes</span> above.
                     </p>
                 </div>

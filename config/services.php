@@ -1,4 +1,11 @@
 <?php
+/**
+ * Third-Party Services configuration.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ *
+ * @since 0.0.0-framework introduced
+ */
 
 declare(strict_types=1);
 
@@ -6,7 +13,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Third Party Services
+    | Third-Party Services
     |--------------------------------------------------------------------------
     |
     | This file is for storing the credentials for third party services such

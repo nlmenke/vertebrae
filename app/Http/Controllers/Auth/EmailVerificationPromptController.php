@@ -1,16 +1,27 @@
 <?php
+/**
+ * Email Verification Prompt controller.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ */
 
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AbstractController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-final class EmailVerificationPromptController extends Controller
+/**
+ * Handles displaying the email verification prompt page to users who have not
+ * yet verified their email addresses.
+ *
+ * @since 0.0.0-framework introduced
+ */
+final class EmailVerificationPromptController extends AbstractController
 {
     /**
      * Show the email verification prompt page.

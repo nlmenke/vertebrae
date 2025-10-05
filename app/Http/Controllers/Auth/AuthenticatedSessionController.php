@@ -1,11 +1,16 @@
 <?php
+/**
+ * Authenticated Session controller.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ */
 
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Controllers\AbstractController;
+use App\Http\Requests\Auth\StoreAuthenticatedSessionRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +19,12 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Laravel\Fortify\Features;
 
-final class AuthenticatedSessionController extends Controller
+/**
+ * Handles authentication session management.
+ *
+ * @since 0.0.0-framework introduced
+ */
+final class AuthenticatedSessionController extends AbstractController
 {
     /**
      * Show the login page.
@@ -30,7 +40,7 @@ final class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(StoreAuthenticatedSessionRequest $request): RedirectResponse
     {
         $user = $request->validateCredentials();
 

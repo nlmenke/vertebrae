@@ -1,4 +1,11 @@
 <?php
+/**
+ * Application configuration.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ *
+ * @since 0.0.0-framework introduced
+ */
 
 declare(strict_types=1);
 
@@ -15,7 +22,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Vertebrae'),
 
     /*
     |--------------------------------------------------------------------------
@@ -92,7 +99,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This key is utilized by Laravel's encryption services and should be set
-    | to a random, 32 character string to ensure that all encrypted values
+    | to a random, 32-character string to ensure that all encrypted values
     | are secure. You should do this prior to deploying the application.
     |
     */

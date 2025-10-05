@@ -1,4 +1,13 @@
 <?php
+/**
+ * Tests functionality related to password confirmation.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ * @author Nick Menke <git@nlmenke.net>
+ *
+ * @since 0.0.0-framework introduced
+ * @since 0.0.0-vertebrae converted to Pest
+ */
 
 declare(strict_types=1);
 

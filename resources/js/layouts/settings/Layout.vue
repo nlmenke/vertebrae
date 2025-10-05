@@ -46,14 +46,14 @@ const currentPath = typeof window !== undefined ? window.location.pathname : '';
                         v-for="item in sidebarNavItems"
                         :key="toUrl(item.href)"
                         variant="ghost"
-                        :class="[
-                            'w-full justify-start',
-                            { 'bg-muted': urlIsActive(item.href, currentPath) },
-                        ]"
+                        :class="['w-full justify-start', { 'bg-muted': urlIsActive(item.href, currentPath) }]"
                         as-child
                     >
                         <Link :href="item.href">
-                            <component :is="item.icon" class="h-4 w-4" />
+                            <component
+                                :is="item.icon"
+                                class="h-4 w-4"
+                            />
                             {{ item.title }}
                         </Link>
                     </Button>
