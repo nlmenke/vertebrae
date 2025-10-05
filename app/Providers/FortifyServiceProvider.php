@@ -1,4 +1,9 @@
 <?php
+/**
+ * Fortify service provider.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ */
 
 declare(strict_types=1);
 
@@ -11,6 +16,11 @@ use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 use Laravel\Fortify\Fortify;
 
+/**
+ * Registers and bootstraps the Fortify service components.
+ *
+ * @since 0.0.0-framework introduced
+ */
 final class FortifyServiceProvider extends ServiceProvider
 {
     /**

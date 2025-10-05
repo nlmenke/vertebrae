@@ -1,4 +1,11 @@
 <?php
+/**
+ * Web routes.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ *
+ * @since 0.0.0-framework introduced
+ */
 
 declare(strict_types=1);
 

@@ -3,6 +3,7 @@
     "rules": {
         "array_push": true,
         "backtick_to_shell_exec": true,
+        "blank_line_after_opening_tag": false,
         "concat_space": {
             "spacing": "one"
         },
@@ -52,6 +53,42 @@
         },
         "ordered_interfaces": true,
         "ordered_traits": true,
+        "phpdoc_align": true,
+        "phpdoc_order": {
+            "order": [
+                "author",
+                "deprecated",
+                "since",
+                "todo",
+                "link",
+                "see",
+                "example",
+                "api",
+                "internal",
+                "mixin",
+                "property",
+                "property-read",
+                "property-write",
+                "var",
+                "param",
+                "throws",
+                "return"
+            ]
+        },
+        "phpdoc_separation": {
+            "groups": [
+                [
+                    "link",
+                    "see",
+                    "example"
+                ],
+                [
+                    "property",
+                    "property-read",
+                    "property-write"
+                ]
+            ]
+        },
         "protected_to_private": true,
         "self_accessor": true,
         "self_static_accessor": true,

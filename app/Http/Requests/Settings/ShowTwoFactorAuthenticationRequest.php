@@ -1,15 +1,26 @@
 <?php
+/**
+ * Show Two-Factor Authentication request.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ */
 
 declare(strict_types=1);
 
 namespace App\Http\Requests\Settings;
 
+use App\Http\Requests\AbstractFormRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Foundation\Http\FormRequest;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\InteractsWithTwoFactorState;
 
-final class TwoFactorAuthenticationRequest extends FormRequest
+/**
+ * Handles validation for showing two-factor authentication requests.
+ *
+ * @since 0.0.0-framework introduced
+ * @since 0.0.0-vertebrae renamed to ShowTwoFactorAuthenticationRequest
+ */
+final class ShowTwoFactorAuthenticationRequest extends AbstractFormRequest
 {
     use InteractsWithTwoFactorState;
 
@@ -24,7 +35,7 @@ final class TwoFactorAuthenticationRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|list<ValidationRule|string>|string>
      */
     public function rules(): array
     {

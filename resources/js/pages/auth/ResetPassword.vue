@@ -42,7 +42,10 @@ const inputEmail = ref(props.email);
                         class="mt-1 block w-full"
                         readonly
                     />
-                    <InputError :message="errors.email" class="mt-2" />
+                    <InputError
+                        :message="errors.email"
+                        class="mt-2"
+                    />
                 </div>
 
                 <div class="grid gap-2">
@@ -60,9 +63,7 @@ const inputEmail = ref(props.email);
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password_confirmation">
-                        Confirm Password
-                    </Label>
+                    <Label for="password_confirmation"> Confirm Password </Label>
                     <Input
                         id="password_confirmation"
                         type="password"

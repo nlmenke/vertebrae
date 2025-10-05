@@ -1,11 +1,17 @@
 <?php
+/**
+ * Profile controller.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ */
 
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Settings\ProfileUpdateRequest;
+use App\Http\Controllers\AbstractController;
+use App\Http\Requests\Settings\DeleteProfileRequest;
+use App\Http\Requests\Settings\UpdateProfileRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,7 +19,12 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
-final class ProfileController extends Controller
+/**
+ * Handles updating user profiles.
+ *
+ * @since 0.0.0-framework introduced
+ */
+final class ProfileController extends AbstractController
 {
     /**
      * Show the user's profile settings page.
@@ -29,12 +40,14 @@ final class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(UpdateProfileRequest $request): RedirectResponse
     {
         $request->user()?->fill($request->validated());
 
         if ($request->user()?->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+            $request->user()->update([
+                'email_verified_at' => null,
+            ]);
         }
 
         $request->user()?->save();
@@ -45,15 +58,8 @@ final class ProfileController extends Controller
     /**
      * Delete the user's profile.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(DeleteProfileRequest $request): RedirectResponse
     {
-        $request->validate([
-            'password' => [
-                'required',
-                'current_password',
-            ],
-        ]);
-
         $user = $request->user();
 
         Auth::logout();
@@ -63,6 +69,6 @@ final class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect(route('home'));
     }
 }

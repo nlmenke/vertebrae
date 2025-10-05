@@ -1,4 +1,9 @@
 <?php
+/**
+ * Handle Inertia Requests middleware.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ */
 
 declare(strict_types=1);
 
@@ -8,10 +13,15 @@ use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
+/**
+ * Handles sharing data with all pages and managing asset versioning.
+ *
+ * @since 0.0.0-framework introduced
+ */
 final class HandleInertiaRequests extends Middleware
 {
     /**
-     * The root template that's loaded on the first page visit.
+     * The root template loaded on the first page visit.
      *
      * @see https://inertiajs.com/server-side-setup#root-template
      *

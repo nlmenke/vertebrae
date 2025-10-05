@@ -1,4 +1,10 @@
 <?php
+/**
+ * User factory.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ * @author Nick Menke <git@nlmenke.net>
+ */
 
 declare(strict_types=1);
 
@@ -10,7 +16,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
+ * Generates test data for User models with default attributes and states for
+ * unverified users.
+ *
  * @extends Factory<User>
+ *
+ * @since 0.0.0-framework introduced
+ * @since 0.0.0-vertebrae set email to be variant of a unique name
  */
 final class UserFactory extends Factory
 {
@@ -22,13 +34,15 @@ final class UserFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return array<model-property<User>, mixed>
      */
     public function definition(): array
     {
+        $name = fake()->unique()->firstName() . ' ' . fake()->unique()->lastName();
+
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $name,
+            'email' => Str::snake($name, '.') . '@' . fake()->safeEmailDomain(),
             'email_verified_at' => now(),
             'password' => self::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),

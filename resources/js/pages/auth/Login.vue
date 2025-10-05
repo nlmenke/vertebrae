@@ -79,8 +79,15 @@ defineProps<{
                 </div>
 
                 <div class="flex items-center justify-between">
-                    <Label for="remember" class="flex items-center space-x-3">
-                        <Checkbox id="remember" name="remember" :tabindex="3" />
+                    <Label
+                        for="remember"
+                        class="flex items-center space-x-3"
+                    >
+                        <Checkbox
+                            id="remember"
+                            name="remember"
+                            :tabindex="3"
+                        />
                         <span>Remember me</span>
                     </Label>
                 </div>
@@ -102,7 +109,11 @@ defineProps<{
 
             <div class="text-center text-sm text-muted-foreground">
                 Don't have an account?
-                <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
+                <TextLink
+                    :href="register()"
+                    :tabindex="5"
+                    >Sign up</TextLink
+                >
             </div>
         </Form>
     </AuthBase>

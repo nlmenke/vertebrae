@@ -1,20 +1,33 @@
 <?php
+/**
+ * Password Reset Link controller.
+ *
+ * @author Taylor Otwell <taylor@laravel.com>
+ */
 
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AbstractController;
+use App\Http\Requests\Auth\StorePasswordResetLinkRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
-final class PasswordResetLinkController extends Controller
+/**
+ * Handles sending password reset links to users who have forgotten their
+ * passwords.
+ *
+ * @since 0.0.0-framework introduced
+ */
+final class PasswordResetLinkController extends AbstractController
 {
     /**
-     * Show the password reset link request page.
+     * Show the password-reset link request page.
      */
     public function create(Request $request): Response
     {
@@ -26,14 +39,10 @@ final class PasswordResetLinkController extends Controller
     /**
      * Handle an incoming password reset link request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StorePasswordResetLinkRequest $request): RedirectResponse
     {
-        $request->validate([
-            'email' => 'required|email',
-        ]);
-
         Password::sendResetLink(
             $request->only('email')
         );

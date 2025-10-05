@@ -1,4 +1,11 @@
 <?php
+/**
+ * Inertia configuration.
+ *
+ * @author Jonathan Reinink <jonathan@reinink.ca>
+ *
+ * @since 0.0.0-framework introduced
+ */
 
 declare(strict_types=1);
 

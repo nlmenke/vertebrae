@@ -1,10 +1,18 @@
 <?php
+/**
+ * Configuration for upgrading and refactoring the application code.
+ *
+ * @author Tomas Votruba <tomas.vot@gmail.com>
+ *
+ * @since 0.0.0-vertebrae introduced
+ */
 
 declare(strict_types=1);
 
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
+use RectorLaravel\Rector\Class_\AddHasFactoryToModelsRector;
 use RectorLaravel\Set\LaravelSetList;
 use RectorLaravel\Set\LaravelSetProvider;
 
@@ -49,5 +57,8 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_LEGACY_FACTORIES_TO_CLASSES,
     ])
     ->withSkip([
+        AddHasFactoryToModelsRector::class => [
+            __DIR__ . '/app/Models/AbstractModel.php',
+        ],
         AddOverrideAttributeToOverriddenMethodsRector::class,
     ]);

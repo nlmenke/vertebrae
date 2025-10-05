@@ -4,37 +4,22 @@ import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import {
     NavigationMenu,
     NavigationMenuItem,
     NavigationMenuList,
     navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
-import {
-    Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from '@/components/ui/sheet';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import UserMenuContent from '@/components/UserMenuContent.vue';
 import { getInitials } from '@/composables/useInitials';
 import { toUrl, urlIsActive } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { InertiaLinkProps, Link, usePage } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-vue-next';
+import { Folder, LayoutGrid, Menu, Search } from 'lucide-vue-next';
 import { computed } from 'vue';
 
 interface Props {
@@ -48,16 +33,11 @@ const props = withDefaults(defineProps<Props>(), {
 const page = usePage();
 const auth = computed(() => page.props.auth);
 
-const isCurrentRoute = computed(
-    () => (url: NonNullable<InertiaLinkProps['href']>) =>
-        urlIsActive(url, page.url),
-);
+const isCurrentRoute = computed(() => (url: NonNullable<InertiaLinkProps['href']>) => urlIsActive(url, page.url));
 
 const activeItemStyles = computed(
     () => (url: NonNullable<InertiaLinkProps['href']>) =>
-        isCurrentRoute.value(toUrl(url))
-            ? 'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100'
-            : '',
+        isCurrentRoute.value(toUrl(url)) ? 'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100' : '',
 );
 
 const mainNavItems: NavItem[] = [
@@ -71,13 +51,8 @@ const mainNavItems: NavItem[] = [
 const rightNavItems: NavItem[] = [
     {
         title: 'Repository',
-        href: 'https://github.com/laravel/vue-starter-kit',
+        href: 'https://github.com/nlmenke/vertebrae',
         icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
     },
 ];
 </script>
@@ -98,18 +73,15 @@ const rightNavItems: NavItem[] = [
                                 <Menu class="h-5 w-5" />
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="left" class="w-[300px] p-6">
-                            <SheetTitle class="sr-only"
-                                >Navigation Menu</SheetTitle
-                            >
+                        <SheetContent
+                            side="left"
+                            class="w-[300px] p-6"
+                        >
+                            <SheetTitle class="sr-only">Navigation Menu</SheetTitle>
                             <SheetHeader class="flex justify-start text-left">
-                                <AppLogoIcon
-                                    class="size-6 fill-current text-black dark:text-white"
-                                />
+                                <AppLogoIcon class="size-6 fill-current text-black dark:text-white" />
                             </SheetHeader>
-                            <div
-                                class="flex h-full flex-1 flex-col justify-between space-y-4 py-6"
-                            >
+                            <div class="flex h-full flex-1 flex-col justify-between space-y-4 py-6">
                                 <nav class="-mx-3 space-y-1">
                                     <Link
                                         v-for="item in mainNavItems"
@@ -148,16 +120,17 @@ const rightNavItems: NavItem[] = [
                     </Sheet>
                 </div>
 
-                <Link :href="dashboard()" class="flex items-center gap-x-2">
+                <Link
+                    :href="dashboard()"
+                    class="flex items-center gap-x-2"
+                >
                     <AppLogo />
                 </Link>
 
                 <!-- Desktop Menu -->
                 <div class="hidden h-full lg:flex lg:flex-1">
                     <NavigationMenu class="ml-10 flex h-full items-stretch">
-                        <NavigationMenuList
-                            class="flex h-full items-stretch space-x-2"
-                        >
+                        <NavigationMenuList class="flex h-full items-stretch space-x-2">
                             <NavigationMenuItem
                                 v-for="(item, index) in mainNavItems"
                                 :key="index"
@@ -194,9 +167,7 @@ const rightNavItems: NavItem[] = [
                             size="icon"
                             class="group h-9 w-9 cursor-pointer"
                         >
-                            <Search
-                                class="size-5 opacity-80 group-hover:opacity-100"
-                            />
+                            <Search class="size-5 opacity-80 group-hover:opacity-100" />
                         </Button>
 
                         <div class="hidden space-x-1 lg:flex">
@@ -218,9 +189,7 @@ const rightNavItems: NavItem[] = [
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
-                                                    <span class="sr-only">{{
-                                                        item.title
-                                                    }}</span>
+                                                    <span class="sr-only">{{ item.title }}</span>
                                                     <component
                                                         :is="item.icon"
                                                         class="size-5 opacity-80 group-hover:opacity-100"
@@ -244,9 +213,7 @@ const rightNavItems: NavItem[] = [
                                 size="icon"
                                 class="relative size-10 w-auto rounded-full p-1 focus-within:ring-2 focus-within:ring-primary"
                             >
-                                <Avatar
-                                    class="size-8 overflow-hidden rounded-full"
-                                >
+                                <Avatar class="size-8 overflow-hidden rounded-full">
                                     <AvatarImage
                                         v-if="auth.user.avatar"
                                         :src="auth.user.avatar"
@@ -260,7 +227,10 @@ const rightNavItems: NavItem[] = [
                                 </Avatar>
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" class="w-56">
+                        <DropdownMenuContent
+                            align="end"
+                            class="w-56"
+                        >
                             <UserMenuContent :user="auth.user" />
                         </DropdownMenuContent>
                     </DropdownMenu>
@@ -272,9 +242,7 @@ const rightNavItems: NavItem[] = [
             v-if="props.breadcrumbs.length > 1"
             class="flex w-full border-b border-sidebar-border/70"
         >
-            <div
-                class="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl"
-            >
+            <div class="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl">
                 <Breadcrumbs :breadcrumbs="breadcrumbs" />
             </div>
         </div>
