@@ -10,7 +10,7 @@ stages:
   - test    # run the test suites
   - quality # analyze code quality
   - publish # publish a release candidate
-  - state   # deploy to staging environment
+  - stage   # deploy to staging environment
   - deploy  # deploy to production environment
 
 include:
