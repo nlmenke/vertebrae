@@ -21,3 +21,5 @@ parameters:
     - tests/Pest.php
 
   level: max
+
+  tmpDir: /tmp/phpstan

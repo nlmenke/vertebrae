@@ -1,0 +1,77 @@
+# build the docker container
+.build-docker:
+  stage: build
+
+  image: docker:latest
+
+  services:
+    - docker:dind
+
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$PHP_VERSION || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:$PHP_VERSION -t $CI_REGISTRY_IMAGE:$PHP_VERSION --build-arg WWWUSER=1000 --build-arg WWWGROUP=1000 docker/$PHP_VERSION
+    - docker push $CI_REGISTRY_IMAGE:$PHP_VERSION
+
+# build the application using the docker container
+.build-app:
+  stage: build
+
+  image:
+    name: $CI_REGISTRY_IMAGE:$PHP_VERSION
+    entrypoint: [ "" ]
+
+  script:
+    - COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction --prefer-dist --optimize-autoloader
+    - cp .env.example .env
+    - php artisan key:generate
+    - npm ci
+    - npm run build
+
+  cache: # speeds up builds
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - bootstrap/cache/
+      - public/build/
+      - vendor/
+      - .env
+
+  artifacts:
+    paths:
+      - storage/logs/ # for debugging
+    when: always
+    expire_in: 1 week
+
+# test the application using the docker container
+.test-app:
+  stage: test
+
+  image:
+    name: $CI_REGISTRY_IMAGE:$PHP_VERSION
+    entrypoint: [ "" ]
+
+  services:
+    - name: mysql:8.0
+      command:
+        - '--default-authentication-plugin=mysql_native_password'
+
+  script:
+    - DB_DATABASE=$MYSQL_DATABASE DB_USERNAME=$MYSQL_USER DB_PASSWORD=$MYSQL_PASSWORD ./vendor/bin/phpunit --coverage-text --colors=never
+
+  coverage: /^\s*Lines:\s*\d+.\d+\%/
+
+  cache: # speeds up builds
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - bootstrap/cache/
+      - public/build/
+      - vendor/
+      - .env
+
+  artifacts:
+    paths:
+      - storage/logs/ # for debugging
+    when: always
+    expire_in: 1 week
