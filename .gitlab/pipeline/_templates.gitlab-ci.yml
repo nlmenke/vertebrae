@@ -58,7 +58,7 @@
         - '--default-authentication-plugin=mysql_native_password'
 
   script:
-    - DB_DATABASE=$MYSQL_DATABASE DB_USERNAME=$MYSQL_USER DB_PASSWORD=$MYSQL_PASSWORD ./vendor/bin/phpunit --coverage-text --colors=never
+    - DB_DATABASE=$MYSQL_DATABASE DB_USERNAME=$MYSQL_USER DB_PASSWORD=$MYSQL_PASSWORD ./vendor/bin/pest --coverage-text --colors=never
 
   coverage: /^\s*Lines:\s*\d+.\d+\%/
 
