@@ -1,0 +1,35 @@
+variables:
+  DB_CONNECTION: mysql
+  DB_HOST: mysql
+  MYSQL_ROOT_PASSWORD: root
+  MYSQL_DATABASE: $CI_PROJECT_NAME
+  MYSQL_USER: $CI_PROJECT_NAMESPACE
+  MYSQL_PASSWORD: $CI_PROJECT_PATH_SLUG-password
+
+stages:
+  - build   # build the application
+  - test    # run the test suites
+  - quality # analyze code quality
+  - publish # publish a release candidate
+  - stage   # deploy to staging environment
+  - deploy  # deploy to production environment
+
+include:
+  # config templates
+  - local: .gitlab/pipeline/_templates.gitlab-ci.yml
+
+  # backend CI/CD configs
+  - local: .gitlab/pipeline/backend/*.gitlab-ci.yml
+
+  # code quality configs
+  - template: Jobs/Code-Quality.gitlab-ci.yml
+
+code_quality:
+  stage: quality
+
+  variables:
+    REPORT_FORMAT: html
+
+  artifacts:
+    paths:
+      - gl-code-quality-report.html

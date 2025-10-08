@@ -1,0 +1,12 @@
+# build the project on PHP 8.4
+php8.4:docker:
+  variables:
+    PHP_VERSION: 8.4
+  extends: .build-docker
+
+php8.4:test:
+  variables:
+    PHP_VERSION: 8.4
+  extends: .test-app
+  needs:
+    - php8.4:docker
