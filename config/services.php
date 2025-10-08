@@ -1,13 +1,9 @@
 <?php
 /**
- * Services Config.
+ * Third-Party Services configuration.
  *
- * @package Config
+ * @author Taylor Otwell <taylor@laravel.com>
  *
- * @author    Taylor Otwell <taylor@laravel.com>
- * @copyright 2018-2020 Nick Menke
- *
- * @link  https://github.com/nlmenke/vertebrae
  * @since 0.0.0-framework introduced
  */
 
@@ -17,7 +13,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Third Party Services
+    | Third-Party Services
     |--------------------------------------------------------------------------
     |
     | This file is for storing the credentials for third party services such
@@ -27,12 +23,6 @@ return [
     |
     */
 
-    'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
-        'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
-    ],
-
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
@@ -41,6 +31,17 @@ return [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    ],
+
+    'resend' => [
+        'key' => env('RESEND_KEY'),
+    ],
+
+    'slack' => [
+        'notifications' => [
+            'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
+            'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
+        ],
     ],
 
 ];
