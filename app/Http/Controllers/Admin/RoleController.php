@@ -18,7 +18,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
-use Laravel\Scout\Builder as ScoutBuilder;
 
 /**
  * Handles the application's role admin pages.
@@ -46,15 +45,8 @@ final class RoleController extends AbstractController
 
         $roles = $this->model;
 
-        if ($this->request->has('search')) {
-            // todo: testing
-            /** @var Role|ScoutBuilder<Role> $roles */
-            // @phpstan-ignore method.notFound
-            $roles = $roles->search($this->request->query('search')); // @codeCoverageIgnore
-        } else {
-            foreach ($this->sorting['columns'] as $index => $column) {
-                $roles = $roles->orderBy($column, $this->sorting['directions'][$index]);
-            }
+        foreach ($this->sorting['columns'] as $index => $column) {
+            $roles = $roles->orderBy($column, $this->sorting['directions'][$index]);
         }
 
         $roles = $roles->paginate($this->perPage)
