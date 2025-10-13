@@ -47,6 +47,9 @@ final class RoleSeeder extends AbstractSeeder
         $this->model = $model;
     }
 
+    /**
+     * Additional tasks to be completed after seeding.
+     */
     protected function complete(): void
     {
         if (app()->isLocal()) {

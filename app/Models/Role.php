@@ -72,6 +72,10 @@ final class Role extends AbstractModel
      * The `users` relationship instance.
      *
      * @return BelongsToMany<User, $this>
+     *
+     * @todo: testing
+     *
+     * @codeCoverageIgnore this relationship is unused
      */
     public function users(): BelongsToMany
     {

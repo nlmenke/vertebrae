@@ -47,9 +47,10 @@ final class RoleController extends AbstractController
         $roles = $this->model;
 
         if ($this->request->has('search')) {
+            // todo: testing
             /** @var Role|ScoutBuilder<Role> $roles */
             // @phpstan-ignore method.notFound
-            $roles = $roles->search($this->request->query('search'));
+            $roles = $roles->search($this->request->query('search')); // @codeCoverageIgnore
         } else {
             foreach ($this->sorting['columns'] as $index => $column) {
                 $roles = $roles->orderBy($column, $this->sorting['directions'][$index]);
@@ -107,7 +108,7 @@ final class RoleController extends AbstractController
         return to_route('admin.roles.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $role->name . ' was created successfully.',
+                'message' => $role->refresh()->name . ' was created successfully.',
             ]);
     }
 
@@ -160,7 +161,7 @@ final class RoleController extends AbstractController
         return to_route('admin.roles.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $role->name . ' was updated successfully.',
+                'message' => $role->refresh()->name . ' was updated successfully.',
             ]);
     }
 

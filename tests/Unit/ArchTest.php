@@ -94,6 +94,11 @@ arch()
     ]);
 
 arch()
+    ->expect('App\Policies')
+    ->toHaveSuffix('Policy')
+    ->toExtend(App\Policies\AbstractPolicy::class);
+
+arch()
     ->expect('Database\Factories')
     ->toHaveSuffix('Factory')
     ->toExtend(Illuminate\Database\Eloquent\Factories\Factory::class)

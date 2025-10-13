@@ -55,7 +55,7 @@ final class UserRoleController extends AbstractController
         return to_route('admin.users.index')
             ->with('toast', [
                 'type' => 'success',
-                'message' => 'Roles for ' . $user->name . ' were updated successfully.',
+                'message' => 'Roles for ' . $user->refresh()->name . ' were updated successfully.',
             ]);
     }
 }

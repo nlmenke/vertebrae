@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Permission;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -30,6 +32,16 @@ final class UserFactory extends Factory
      * The current password being used by the factory.
      */
     private static ?string $password = null;
+
+    /**
+     * Indicate that the model should have the admin role.
+     */
+    public function admin(): self
+    {
+        return $this->afterCreating(function (User $user): void {
+            $user->roles()->attach(Role::query()->where('slug', 'admin')->first());
+        });
+    }
 
     /**
      * Define the model's default state.
@@ -57,5 +69,15 @@ final class UserFactory extends Factory
         return $this->state(fn (array $attributes): array => [
             'email_verified_at' => null,
         ]);
+    }
+
+    /**
+     * Indicate that the model should have the given permission.
+     */
+    public function withPermission(string $permission): self
+    {
+        return $this->afterCreating(function (User $user) use ($permission): void {
+            $user->permissions()->attach(Permission::query()->where('slug', $permission)->first());
+        });
     }
 }

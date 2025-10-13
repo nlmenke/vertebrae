@@ -40,8 +40,7 @@ final class RolePolicy extends AbstractPolicy
      */
     public function update(User $user, Role $role): bool
     {
-        return $user->hasPermission('edit-roles')
-            && $role->slug !== 'admin';
+        return $user->hasPermission('edit-roles');
     }
 
     /**

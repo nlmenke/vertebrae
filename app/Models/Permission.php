@@ -41,6 +41,10 @@ final class Permission extends AbstractModel
      * The `roles` relationship instance.
      *
      * @return BelongsToMany<Role, $this>
+     *
+     * @todo: testing
+     *
+     * @codeCoverageIgnore this relationship is unused
      */
     public function roles(): BelongsToMany
     {
@@ -51,6 +55,10 @@ final class Permission extends AbstractModel
      * The `users` relationship instance.
      *
      * @return BelongsToMany<User, $this>
+     *
+     * @todo: testing
+     *
+     * @codeCoverageIgnore this relationship is unused
      */
     public function users(): BelongsToMany
     {

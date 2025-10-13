@@ -23,7 +23,7 @@ abstract class AbstractPolicy
      */
     final public function before(User $user): ?bool
     {
-        if ($user->roles()->where('name', 'admin')->exists()) {
+        if ($user->roles()->where('slug', 'admin')->exists()) {
             return true;
         }
 

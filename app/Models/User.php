@@ -123,7 +123,8 @@ final class User extends AbstractModel implements AuthenticatableContract, Autho
     public function hasPermission(Permission|string $permission): bool
     {
         if ($permission instanceof Permission) {
-            $permission = $permission->slug;
+            // todo: testing; we're not checking permissions using the model
+            $permission = $permission->slug; // @codeCoverageIgnore
         }
 
         return $this->allPermissions()

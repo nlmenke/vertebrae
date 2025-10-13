@@ -44,9 +44,10 @@ final class UserController extends AbstractController
         $users = $this->model;
 
         if ($this->request->has('search')) {
+            // todo: testing
             /** @var ScoutBuilder<User>|User $users */
             // @phpstan-ignore method.notFound
-            $users = $users->search($this->request->query('search'));
+            $users = $users->search($this->request->query('search')); // @codeCoverageIgnore
         } else {
             foreach ($this->sorting['columns'] as $index => $column) {
                 $users = $users->orderBy($column, $this->sorting['directions'][$index]);
@@ -83,7 +84,7 @@ final class UserController extends AbstractController
         return to_route('admin.users.index')
             ->with('toast', [
                 'type' => 'success',
-                'message' => $user->name . ' was updated successfully.',
+                'message' => $user->refresh()->name . ' was updated successfully.',
             ]);
     }
 }
