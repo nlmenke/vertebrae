@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import EmailVerificationNotificationController from '@/actions/App/Http/Controllers/Auth/EmailVerificationNotificationController';
-import TextLink from '@/components/TextLink.vue';
-import { Button } from '@/components/ui/button';
-import AuthLayout from '@/layouts/AuthLayout.vue';
-import { logout } from '@/routes';
+// packages
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+// shadcn ui
+import { Button } from '@/components/ui/button';
+// generated (wayfinder)
+import EmailVerificationNotificationController from '@/actions/App/Http/Controllers/Auth/EmailVerificationNotificationController';
+import { logout } from '@/routes';
+
+import TextLink from '@/components/TextLink.vue';
+import AuthLayout from '@/layouts/AuthLayout.vue';
 
 defineProps<{
     status?: string;

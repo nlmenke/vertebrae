@@ -1,6 +1,6 @@
 <?php
 /**
- * Update Profile request.
+ * Update Profile form request.
  *
  * @author Taylor Otwell <taylor@laravel.com>
  */

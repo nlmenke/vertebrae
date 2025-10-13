@@ -1,6 +1,6 @@
 <?php
 /**
- * Store Authenticated Session request.
+ * Store Authenticated Session form request.
  *
  * @author Taylor Otwell <taylor@laravel.com>
  */

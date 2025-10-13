@@ -37,6 +37,7 @@ arch()
         App\Http\Controllers\AbstractController::class,
         App\Http\Requests\AbstractFormRequest::class,
         App\Models\AbstractModel::class,
+        App\Policies\AbstractPolicy::class,
         Database\Seeders\AbstractSeeder::class,
     ])
     ->toBeFinal()
@@ -44,6 +45,7 @@ arch()
         App\Http\Controllers\AbstractController::class,
         App\Http\Requests\AbstractFormRequest::class,
         App\Models\AbstractModel::class,
+        App\Policies\AbstractPolicy::class,
         Database\Seeders\AbstractSeeder::class,
     ]);
 
@@ -85,6 +87,7 @@ arch()
     ->toOnlyBeUsedIn([
         'App\Http',
         'App\Models',
+        'App\Policies',
         'App\Providers',
         'Database\Factories',
         'Database\Seeders',

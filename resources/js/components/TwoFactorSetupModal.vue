@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import AlertError from '@/components/AlertError.vue';
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { PinInput, PinInputGroup, PinInputSlot } from '@/components/ui/pin-input';
-import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
-import { confirm } from '@/routes/two-factor';
+// packages
 import { Form } from '@inertiajs/vue3';
 import { useClipboard } from '@vueuse/core';
 import { Check, Copy, Loader2, ScanLine } from 'lucide-vue-next';
 import { computed, nextTick, ref, watch } from 'vue';
+// shadcn ui
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { PinInput, PinInputGroup, PinInputSlot } from '@/components/ui/pin-input';
+// generated (wayfinder)
+import { confirm } from '@/routes/two-factor';
+
+import AlertError from '@/components/AlertError.vue';
+import InputError from '@/components/InputError.vue';
+import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 
 interface Props {
     requiresConfirmation: boolean;

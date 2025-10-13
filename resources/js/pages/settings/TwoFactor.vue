@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import HeadingSmall from '@/components/HeadingSmall.vue';
-import TwoFactorRecoveryCodes from '@/components/TwoFactorRecoveryCodes.vue';
-import TwoFactorSetupModal from '@/components/TwoFactorSetupModal.vue';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
-import AppLayout from '@/layouts/AppLayout.vue';
-import SettingsLayout from '@/layouts/settings/Layout.vue';
-import { disable, enable, show } from '@/routes/two-factor';
-import { BreadcrumbItem } from '@/types';
+// packages
 import { Form, Head } from '@inertiajs/vue3';
 import { ShieldBan, ShieldCheck } from 'lucide-vue-next';
 import { onUnmounted, ref } from 'vue';
+// shadcn ui
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+// generated (wayfinder)
+import { disable, enable, show } from '@/routes/two-factor';
+
+import HeadingSmall from '@/components/HeadingSmall.vue';
+import TwoFactorRecoveryCodes from '@/components/TwoFactorRecoveryCodes.vue';
+import TwoFactorSetupModal from '@/components/TwoFactorSetupModal.vue';
+import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
+import AppLayout from '@/layouts/AppLayout.vue';
+import SettingsLayout from '@/layouts/settings/Layout.vue';
+import { BreadcrumbItem } from '@/types';
 
 interface Props {
     requiresConfirmation?: boolean;
@@ -26,7 +30,7 @@ withDefaults(defineProps<Props>(), {
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Two-Factor Authentication',
-        href: show.url(),
+        href: show(),
     },
 ];
 

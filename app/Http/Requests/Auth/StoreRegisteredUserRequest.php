@@ -1,7 +1,8 @@
 <?php
 /**
- * Store Registered User request.
+ * Store Registered User form request.
  *
+ * @author Taylor Otwell <taylor@laravel.com>
  * @author Nick Menke <git@nlmenke.net>
  */
 
@@ -18,7 +19,8 @@ use Illuminate\Validation\Rules;
 /**
  * Handles validation for registered user requests.
  *
- * @since 0.0.0-vertebrae introduced
+ * @since 0.0.0-framework introduced
+ * @since 0.0.0-vertebrae moved validation to class
  */
 final class StoreRegisteredUserRequest extends AbstractFormRequest
 {

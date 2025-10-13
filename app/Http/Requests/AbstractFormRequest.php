@@ -25,6 +25,8 @@ abstract class AbstractFormRequest extends FormRequest
     abstract public function authorize(): bool;
 
     /**
+     * Get the validation rules that apply to the request.
+     *
      * @return array<string, ValidationRule|list<ValidationRule|string>|string>
      */
     abstract public function rules(): array;

@@ -1,3 +1,4 @@
+// packages
 import { InertiaLinkProps } from '@inertiajs/vue3';
 import type { LucideIcon } from 'lucide-vue-next';
 
@@ -23,6 +24,20 @@ export type AppPageProps<T extends Record<string, unknown> = Record<string, unkn
     auth: Auth;
     sidebarOpen: boolean;
 };
+
+export interface Permission {
+    id: number;
+    slug: string;
+    name: string;
+    description?: string;
+}
+
+export interface Role {
+    id: number;
+    slug: string;
+    name: string;
+    description?: string;
+}
 
 export interface User {
     id: number;

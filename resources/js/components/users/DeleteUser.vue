@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
+// packages
 import { Form } from '@inertiajs/vue3';
 import { ref } from 'vue';
-
-// Components
-import HeadingSmall from '@/components/HeadingSmall.vue';
-import InputError from '@/components/InputError.vue';
+// shadcn ui
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -19,6 +16,11 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+// generated (wayfinder)
+import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
+
+import HeadingSmall from '@/components/HeadingSmall.vue';
+import InputError from '@/components/InputError.vue';
 
 const passwordInput = ref<InstanceType<typeof Input> | null>(null);
 </script>
@@ -39,8 +41,9 @@ const passwordInput = ref<InstanceType<typeof Input> | null>(null);
                     <Button
                         variant="destructive"
                         data-test="delete-user-button"
-                        >Delete account</Button
                     >
+                        Delete account
+                    </Button>
                 </DialogTrigger>
                 <DialogContent>
                     <Form
@@ -66,8 +69,9 @@ const passwordInput = ref<InstanceType<typeof Input> | null>(null);
                             <Label
                                 for="password"
                                 class="sr-only"
-                                >Password</Label
                             >
+                                Password
+                            </Label>
                             <Input
                                 id="password"
                                 type="password"

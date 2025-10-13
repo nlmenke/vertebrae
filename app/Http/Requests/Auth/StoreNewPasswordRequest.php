@@ -1,7 +1,8 @@
 <?php
 /**
- * Store New Password request.
+ * Store New Password form request.
  *
+ * @author Taylor Otwell <taylor@laravel.com>
  * @author Nick Menke <git@nlmenke.net>
  */
 
@@ -16,7 +17,8 @@ use Illuminate\Validation\Rules;
 /**
  * Handles validation for new password requests.
  *
- * @since 0.0.0-vertebrae introduced
+ * @since 0.0.0-framework introduced
+ * @since 0.0.0-vertebrae moved validation to class
  */
 final class StoreNewPasswordRequest extends AbstractFormRequest
 {

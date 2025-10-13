@@ -1,22 +1,25 @@
 <script setup lang="ts">
-import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
-import InputError from '@/components/InputError.vue';
-import AppLayout from '@/layouts/AppLayout.vue';
-import SettingsLayout from '@/layouts/settings/Layout.vue';
-import { edit } from '@/routes/password';
+// packages
 import { Form, Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
-
-import HeadingSmall from '@/components/HeadingSmall.vue';
+// shadcn ui
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { type BreadcrumbItem } from '@/types';
+// generated (wayfinder)
+import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
+import { edit } from '@/routes/password';
 
-const breadcrumbItems: BreadcrumbItem[] = [
+import HeadingSmall from '@/components/HeadingSmall.vue';
+import InputError from '@/components/InputError.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
+import SettingsLayout from '@/layouts/settings/Layout.vue';
+import type { BreadcrumbItem } from '@/types';
+
+const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Password settings',
-        href: edit().url,
+        href: edit(),
     },
 ];
 
@@ -25,7 +28,7 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
 </script>
 
 <template>
-    <AppLayout :breadcrumbs="breadcrumbItems">
+    <AppLayout :breadcrumbs="breadcrumbs">
         <Head title="Password settings" />
 
         <SettingsLayout>

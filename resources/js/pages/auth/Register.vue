@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import RegisteredUserController from '@/actions/App/Http/Controllers/Auth/RegisteredUserController';
-import InputError from '@/components/InputError.vue';
-import TextLink from '@/components/TextLink.vue';
+// packages
+import { Form, Head } from '@inertiajs/vue3';
+import { LoaderCircle } from 'lucide-vue-next';
+// shadcn ui
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AuthBase from '@/layouts/AuthLayout.vue';
+// generated (wayfinder)
+import RegisteredUserController from '@/actions/App/Http/Controllers/Auth/RegisteredUserController';
 import { login } from '@/routes';
-import { Form, Head } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
+
+import InputError from '@/components/InputError.vue';
+import TextLink from '@/components/TextLink.vue';
+import AuthBase from '@/layouts/AuthLayout.vue';
 </script>
 
 <template>

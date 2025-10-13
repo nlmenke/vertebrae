@@ -1,4 +1,7 @@
 <script setup lang="ts">
+// packages
+import { Link } from '@inertiajs/vue3';
+// shadcn ui
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -7,7 +10,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { Link } from '@inertiajs/vue3';
 
 interface BreadcrumbItemType {
     title: string;

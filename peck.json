@@ -180,6 +180,7 @@
             "phpstorm",
             "ssr",
             "supervisord",
+            "textarea",
             "tooltip",
             "tsconfig",
             "utils",

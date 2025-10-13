@@ -1,4 +1,7 @@
 <script setup lang="ts">
+// packages
+import { Link, usePage } from '@inertiajs/vue3';
+// shadcn ui
 import {
     SidebarGroup,
     SidebarGroupLabel,
@@ -6,9 +9,9 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
+
 import { urlIsActive } from '@/lib/utils';
-import { type NavItem } from '@/types';
-import { Link, usePage } from '@inertiajs/vue3';
+import type { NavItem } from '@/types';
 
 defineProps<{
     items: NavItem[];

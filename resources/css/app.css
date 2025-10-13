@@ -76,6 +76,15 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
     }
+
+    button:not(:disabled),
+    [role='button']:not(:disabled) {
+        cursor: pointer;
+    }
+
+    a:has(button:disabled) {
+        pointer-events: none;
+    }
 }
 
 @layer utilities {
@@ -164,6 +173,7 @@
     * {
         @apply border-border outline-ring/50;
     }
+
     body {
         @apply bg-background text-foreground;
     }
