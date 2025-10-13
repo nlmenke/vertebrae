@@ -26,8 +26,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Scout\Builder as ScoutBuilder;
-use Laravel\Scout\Searchable;
 
 /**
  * Represents a user in the system with authentication and notification
@@ -36,7 +34,6 @@ use Laravel\Scout\Searchable;
  * @since 0.0.0-framework introduced
  *
  * @mixin EloquentBuilder<static>
- * @mixin ScoutBuilder<static>
  *
  * @property-read int                                 $id
  * @property-read string                              $name
@@ -61,7 +58,6 @@ final class User extends AbstractModel implements AuthenticatableContract, Autho
 
     use MustVerifyEmail;
     use Notifiable;
-    use Searchable;
     use TwoFactorAuthenticatable;
 
     /**
@@ -149,21 +145,6 @@ final class User extends AbstractModel implements AuthenticatableContract, Autho
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class);
-    }
-
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array<string, float|int|string|null>
-     */
-    public function toSearchableArray(): array
-    {
-        return [
-            'id' => (string) $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'created_at' => $this->created_at->timestamp,
-        ];
     }
 
     /**

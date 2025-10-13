@@ -15,7 +15,6 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response as InertiaResponse;
-use Laravel\Scout\Builder as ScoutBuilder;
 
 /**
  * Handles the application's user admin pages.
@@ -43,15 +42,8 @@ final class UserController extends AbstractController
 
         $users = $this->model;
 
-        if ($this->request->has('search')) {
-            // todo: testing
-            /** @var ScoutBuilder<User>|User $users */
-            // @phpstan-ignore method.notFound
-            $users = $users->search($this->request->query('search')); // @codeCoverageIgnore
-        } else {
-            foreach ($this->sorting['columns'] as $index => $column) {
-                $users = $users->orderBy($column, $this->sorting['directions'][$index]);
-            }
+        foreach ($this->sorting['columns'] as $index => $column) {
+            $users = $users->orderBy($column, $this->sorting['directions'][$index]);
         }
 
         $users = $users->paginate($this->perPage)

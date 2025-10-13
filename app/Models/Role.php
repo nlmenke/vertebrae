@@ -15,8 +15,6 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Laravel\Scout\Builder as ScoutBuilder;
-use Laravel\Scout\Searchable;
 
 /**
  * Represents a user role in the system.
@@ -24,7 +22,6 @@ use Laravel\Scout\Searchable;
  * @since 0.0.0-vertebrae introduced
  *
  * @mixin EloquentBuilder<static>
- * @mixin ScoutBuilder<static>
  *
  * @property-read int                                 $id
  * @property-read string                              $slug
@@ -40,8 +37,6 @@ final class Role extends AbstractModel
     /** @use HasFactory<RoleFactory> */
     use HasFactory;
 
-    use Searchable;
-
     /**
      * The `permissions` relationship instance.
      *
@@ -50,22 +45,6 @@ final class Role extends AbstractModel
     public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(Permission::class);
-    }
-
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array<string, float|int|string|null>
-     */
-    public function toSearchableArray(): array
-    {
-        return [
-            'id' => (string) $this->id,
-            'slug' => $this->slug,
-            'name' => $this->name,
-            'description' => $this->description,
-            'created_at' => $this->created_at->timestamp,
-        ];
     }
 
     /**

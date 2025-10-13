@@ -164,7 +164,6 @@
             "inertiajs",
             "jetstream",
             "laratrust",
-            "typesense",
             "ulid",
 
             "codeowners",
