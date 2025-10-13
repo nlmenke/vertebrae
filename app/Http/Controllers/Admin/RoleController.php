@@ -64,16 +64,12 @@ final class RoleController extends AbstractController
     {
         $this->authorize('create', Role::class);
 
-        if (config('database.default') === 'sqlite') {
-            $SqlPositionCheck = "instr(slug, '-')";
-        } else {
-            $SqlPositionCheck = "position('-' in slug)";
-        }
+        $sqlPositionCheck = config('database.default') === 'sqlite' ? "instr(slug, '-')" : "position('-' in slug)";
 
         $permissions = Permission::query()
-            ->orderByRaw("substr(slug, $SqlPositionCheck + 1)")
+            ->orderByRaw(sprintf('substr(slug, %s + 1)', $sqlPositionCheck))
             ->orderByRaw(
-                "CASE substr(slug, 1, $SqlPositionCheck - 1)
+                "CASE substr(slug, 1, {$sqlPositionCheck} - 1)
                     WHEN 'view' THEN 1
                     WHEN 'create' THEN 2
                     WHEN 'edit' THEN 3
@@ -117,16 +113,12 @@ final class RoleController extends AbstractController
     {
         $this->authorize('update', $role);
 
-        if (config('database.default') === 'sqlite') {
-            $SqlPositionCheck = "instr(slug, '-')";
-        } else {
-            $SqlPositionCheck = "position('-' in slug)";
-        }
+        $sqlPositionCheck = config('database.default') === 'sqlite' ? "instr(slug, '-')" : "position('-' in slug)";
 
         $permissions = Permission::query()
-            ->orderByRaw("substr(slug, $SqlPositionCheck + 1)")
+            ->orderByRaw(sprintf('substr(slug, %s + 1)', $sqlPositionCheck))
             ->orderByRaw(
-                "CASE substr(slug, 1, $SqlPositionCheck - 1)
+                "CASE substr(slug, 1, {$sqlPositionCheck} - 1)
                     WHEN 'view' THEN 1
                     WHEN 'create' THEN 2
                     WHEN 'edit' THEN 3
