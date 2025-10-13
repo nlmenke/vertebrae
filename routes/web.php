@@ -1,30 +1,30 @@
 <?php
 /**
- * Web Routes.
+ * Web routes.
  *
- * Here is where you can register web routes for your application. These
- * routes are loaded by the RouteServiceProvider within a group which
- * contains the `web` middleware group. Now create something great!
+ * @author Taylor Otwell <taylor@laravel.com>
+ * @author Nick Menke <git@nlmenke.net>
  *
- * @package Routes
- *
- * @author    Taylor Otwell <taylor@laravel.com>
- * @author    Nick Menke <nick@nlmenke.net>
- * @copyright 2018-2020 Nick Menke
- *
- * @link  https://github.com/nlmenke/vertebrae
  * @since 0.0.0-framework introduced
+ * @since 0.0.0-vertebrae add routes for starter kit
  */
 
 declare(strict_types=1);
 
-use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-/* @var Router $router */
+require __DIR__ . '/admin.php';
+require __DIR__ . '/auth.php';
+require __DIR__ . '/settings.php';
 
-Auth::routes();
+Route::get('/', fn () => Inertia::render('Welcome'))
+    ->name('home');
 
-//$router->get('/', 'DashboardController@index');
-//$router->get('/home', 'HomeController@index')->name('home');
-
-$router->get('{any}', 'SinglePageController@index')->where('any', '.*');
+Route::middleware([
+    'auth',
+    'verified',
+])->group(function (): void {
+    Route::get('dashboard', fn () => Inertia::render('Dashboard'))
+        ->name('dashboard');
+});

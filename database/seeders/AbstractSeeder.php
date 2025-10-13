@@ -1,70 +1,59 @@
 <?php
 /**
- * Abstract Seeder.
+ * Abstract seeder.
  *
- * @package Database Seeders
- *
- * @author    Nick Menke <nick@nlmenke.net>
- * @copyright 2018-2020 Nick Menke
- *
- * @link https://github.com/nlmenke/vertebrae
+ * @author Nick Menke <git@nlmenke.net>
  */
 
 declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Entities\AbstractEntity;
-use DB;
-use Exception;
+use App\Models\AbstractModel;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 /**
- * The base database seeder class.
+ * Base seeder that all other seeders extend.
  *
- * This class contains any functionality that would otherwise be duplicated in
- * other seeders. All other seeders should extend this class.
- *
- * @since x.x.x introduced
+ * @since 0.0.0-vertebrae introduced
  */
 abstract class AbstractSeeder extends Seeder
 {
     /**
      * Items to be seeded.
      *
-     * @var array
+     * @var array<array<string, mixed>>
      */
-    protected $itemList = [];
+    protected array $itemList = [];
 
     /**
-     * The entity used for importing.
+     * The model used for importing.
      *
-     * @var AbstractEntity|EloquentBuilder
+     * @var AbstractModel|EloquentBuilder<AbstractModel>
      */
-    protected $model;
+    protected AbstractModel|EloquentBuilder $model;
 
     /**
-     * Tables to be cleared before seeding.
+     * Tables that should be truncated before running.
      *
-     * @var array
+     * @var list<string>
      */
-    protected $truncateTables = [];
+    protected array $truncateTables = [];
 
     /**
-     * Run the seeder.
+     * Run the database seeds.
      *
-     * @throws Exception
      * @throws Throwable
-     *
-     * @return void
      */
-    public function run(): void
+    final public function run(): void
     {
-        DB::beginTransaction();
+        $this->clearDatabase();
 
-        $this->cleanDatabase();
+        DB::beginTransaction();
 
         foreach ($this->itemList as $item) {
             $this->model->create($item);
@@ -76,27 +65,21 @@ abstract class AbstractSeeder extends Seeder
     }
 
     /**
-     * Clear existing data from tables in $truncateTables array.
-     *
-     * @return void
+     * Clear existing data from tables in the truncateTables array.
      */
-    protected function cleanDatabase(): void
+    protected function clearDatabase(): void
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::disableForeignKeyConstraints();
 
         foreach ($this->truncateTables as $table) {
             DB::table($table)->truncate();
         }
 
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
-     * Additional tasks to be completed after seeding has completed.
-     *
-     * @return void
+     * Additional tasks to be completed after seeding.
      */
-    protected function complete(): void
-    {
-    }
+    protected function complete(): void {}
 }

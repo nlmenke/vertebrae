@@ -1,105 +1,86 @@
 <?php
 /**
- * Abstract Controller.
+ * Abstract controller.
  *
- * @package App\Http\Controllers
- *
- * @author    Taylor Otwell <taylor@laravel.com>
- * @author    Nick Menke <nick@nlmenke.net>
- * @copyright 2018-2020 Nick Menke
- *
- * @link https://github.com/nlmenke/vertebrae
+ * @author Taylor Otwell <taylor@laravel.com>
+ * @author Nick Menke <git@nlmenke.net>
  */
 
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Entities\AbstractEntity;
-use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use App\Models\AbstractModel;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller;
-use Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 /**
- * The base controller class.
- *
- * This class contains any functionality that would otherwise be duplicated in
- * other controllers. All other controllers should extend this class.
+ * Base controller that all other controllers extend.
  *
  * @since 0.0.0-framework introduced
- * @since x.x.x           renamed to AbstractController and added abstraction
+ * @since 0.0.0-vertebrae renamed to AbstractController with added abstraction
  */
-abstract class AbstractController extends Controller
+abstract class AbstractController
 {
     use AuthorizesRequests;
-    use DispatchesJobs;
     use ValidatesRequests;
 
     /**
-     * The current locale.
+     * The model instance.
      *
-     * @since x.x.x introduced
-     *
-     * @var string
+     * @since 0.0.0-vertebrae introduced
      */
-    protected $currentLocale;
+    protected AbstractModel $model;
 
     /**
-     * The entity instance.
+     * The number of results to return per page.
      *
-     * @since x.x.x introduced
-     *
-     * @var AbstractEntity|EloquentBuilder
+     * @since 0.0.0-vertebrae introduced
      */
-    protected $model;
+    protected int $perPage;
 
     /**
-     * The number of results per page.
+     * The order in which the results should be displayed.
      *
-     * @since x.x.x introduced
+     * @since 0.0.0-vertebrae introduced
      *
-     * @var int
+     * @var array<string, list<string>>
      */
-    protected $perPage;
-
-    /**
-     * The order the results displayed.
-     *
-     * @since x.x.x introduced
-     *
-     * @var array
-     */
-    protected $sorting;
+    protected array $sorting;
 
     /**
      * Relationships to be returned with the results.
      *
-     * @since x.x.x introduced
+     * @since 0.0.0-vertebrae introduced
      *
-     * @var array
+     * @var array<string, list<string>>
      */
-    protected $with = [];
+    protected array $with = [];
 
     /**
      * Creates a new controller instance.
      *
-     * @since x.x.x introduced
-     *
-     * @return void
+     * @since 0.0.0-vertebrae introduced
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->currentLocale = app()->getLocale();
+        $sortRequest = $request->string('sort', 'id')->toString();
+        $sortRequest = explode(',', $sortRequest);
 
-        $this->perPage = (int)Request::get('count', 10);
+        $columns = [];
+        $directions = [];
+        foreach ($sortRequest as $sort) {
+            $columns[] = mb_ltrim($sort, '-');
+            $directions[] = Str::startsWith($sort, '-') ? 'desc' : 'asc';
+        }
 
-        $sortRequest = Request::get('sorting', ['id' => 'asc']);
         $this->sorting = [
-            'column' => array_keys($sortRequest)[0],
-            'direction' => array_values($sortRequest)[0],
+            'columns' => $columns,
+            'directions' => $directions,
         ];
+
+        $this->perPage = $request->integer('count', 50);
     }
 }
