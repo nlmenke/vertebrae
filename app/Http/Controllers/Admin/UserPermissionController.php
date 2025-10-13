@@ -31,10 +31,16 @@ final class UserPermissionController extends AbstractController
     {
         $this->authorize('update-permissions', $user);
 
+        if (config('database.default') === 'sqlite') {
+            $SqlPositionCheck = "instr(slug, '-')";
+        } else {
+            $SqlPositionCheck = "position('-' in slug)";
+        }
+
         $permissions = Permission::query()
-            ->orderByRaw("substring(slug, position('-' in slug) + 1)")
+            ->orderByRaw("substr(slug, $SqlPositionCheck + 1)")
             ->orderByRaw(
-                "CASE substring(slug, 1, position('-' in slug) - 1)
+                "CASE substr(slug, 1, $SqlPositionCheck - 1)
                     WHEN 'view' THEN 1
                     WHEN 'create' THEN 2
                     WHEN 'edit' THEN 3
