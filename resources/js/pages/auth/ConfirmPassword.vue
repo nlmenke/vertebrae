@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
+// packages
+import { Form, Head } from '@inertiajs/vue3';
+import { LoaderCircle } from 'lucide-vue-next';
+// shadcn ui
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AuthLayout from '@/layouts/AuthLayout.vue';
+// generated (wayfinder)
 import { store } from '@/routes/password/confirm';
-import { Form, Head } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
+
+import InputError from '@/components/InputError.vue';
+import AuthLayout from '@/layouts/AuthLayout.vue';
 </script>
 
 <template>

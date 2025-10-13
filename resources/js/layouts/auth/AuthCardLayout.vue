@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { home } from '@/routes';
+// packages
 import { Link } from '@inertiajs/vue3';
+// shadcn ui
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+// generated (wayfinder)
+import { home } from '@/routes';
+
+import AppLogoIcon from '@/components/AppLogoIcon.vue';
 
 defineProps<{
     title?: string;

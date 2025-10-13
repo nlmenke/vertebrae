@@ -13,6 +13,8 @@ use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use RectorLaravel\Rector\Class_\AddHasFactoryToModelsRector;
+use RectorLaravel\Rector\Class_\AnonymousMigrationsRector;
+use RectorLaravel\Set\LaravelLevelSetList;
 use RectorLaravel\Set\LaravelSetList;
 use RectorLaravel\Set\LaravelSetProvider;
 
@@ -27,7 +29,7 @@ return RectorConfig::configure()
         __DIR__ . '/bootstrap',
         __DIR__ . '/config',
         __DIR__ . '/database',
-        __DIR__ . '/public/index.php',
+        __DIR__ . '/public',
         __DIR__ . '/routes',
         __DIR__ . '/tests',
         __DIR__ . '/artisan',
@@ -38,10 +40,12 @@ return RectorConfig::configure()
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
+        codingStyle: true,
         typeDeclarations: true,
         privatization: true,
         earlyReturn: true,
         strictBooleans: true,
+        rectorPreset: true,
     )
     ->withSetProviders(LaravelSetProvider::class)
     ->withSets([
@@ -55,10 +59,12 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_FACTORIES,
         LaravelSetList::LARAVEL_IF_HELPERS,
         LaravelSetList::LARAVEL_LEGACY_FACTORIES_TO_CLASSES,
+        LaravelLevelSetList::UP_TO_LARAVEL_120,
     ])
     ->withSkip([
         AddHasFactoryToModelsRector::class => [
             __DIR__ . '/app/Models/AbstractModel.php',
         ],
         AddOverrideAttributeToOverriddenMethodsRector::class,
+        AnonymousMigrationsRector::class,
     ]);

@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { SidebarProvider } from '@/components/ui/sidebar';
+// packages
 import { usePage } from '@inertiajs/vue3';
+// shadcn ui
+import { SidebarProvider } from '@/components/ui/sidebar';
 
 interface Props {
     variant?: 'header' | 'sidebar';

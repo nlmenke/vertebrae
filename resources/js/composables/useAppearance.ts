@@ -1,3 +1,4 @@
+// packages
 import { onMounted, ref } from 'vue';
 
 type Appearance = 'light' | 'dark' | 'system';
@@ -58,7 +59,7 @@ export function initializeTheme() {
     const savedAppearance = getStoredAppearance();
     updateTheme(savedAppearance || 'system');
 
-    // Set up system theme change listener...
+    // Set up the system theme change listener...
     mediaQuery()?.addEventListener('change', handleSystemThemeChange);
 }
 

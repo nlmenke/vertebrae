@@ -1,8 +1,11 @@
 <script setup lang="ts">
+// packages
+import { computed } from 'vue';
+// shadcn ui
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
 import { useInitials } from '@/composables/useInitials';
 import type { User } from '@/types';
-import { computed } from 'vue';
 
 interface Props {
     user: User;
@@ -36,7 +39,8 @@ const showAvatar = computed(() => props.user.avatar && props.user.avatar !== '')
         <span
             v-if="showEmail"
             class="truncate text-xs text-muted-foreground"
-            >{{ user.email }}</span
         >
+            {{ user.email }}
+        </span>
     </div>
 </template>

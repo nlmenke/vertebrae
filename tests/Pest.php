@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use Database\Seeders\PermissionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Sleep;
@@ -16,6 +17,7 @@ use Illuminate\Support\Str;
 use Tests\AbstractTestCase;
 
 use function Pest\Laravel\freezeTime;
+use function Pest\Laravel\seed;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,8 @@ pest()
         Sleep::fake();
 
         freezeTime();
+
+        seed(PermissionSeeder::class);
     })
     ->in('Browser', 'Feature', 'Unit');
 

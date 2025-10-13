@@ -1,7 +1,8 @@
 <?php
 /**
- * Delete Profile request.
+ * Delete Profile form request.
  *
+ * @author Taylor Otwell <taylor@laravel.com>
  * @author Nick Menke <git@nlmenke.net>
  */
 
@@ -15,7 +16,8 @@ use Illuminate\Contracts\Validation\ValidationRule;
 /**
  * Handles validation for deleting profile requests.
  *
- * @since 0.0.0-vertebrae introduced
+ * @since 0.0.0-framework introduced
+ * @since 0.0.0-vertebrae moved validation to class
  */
 final class DeleteProfileRequest extends AbstractFormRequest
 {

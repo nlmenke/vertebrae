@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import AppLogo from '@/components/AppLogo.vue';
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
-import Breadcrumbs from '@/components/Breadcrumbs.vue';
+// packages
+import { InertiaLinkProps, Link, usePage } from '@inertiajs/vue3';
+import { Folder, LayoutGrid, Menu, Search, Shield, User } from 'lucide-vue-next';
+import { computed } from 'vue';
+// shadcn ui
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -13,14 +15,19 @@ import {
 } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+// generated (wayfinder)
+import { index as RoleControllerIndex } from '@/actions/App/Http/Controllers/Admin/RoleController';
+import { index as UserControllerIndex } from '@/actions/App/Http/Controllers/Admin/UserController';
+import { dashboard } from '@/routes';
+
+import AppLogo from '@/components/AppLogo.vue';
+import AppLogoIcon from '@/components/AppLogoIcon.vue';
+import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import UserMenuContent from '@/components/UserMenuContent.vue';
+import { can } from '@/composables/hasPermissions';
 import { getInitials } from '@/composables/useInitials';
 import { toUrl, urlIsActive } from '@/lib/utils';
-import { dashboard } from '@/routes';
 import type { BreadcrumbItem, NavItem } from '@/types';
-import { InertiaLinkProps, Link, usePage } from '@inertiajs/vue3';
-import { Folder, LayoutGrid, Menu, Search } from 'lucide-vue-next';
-import { computed } from 'vue';
 
 interface Props {
     breadcrumbs?: BreadcrumbItem[];
@@ -45,12 +52,25 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
+        isVisible: true,
+    },
+    {
+        title: 'Roles',
+        href: RoleControllerIndex(),
+        icon: Shield,
+        isVisible: can('view-roles'),
+    },
+    {
+        title: 'Users',
+        href: UserControllerIndex(),
+        icon: User,
+        isVisible: can('users-roles'),
     },
 ];
 
 const rightNavItems: NavItem[] = [
     {
-        title: 'Repository',
+        title: 'GitHub Repo',
         href: 'https://github.com/nlmenke/vertebrae',
         icon: Folder,
     },
@@ -83,20 +103,24 @@ const rightNavItems: NavItem[] = [
                             </SheetHeader>
                             <div class="flex h-full flex-1 flex-col justify-between space-y-4 py-6">
                                 <nav class="-mx-3 space-y-1">
-                                    <Link
+                                    <slot
                                         v-for="item in mainNavItems"
                                         :key="item.title"
-                                        :href="item.href"
-                                        class="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
-                                        :class="activeItemStyles(item.href)"
                                     >
-                                        <component
-                                            v-if="item.icon"
-                                            :is="item.icon"
-                                            class="h-5 w-5"
-                                        />
-                                        {{ item.title }}
-                                    </Link>
+                                        <Link
+                                            v-if="item.isVisible ?? false"
+                                            :href="item.href"
+                                            class="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
+                                            :class="activeItemStyles(item.href)"
+                                        >
+                                            <component
+                                                v-if="item.icon"
+                                                :is="item.icon"
+                                                class="h-5 w-5"
+                                            />
+                                            {{ item.title }}
+                                        </Link>
+                                    </slot>
                                 </nav>
                                 <div class="flex flex-col space-y-4">
                                     <a
@@ -131,31 +155,35 @@ const rightNavItems: NavItem[] = [
                 <div class="hidden h-full lg:flex lg:flex-1">
                     <NavigationMenu class="ml-10 flex h-full items-stretch">
                         <NavigationMenuList class="flex h-full items-stretch space-x-2">
-                            <NavigationMenuItem
+                            <slot
                                 v-for="(item, index) in mainNavItems"
                                 :key="index"
-                                class="relative flex h-full items-center"
                             >
-                                <Link
-                                    :class="[
-                                        navigationMenuTriggerStyle(),
-                                        activeItemStyles(item.href),
-                                        'h-9 cursor-pointer px-3',
-                                    ]"
-                                    :href="item.href"
+                                <NavigationMenuItem
+                                    v-if="item.isVisible ?? false"
+                                    class="relative flex h-full items-center"
                                 >
-                                    <component
-                                        v-if="item.icon"
-                                        :is="item.icon"
-                                        class="mr-2 h-4 w-4"
-                                    />
-                                    {{ item.title }}
-                                </Link>
-                                <div
-                                    v-if="isCurrentRoute(item.href)"
-                                    class="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"
-                                ></div>
-                            </NavigationMenuItem>
+                                    <Link
+                                        :class="[
+                                            navigationMenuTriggerStyle(),
+                                            activeItemStyles(item.href),
+                                            'h-9 cursor-pointer px-3',
+                                        ]"
+                                        :href="item.href"
+                                    >
+                                        <component
+                                            v-if="item.icon"
+                                            :is="item.icon"
+                                            class="mr-2 h-4 w-4"
+                                        />
+                                        {{ item.title }}
+                                    </Link>
+                                    <div
+                                        v-if="isCurrentRoute(item.href)"
+                                        class="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"
+                                    ></div>
+                                </NavigationMenuItem>
+                            </slot>
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>

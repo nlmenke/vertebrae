@@ -70,7 +70,9 @@ final class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'search' => $request->query('search'),
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'toast' => $request->session()->get('toast', []),
         ];
     }
 }

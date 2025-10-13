@@ -1,6 +1,6 @@
 <?php
 /**
- * Show Two-Factor Authentication request.
+ * Show Two-Factor Authentication form request.
  *
  * @author Taylor Otwell <taylor@laravel.com>
  */

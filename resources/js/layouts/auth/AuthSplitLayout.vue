@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
-import { home } from '@/routes';
+//packages
 import { Link, usePage } from '@inertiajs/vue3';
+//generated (wayfinder)
+import { home } from '@/routes';
+
+import AppLogoIcon from '@/components/AppLogoIcon.vue';
 
 const page = usePage();
 const name = page.props.name;
