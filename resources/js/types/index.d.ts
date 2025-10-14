@@ -11,6 +11,16 @@ export interface BreadcrumbItem {
     href: string;
 }
 
+export interface Currency {
+    id: number;
+    iso_alpha: string;
+    iso_numeric: number;
+    name: string;
+    symbol: string;
+    decimal_precision: number;
+    exchange_rate: number;
+}
+
 export interface NavItem {
     title: string;
     href: NonNullable<InertiaLinkProps['href']>;

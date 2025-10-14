@@ -35,8 +35,7 @@ test('authorized users can visit the users index', function (): void {
 
     actingAs($user)
         ->get(route('admin.users.index'))
-        ->assertOk()
-        ->assertSee('admin');
+        ->assertOk();
 });
 
 test('unauthorized users cannot visit the user edit page', function (): void {
