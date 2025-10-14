@@ -11,7 +11,8 @@ declare(strict_types=1);
 
 arch()
     ->preset()
-    ->php();
+    ->php()
+    ->ignoring(Database\Seeders\CurrencySeeder::class); // some currency symbols contain suspicious characters
 
 arch()
     ->preset()

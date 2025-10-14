@@ -70,7 +70,7 @@ test('user can delete their account', function (): void {
         ->assertRedirect(route('home'));
 
     assertGuest();
-    assertNull($user->fresh());
+    assertNotNull($user->fresh()?->deleted_at);
 });
 
 test('correct password must be provided to delete account', function (): void {
