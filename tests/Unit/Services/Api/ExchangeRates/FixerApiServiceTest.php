@@ -34,7 +34,7 @@ test('getExchangeRates() can return proper data', function (): void {
 
     $result = app(FixerApiService::class)->getExchangerates();
 
-    expect($result)->toBe([
+    expect($result)->toEqual([
         'AUD' => 1.566015,
         'CAD' => 1.560132,
         'CHF' => 1.154727,

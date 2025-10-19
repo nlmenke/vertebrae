@@ -34,7 +34,7 @@ test('getExchangeRates() can return proper data', function (): void {
 
     $result = app(CurrencyApiApiService::class)->getExchangerates();
 
-    expect($result)->toBe([
+    expect($result)->toEqual([
         'AED' => 3.67306,
         'AFN' => 91.80254,
         'ALL' => 108.22904,

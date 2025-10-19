@@ -18,6 +18,8 @@ use App\Services\Api\ExchangeRates\OpenExchangeRatesApiService;
 use function PHPUnit\Framework\assertInstanceOf;
 
 test('resolves default driver', function (): void {
+    config()->set('currency.exchange_rates.drivers.open_exchange_rates', 'test-api-key');
+
     $manager = app()->make(ExchangeRatesApiServiceManager::class);
 
     assertInstanceOf(OpenExchangeRatesApiService::class, $manager->driver());

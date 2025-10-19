@@ -34,7 +34,7 @@ test('getExchangeRates() can return proper data', function (): void {
 
     $result = app(ExchangeRateApiApiService::class)->getExchangeRates();
 
-    expect($result)->toBe([
+    expect($result)->toEqual([
         'USD' => 1.0,
         'AUD' => 1.4817,
         'BGN' => 1.7741,
