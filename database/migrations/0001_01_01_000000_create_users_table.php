@@ -48,6 +48,7 @@ final class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create(self::TABLE_RESET, function (Blueprint $table): void {

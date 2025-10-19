@@ -1,11 +1,9 @@
 <script setup lang="ts">
 // packages
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
-import debounce from 'lodash/debounce';
 import { ArrowLeft, ArrowLeftToLine, ArrowRight, ArrowRightToLine, Lock, Pencil, Shield } from 'lucide-vue-next';
 // shadcn ui
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 // generated (wayfinder)
@@ -36,17 +34,6 @@ const lastPage = page.props.users.last_page;
 const lastPageUrl = page.props.users.last_page_url;
 const nextPageUrl = page.props.users.next_page_url ?? lastPageUrl;
 
-const search = debounce((term: string) => {
-    router.get(
-        page.props.users.path,
-        term !== ''
-            ? {
-                  search: term,
-              }
-            : {},
-    );
-}, 500);
-
 const setPageSize = (pageSize: number) => {
     router.get(page.props.users.path, {
         count: parseInt(pageSize),
@@ -59,14 +46,7 @@ const setPageSize = (pageSize: number) => {
         <Head :title="`Users`" />
 
         <div class="w-full p-4">
-            <div class="flex items-center py-4">
-                <Input
-                    class="max-w-sm"
-                    :placeholder="`Search...`"
-                    :model-value="page.props.search"
-                    @update:model-value="search"
-                />
-            </div>
+            <div class="flex items-center py-4"></div>
 
             <div class="rounded-md border">
                 <Table>

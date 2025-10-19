@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Link } from '@inertiajs/vue3';
-import { Folder, LayoutGrid, Shield, User } from 'lucide-vue-next';
+import { Banknote, Folder, LayoutGrid, Shield, User } from 'lucide-vue-next';
 // shadcn ui
 import {
     Sidebar,
@@ -13,6 +13,7 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 // generated (wayfinder)
+import { index as CurrencyControllerIndex } from '@/actions/App/Http/Controllers/Admin/CurrencyController';
 import { index as RoleControllerIndex } from '@/actions/App/Http/Controllers/Admin/RoleController';
 import { index as UserControllerIndex } from '@/actions/App/Http/Controllers/Admin/UserController';
 import { dashboard } from '@/routes';
@@ -30,6 +31,12 @@ const mainNavItems: NavItem[] = [
         href: dashboard(),
         icon: LayoutGrid,
         isVisible: true,
+    },
+    {
+        title: 'Currencies',
+        href: CurrencyControllerIndex(),
+        icon: Banknote,
+        isVisible: can('view-currencies'),
     },
     {
         title: 'Roles',

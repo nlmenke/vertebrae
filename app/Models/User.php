@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -43,6 +44,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property-read string|null                         $remember_token
  * @property-read CarbonInterface                     $created_at
  * @property-read CarbonInterface                     $updated_at
+ * @property-read CarbonInterface|null                $deleted_at
  * @property-read Attribute<array-key, mixed>         $permission_list
  * @property-read EloquentCollection<int, Permission> $permissions
  * @property-read EloquentCollection<int, Role>       $roles
@@ -58,6 +60,7 @@ final class User extends AbstractModel implements AuthenticatableContract, Autho
 
     use MustVerifyEmail;
     use Notifiable;
+    use SoftDeletes;
     use TwoFactorAuthenticatable;
 
     /**

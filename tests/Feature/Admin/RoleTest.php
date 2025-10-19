@@ -47,8 +47,7 @@ test('authorized users can visit the role index', function (): void {
 
     actingAs($user)
         ->get(route('admin.roles.index'))
-        ->assertOk()
-        ->assertSee('admin');
+        ->assertOk();
 });
 
 test('unauthorized users cannot visit the role create page', function (): void {

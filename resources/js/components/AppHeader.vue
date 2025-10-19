@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // packages
 import { InertiaLinkProps, Link, usePage } from '@inertiajs/vue3';
-import { Folder, LayoutGrid, Menu, Search, Shield, User } from 'lucide-vue-next';
+import { Banknote, Folder, LayoutGrid, Menu, Search, Shield, User } from 'lucide-vue-next';
 import { computed } from 'vue';
 // shadcn ui
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -16,6 +16,7 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 // generated (wayfinder)
+import { index as CurrencyControllerIndex } from '@/actions/App/Http/Controllers/Admin/CurrencyController';
 import { index as RoleControllerIndex } from '@/actions/App/Http/Controllers/Admin/RoleController';
 import { index as UserControllerIndex } from '@/actions/App/Http/Controllers/Admin/UserController';
 import { dashboard } from '@/routes';
@@ -59,6 +60,12 @@ const mainNavItems: NavItem[] = [
         href: RoleControllerIndex(),
         icon: Shield,
         isVisible: can('view-roles'),
+    },
+    {
+        title: 'Currencies',
+        href: CurrencyControllerIndex(),
+        icon: Banknote,
+        isVisible: can('view-currencies'),
     },
     {
         title: 'Users',
