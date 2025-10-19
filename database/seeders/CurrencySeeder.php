@@ -9,8 +9,10 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Jobs\ExchangeRates\UpdateExchangeRatesJob;
 use App\Models\Currency;
 use CreateCurrenciesTable;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Seeds the database with initial currency data.
@@ -19,6 +21,8 @@ use CreateCurrenciesTable;
  */
 final class CurrencySeeder extends AbstractSeeder
 {
+    use DispatchesJobs;
+
     /**
      * Items to be seeded.
      *
@@ -29,7 +33,6 @@ final class CurrencySeeder extends AbstractSeeder
         ['iso_alpha' => 'AFN', 'iso_numeric' => '971', 'name' => 'Afghan Afghani', 'symbol' => '؋'],
         ['iso_alpha' => 'ALL', 'iso_numeric' => '008', 'name' => 'Albanian Lek', 'symbol' => 'L'],
         ['iso_alpha' => 'AMD', 'iso_numeric' => '051', 'name' => 'Armenian Dram', 'symbol' => '֏'],
-        ['iso_alpha' => 'ANG', 'iso_numeric' => '532', 'name' => 'Netherlands Antillean Guilder', 'symbol' => 'ƒ'],
         ['iso_alpha' => 'AOA', 'iso_numeric' => '973', 'name' => 'Angolan Kwanza', 'symbol' => 'Kz'],
         ['iso_alpha' => 'ARS', 'iso_numeric' => '032', 'name' => 'Argentine Peso'],
         ['iso_alpha' => 'AUD', 'iso_numeric' => '036', 'name' => 'Australian Dollar'],
@@ -80,7 +83,6 @@ final class CurrencySeeder extends AbstractSeeder
         ['iso_alpha' => 'GYD', 'iso_numeric' => '328', 'name' => 'Guyanese Dollar'],
         ['iso_alpha' => 'HKD', 'iso_numeric' => '344', 'name' => 'Hong Kong Dollar'],
         ['iso_alpha' => 'HNL', 'iso_numeric' => '340', 'name' => 'Honduran Lempira', 'symbol' => 'L'],
-        ['iso_alpha' => 'HRK', 'iso_numeric' => '191', 'name' => 'Croatian Kuna', 'symbol' => 'kn'],
         ['iso_alpha' => 'HTG', 'iso_numeric' => '332', 'name' => 'Haitian Gourde', 'symbol' => 'G'],
         ['iso_alpha' => 'HUF', 'iso_numeric' => '348', 'name' => 'Hungarian Forint', 'symbol' => 'Ft'],
         ['iso_alpha' => 'IDR', 'iso_numeric' => '360', 'name' => 'Indonesian Rupiah', 'symbol' => 'Rp'],
@@ -114,7 +116,7 @@ final class CurrencySeeder extends AbstractSeeder
         ['iso_alpha' => 'MMK', 'iso_numeric' => '104', 'name' => 'Burmese Kyat', 'symbol' => 'K'],
         ['iso_alpha' => 'MNT', 'iso_numeric' => '496', 'name' => 'Mongolian Tögrög', 'symbol' => '₮'],
         ['iso_alpha' => 'MOP', 'iso_numeric' => '446', 'name' => 'Macanese Pataca', 'symbol' => 'P'],
-        ['iso_alpha' => 'MRO', 'iso_numeric' => '478', 'name' => 'Mauritanian Ouguiya', 'symbol' => 'UM'],
+        ['iso_alpha' => 'MRU', 'iso_numeric' => '929', 'name' => 'Mauritanian Ouguiya', 'symbol' => 'UM'],
         ['iso_alpha' => 'MUR', 'iso_numeric' => '480', 'name' => 'Mauritian Rupee', 'symbol' => '₨'],
         ['iso_alpha' => 'MVR', 'iso_numeric' => '462', 'name' => 'Maldivian Rufiyaa', 'symbol' => 'MVR'],
         ['iso_alpha' => 'MWK', 'iso_numeric' => '454', 'name' => 'Malawian Kwacha', 'symbol' => 'MK'],
@@ -147,11 +149,11 @@ final class CurrencySeeder extends AbstractSeeder
         ['iso_alpha' => 'SEK', 'iso_numeric' => '752', 'name' => 'Swedish Krona', 'symbol' => 'kr'],
         ['iso_alpha' => 'SGD', 'iso_numeric' => '702', 'name' => 'Singapore Dollar'],
         ['iso_alpha' => 'SHP', 'iso_numeric' => '654', 'name' => 'Saint Helena Pound', 'symbol' => '£'],
-        ['iso_alpha' => 'SLL', 'iso_numeric' => '694', 'name' => 'Sierra Leonean Leone', 'symbol' => 'Le'],
+        ['iso_alpha' => 'SLE', 'iso_numeric' => '925', 'name' => 'Sierra Leonean Leone', 'symbol' => 'Le'],
         ['iso_alpha' => 'SOS', 'iso_numeric' => '706', 'name' => 'Somali Shilling', 'symbol' => 'Sh'],
         ['iso_alpha' => 'SRD', 'iso_numeric' => '968', 'name' => 'Surinamese Dollar'],
         ['iso_alpha' => 'SSP', 'iso_numeric' => '728', 'name' => 'South Sudanese Pound', 'symbol' => '£'],
-        ['iso_alpha' => 'STD', 'iso_numeric' => '678', 'name' => 'São Tomé and Príncipe Dobra', 'symbol' => 'Db'],
+        ['iso_alpha' => 'STN', 'iso_numeric' => '930', 'name' => 'São Tomé and Príncipe Dobra', 'symbol' => 'Db'],
         ['iso_alpha' => 'SVC', 'iso_numeric' => '222', 'name' => 'Salvadoran Colón', 'symbol' => '₡'],
         ['iso_alpha' => 'SYP', 'iso_numeric' => '760', 'name' => 'Syrian Pound', 'symbol' => '£S'],
         ['iso_alpha' => 'SZL', 'iso_numeric' => '748', 'name' => 'Swazi Lilangeni', 'symbol' => 'E'],
@@ -169,18 +171,19 @@ final class CurrencySeeder extends AbstractSeeder
         ['iso_alpha' => 'USD', 'iso_numeric' => '840', 'name' => 'United States Dollar'],
         ['iso_alpha' => 'UYU', 'iso_numeric' => '858', 'name' => 'Uruguayan Peso'],
         ['iso_alpha' => 'UZS', 'iso_numeric' => '860', 'name' => 'Uzbekistani Som', 'symbol' => 'лв'],
-        ['iso_alpha' => 'VEF', 'iso_numeric' => '937', 'name' => 'Venezuelan Bolívar', 'symbol' => 'Bs F'],
+        ['iso_alpha' => 'VES', 'iso_numeric' => '928', 'name' => 'Venezuelan Bolívar', 'symbol' => 'Bs.'],
         ['iso_alpha' => 'VND', 'iso_numeric' => '704', 'name' => 'Vietnamese Dong', 'symbol' => '₫', 'decimal_precision' => 0],
         ['iso_alpha' => 'VUV', 'iso_numeric' => '548', 'name' => 'Vanuatu Vatu', 'symbol' => 'Vt', 'decimal_precision' => 0],
         ['iso_alpha' => 'WST', 'iso_numeric' => '882', 'name' => 'Samoan Tālā', 'symbol' => 'T'],
         ['iso_alpha' => 'XAF', 'iso_numeric' => '950', 'name' => 'Central African CFA Franc', 'symbol' => 'Fr', 'decimal_precision' => 0],
         ['iso_alpha' => 'XCD', 'iso_numeric' => '951', 'name' => 'East Caribbean Dollar'],
+        ['iso_alpha' => 'XCG', 'iso_numeric' => '532', 'name' => 'Caribbean Guilder', 'symbol' => ''],
         ['iso_alpha' => 'XOF', 'iso_numeric' => '952', 'name' => 'West African CFA Franc', 'symbol' => 'Fr', 'decimal_precision' => 0],
         ['iso_alpha' => 'XPF', 'iso_numeric' => '953', 'name' => 'CFP Franc', 'symbol' => 'Fr', 'decimal_precision' => 0],
         ['iso_alpha' => 'YER', 'iso_numeric' => '886', 'name' => 'Yemeni Rial', 'symbol' => '﷼'],
         ['iso_alpha' => 'ZAR', 'iso_numeric' => '710', 'name' => 'South African Rand', 'symbol' => 'R'],
         ['iso_alpha' => 'ZMW', 'iso_numeric' => '967', 'name' => 'Zambian Kwacha', 'symbol' => 'ZK'],
-        ['iso_alpha' => 'ZWL', 'iso_numeric' => '932', 'name' => 'Zimbabwean Dollar'],
+        ['iso_alpha' => 'ZWG', 'iso_numeric' => '924', 'name' => 'Zimbabwe Gold', 'symbol' => 'ZWG'],
     ];
 
     /**
@@ -198,5 +201,13 @@ final class CurrencySeeder extends AbstractSeeder
     public function __construct(Currency $model)
     {
         $this->model = $model;
+    }
+
+    /**
+     * Additional tasks to be completed after seeding.
+     */
+    protected function complete(): void
+    {
+        $this->dispatch(new UpdateExchangeRatesJob());
     }
 }
