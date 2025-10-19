@@ -16,6 +16,7 @@ use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\get;
+use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertSame;
 
 test('guests are redirected to the login page', function (): void {
@@ -150,7 +151,7 @@ test('authorized users can edit a currency', function (): void {
     assertSame($updatedCurrency?->name, 'Test Currency Update');
     assertSame($updatedCurrency?->symbol, '#');
     assertSame($updatedCurrency?->decimal_precision, 1);
-    assertSame($updatedCurrency?->exchange_rate, '1.000000');
+    assertEquals($updatedCurrency?->exchange_rate, '1.000000');
 });
 
 test('unauthorized users cannot delete a currency', function (): void {

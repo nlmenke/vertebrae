@@ -29,7 +29,7 @@ abstract class AbstractApiService
     /**
      * The Guzzle HTTP client instance.
      */
-    protected Client $client;
+    protected ?Client $client = null;
 
     /**
      * Headers being sent with the API call.
@@ -64,12 +64,12 @@ abstract class AbstractApiService
         ?Closure $callback = null,
     ): array {
         try {
-            $result = $this->client->get($uri . ($id !== null ? '/' . $id : ''), [
+            $result = $this->client?->get($uri . ($id !== null ? '/' . $id : ''), [
                 'headers' => $this->headerList,
                 'query' => $query,
             ]);
 
-            $contents = $result->getBody()->getContents();
+            $contents = (string) $result?->getBody()->getContents();
 
             if (is_callable($callback)) {
                 $callback($contents);
@@ -97,12 +97,12 @@ abstract class AbstractApiService
         ?Closure $callback = null,
     ): array {
         try {
-            $result = $this->client->post($uri . ($id !== null ? '/' . $id : ''), [
+            $result = $this->client?->post($uri . ($id !== null ? '/' . $id : ''), [
                 'headers' => $this->headerList,
                 'form_params' => $formParams,
             ]);
 
-            $contents = $result->getBody()->getContents();
+            $contents = (string) $result?->getBody()->getContents();
 
             if (is_callable($callback)) {
                 $callback($contents);
@@ -130,12 +130,12 @@ abstract class AbstractApiService
         ?Closure $callback = null,
     ): array {
         try {
-            $result = $this->client->put($uri . ($id !== null ? '/' . $id : ''), [
+            $result = $this->client?->put($uri . ($id !== null ? '/' . $id : ''), [
                 'headers' => $this->headerList,
                 'form_params' => $formParams,
             ]);
 
-            $contents = $result->getBody()->getContents();
+            $contents = (string) $result?->getBody()->getContents();
 
             if (is_callable($callback)) {
                 $callback($contents);
@@ -160,11 +160,11 @@ abstract class AbstractApiService
         ?Closure $callback = null,
     ): array {
         try {
-            $result = $this->client->delete($uri . ($id !== null ? '/' . $id : ''), [
+            $result = $this->client?->delete($uri . ($id !== null ? '/' . $id : ''), [
                 'headers' => $this->headerList,
             ]);
 
-            $contents = $result->getBody()->getContents();
+            $contents = (string) $result?->getBody()->getContents();
 
             if (is_callable($callback)) {
                 $callback($contents);

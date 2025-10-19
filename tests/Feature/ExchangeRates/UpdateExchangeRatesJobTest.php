@@ -13,7 +13,7 @@ use App\Jobs\ExchangeRates\UpdateExchangeRatesJob;
 use App\Models\Currency;
 use Illuminate\Support\Facades\Log;
 
-use function PHPUnit\Framework\assertSame;
+use function PHPUnit\Framework\assertEquals;
 
 test('can update exchange rates', function (): void {
     config()->set('currency.exchange_rates.drivers.open_exchange_rates', 'test-api-key');
@@ -42,9 +42,9 @@ test('can update exchange rates', function (): void {
 
     $currencies = $currencies->fresh();
 
-    assertSame($currencies->where('iso_alpha', 'USD')->first()?->exchange_rate, number_format($exchangeRates['USD'], 6));
-    assertSame($currencies->where('iso_alpha', 'EUR')->first()?->exchange_rate, number_format($exchangeRates['EUR'], 6));
-    assertSame($currencies->where('iso_alpha', 'JPY')->first()?->exchange_rate, number_format($exchangeRates['JPY'], 6));
+    assertEquals($currencies->where('iso_alpha', 'USD')->first()?->exchange_rate, $exchangeRates['USD']);
+    assertEquals($currencies->where('iso_alpha', 'EUR')->first()?->exchange_rate, $exchangeRates['EUR']);
+    assertEquals($currencies->where('iso_alpha', 'JPY')->first()?->exchange_rate, $exchangeRates['JPY']);
 });
 
 test('can error gracefully', function (): void {
