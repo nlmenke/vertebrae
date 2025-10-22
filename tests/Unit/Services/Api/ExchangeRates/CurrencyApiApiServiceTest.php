@@ -11,10 +11,13 @@ declare(strict_types=1);
 
 use App\Services\Api\ExchangeRates\CurrencyApiApiService;
 use DG\BypassFinals;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\Log;
-use Mockery\MockInterface;
-
-use function Pest\Laravel\partialMock;
 
 beforeEach(function (): void {
     // allow final classes to be mocked
@@ -23,16 +26,20 @@ beforeEach(function (): void {
     config()->set('currency.exchange_rates.drivers.currency_api', 'test-api-key');
 });
 
-test('getExchangeRates() can return proper data', function (): void {
+test('getExchangeRates method returns expected data format', function (): void {
     // results from API documentation; see: https://currencyapi.com/docs/latest#latest-currency-exchange-data
     $apiResult = '{"meta":{"last_updated_at":"2023-06-23T10:15:59Z"},"data":{"AED":{"code":"AED","value":3.67306},"AFN":{"code":"AFN","value":91.80254},"ALL":{"code":"ALL","value":108.22904},"AMD":{"code":"AMD","value":480.41659}}}';
 
-    partialMock(CurrencyApiApiService::class, function (MockInterface $mock) use ($apiResult): void {
-        $mock->shouldReceive('get')
-            ->andReturn(json_decode($apiResult, true));
-    });
+    $mockClient = new Client([
+        'handler' => HandlerStack::create(
+            new MockHandler([
+                new Response(200, [], $apiResult),
+            ])
+        ),
+    ]);
 
-    $result = app(CurrencyApiApiService::class)->getExchangerates();
+    $result = new CurrencyApiApiService($mockClient)
+        ->getExchangerates();
 
     expect($result)->toEqual([
         'AED' => 3.67306,
@@ -42,16 +49,23 @@ test('getExchangeRates() can return proper data', function (): void {
     ]);
 });
 
-test('getExchangeRates() can error gracefully', function (): void {
-    partialMock(CurrencyApiApiService::class, function (MockInterface $mock): void {
-        $mock->shouldReceive('get')
-            ->andThrow(new Exception());
-    });
-
+test('getExchangeRates method handles errors gracefully', function (): void {
     Log::expects('error')
         ->once();
 
-    $result = app(CurrencyApiApiService::class)->getExchangerates();
+    $mockClient = new Client([
+        'handler' => HandlerStack::create(
+            new MockHandler([
+                new RequestException(
+                    'Test API Error',
+                    new Request('GET', 'latest.json')
+                ),
+            ])
+        ),
+    ]);
+
+    $result = new CurrencyApiApiService($mockClient)
+        ->getExchangerates();
 
     expect($result)->toBeEmpty();
 });

@@ -11,10 +11,13 @@ declare(strict_types=1);
 
 use App\Services\Api\ExchangeRates\OpenExchangeRatesApiService;
 use DG\BypassFinals;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\Log;
-use Mockery\MockInterface;
-
-use function Pest\Laravel\partialMock;
 
 beforeEach(function (): void {
     // allow final classes to be mocked
@@ -23,16 +26,20 @@ beforeEach(function (): void {
     config()->set('currency.exchange_rates.drivers.open_exchange_rates', 'test-api-key');
 });
 
-test('getExchangeRates() can return proper data', function (): void {
+test('getExchangeRates method returns expected data format', function (): void {
     // results from API documentation; see: https://docs.openexchangerates.org/reference/api-introduction#api-response-formats
     $apiResult = '{"disclaimer":"https://openexchangerates.org/terms/","license":"https://openexchangerates.org/license/","timestamp":1449877801,"base":"USD","rates":{"AED":3.672538,"AFN":66.809999,"ALL":125.716501,"AMD":484.902502,"ANG":1.788575,"AOA":135.295998,"ARS":9.750101,"AUD":1.390866}}';
 
-    partialMock(OpenExchangeRatesApiService::class, function (MockInterface $mock) use ($apiResult): void {
-        $mock->shouldReceive('get')
-            ->andReturn(json_decode($apiResult, true));
-    });
+    $mockClient = new Client([
+        'handler' => HandlerStack::create(
+            new MockHandler([
+                new Response(200, [], $apiResult),
+            ])
+        ),
+    ]);
 
-    $result = app(OpenExchangeRatesApiService::class)->getExchangeRates();
+    $result = new OpenExchangeRatesApiService($mockClient)
+        ->getExchangeRates();
 
     expect($result)->toEqual([
         'AED' => 3.672538,
@@ -46,16 +53,23 @@ test('getExchangeRates() can return proper data', function (): void {
     ]);
 });
 
-test('getExchangeRates() can error gracefully', function (): void {
-    partialMock(OpenExchangeRatesApiService::class, function (MockInterface $mock): void {
-        $mock->shouldReceive('get')
-            ->andThrow(new Exception());
-    });
-
+test('getExchangeRates method handles errors gracefully', function (): void {
     Log::expects('error')
         ->once();
 
-    $result = app(OpenExchangeRatesApiService::class)->getExchangeRates();
+    $mockClient = new Client([
+        'handler' => HandlerStack::create(
+            new MockHandler([
+                new RequestException(
+                    'Test API Error',
+                    new Request('GET', 'latest.json')
+                ),
+            ])
+        ),
+    ]);
+
+    $result = new OpenExchangeRatesApiService($mockClient)
+        ->getExchangeRates();
 
     expect($result)->toBeEmpty();
 });

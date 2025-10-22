@@ -13,6 +13,7 @@ use App\Exceptions\Api\MissingOrInvalidApiKeyException;
 use App\Interfaces\ExchangeRatesApiServiceInterface;
 use App\Services\Api\AbstractApiService;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -37,7 +38,7 @@ final class OpenExchangeRatesApiService extends AbstractApiService implements Ex
      *
      * @throws Throwable
      */
-    public function __construct()
+    public function __construct(?Client $client = null)
     {
         $apiKey = Config::string('currency.exchange_rates.drivers.open_exchange_rates');
 
@@ -49,7 +50,7 @@ final class OpenExchangeRatesApiService extends AbstractApiService implements Ex
             'Authorization' => 'Token ' . $apiKey,
         ]);
 
-        parent::__construct();
+        parent::__construct($client);
     }
 
     /**

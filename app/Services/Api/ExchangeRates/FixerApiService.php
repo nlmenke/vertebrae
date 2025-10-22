@@ -13,6 +13,7 @@ use App\Exceptions\Api\MissingOrInvalidApiKeyException;
 use App\Interfaces\ExchangeRatesApiServiceInterface;
 use App\Services\Api\AbstractApiService;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -35,7 +36,7 @@ final class FixerApiService extends AbstractApiService implements ExchangeRatesA
      *
      * @throws Throwable
      */
-    public function __construct()
+    public function __construct(?Client $client = null)
     {
         $apiKey = Config::string('currency.exchange_rates.drivers.fixer');
 
@@ -43,7 +44,7 @@ final class FixerApiService extends AbstractApiService implements ExchangeRatesA
 
         $this->baseUri = 'https://data.fixer.io/api/';
 
-        parent::__construct();
+        parent::__construct($client);
     }
 
     /**

@@ -18,11 +18,11 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 
 /**
- * Creates a mock service instance for testing.
+ * Creates a mock API service instance for testing.
  *
  * @param array<int, mixed>|null $handlerQueue
  */
-function createMockService(?array $handlerQueue): AbstractApiService
+function createMockApiService(?array $handlerQueue): AbstractApiService
 {
     $mockHandler = new MockHandler($handlerQueue);
     $mockClient = new Client([
@@ -38,7 +38,7 @@ test('can perform GET requests successfully', function (): void {
     ];
 
     $callbackRan = false;
-    $result = createMockService($handlerQueue)
+    $result = createMockApiService($handlerQueue)
         ->get('/', 1, [], function () use (&$callbackRan): void {
             $callbackRan = true;
         });
@@ -52,7 +52,7 @@ test('handles GET request exceptions correctly', function (): void {
         new RequestException('Test GET Error', new Request('GET', 'test')),
     ];
 
-    $result = createMockService($handlerQueue)
+    $result = createMockApiService($handlerQueue)
         ->get('/test');
 
     expect($result)->toBe(['error' => 'Test GET Error']);
@@ -64,7 +64,7 @@ test('can perform POST requests successfully', function (): void {
     ];
 
     $callbackRan = false;
-    $result = createMockService($handlerQueue)
+    $result = createMockApiService($handlerQueue)
         ->post('/test', 1, ['name' => 'Test Post'], function () use (&$callbackRan): void {
             $callbackRan = true;
         });
@@ -78,7 +78,7 @@ test('handles POST request exceptions correctly', function (): void {
         new RequestException('Test POST Error', new Request('POST', 'test')),
     ];
 
-    $result = createMockService($handlerQueue)
+    $result = createMockApiService($handlerQueue)
         ->post('/test', 1, ['name' => 'Test Post']);
 
     expect($result)->toBe(['error' => 'Test POST Error']);
@@ -90,7 +90,7 @@ test('can perform PUT requests successfully', function (): void {
     ];
 
     $callbackRan = false;
-    $result = createMockService($handlerQueue)
+    $result = createMockApiService($handlerQueue)
         ->put('/test', 1, ['name' => 'Test Put'], function () use (&$callbackRan): void {
             $callbackRan = true;
         });
@@ -104,7 +104,7 @@ test('handles PUT request exceptions correctly', function (): void {
         new RequestException('Test PUT Error', new Request('PUT', 'test')),
     ];
 
-    $result = createMockService($handlerQueue)
+    $result = createMockApiService($handlerQueue)
         ->put('/test', 1, ['name' => 'Test Put']);
 
     expect($result)->toBe(['error' => 'Test PUT Error']);
@@ -116,7 +116,7 @@ test('can perform DELETE requests successfully', function (): void {
     ];
 
     $callbackRan = false;
-    $result = createMockService($handlerQueue)
+    $result = createMockApiService($handlerQueue)
         ->delete('/test', 1, function () use (&$callbackRan): void {
             $callbackRan = true;
         });
@@ -130,7 +130,7 @@ test('handles DELETE request exceptions correctly', function (): void {
         new RequestException('Test DELETE Error', new Request('DELETE', 'test')),
     ];
 
-    $result = createMockService($handlerQueue)
+    $result = createMockApiService($handlerQueue)
         ->delete('/test', 1);
 
     expect($result)->toBe(['error' => 'Test DELETE Error']);
@@ -141,7 +141,7 @@ test('can add additional headers to requests', function (): void {
         new Response(200, [], '{}'),
     ];
 
-    $service = createMockService($handlerQueue);
+    $service = createMockApiService($handlerQueue);
 
     $reflection = new ReflectionClass($service);
     $headerMethod = $reflection->getMethod('headers');
