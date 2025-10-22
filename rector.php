@@ -44,7 +44,6 @@ return RectorConfig::configure()
         typeDeclarations: true,
         privatization: true,
         earlyReturn: true,
-        strictBooleans: true,
         rectorPreset: true,
     )
     ->withSetProviders(LaravelSetProvider::class)

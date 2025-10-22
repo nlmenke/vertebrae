@@ -20,6 +20,8 @@ use Illuminate\Support\Manager;
  * Determines which exchange rate API to use.
  *
  * @since 0.0.0-vertebrae introduced
+ *
+ * @method array<string, float> getExchangeRates()
  */
 final class ExchangeRatesApiServiceManager extends Manager
 {
