@@ -44,13 +44,6 @@ export interface NavItem {
     isActive?: boolean;
 }
 
-export type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
-    name: string;
-    quote: { message: string; author: string };
-    auth: Auth;
-    sidebarOpen: boolean;
-};
-
 export interface Permission {
     id: number;
     slug: string;
@@ -65,6 +58,14 @@ export interface Role {
     description?: string;
 }
 
+export interface Script {
+    id: number;
+    iso_alpha: string;
+    iso_numeric: number;
+    name: string;
+    direction: string;
+}
+
 export interface User {
     id: number;
     name: string;
@@ -74,5 +75,12 @@ export interface User {
     created_at: string;
     updated_at: string;
 }
+
+export type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
+    name: string;
+    quote: { message: string; author: string };
+    auth: Auth;
+    sidebarOpen: boolean;
+};
 
 export type BreadcrumbItemType = BreadcrumbItem;

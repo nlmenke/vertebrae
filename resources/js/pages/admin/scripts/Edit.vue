@@ -5,37 +5,38 @@ import { Form, Head, usePage } from '@inertiajs/vue3';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 // generated (wayfinder)
-import CurrencyController from '@/actions/App/Http/Controllers/Admin/CurrencyController';
+import ScriptController from '@/actions/App/Http/Controllers/Admin/ScriptController';
 
-import DeleteCurrency from '@/components/currencies/DeleteCurrency.vue';
 import InputError from '@/components/InputError.vue';
+import DeleteScript from '@/components/scripts/DeleteScript.vue';
 import { can } from '@/composables/hasPermissions';
 import AppLayout from '@/layouts/AppLayout.vue';
-import type { BreadcrumbItem, Currency, SharedData } from '@/types';
+import type { BreadcrumbItem, Script, SharedData } from '@/types';
 
 const page = usePage<SharedData>();
-const currency = page.props.currency as Currency;
+const script = page.props.script as Script;
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Currencies',
-        href: CurrencyController.index(),
+        title: 'Scripts',
+        href: ScriptController.index(),
     },
     {
-        title: 'Edit (' + currency.name + ')',
-        href: CurrencyController.edit(currency),
+        title: 'Edit (' + script.name + ')',
+        href: ScriptController.edit(script),
     },
 ];
 </script>
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head :title="`Edit Currency`" />
+        <Head :title="`Edit Script`" />
 
         <div class="w-full space-y-6 p-4">
             <Form
-                v-bind="CurrencyController.update.form(currency)"
+                v-bind="ScriptController.update.form(script)"
                 class="space-y-4"
                 v-slot="{ errors, processing, recentlySuccessful }"
             >
@@ -53,7 +54,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="iso_alpha"
                         name="iso_alpha"
                         class="mt-1 block w-full"
-                        v-model="currency.iso_alpha"
+                        v-model="script.iso_alpha"
                         :placeholder="`ISO Alpha`"
                         required
                     />
@@ -77,10 +78,8 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="iso_numeric"
                         name="iso_numeric"
                         class="mt-1 block w-full"
-                        v-model="currency.iso_numeric"
+                        v-model="script.iso_numeric"
                         :placeholder="`ISO Numeric`"
-                        type="number"
-                        step="1"
                         required
                     />
                     <InputError
@@ -103,7 +102,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="name"
                         name="name"
                         class="mt-1 block w-full"
-                        v-model="currency.name"
+                        v-model="script.name"
                         :placeholder="`Name`"
                         required
                     />
@@ -114,79 +113,21 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
 
                 <div class="grid">
-                    <Label for="symbol">
-                        Symbol
-                        <span
-                            class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
-                        >
-                            *
-                        </span>
-                    </Label>
-                    <Input
-                        id="symbol"
-                        name="symbol"
-                        class="mt-1 block w-full"
-                        v-model="currency.symbol"
-                        :placeholder="`Symbol`"
-                        required
-                    />
-                    <InputError
-                        class="mt-2"
-                        :message="errors.symbol"
-                    />
-                </div>
-
-                <div class="grid">
-                    <Label for="decimal_precision">
-                        Decimal Precision
-                        <span
-                            class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
-                        >
-                            *
-                        </span>
-                    </Label>
-                    <Input
-                        id="decimal_precision"
-                        name="decimal_precision"
-                        class="mt-1 block w-full"
-                        v-model="currency.decimal_precision"
-                        :placeholder="`Decimal Precision`"
-                        type="number"
-                        step="1"
-                        required
-                    />
-                    <InputError
-                        class="mt-2"
-                        :message="errors.decimal_precision"
-                    />
-                </div>
-
-                <div class="grid">
-                    <Label for="exchange_rate">
-                        Exchange Rate
-                        <span
-                            class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
-                        >
-                            *
-                        </span>
-                    </Label>
-                    <Input
-                        id="exchange_rate"
-                        name="exchange_rate"
-                        class="mt-1 block w-full"
-                        v-model="currency.exchange_rate"
-                        :placeholder="`Exchange Rate`"
-                        type="number"
-                        step="0.000001"
-                        required
-                    />
-                    <InputError
-                        class="mt-2"
-                        :message="errors.exchange_rate"
-                    />
+                    <Label for="direction">Direction</Label>
+                    <Select
+                        name="direction"
+                        v-model="script.direction"
+                    >
+                        <SelectTrigger>
+                            <SelectValue :placeholder="`Select a Direction`" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="ltr">Left-to-Right</SelectItem>
+                            <SelectItem value="rtl">Right-to-Left</SelectItem>
+                            <SelectItem value="ttb">Top-to-Bottom</SelectItem>
+                            <SelectItem value="varies">Varies</SelectItem>
+                        </SelectContent>
+                    </Select>
                 </div>
 
                 <div class="flex items-center">
@@ -208,9 +149,9 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
             </Form>
 
-            <DeleteCurrency
-                v-if="can('delete-currencies')"
-                :currency="currency"
+            <DeleteScript
+                v-if="can('delete-scripts')"
+                :script="script"
             />
         </div>
     </AppLayout>

@@ -37,12 +37,7 @@ const currency = page.props.currency as Currency;
             </div>
             <Dialog>
                 <DialogTrigger as-child>
-                    <Button
-                        variant="destructive"
-                        data-test="delete-currency-button"
-                    >
-                        Delete
-                    </Button>
+                    <Button variant="destructive">Delete</Button>
                 </DialogTrigger>
                 <DialogContent>
                     <Form
@@ -80,7 +75,6 @@ const currency = page.props.currency as Currency;
                                 type="submit"
                                 variant="destructive"
                                 :disabled="processing"
-                                data-test="confirm-delete-currency-button"
                             >
                                 Delete
                             </Button>

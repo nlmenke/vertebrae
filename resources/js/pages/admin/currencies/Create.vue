@@ -179,7 +179,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
 
                 <div class="flex items-center">
-                    <Button :disabled="processing"> Save </Button>
+                    <Button :disabled="processing">Save</Button>
 
                     <Transition
                         enter-active-class="transition ease-in-out"

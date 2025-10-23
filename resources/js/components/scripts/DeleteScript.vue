@@ -14,20 +14,20 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 // generated (wayfinder)
-import LanguageController from '@/actions/App/Http/Controllers/Admin/LanguageController';
+import ScriptController from '@/actions/App/Http/Controllers/Admin/ScriptController';
 
 import HeadingSmall from '@/components/HeadingSmall.vue';
-import type { Language, SharedData } from '@/types';
+import type { Script, SharedData } from '@/types';
 
 const page = usePage<SharedData>();
-const language = page.props.language as Language;
+const script = page.props.script as Script;
 </script>
 
 <template>
     <div class="space-y-6">
         <HeadingSmall
-            :title="`Delete Currency`"
-            :description="`Delete '${language.name}' from the system.`"
+            :title="`Delete Script`"
+            :description="`Delete '${script.name}' from the system.`"
         />
 
         <div class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10">
@@ -41,14 +41,16 @@ const language = page.props.language as Language;
                 </DialogTrigger>
                 <DialogContent>
                     <Form
-                        v-bind="LanguageController.destroy.form(language)"
+                        v-bind="ScriptController.destroy.form(script)"
                         class="space-y-6"
                         v-slot="{ processing, reset, clearErrors }"
                     >
                         <DialogHeader class="space-y-3">
-                            <DialogTitle>Are you sure you want to delete this language?</DialogTitle>
+                            <DialogTitle>Are you sure you want to delete this script?</DialogTitle>
                             <DialogDescription>
-                                This cannot be undone. Please confirm you would like to delete '{{ language.name }}.'
+                                <span>
+                                    This cannot be undone. Please confirm you would like to delete '{{ script.name }}.'
+                                </span>
                             </DialogDescription>
                         </DialogHeader>
 

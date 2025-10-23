@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\ScriptController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserPermissionController;
 use App\Http\Controllers\Admin\UserRoleController;
@@ -31,6 +32,7 @@ Route::middleware([
         Route::resource('currencies', CurrencyController::class, ['except' => ['show']]);
         Route::resource('languages', LanguageController::class, ['except' => ['show']]);
         Route::resource('roles', RoleController::class, ['except' => ['show']]);
+        Route::resource('scripts', ScriptController::class, ['except' => ['show']]);
 
         Route::resource('users', UserController::class, ['only' => ['index', 'edit', 'update']]);
         Route::prefix('users')

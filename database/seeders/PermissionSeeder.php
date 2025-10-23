@@ -45,6 +45,10 @@ final class PermissionSeeder extends AbstractSeeder
         ['slug' => 'create-languages', 'name' => 'Create Languages', 'description' => 'Allows a user to create new languages.'],
         ['slug' => 'edit-languages', 'name' => 'Edit Languages', 'description' => 'Allows a user to edit existing languages.'],
         ['slug' => 'delete-languages', 'name' => 'Delete Languages', 'description' => 'Allows a user to delete existing languages.'],
+        ['slug' => 'view-scripts', 'name' => 'View Scripts', 'description' => 'Allows a user to view the script list.'],
+        ['slug' => 'create-scripts', 'name' => 'Create Scripts', 'description' => 'Allows a user to create new scripts.'],
+        ['slug' => 'edit-scripts', 'name' => 'Edit Scripts', 'description' => 'Allows a user to edit existing scripts.'],
+        ['slug' => 'delete-scripts', 'name' => 'Delete Scripts', 'description' => 'Allows a user to delete existing scripts.'],
     ];
 
     /**

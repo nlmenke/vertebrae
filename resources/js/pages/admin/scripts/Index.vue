@@ -1,41 +1,39 @@
 <script setup lang="ts">
 // packages
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
-import { ArrowLeft, ArrowLeftToLine, ArrowRight, ArrowRightToLine, Lock, Pencil, Shield } from 'lucide-vue-next';
+import { ArrowLeft, ArrowLeftToLine, ArrowRight, ArrowRightToLine, Pencil } from 'lucide-vue-next';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 // generated (wayfinder)
-import UserController from '@/actions/App/Http/Controllers/Admin/UserController';
-import UserPermissionController from '@/actions/App/Http/Controllers/Admin/UserPermissionController';
-import UserRoleController from '@/actions/App/Http/Controllers/Admin/UserRoleController';
+import ScriptController from '@/actions/App/Http/Controllers/Admin/ScriptController';
 
 import { can } from '@/composables/hasPermissions';
 import AppLayout from '@/layouts/AppLayout.vue';
-import type { BreadcrumbItem, SharedData, User } from '@/types';
+import type { BreadcrumbItem, Script, SharedData } from '@/types';
 
 const page = usePage<SharedData>();
-const users = page.props.users.data as User[];
+const scripts = page.props.scripts.data as Script[];
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Users',
-        href: UserController.index(),
+        title: 'Scripts',
+        href: ScriptController.index(),
     },
 ];
 
 // pagination
 const firstPage = 1;
-const firstPageUrl = page.props.users.first_page_url;
-const previousPageUrl = page.props.users.prev_page_url ?? firstPageUrl;
-const currentPage = page.props.users.current_page;
-const lastPage = page.props.users.last_page;
-const lastPageUrl = page.props.users.last_page_url;
-const nextPageUrl = page.props.users.next_page_url ?? lastPageUrl;
+const firstPageUrl = page.props.scripts.first_page_url;
+const previousPageUrl = page.props.scripts.prev_page_url ?? firstPageUrl;
+const currentPage = page.props.scripts.current_page;
+const lastPage = page.props.scripts.last_page;
+const lastPageUrl = page.props.scripts.last_page_url;
+const nextPageUrl = page.props.scripts.next_page_url ?? lastPageUrl;
 
-const setPageSize = (pageSize: number) => {
-    router.get(page.props.users.path, {
+const setPageSize = (pageSize: string) => {
+    router.get(page.props.scripts.path, {
         count: parseInt(pageSize),
     });
 };
@@ -43,60 +41,52 @@ const setPageSize = (pageSize: number) => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head :title="`Users`" />
+        <Head :title="`Scripts`" />
 
         <div class="w-full p-4">
-            <div class="flex items-center py-4"></div>
+            <div class="flex items-center py-4">
+                <Link
+                    v-if="can('create-scripts')"
+                    :href="ScriptController.create()"
+                    class="ml-auto"
+                >
+                    <Button variant="default">Create</Button>
+                </Link>
+            </div>
 
             <div class="rounded-md border">
                 <Table>
                     <TableHeader>
                         <TableRow>
+                            <TableHead>ISO Alpha</TableHead>
+                            <TableHead>ISO Numeric</TableHead>
                             <TableHead>Name</TableHead>
-                            <TableHead>Email Address</TableHead>
+                            <TableHead>Direction</TableHead>
                             <TableHead></TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         <TableRow
-                            v-for="user in users"
-                            :key="user.id"
+                            v-for="script in scripts"
+                            :key="script.id"
                         >
-                            <TableCell>{{ user.name }}</TableCell>
-                            <TableCell>{{ user.email }}</TableCell>
-                            <TableCell class="h-4 text-right">
+                            <TableCell class="h-4">
+                                <code>{{ script.iso_alpha }}</code>
+                            </TableCell>
+                            <TableCell>
+                                <code>{{ script.iso_numeric }}</code>
+                            </TableCell>
+                            <TableCell>{{ script.name }}</TableCell>
+                            <TableCell>{{ script.direction }}</TableCell>
+                            <TableCell class="text-right">
                                 <Link
-                                    v-if="can('edit-user-roles')"
-                                    :href="UserRoleController.edit(user)"
-                                    :title="`Edit Roles`"
-                                >
-                                    <Button
-                                        variant="ghost"
-                                        class="size-4 text-purple-400 transition-colors hover:text-purple-400 dark:text-purple-300 dark:hover:text-purple-100"
-                                    >
-                                        <Shield />
-                                    </Button>
-                                </Link>
-                                <Link
-                                    v-if="can('edit-user-permissions')"
-                                    :href="UserPermissionController.edit(user)"
-                                    :title="`Edit Permissions`"
-                                >
-                                    <Button
-                                        variant="ghost"
-                                        class="size-4 text-yellow-400 transition-colors hover:text-yellow-400 dark:text-yellow-300 dark:hover:text-yellow-100"
-                                    >
-                                        <Lock />
-                                    </Button>
-                                </Link>
-                                <Link
-                                    v-if="can('edit-users')"
-                                    :href="UserController.edit(user)"
+                                    v-if="can('edit-scripts')"
+                                    :href="ScriptController.edit(script)"
                                     :title="`Edit`"
                                 >
                                     <Button
                                         variant="ghost"
-                                        class="size-4 text-blue-400 transition-colors hover:text-blue-400 dark:text-blue-300 dark:hover:text-blue-100"
+                                        class="size-4 text-blue-400 transition-colors hover:text-blue-600 dark:text-blue-300 hover:dark:text-blue-100"
                                     >
                                         <Pencil />
                                     </Button>
@@ -112,11 +102,11 @@ const setPageSize = (pageSize: number) => {
                     <div class="flex items-center space-x-2">
                         <p class="text-sm font-medium">Rows Per Page</p>
                         <Select
-                            :model-value="page.props.users.per_page"
+                            :model-value="page.props.scripts.per_page"
                             @update:model-value="setPageSize"
                         >
                             <SelectTrigger class="h-8 w-[70px]">
-                                <SelectValue :placeholder="page.props.users.per_page.toString()" />
+                                <SelectValue :placeholder="page.props.scripts.per_page.toString()" />
                             </SelectTrigger>
                             <SelectContent side="top">
                                 <SelectItem

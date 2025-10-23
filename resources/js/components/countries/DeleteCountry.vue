@@ -37,12 +37,7 @@ const country = page.props.country as Country;
             </div>
             <Dialog>
                 <DialogTrigger as-child>
-                    <Button
-                        variant="destructive"
-                        data-test="delete-country-button"
-                    >
-                        Delete
-                    </Button>
+                    <Button variant="destructive">Delete</Button>
                 </DialogTrigger>
                 <DialogContent>
                     <Form
@@ -78,7 +73,6 @@ const country = page.props.country as Country;
                                 type="submit"
                                 variant="destructive"
                                 :disabled="processing"
-                                data-test="confirm-delete-country-button"
                             >
                                 Delete
                             </Button>
