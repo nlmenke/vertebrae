@@ -42,6 +42,7 @@ export interface NavItem {
     href: NonNullable<InertiaLinkProps['href']>;
     icon?: LucideIcon;
     isActive?: boolean;
+    isVisible?: boolean;
 }
 
 export interface Permission {

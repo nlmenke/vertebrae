@@ -103,7 +103,7 @@ const mainNavItems: NavItem[] = [
         title: 'Users',
         href: UserControllerIndex(),
         icon: User,
-        isVisible: can('users-roles'),
+        isVisible: can('view-users'),
     },
 ];
 
