@@ -30,6 +30,13 @@ export interface Currency {
     exchange_rate: number;
 }
 
+export interface Language {
+    id: number;
+    iso_alpha_2: string;
+    iso_alpha_3: string;
+    name: string;
+}
+
 export interface NavItem {
     title: string;
     href: NonNullable<InertiaLinkProps['href']>;

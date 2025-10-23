@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // packages
 import { InertiaLinkProps, Link, usePage } from '@inertiajs/vue3';
-import { Banknote, Earth, Folder, LayoutGrid, Menu, Search, Shield, User } from 'lucide-vue-next';
+import { Banknote, Earth, Folder, Languages, LayoutGrid, Menu, Search, Shield, User } from 'lucide-vue-next';
 import { computed } from 'vue';
 // shadcn ui
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -18,6 +18,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 // generated (wayfinder)
 import { index as CountryControllerIndex } from '@/actions/App/Http/Controllers/Admin/CountryController';
 import { index as CurrencyControllerIndex } from '@/actions/App/Http/Controllers/Admin/CurrencyController';
+import { index as LanguageControllerIndex } from '@/actions/App/Http/Controllers/Admin/LanguageController';
 import { index as RoleControllerIndex } from '@/actions/App/Http/Controllers/Admin/RoleController';
 import { index as UserControllerIndex } from '@/actions/App/Http/Controllers/Admin/UserController';
 import { dashboard } from '@/routes';
@@ -67,6 +68,12 @@ const mainNavItems: NavItem[] = [
         href: CurrencyControllerIndex(),
         icon: Banknote,
         isVisible: can('view-currencies'),
+    },
+    {
+        title: 'Languages',
+        href: LanguageControllerIndex(),
+        icon: Languages,
+        isVisible: can('view-languages'),
     },
     {
         title: 'Roles',

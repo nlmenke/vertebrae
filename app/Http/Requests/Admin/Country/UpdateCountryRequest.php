@@ -47,6 +47,7 @@ final class UpdateCountryRequest extends AbstractFormRequest
             'iso_alpha_2' => [
                 'required',
                 'string',
+                'alpha',
                 'min:2',
                 'max:2',
                 Rule::unique(Country::class, 'iso_alpha_2')
@@ -56,6 +57,7 @@ final class UpdateCountryRequest extends AbstractFormRequest
             'iso_alpha_3' => [
                 'required',
                 'string',
+                'alpha',
                 'min:3',
                 'max:3',
                 Rule::unique(Country::class, 'iso_alpha_3')

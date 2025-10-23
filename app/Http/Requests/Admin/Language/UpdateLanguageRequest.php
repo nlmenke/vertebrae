@@ -1,56 +1,51 @@
 <?php
 /**
- * Store Country form request.
+ * Update Language form request.
  *
  * @author Nick Menke <git@nlmenke.net>
  */
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\Admin\Country;
+namespace App\Http\Requests\Admin\Language;
 
 use App\Http\Requests\AbstractFormRequest;
-use App\Models\Country;
-use App\Models\Currency;
+use App\Models\Language;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 
 /**
- * Handles validation for creating country requests.
+ * Handles validation for updating language requests.
  *
  * @since 0.0.0-vertebrae introduced
  */
-final class StoreCountryRequest extends AbstractFormRequest
+final class UpdateLanguageRequest extends AbstractFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return (bool) $this->user()?->can('create', Country::class);
+        return (bool) $this->user()?->can('update', $this->route('language'));
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, Rules\Exists|Rules\Unique|ValidationRule|list<Rules\Exists|Rules\Unique|ValidationRule|string>|string>
+     * @return array<string, Rules\Unique|ValidationRule|list<Rules\Unique|ValidationRule|string>|string>
      */
     public function rules(): array
     {
         return [
-            'currency_id' => [
-                'nullable',
-                'integer',
-                Rule::exists(Currency::class, 'id'),
-            ],
             'iso_alpha_2' => [
                 'required',
                 'string',
                 'alpha',
                 'min:2',
                 'max:2',
-                Rule::unique(Country::class, 'iso_alpha_2')
+                Rule::unique(Language::class, 'iso_alpha_2')
+                    ->ignore($this->route('language'))
                     ->withoutTrashed(),
             ],
             'iso_alpha_3' => [
@@ -59,14 +54,8 @@ final class StoreCountryRequest extends AbstractFormRequest
                 'alpha',
                 'min:3',
                 'max:3',
-                Rule::unique(Country::class, 'iso_alpha_3')
-                    ->withoutTrashed(),
-            ],
-            'iso_numeric' => [
-                'required',
-                'numeric',
-                'digits:3',
-                Rule::unique(Country::class, 'iso_numeric')
+                Rule::unique(Language::class, 'iso_alpha_3')
+                    ->ignore($this->route('language'))
                     ->withoutTrashed(),
             ],
             'name' => [
@@ -74,7 +63,8 @@ final class StoreCountryRequest extends AbstractFormRequest
                 'string',
                 'min:3',
                 'max:255',
-                Rule::unique(Country::class, 'name')
+                Rule::unique(Language::class, 'name')
+                    ->ignore($this->route('language'))
                     ->withoutTrashed(),
             ],
         ];

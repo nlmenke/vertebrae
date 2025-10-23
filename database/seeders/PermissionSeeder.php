@@ -41,6 +41,10 @@ final class PermissionSeeder extends AbstractSeeder
         ['slug' => 'create-countries', 'name' => 'Create Countries', 'description' => 'Allows a user to create new countries.'],
         ['slug' => 'edit-countries', 'name' => 'Edit Countries', 'description' => 'Allows a user to edit existing countries.'],
         ['slug' => 'delete-countries', 'name' => 'Delete Countries', 'description' => 'Allows a user to delete existing countries.'],
+        ['slug' => 'view-languages', 'name' => 'View Languages', 'description' => 'Allows a user to view the language list.'],
+        ['slug' => 'create-languages', 'name' => 'Create Languages', 'description' => 'Allows a user to create new languages.'],
+        ['slug' => 'edit-languages', 'name' => 'Edit Languages', 'description' => 'Allows a user to edit existing languages.'],
+        ['slug' => 'delete-languages', 'name' => 'Delete Languages', 'description' => 'Allows a user to delete existing languages.'],
     ];
 
     /**
