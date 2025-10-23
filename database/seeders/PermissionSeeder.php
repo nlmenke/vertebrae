@@ -37,6 +37,10 @@ final class PermissionSeeder extends AbstractSeeder
         ['slug' => 'create-currencies', 'name' => 'Create Currencies', 'description' => 'Allows a user to create new currencies.'],
         ['slug' => 'edit-currencies', 'name' => 'Edit Currencies', 'description' => 'Allows a user to edit existing currencies.'],
         ['slug' => 'delete-currencies', 'name' => 'Delete Currencies', 'description' => 'Allows a user to delete existing currencies.'],
+        ['slug' => 'view-countries', 'name' => 'View Countries', 'description' => 'Allows a user to view the country list.'],
+        ['slug' => 'create-countries', 'name' => 'Create Countries', 'description' => 'Allows a user to create new countries.'],
+        ['slug' => 'edit-countries', 'name' => 'Edit Countries', 'description' => 'Allows a user to edit existing countries.'],
+        ['slug' => 'delete-countries', 'name' => 'Delete Countries', 'description' => 'Allows a user to delete existing countries.'],
     ];
 
     /**

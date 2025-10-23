@@ -11,6 +11,15 @@ export interface BreadcrumbItem {
     href: string;
 }
 
+export interface Country {
+    id: number;
+    currency_id?: number;
+    iso_alpha_2: string;
+    iso_alpha_3: string;
+    iso_numeric: number;
+    name: string;
+}
+
 export interface Currency {
     id: number;
     iso_alpha: string;

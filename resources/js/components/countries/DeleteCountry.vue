@@ -14,20 +14,20 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 // generated (wayfinder)
-import CurrencyController from '@/actions/App/Http/Controllers/Admin/CurrencyController';
+import CountryController from '@/actions/App/Http/Controllers/Admin/CountryController';
 
 import HeadingSmall from '@/components/HeadingSmall.vue';
-import type { Currency, SharedData } from '@/types';
+import type { Country, SharedData } from '@/types';
 
 const page = usePage<SharedData>();
-const currency = page.props.currency as Currency;
+const country = page.props.country as Country;
 </script>
 
 <template>
     <div class="space-y-6">
         <HeadingSmall
-            :title="`Delete Currency`"
-            :description="`Delete '${currency.name}' from the system.`"
+            :title="`Delete Country`"
+            :description="`Delete '${country.name}' from the system.`"
         />
 
         <div class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10">
@@ -39,24 +39,22 @@ const currency = page.props.currency as Currency;
                 <DialogTrigger as-child>
                     <Button
                         variant="destructive"
-                        data-test="delete-currency-button"
+                        data-test="delete-country-button"
                     >
                         Delete
                     </Button>
                 </DialogTrigger>
                 <DialogContent>
                     <Form
-                        v-bind="CurrencyController.destroy.form(currency)"
+                        v-bind="CountryController.destroy.form(country)"
                         class="space-y-6"
                         v-slot="{ processing, reset, clearErrors }"
                     >
                         <DialogHeader class="space-y-3">
-                            <DialogTitle>Are you sure you want to delete this currency?</DialogTitle>
+                            <DialogTitle>Are you sure you want to delete this country?</DialogTitle>
                             <DialogDescription>
                                 <span>
-                                    This cannot be undone. Please confirm you would like to delete '{{
-                                        currency.name
-                                    }}.'
+                                    This cannot be undone. Please confirm you would like to delete '{{ country.name }}.'
                                 </span>
                             </DialogDescription>
                         </DialogHeader>
@@ -80,7 +78,7 @@ const currency = page.props.currency as Currency;
                                 type="submit"
                                 variant="destructive"
                                 :disabled="processing"
-                                data-test="confirm-delete-currency-button"
+                                data-test="confirm-delete-country-button"
                             >
                                 Delete
                             </Button>

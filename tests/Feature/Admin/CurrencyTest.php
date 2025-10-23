@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Country;
 use App\Models\Currency;
 use App\Models\User;
 
@@ -93,6 +94,12 @@ test('authorized users can create a currency', function (): void {
         'decimal_precision' => '1',
         'exchange_rate' => '2',
     ]);
+
+    // attach to a country and test the relationship for model coverage
+    $currency = Currency::query()->firstWhere('iso_alpha', 'AAA');
+    $country = Country::factory()->create(['currency_id' => $currency?->id]);
+
+    assertSame($currency?->countries->firstWhere('id', $country->id)?->name, $country->name);
 });
 
 test('unauthorized users cannot visit the currency edit page', function (): void {
