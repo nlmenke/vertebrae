@@ -9,7 +9,9 @@
 
 declare(strict_types=1);
 
+use App\Models\Country;
 use App\Models\Language;
+use App\Models\Locale;
 use App\Models\User;
 
 use function Pest\Laravel\actingAs;
@@ -17,6 +19,7 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\get;
 use function PHPUnit\Framework\assertSame;
+use function PHPUnit\Framework\assertTrue;
 
 test('guests are redirected to the login page', function (): void {
     get(route('admin.languages.index'))
@@ -76,13 +79,25 @@ test('authorized users can create a language', function (): void {
             'iso_alpha_3' => 'AAA',
             'name' => 'Test Language Create',
         ])
-        ->assertRedirect(route('admin.languages.index'));
+        ->assertRedirect(route('admin.languages.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Test Language Create was created successfully.',
+        ]);
 
     assertDatabaseHas('languages', [
         'iso_alpha_2' => 'AA',
         'iso_alpha_3' => 'AAA',
         'name' => 'Test Language Create',
     ]);
+
+    // test the relationship for model coverage
+    $language = Language::query()->firstWhere('iso_alpha_2', 'AA');
+    $country = Country::factory()->create();
+    $locale = Locale::factory()->create(['language_id' => $language?->id, 'country_id' => $country->id]);
+
+    assertTrue($language?->countries->contains($country));
+    assertTrue($language->locales->contains($locale));
 });
 
 test('unauthorized users cannot visit the language edit page', function (): void {
@@ -126,7 +141,11 @@ test('authorized users can edit a language', function (): void {
             'iso_alpha_3' => 'AAA',
             'name' => 'Test Language Update',
         ])
-        ->assertRedirect(route('admin.languages.index'));
+        ->assertRedirect(route('admin.languages.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Test Language Update was updated successfully.',
+        ]);
 
     $updatedLanguage = $language->fresh();
 
@@ -150,7 +169,11 @@ test('authorized users can delete a language', function (): void {
 
     actingAs($user)
         ->delete(route('admin.languages.destroy', $language))
-        ->assertRedirect(route('admin.languages.index'));
+        ->assertRedirect(route('admin.languages.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => $language->name . ' was deleted successfully.',
+        ]);
 
     assertSoftDeleted($language);
 });

@@ -42,9 +42,9 @@ test('can update exchange rates', function (): void {
 
     $currencies = $currencies->fresh();
 
-    assertEquals($currencies->where('iso_alpha', 'USD')->first()?->exchange_rate, $exchangeRates['USD']);
-    assertEquals($currencies->where('iso_alpha', 'EUR')->first()?->exchange_rate, $exchangeRates['EUR']);
-    assertEquals($currencies->where('iso_alpha', 'JPY')->first()?->exchange_rate, $exchangeRates['JPY']);
+    assertEquals($currencies->firstWhere('iso_alpha', 'USD')?->exchange_rate, $exchangeRates['USD']);
+    assertEquals($currencies->firstWhere('iso_alpha', 'EUR')?->exchange_rate, $exchangeRates['EUR']);
+    assertEquals($currencies->firstWhere('iso_alpha', 'JPY')?->exchange_rate, $exchangeRates['JPY']);
 });
 
 test('can error gracefully', function (): void {

@@ -39,7 +39,7 @@ final class UserFactory extends Factory
     public function admin(): self
     {
         return $this->afterCreating(function (User $user): void {
-            $user->roles()->attach(Role::query()->where('slug', 'admin')->first());
+            $user->roles()->attach(Role::query()->firstWhere('slug', 'admin'));
         });
     }
 
@@ -77,7 +77,7 @@ final class UserFactory extends Factory
     public function withPermission(string $permission): self
     {
         return $this->afterCreating(function (User $user) use ($permission): void {
-            $user->permissions()->attach(Permission::query()->where('slug', $permission)->first());
+            $user->permissions()->attach(Permission::query()->firstWhere('slug', $permission));
         });
     }
 }

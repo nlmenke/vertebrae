@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Link } from '@inertiajs/vue3';
-import { Banknote, Earth, Folder, Languages, LayoutGrid, ScrollText, Shield, User } from 'lucide-vue-next';
+import { Banknote, BookA, Earth, Folder, Languages, LayoutGrid, ScrollText, Shield, User } from 'lucide-vue-next';
 // shadcn ui
 import {
     Sidebar,
@@ -16,6 +16,7 @@ import {
 import { index as CountryControllerIndex } from '@/actions/App/Http/Controllers/Admin/CountryController';
 import { index as CurrencyControllerIndex } from '@/actions/App/Http/Controllers/Admin/CurrencyController';
 import { index as LanguageControllerIndex } from '@/actions/App/Http/Controllers/Admin/LanguageController';
+import { index as LocaleControllerIndex } from '@/actions/App/Http/Controllers/Admin/LocaleController';
 import { index as RoleControllerIndex } from '@/actions/App/Http/Controllers/Admin/RoleController';
 import { index as ScriptControllerIndex } from '@/actions/App/Http/Controllers/Admin/ScriptController';
 import { index as UserControllerIndex } from '@/actions/App/Http/Controllers/Admin/UserController';
@@ -52,6 +53,12 @@ const mainNavItems: NavItem[] = [
         href: LanguageControllerIndex(),
         icon: Languages,
         isVisible: can('view-languages'),
+    },
+    {
+        title: 'Locales',
+        href: LocaleControllerIndex(),
+        icon: BookA,
+        isVisible: can('view-locales'),
     },
     {
         title: 'Roles',

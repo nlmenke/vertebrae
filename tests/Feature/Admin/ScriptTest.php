@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Locale;
 use App\Models\Script;
 use App\Models\User;
 
@@ -17,6 +18,7 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\get;
 use function PHPUnit\Framework\assertSame;
+use function PHPUnit\Framework\assertTrue;
 
 test('guests are redirected to the login page', function (): void {
     get(route('admin.scripts.index'))
@@ -78,7 +80,11 @@ test('authorized users can create a script', function (): void {
             'name' => 'Test Script Create',
             'direction' => 'ltr',
         ])
-        ->assertRedirect(route('admin.scripts.index'));
+        ->assertRedirect(route('admin.scripts.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Test Script Create was created successfully.',
+        ]);
 
     assertDatabaseHas('scripts', [
         'iso_alpha' => 'Aaaa',
@@ -86,6 +92,12 @@ test('authorized users can create a script', function (): void {
         'name' => 'Test Script Create',
         'direction' => 'ltr',
     ]);
+
+    // test the relationship for model coverage
+    $script = Script::query()->firstWhere('iso_alpha', 'Aaaa');
+    $locale = Locale::factory()->create(['script_id' => $script?->id]);
+
+    assertTrue($script?->locales->contains($locale));
 });
 
 test('unauthorized users cannot visit the script edit page', function (): void {
@@ -131,7 +143,11 @@ test('authorized users can edit a script', function (): void {
             'name' => 'Test Script Update',
             'direction' => 'ltr',
         ])
-        ->assertRedirect(route('admin.scripts.index'));
+        ->assertRedirect(route('admin.scripts.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Test Script Update was updated successfully.',
+        ]);
 
     $updatedScript = $script->fresh();
 
@@ -156,7 +172,11 @@ test('authorized users can delete a script', function (): void {
 
     actingAs($user)
         ->delete(route('admin.scripts.destroy', $script))
-        ->assertRedirect(route('admin.scripts.index'));
+        ->assertRedirect(route('admin.scripts.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => $script->name . ' was deleted successfully.',
+        ]);
 
     assertSoftDeleted($script);
 });

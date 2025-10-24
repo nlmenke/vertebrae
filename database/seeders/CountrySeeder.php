@@ -294,7 +294,7 @@ final class CountrySeeder extends AbstractSeeder
      */
     private function getCurrencyId(string $isoCode): ?int
     {
-        if ($currency = Currency::query()->where('iso_alpha', $isoCode)->first(['id'])) {
+        if ($currency = Currency::query()->where('iso_alpha', $isoCode)->first('id')) {
             return $currency->id;
         }
 

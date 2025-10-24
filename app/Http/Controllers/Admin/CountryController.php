@@ -43,10 +43,10 @@ final class CountryController extends AbstractController
     {
         $this->authorize('viewAny', Country::class);
 
-        $countries = $this->model;
+        $countries = $this->model->with('currency');
 
         foreach ($this->sorting['columns'] as $index => $column) {
-            $countries = $countries->with('currency')->orderBy($column, $this->sorting['directions'][$index]);
+            $countries = $countries->orderBy($column, $this->sorting['directions'][$index]);
         }
 
         $countries = $countries->paginate($this->perPage)

@@ -1,39 +1,39 @@
 <script setup lang="ts">
 // packages
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
-import { ArrowLeft, ArrowLeftToLine, ArrowRight, ArrowRightToLine, Pencil } from 'lucide-vue-next';
+import { ArrowLeft, ArrowLeftToLine, ArrowRight, ArrowRightToLine, Check, Pencil, X } from 'lucide-vue-next';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 // generated (wayfinder)
-import CurrencyController from '@/actions/App/Http/Controllers/Admin/CurrencyController';
+import LocaleController from '@/actions/App/Http/Controllers/Admin/LocaleController';
 
 import { can } from '@/composables/hasPermissions';
 import AppLayout from '@/layouts/AppLayout.vue';
-import type { BreadcrumbItem, Currency, SharedData } from '@/types';
+import type { BreadcrumbItem, Locale, SharedData } from '@/types';
 
 const page = usePage<SharedData>();
-const currencies = page.props.currencies.data as Currency[];
+const locales = page.props.locales.data as Locale[];
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Currencies',
-        href: CurrencyController.index(),
+        title: 'Locales',
+        href: LocaleController.index(),
     },
 ];
 
 // pagination
 const firstPage = 1;
-const firstPageUrl = page.props.currencies.first_page_url;
-const previousPageUrl = page.props.currencies.prev_page_url ?? firstPageUrl;
-const currentPage = page.props.currencies.current_page;
-const lastPage = page.props.currencies.last_page;
-const lastPageUrl = page.props.currencies.last_page_url;
-const nextPageUrl = page.props.currencies.next_page_url ?? lastPageUrl;
+const firstPageUrl = page.props.locales.first_page_url;
+const previousPageUrl = page.props.locales.prev_page_url ?? firstPageUrl;
+const currentPage = page.props.locales.current_page;
+const lastPage = page.props.locales.last_page;
+const lastPageUrl = page.props.locales.last_page_url;
+const nextPageUrl = page.props.locales.next_page_url ?? lastPageUrl;
 
 const setPageSize = (pageSize: string) => {
-    router.get(page.props.currencies.path, {
+    router.get(page.props.locales.path, {
         count: parseInt(pageSize),
     });
 };
@@ -41,13 +41,13 @@ const setPageSize = (pageSize: string) => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head :title="`Currencies`" />
+        <Head :title="`Locales`" />
 
         <div class="w-full p-4">
             <div class="flex items-center py-4">
                 <Link
-                    v-if="can('create-currencies')"
-                    :href="CurrencyController.create()"
+                    v-if="can('create-locales')"
+                    :href="LocaleController.create()"
                     class="ml-auto"
                 >
                     <Button variant="default">Create</Button>
@@ -58,36 +58,64 @@ const setPageSize = (pageSize: string) => {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>ISO Alpha</TableHead>
-                            <TableHead>ISO Numeric</TableHead>
-                            <TableHead>Name</TableHead>
-                            <TableHead>Symbol</TableHead>
-                            <TableHead>Decimal Precision</TableHead>
-                            <TableHead>Exchange Rate</TableHead>
+                            <TableHead>Country</TableHead>
+                            <TableHead>Language</TableHead>
+                            <TableHead>Script</TableHead>
+                            <TableHead>Code</TableHead>
+                            <TableHead>Native</TableHead>
+                            <TableHead>Decimal Mark</TableHead>
+                            <TableHead>Thousands Separator</TableHead>
+                            <TableHead>Currency Symbol First</TableHead>
+                            <TableHead>Active</TableHead>
                             <TableHead></TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         <TableRow
-                            v-for="currency in currencies"
-                            :key="currency.id"
+                            v-for="locale in locales"
+                            :key="locale.id"
                         >
+                            <TableCell class="h-4">{{ locale.country?.name }}</TableCell>
+                            <TableCell>{{ locale.language?.name }}</TableCell>
+                            <TableCell>{{ locale.script?.name }}</TableCell>
                             <TableCell>
-                                <code>{{ currency.iso_alpha }}</code>
+                                <code>{{ locale.code }}</code>
+                            </TableCell>
+                            <TableCell>{{ locale.native }}</TableCell>
+                            <TableCell>
+                                <code>{{ locale.decimal_mark }}</code>
                             </TableCell>
                             <TableCell>
-                                <code>{{ currency.iso_numeric }}</code>
+                                <code>{{ locale.thousands_separator }}</code>
                             </TableCell>
-                            <TableCell>{{ currency.name }}</TableCell>
                             <TableCell>
-                                <code>{{ currency.symbol }}</code>
+                                <component
+                                    :is="locale.currency_symbol_first ? Check : X"
+                                    variant="ghost"
+                                    class="size-4"
+                                    :class="
+                                        locale.currency_symbol_first
+                                            ? 'text-green-400 dark:text-green-300'
+                                            : 'text-red-400 dark:text-red-300'
+                                    "
+                                />
                             </TableCell>
-                            <TableCell>{{ currency.decimal_precision }}</TableCell>
-                            <TableCell>{{ currency.exchange_rate }}</TableCell>
-                            <TableCell class="h-4 text-right">
+                            <TableCell>
+                                <component
+                                    :is="locale.active ? Check : X"
+                                    variant="ghost"
+                                    class="size-4"
+                                    :class="
+                                        locale.active
+                                            ? 'text-green-400 dark:text-green-300'
+                                            : 'text-red-400 dark:text-red-300'
+                                    "
+                                />
+                            </TableCell>
+                            <TableCell class="text-right">
                                 <Link
-                                    v-if="can('edit-currencies')"
-                                    :href="CurrencyController.edit(currency)"
+                                    v-if="can('edit-locales')"
+                                    :href="LocaleController.edit(locale)"
                                     :title="`Edit`"
                                 >
                                     <Button
@@ -108,11 +136,11 @@ const setPageSize = (pageSize: string) => {
                     <div class="flex items-center space-x-2">
                         <p class="text-sm font-medium">Rows Per Page</p>
                         <Select
-                            :model-value="page.props.currencies.per_page"
+                            :model-value="page.props.locales.per_page"
                             @update:model-value="setPageSize"
                         >
                             <SelectTrigger class="h-8 w-[70px]">
-                                <SelectValue :placeholder="page.props.currencies.per_page.toString()" />
+                                <SelectValue :placeholder="page.props.locales.per_page.toString()" />
                             </SelectTrigger>
                             <SelectContent side="top">
                                 <SelectItem

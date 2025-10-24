@@ -90,7 +90,10 @@ test('authorized users can create a role', function (): void {
             'name' => 'Test Role Create',
         ])
         ->assertRedirect(route('admin.roles.index'))
-        ->assertSessionHas('toast');
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Test Role Create was created successfully.',
+        ]);
 
     assertDatabaseHas('roles', [
         'slug' => 'test-role-create',
@@ -104,7 +107,10 @@ test('authorized users can create a role', function (): void {
             'name' => 'Test Role Create 2',
         ])
         ->assertRedirect(route('admin.roles.index'))
-        ->assertSessionHas('toast');
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Test Role Create 2 was created successfully.',
+        ]);
 
     assertDatabaseHas('roles', [
         'slug' => 'test-role-create-2',
@@ -123,7 +129,7 @@ test('unauthorized users cannot visit the role edit page', function (): void {
 
 test('authorized users can visit the role edit page', function (): void {
     $user = User::factory()->admin()->create();
-    $role = Role::query()->where('slug', 'admin')->first();
+    $role = Role::query()->firstWhere('slug', 'admin');
 
     actingAs($user)
         ->get(route('admin.roles.edit', $role))
@@ -157,7 +163,11 @@ test('authorized users can edit a role', function (): void {
             'slug' => 'test-role-update',
             'name' => 'Test Role Update',
         ])
-        ->assertRedirect(route('admin.roles.index'));
+        ->assertRedirect(route('admin.roles.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Test Role Update was updated successfully.',
+        ]);
 
     $updatedRole = $role->fresh();
 
@@ -171,7 +181,11 @@ test('authorized users can edit a role', function (): void {
             'slug' => 'test-role-update-2',
             'name' => 'Test Role Update 2',
         ])
-        ->assertRedirect(route('admin.roles.index'));
+        ->assertRedirect(route('admin.roles.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Test Role Update 2 was updated successfully.',
+        ]);
 
     $updatedRole = $role->fresh();
 
@@ -194,7 +208,11 @@ test('authorized users can delete a role', function (): void {
 
     actingAs($user)
         ->delete(route('admin.roles.destroy', $role))
-        ->assertRedirect(route('admin.roles.index'));
+        ->assertRedirect(route('admin.roles.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => $role->name . ' was deleted successfully.',
+        ]);
 
     assertNull($role->fresh());
     assertDatabaseMissing($role);
@@ -204,7 +222,11 @@ test('authorized users can delete a role', function (): void {
 
     actingAs($user)
         ->delete(route('admin.roles.destroy', $role))
-        ->assertRedirect(route('admin.roles.index'));
+        ->assertRedirect(route('admin.roles.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => $role->name . ' was deleted successfully.',
+        ]);
 
     assertNull($role->fresh());
     assertDatabaseMissing($role);

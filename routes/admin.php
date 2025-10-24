@@ -14,6 +14,7 @@ declare(strict_types=1);
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\LocaleController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ScriptController;
 use App\Http\Controllers\Admin\UserController;
@@ -31,6 +32,7 @@ Route::middleware([
         Route::resource('countries', CountryController::class, ['except' => ['show']]);
         Route::resource('currencies', CurrencyController::class, ['except' => ['show']]);
         Route::resource('languages', LanguageController::class, ['except' => ['show']]);
+        Route::resource('locales', LocaleController::class, ['except' => ['show']]);
         Route::resource('roles', RoleController::class, ['except' => ['show']]);
         Route::resource('scripts', ScriptController::class, ['except' => ['show']]);
 

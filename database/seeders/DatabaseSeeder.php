@@ -31,5 +31,6 @@ final class DatabaseSeeder extends Seeder
         $this->call(CountrySeeder::class);
         $this->call(LanguageSeeder::class);
         $this->call(ScriptSeeder::class);
+        $this->call(LocaleSeeder::class);
     }
 }
