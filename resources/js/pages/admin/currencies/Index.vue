@@ -79,7 +79,9 @@ const setPageSize = (pageSize: string) => {
                                 <code>{{ currency.iso_numeric }}</code>
                             </TableCell>
                             <TableCell>{{ currency.name }}</TableCell>
-                            <TableCell>{{ currency.symbol }}</TableCell>
+                            <TableCell>
+                                <code>{{ currency.symbol }}</code>
+                            </TableCell>
                             <TableCell>{{ currency.decimal_precision }}</TableCell>
                             <TableCell>{{ currency.exchange_rate }}</TableCell>
                             <TableCell class="h-4 text-right">

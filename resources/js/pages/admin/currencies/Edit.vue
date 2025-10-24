@@ -8,8 +8,8 @@ import { Label } from '@/components/ui/label';
 // generated (wayfinder)
 import CurrencyController from '@/actions/App/Http/Controllers/Admin/CurrencyController';
 
-import InputError from '@/components/InputError.vue';
 import DeleteCurrency from '@/components/currencies/DeleteCurrency.vue';
+import InputError from '@/components/InputError.vue';
 import { can } from '@/composables/hasPermissions';
 import AppLayout from '@/layouts/AppLayout.vue';
 import type { BreadcrumbItem, Currency, SharedData } from '@/types';
@@ -30,9 +30,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 </script>
 
 <template>
-    <Head :title="`Edit Currency`" />
-
     <AppLayout :breadcrumbs="breadcrumbs">
+        <Head :title="`Edit Currency`" />
+
         <div class="w-full space-y-6 p-4">
             <Form
                 v-bind="CurrencyController.update.form(currency)"
@@ -190,7 +190,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
 
                 <div class="flex items-center">
-                    <Button :disabled="processing"> Save </Button>
+                    <Button :disabled="processing">Save</Button>
 
                     <Transition
                         enter-active-class="transition ease-in-out"

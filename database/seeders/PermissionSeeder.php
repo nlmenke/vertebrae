@@ -37,6 +37,22 @@ final class PermissionSeeder extends AbstractSeeder
         ['slug' => 'create-currencies', 'name' => 'Create Currencies', 'description' => 'Allows a user to create new currencies.'],
         ['slug' => 'edit-currencies', 'name' => 'Edit Currencies', 'description' => 'Allows a user to edit existing currencies.'],
         ['slug' => 'delete-currencies', 'name' => 'Delete Currencies', 'description' => 'Allows a user to delete existing currencies.'],
+        ['slug' => 'view-countries', 'name' => 'View Countries', 'description' => 'Allows a user to view the country list.'],
+        ['slug' => 'create-countries', 'name' => 'Create Countries', 'description' => 'Allows a user to create new countries.'],
+        ['slug' => 'edit-countries', 'name' => 'Edit Countries', 'description' => 'Allows a user to edit existing countries.'],
+        ['slug' => 'delete-countries', 'name' => 'Delete Countries', 'description' => 'Allows a user to delete existing countries.'],
+        ['slug' => 'view-languages', 'name' => 'View Languages', 'description' => 'Allows a user to view the language list.'],
+        ['slug' => 'create-languages', 'name' => 'Create Languages', 'description' => 'Allows a user to create new languages.'],
+        ['slug' => 'edit-languages', 'name' => 'Edit Languages', 'description' => 'Allows a user to edit existing languages.'],
+        ['slug' => 'delete-languages', 'name' => 'Delete Languages', 'description' => 'Allows a user to delete existing languages.'],
+        ['slug' => 'view-scripts', 'name' => 'View Scripts', 'description' => 'Allows a user to view the script list.'],
+        ['slug' => 'create-scripts', 'name' => 'Create Scripts', 'description' => 'Allows a user to create new scripts.'],
+        ['slug' => 'edit-scripts', 'name' => 'Edit Scripts', 'description' => 'Allows a user to edit existing scripts.'],
+        ['slug' => 'delete-scripts', 'name' => 'Delete Scripts', 'description' => 'Allows a user to delete existing scripts.'],
+        ['slug' => 'view-locales', 'name' => 'View Locales', 'description' => 'Allows a user to view the locale list.'],
+        ['slug' => 'create-locales', 'name' => 'Create Locales', 'description' => 'Allows a user to create new locales.'],
+        ['slug' => 'edit-locales', 'name' => 'Edit Locales', 'description' => 'Allows a user to edit existing locales.'],
+        ['slug' => 'delete-locales', 'name' => 'Delete Locales', 'description' => 'Allows a user to delete existing locales.'],
     ];
 
     /**

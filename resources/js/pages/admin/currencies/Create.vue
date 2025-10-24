@@ -25,9 +25,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 </script>
 
 <template>
-    <Head :title="`Create Currency`" />
-
     <AppLayout :breadcrumbs="breadcrumbs">
+        <Head :title="`Create Currency`" />
+
         <div class="w-full space-y-6 p-4">
             <Form
                 v-bind="CurrencyController.store.form()"
@@ -179,7 +179,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
 
                 <div class="flex items-center">
-                    <Button :disabled="processing"> Save </Button>
+                    <Button :disabled="processing">Save</Button>
 
                     <Transition
                         enter-active-class="transition ease-in-out"

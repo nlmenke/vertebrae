@@ -37,16 +37,11 @@ const role = page.props.role as Role;
             </div>
             <Dialog>
                 <DialogTrigger as-child>
-                    <Button
-                        variant="destructive"
-                        data-test="delete-role-button"
-                    >
-                        Delete
-                    </Button>
+                    <Button variant="destructive">Delete</Button>
                 </DialogTrigger>
                 <DialogContent>
                     <Form
-                        v-bind="RoleController.destroy.form(role.id)"
+                        v-bind="RoleController.destroy.form(role)"
                         class="space-y-6"
                         v-slot="{ processing, reset, clearErrors }"
                     >
@@ -78,7 +73,6 @@ const role = page.props.role as Role;
                                 type="submit"
                                 variant="destructive"
                                 :disabled="processing"
-                                data-test="confirm-delete-role-button"
                             >
                                 Delete
                             </Button>

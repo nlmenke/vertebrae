@@ -76,7 +76,10 @@ test('authorized users can edit a user', function (): void {
             'name' => 'Test User Update',
         ])
         ->assertRedirect(route('admin.users.index'))
-        ->assertSessionHas('toast');
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Test User Update was updated successfully.',
+        ]);
 
     assertSame($userUpdate->fresh()?->name, 'Test User Update');
 });
@@ -121,7 +124,10 @@ test('authorized users can edit user roles', function (): void {
             'roles' => $roles->map(fn ($role): array => ['id' => $role->id, 'checked' => true])->all(),
         ])
         ->assertRedirect(route('admin.users.index'))
-        ->assertSessionHas('toast');
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Roles for ' . $userUpdate->name . ' were updated successfully.',
+        ]);
 
     assertSame(
         $userUpdate->fresh()?->roles->pluck('id')->toArray(),
@@ -169,7 +175,10 @@ test('authorized users can edit user permissions', function (): void {
             'permissions' => $permissions->map(fn ($permission): array => ['id' => $permission->id, 'checked' => true])->all(),
         ])
         ->assertRedirect(route('admin.users.index'))
-        ->assertSessionHas('toast');
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Permissions for ' . $userUpdate->name . ' were updated successfully.',
+        ]);
 
     assertSame(
         $userUpdate->fresh()?->permissions->pluck('id')->toArray(),

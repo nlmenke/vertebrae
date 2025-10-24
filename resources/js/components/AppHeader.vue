@@ -1,7 +1,19 @@
 <script setup lang="ts">
 // packages
 import { InertiaLinkProps, Link, usePage } from '@inertiajs/vue3';
-import { Banknote, Folder, LayoutGrid, Menu, Search, Shield, User } from 'lucide-vue-next';
+import {
+    Banknote,
+    BookA,
+    Earth,
+    Folder,
+    Languages,
+    LayoutGrid,
+    Menu,
+    ScrollText,
+    Search,
+    Shield,
+    User,
+} from 'lucide-vue-next';
 import { computed } from 'vue';
 // shadcn ui
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -16,8 +28,12 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 // generated (wayfinder)
+import { index as CountryControllerIndex } from '@/actions/App/Http/Controllers/Admin/CountryController';
 import { index as CurrencyControllerIndex } from '@/actions/App/Http/Controllers/Admin/CurrencyController';
+import { index as LanguageControllerIndex } from '@/actions/App/Http/Controllers/Admin/LanguageController';
+import { index as LocaleControllerIndex } from '@/actions/App/Http/Controllers/Admin/LocaleController';
 import { index as RoleControllerIndex } from '@/actions/App/Http/Controllers/Admin/RoleController';
+import { index as ScriptControllerIndex } from '@/actions/App/Http/Controllers/Admin/ScriptController';
 import { index as UserControllerIndex } from '@/actions/App/Http/Controllers/Admin/UserController';
 import { dashboard } from '@/routes';
 
@@ -56,10 +72,10 @@ const mainNavItems: NavItem[] = [
         isVisible: true,
     },
     {
-        title: 'Roles',
-        href: RoleControllerIndex(),
-        icon: Shield,
-        isVisible: can('view-roles'),
+        title: 'Countries',
+        href: CountryControllerIndex(),
+        icon: Earth,
+        isVisible: can('view-countries'),
     },
     {
         title: 'Currencies',
@@ -68,10 +84,34 @@ const mainNavItems: NavItem[] = [
         isVisible: can('view-currencies'),
     },
     {
+        title: 'Languages',
+        href: LanguageControllerIndex(),
+        icon: Languages,
+        isVisible: can('view-languages'),
+    },
+    {
+        title: 'Locales',
+        href: LocaleControllerIndex(),
+        icon: BookA,
+        isVisible: can('view-locales'),
+    },
+    {
+        title: 'Roles',
+        href: RoleControllerIndex(),
+        icon: Shield,
+        isVisible: can('view-roles'),
+    },
+    {
+        title: 'Scripts',
+        href: ScriptControllerIndex(),
+        icon: ScrollText,
+        isVisible: can('view-scripts'),
+    },
+    {
         title: 'Users',
         href: UserControllerIndex(),
         icon: User,
-        isVisible: can('users-roles'),
+        isVisible: can('view-users'),
     },
 ];
 

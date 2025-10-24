@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Country;
 use App\Models\Currency;
 use App\Models\User;
 
@@ -83,7 +84,11 @@ test('authorized users can create a currency', function (): void {
             'decimal_precision' => '1',
             'exchange_rate' => '2',
         ])
-        ->assertRedirect(route('admin.currencies.index'));
+        ->assertRedirect(route('admin.currencies.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Test Currency Create was created successfully.',
+        ]);
 
     assertDatabaseHas('currencies', [
         'iso_alpha' => 'AAA',
@@ -93,6 +98,12 @@ test('authorized users can create a currency', function (): void {
         'decimal_precision' => '1',
         'exchange_rate' => '2',
     ]);
+
+    // attach to a country and test the relationship for model coverage
+    $currency = Currency::query()->firstWhere('iso_alpha', 'AAA');
+    $country = Country::factory()->create(['currency_id' => $currency?->id]);
+
+    assertSame($currency?->countries->firstWhere('id', $country->id)?->name, $country->name);
 });
 
 test('unauthorized users cannot visit the currency edit page', function (): void {
@@ -142,7 +153,11 @@ test('authorized users can edit a currency', function (): void {
             'decimal_precision' => '1',
             'exchange_rate' => '1',
         ])
-        ->assertRedirect(route('admin.currencies.index'));
+        ->assertRedirect(route('admin.currencies.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => 'Test Currency Update was updated successfully.',
+        ]);
 
     $updatedCurrency = $currency->fresh();
 
@@ -169,7 +184,11 @@ test('authorized users can delete a currency', function (): void {
 
     actingAs($user)
         ->delete(route('admin.currencies.destroy', $currency))
-        ->assertRedirect(route('admin.currencies.index'));
+        ->assertRedirect(route('admin.currencies.index'))
+        ->assertSessionHas('toast', [
+            'style' => 'success',
+            'message' => $currency->name . ' was deleted successfully.',
+        ]);
 
     assertSoftDeleted($currency);
 });

@@ -4,7 +4,7 @@ import { Head, Link, router, usePage } from '@inertiajs/vue3';
 import { ArrowLeft, ArrowLeftToLine, ArrowRight, ArrowRightToLine, Lock, Pencil, Shield } from 'lucide-vue-next';
 // shadcn ui
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 // generated (wayfinder)
 import UserController from '@/actions/App/Http/Controllers/Admin/UserController';
@@ -115,9 +115,9 @@ const setPageSize = (pageSize: number) => {
                             :model-value="page.props.users.per_page"
                             @update:model-value="setPageSize"
                         >
-                            <Select-Trigger class="h-8 w-[70px]">
+                            <SelectTrigger class="h-8 w-[70px]">
                                 <SelectValue :placeholder="page.props.users.per_page.toString()" />
-                            </Select-Trigger>
+                            </SelectTrigger>
                             <SelectContent side="top">
                                 <SelectItem
                                     v-for="pageSize in [10, 25, 50]"
@@ -129,7 +129,7 @@ const setPageSize = (pageSize: number) => {
                             </SelectContent>
                         </Select>
                     </div>
-                    <div class="w- flex items-center justify-center text-sm font-medium">
+                    <div class="flex w-[100px] items-center justify-center text-sm font-medium">
                         Page {{ currentPage }} of {{ lastPage }}
                     </div>
                     <div class="flex items-center space-x-2">

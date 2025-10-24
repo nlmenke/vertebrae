@@ -13,7 +13,7 @@
         "php": "^8.4",
         "inertiajs/inertia-laravel": "^2.0.10",
         "laravel/fortify": "^1.31.2",
-        "laravel/framework": "^12.35.0",
+        "laravel/framework": "^12.35.1",
         "laravel/tinker": "^2.10.1",
         "laravel/wayfinder": "^0.1.12",
         "league/flysystem-aws-s3-v3": "^3.30.1"
@@ -21,7 +21,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",
         "dg/bypass-finals": "^1.9",
-        "driftingly/rector-laravel": "^2.1.0",
+        "driftingly/rector-laravel": "^2.1.1",
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.7.2",
         "laravel/pail": "^1.2.3",

@@ -37,12 +37,7 @@ const currency = page.props.currency as Currency;
             </div>
             <Dialog>
                 <DialogTrigger as-child>
-                    <Button
-                        variant="destructive"
-                        data-test="delete-currency-button"
-                    >
-                        Delete
-                    </Button>
+                    <Button variant="destructive">Delete</Button>
                 </DialogTrigger>
                 <DialogContent>
                     <Form
@@ -51,7 +46,7 @@ const currency = page.props.currency as Currency;
                         v-slot="{ processing, reset, clearErrors }"
                     >
                         <DialogHeader class="space-y-3">
-                            <DialogTitle> Are you sure you want to delete this currency? </DialogTitle>
+                            <DialogTitle>Are you sure you want to delete this currency?</DialogTitle>
                             <DialogDescription>
                                 <span>
                                     This cannot be undone. Please confirm you would like to delete '{{
@@ -80,7 +75,6 @@ const currency = page.props.currency as Currency;
                                 type="submit"
                                 variant="destructive"
                                 :disabled="processing"
-                                data-test="confirm-delete-currency-button"
                             >
                                 Delete
                             </Button>

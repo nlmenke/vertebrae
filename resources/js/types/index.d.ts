@@ -11,6 +11,15 @@ export interface BreadcrumbItem {
     href: string;
 }
 
+export interface Country {
+    id: number;
+    currency_id?: number;
+    iso_alpha_2: string;
+    iso_alpha_3: string;
+    iso_numeric: number;
+    name: string;
+}
+
 export interface Currency {
     id: number;
     iso_alpha: string;
@@ -21,19 +30,20 @@ export interface Currency {
     exchange_rate: number;
 }
 
+export interface Language {
+    id: number;
+    iso_alpha_2: string;
+    iso_alpha_3: string;
+    name: string;
+}
+
 export interface NavItem {
     title: string;
     href: NonNullable<InertiaLinkProps['href']>;
     icon?: LucideIcon;
     isActive?: boolean;
+    isVisible?: boolean;
 }
-
-export type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
-    name: string;
-    quote: { message: string; author: string };
-    auth: Auth;
-    sidebarOpen: boolean;
-};
 
 export interface Permission {
     id: number;
@@ -49,6 +59,14 @@ export interface Role {
     description?: string;
 }
 
+export interface Script {
+    id: number;
+    iso_alpha: string;
+    iso_numeric: number;
+    name: string;
+    direction: string;
+}
+
 export interface User {
     id: number;
     name: string;
@@ -58,5 +76,12 @@ export interface User {
     created_at: string;
     updated_at: string;
 }
+
+export type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
+    name: string;
+    quote: { message: string; author: string };
+    auth: Auth;
+    sidebarOpen: boolean;
+};
 
 export type BreadcrumbItemType = BreadcrumbItem;
