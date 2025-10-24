@@ -49,7 +49,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                             <SelectItem
                                 v-for="currency in currencies"
                                 :key="currency.id"
-                                :value="`${currency.id}`"
+                                :value="currency.id"
                             >
                                 {{ currency.name }} ({{ currency.iso_alpha }})
                             </SelectItem>

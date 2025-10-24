@@ -77,7 +77,7 @@ const updateScriptValue = (newScriptId: number) => {
                             <SelectItem
                                 v-for="language in languages"
                                 :key="language.id"
-                                :value="`${language.id}`"
+                                :value="language.id"
                             >
                                 {{ language.name }}
                             </SelectItem>
@@ -102,7 +102,7 @@ const updateScriptValue = (newScriptId: number) => {
                             <SelectItem
                                 v-for="country in countries"
                                 :key="country.id"
-                                :value="`${country.id}`"
+                                :value="country.id"
                             >
                                 {{ country.name }}
                             </SelectItem>
@@ -127,7 +127,7 @@ const updateScriptValue = (newScriptId: number) => {
                             <SelectItem
                                 v-for="script in scripts"
                                 :key="script.id"
-                                :value="`${script.id}`"
+                                :value="script.id"
                             >
                                 {{ script.name }}
                             </SelectItem>

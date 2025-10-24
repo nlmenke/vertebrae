@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // packages
-import { Head, useForm, usePage } from '@inertiajs/vue3';
+import { Form, Head, usePage } from '@inertiajs/vue3';
 import { toInteger } from 'lodash';
 // shadcn ui
 import { Button } from '@/components/ui/button';
@@ -32,20 +32,8 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-const form = useForm({
-    currency_id: country.currency_id,
-    iso_alpha_2: country.iso_alpha_2,
-    iso_alpha_3: country.iso_alpha_3,
-    iso_numeric: country.iso_numeric,
-    name: country.name,
-});
-
 const updateCurrencyValue = (newCurrencyId: number) => {
     currency = currencies.find((currency) => currency.id === toInteger(newCurrencyId));
-};
-
-const submit = () => {
-    form.patch(CountryController.update(country));
 };
 </script>
 
@@ -54,14 +42,16 @@ const submit = () => {
         <Head :title="`Edit Country`" />
 
         <div class="w-full space-y-6 p-4">
-            <form
-                @submit.prevent="submit"
+            <Form
+                v-bind="CountryController.update.form(country)"
                 class="space-y-4"
+                v-slot="{ errors, processing, recentlySuccessful }"
             >
                 <div class="grid">
                     <Label for="currency">Currencies</Label>
                     <Select
-                        v-model="form.currency_id"
+                        name="currency_id"
+                        v-model="country.currency_id"
                         @update:model-value="updateCurrencyValue"
                     >
                         <SelectTrigger>
@@ -74,7 +64,7 @@ const submit = () => {
                             <SelectItem
                                 v-for="currency in currencies"
                                 :key="currency.id"
-                                :value="`${currency.id}`"
+                                :value="currency.id"
                             >
                                 {{ currency.name }} ({{ currency.iso_alpha }})
                             </SelectItem>
@@ -82,7 +72,7 @@ const submit = () => {
                     </Select>
                     <InputError
                         class="mt-2"
-                        :message="form.errors.currency_id"
+                        :message="errors.currency_id"
                     />
                 </div>
 
@@ -98,14 +88,15 @@ const submit = () => {
                     </Label>
                     <Input
                         id="iso_alpha_2"
+                        name="iso_alpha_2"
                         class="mt-1 block w-full"
-                        v-model="form.iso_alpha_2"
+                        v-model="country.iso_alpha_2"
                         :placeholder="`ISO Alpha 2`"
                         required
                     />
                     <InputError
                         class="mt-2"
-                        :message="form.errors.iso_alpha_2"
+                        :message="errors.iso_alpha_2"
                     />
                 </div>
 
@@ -121,14 +112,15 @@ const submit = () => {
                     </Label>
                     <Input
                         id="iso_alpha_3"
+                        name="iso_alpha_3"
                         class="mt-1 block w-full"
-                        v-model="form.iso_alpha_3"
+                        v-model="country.iso_alpha_3"
                         :placeholder="`ISO Alpha 3`"
                         required
                     />
                     <InputError
                         class="mt-2"
-                        :message="form.errors.iso_alpha_3"
+                        :message="errors.iso_alpha_3"
                     />
                 </div>
 
@@ -144,14 +136,15 @@ const submit = () => {
                     </Label>
                     <Input
                         id="iso_numeric"
+                        name="iso_numeric"
                         class="mt-1 block w-full"
-                        v-model="form.iso_numeric"
+                        v-model="country.iso_numeric"
                         :placeholder="`ISO Numeric`"
                         required
                     />
                     <InputError
                         class="mt-2"
-                        :message="form.errors.iso_numeric"
+                        :message="errors.iso_numeric"
                     />
                 </div>
 
@@ -167,19 +160,20 @@ const submit = () => {
                     </Label>
                     <Input
                         id="name"
+                        name="name"
                         class="mt-1 block w-full"
-                        v-model="form.name"
+                        v-model="country.name"
                         :placeholder="`Name`"
                         required
                     />
                     <InputError
                         class="mt-2"
-                        :message="form.errors.name"
+                        :message="errors.name"
                     />
                 </div>
 
                 <div class="flex items-center">
-                    <Button :disabled="form.processing">Save</Button>
+                    <Button :disabled="processing">Save</Button>
 
                     <Transition
                         enter-active-class="transition ease-in-out"
@@ -188,14 +182,14 @@ const submit = () => {
                         leave-to-class="opacity-0"
                     >
                         <p
-                            v-show="form.recentlySuccessful"
+                            v-show="recentlySuccessful"
                             class="text-sm text-neutral-600"
                         >
                             Saved.
                         </p>
                     </Transition>
                 </div>
-            </form>
+            </Form>
 
             <DeleteCountry
                 v-if="can('delete-countries')"
