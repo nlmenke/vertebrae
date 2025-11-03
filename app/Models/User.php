@@ -11,12 +11,6 @@ namespace App\Models;
 
 use Carbon\CarbonInterface;
 use Database\Factories\UserFactory;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\MustVerifyEmail;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -24,7 +18,7 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
@@ -49,16 +43,11 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property-read EloquentCollection<int, Permission> $permissions
  * @property-read EloquentCollection<int, Role>       $roles
  */
-final class User extends AbstractModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, MustVerifyEmailContract
+final class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use Authenticatable;
-    use Authorizable;
-    use CanResetPassword;
-
     /** @use HasFactory<UserFactory> */
     use HasFactory;
 
-    use MustVerifyEmail;
     use Notifiable;
     use SoftDeletes;
     use TwoFactorAuthenticatable;
@@ -80,6 +69,8 @@ final class User extends AbstractModel implements AuthenticatableContract, Autho
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
     ];
 
     /**
@@ -160,6 +151,7 @@ final class User extends AbstractModel implements AuthenticatableContract, Autho
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'two_factor_confirmed_at' => 'datetime',
         ];
     }
 

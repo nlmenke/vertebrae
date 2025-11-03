@@ -17,8 +17,9 @@ import TextLink from '@/components/TextLink.vue';
 import AuthBase from '@/layouts/AuthLayout.vue';
 
 defineProps<{
-    status?: string;
+    canRegister: boolean;
     canResetPassword: boolean;
+    status?: string;
 }>();
 </script>
 
@@ -111,13 +112,17 @@ defineProps<{
                 </Button>
             </div>
 
-            <div class="text-center text-sm text-muted-foreground">
+            <div
+                v-if="canRegister"
+                class="text-center text-sm text-muted-foreground"
+            >
                 Don't have an account?
                 <TextLink
                     :href="register()"
                     :tabindex="5"
-                    >Sign up</TextLink
                 >
+                    Sign up
+                </TextLink>
             </div>
         </Form>
     </AuthBase>

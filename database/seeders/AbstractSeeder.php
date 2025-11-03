@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\AbstractModel;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -33,9 +34,9 @@ abstract class AbstractSeeder extends Seeder
     /**
      * The model used for importing.
      *
-     * @var AbstractModel|EloquentBuilder<AbstractModel>
+     * @var AbstractModel|EloquentBuilder<AbstractModel|User>|User
      */
-    protected AbstractModel|EloquentBuilder $model;
+    protected AbstractModel|EloquentBuilder|User $model;
 
     /**
      * Tables that should be truncated before running.

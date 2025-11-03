@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -49,6 +50,7 @@ final class FortifyServiceProvider extends ServiceProvider
      */
     private function configureActions(): void
     {
+        Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
     }
 
@@ -83,18 +85,17 @@ final class FortifyServiceProvider extends ServiceProvider
      */
     private function configureViews(): void
     {
+        Fortify::confirmPasswordView(fn () => Inertia::render('auth/ConfirmPassword'));
+
         Fortify::loginView(
             fn (Request $request) => Inertia::render('auth/Login', [
+                'canRegister' => Features::enabled(Features::registration()),
                 'canResetPassword' => Features::enabled(Features::resetPasswords()),
                 'status' => $request->session()->get('status'),
             ])
         );
 
-        Fortify::verifyEmailView(
-            fn (Request $request) => Inertia::render('auth/VerifyEmail', [
-                'status' => $request->session()->get('status'),
-            ])
-        );
+        Fortify::registerView(fn () => Inertia::render('auth/Register'));
 
         Fortify::requestPasswordResetLinkView(fn (Request $request) => Inertia::render('auth/ForgotPassword', [
             'status' => $request->session()->get('status'),
@@ -107,6 +108,10 @@ final class FortifyServiceProvider extends ServiceProvider
 
         Fortify::twoFactorChallengeView(fn () => Inertia::render('auth/TwoFactorChallenge'));
 
-        Fortify::confirmPasswordView(fn () => Inertia::render('auth/ConfirmPassword'));
+        Fortify::verifyEmailView(
+            fn (Request $request) => Inertia::render('auth/VerifyEmail', [
+                'status' => $request->session()->get('status'),
+            ])
+        );
     }
 }

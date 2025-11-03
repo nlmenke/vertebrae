@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Laravel\Fortify\Features;
 
 require __DIR__ . '/admin.php';
-require __DIR__ . '/auth.php';
 require __DIR__ . '/settings.php';
 
-Route::get('/', fn () => Inertia::render('Welcome'))
+Route::get('/', fn () => Inertia::render('Welcome', [
+    'canRegister' => Features::enabled(Features::registration()),
+]))
     ->name('home');
 
 Route::middleware([

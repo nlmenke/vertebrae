@@ -114,6 +114,7 @@ arch()
     ->not->toHaveSuffix('Model')
     ->ignoring(App\Models\AbstractModel::class)
     ->toExtend(App\Models\AbstractModel::class)
+    ->ignoring(App\Models\User::class)
     ->toHaveMethod('casts')
     ->toOnlyBeUsedIn([
         'App\Actions',
