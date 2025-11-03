@@ -3,7 +3,7 @@
 import { Form } from '@inertiajs/vue3';
 import { useClipboard } from '@vueuse/core';
 import { Check, Copy, ScanLine } from 'lucide-vue-next';
-import { computed, nextTick, ref, watch } from 'vue';
+import { computed, nextTick, ref, useTemplateRef, watch } from 'vue';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -31,7 +31,7 @@ const showVerificationStep = ref(false);
 const code = ref<number[]>([]);
 const codeValue = computed<string>(() => code.value.join(''));
 
-const pinInputContainerRef = ref<HTMLElement | null>(null);
+const pinInputContainerRef = useTemplateRef('pinInputContainerRef');
 
 const modalConfig = computed<{
     title: string;

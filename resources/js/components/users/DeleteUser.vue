@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { useTemplateRef } from 'vue';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import {
@@ -22,7 +22,7 @@ import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileCo
 import HeadingSmall from '@/components/HeadingSmall.vue';
 import InputError from '@/components/InputError.vue';
 
-const passwordInput = ref<InstanceType<typeof Input> | null>(null);
+const passwordInput = useTemplateRef('passwordInput');
 </script>
 
 <template>

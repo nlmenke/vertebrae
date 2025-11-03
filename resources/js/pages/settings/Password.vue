@@ -1,7 +1,6 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
-import { ref } from 'vue';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,9 +21,6 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: edit(),
     },
 ];
-
-const passwordInput = ref<HTMLInputElement | null>(null);
-const currentPasswordInput = ref<HTMLInputElement | null>(null);
 </script>
 
 <template>
@@ -52,7 +48,6 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                         <Label for="current_password">Current password</Label>
                         <Input
                             id="current_password"
-                            ref="currentPasswordInput"
                             name="current_password"
                             type="password"
                             class="mt-1 block w-full"
@@ -66,7 +61,6 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                         <Label for="password">New password</Label>
                         <Input
                             id="password"
-                            ref="passwordInput"
                             name="password"
                             type="password"
                             class="mt-1 block w-full"
