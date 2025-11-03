@@ -49,6 +49,7 @@ return [
             'busy_timeout' => null,
             'journal_mode' => null,
             'synchronous' => null,
+            'transaction_mode' => 'DEFERRED',
         ],
 
         'mysql' => [
@@ -160,8 +161,7 @@ return [
                 'REDIS_PREFIX',
                 Str::slug(
                     (string) env('APP_NAME', 'laravel'),
-                    '_'
-                ) . '_database_'
+                ) . '-database-'
             ),
             'persistent' => env('REDIS_PERSISTENT', false),
         ],
