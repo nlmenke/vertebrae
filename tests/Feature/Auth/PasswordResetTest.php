@@ -62,7 +62,7 @@ test('password can be reset with valid token', function (): void {
     ]);
 
     Notification::assertSentTo($user, ResetPassword::class, function (ResetPassword $notification) use ($user): bool {
-        post(route('password.store'), [
+        post(route('password.update'), [
             'token' => $notification->token,
             'email' => $user->email,
             'password' => 'password',
@@ -78,7 +78,7 @@ test('password can be reset with valid token', function (): void {
 test('password cannot be reset with invalid token', function (): void {
     $user = User::factory()->create();
 
-    post(route('password.store'), [
+    post(route('password.update'), [
         'token' => 'invalid-token',
         'email' => $user->email,
         'password' => 'newpassword123',

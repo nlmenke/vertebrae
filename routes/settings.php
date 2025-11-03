@@ -28,10 +28,10 @@ Route::middleware('auth')->group(function (): void {
         ->name('profile.destroy');
 
     Route::get('settings/password', [PasswordController::class, 'edit'])
-        ->name('password.edit');
+        ->name('user-password.edit');
     Route::middleware('throttle:6,1')
         ->put('settings/password', [PasswordController::class, 'update'])
-        ->name('password.update');
+        ->name('user-password.update');
 
     Route::get('settings/appearance', fn () => Inertia::render('settings/Appearance'))
         ->name('appearance.edit');
