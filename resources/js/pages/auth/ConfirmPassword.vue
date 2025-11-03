@@ -1,11 +1,11 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Spinner } from '@/components/ui/spinner';
 // generated (wayfinder)
 import { store } from '@/routes/password/confirm';
 
@@ -47,10 +47,7 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
                         :disabled="processing"
                         data-test="confirm-password-button"
                     >
-                        <LoaderCircle
-                            v-if="processing"
-                            class="h-4 w-4 animate-spin"
-                        />
+                        <Spinner v-if="processing" />
                         Confirm Password
                     </Button>
                 </div>

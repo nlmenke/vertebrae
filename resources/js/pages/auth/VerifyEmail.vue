@@ -1,9 +1,9 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
 // shadcn ui
 import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
 // generated (wayfinder)
 import { logout } from '@/routes';
 import { send } from '@/routes/verification';
@@ -39,10 +39,7 @@ defineProps<{
                 :disabled="processing"
                 variant="secondary"
             >
-                <LoaderCircle
-                    v-if="processing"
-                    class="h-4 w-4 animate-spin"
-                />
+                <Spinner v-if="processing" />
                 Resend verification email
             </Button>
 
