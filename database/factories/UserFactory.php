@@ -14,7 +14,6 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -56,7 +55,7 @@ final class UserFactory extends Factory
             'name' => $name,
             'email' => Str::snake($name, '.') . '@' . fake()->safeEmailDomain(),
             'email_verified_at' => now(),
-            'password' => self::$password ??= Hash::make('password'),
+            'password' => self::$password ??= 'password',
             'remember_token' => Str::random(10),
             'two_factor_secret' => Str::random(10),
             'two_factor_recovery_codes' => Str::random(10),

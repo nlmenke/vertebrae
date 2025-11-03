@@ -12,7 +12,6 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\AbstractController;
 use App\Http\Requests\Settings\UpdatePasswordRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -40,7 +39,7 @@ final class PasswordController extends AbstractController
         $validated = $request->validated();
 
         $request->user()?->update([
-            'password' => Hash::make($validated['password']),
+            'password' => $validated['password'],
         ]);
 
         return back();
