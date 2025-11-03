@@ -27,7 +27,7 @@ test('two factor settings page can be rendered', function (): void {
         'confirmPassword' => true,
     ]);
 
-    $user = User::factory()->create();
+    $user = User::factory()->withoutTwoFactor()->create();
 
     actingAs($user)
         ->withSession([
