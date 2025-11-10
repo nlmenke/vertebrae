@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 use App\Models\User;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\ViewErrorBag;
 use Laravel\Fortify\Features;
 
 use function Pest\Laravel\actingAs;
@@ -21,7 +20,6 @@ use function Pest\Laravel\assertAuthenticated;
 use function Pest\Laravel\assertGuest;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
-use function PHPUnit\Framework\assertStringContainsString;
 
 test('login screen can be rendered', function (): void {
     get(route('login'))
@@ -29,7 +27,7 @@ test('login screen can be rendered', function (): void {
 });
 
 test('users can authenticate using the login screen', function (): void {
-    $user = User::factory()->create();
+    $user = User::factory()->withoutTwoFactor()->create();
 
     post(route('login.store'), [
         'email' => $user->email,
@@ -94,20 +92,18 @@ test('users are rate limited', function (): void {
     $user = User::factory()->create();
 
     RateLimiter::increment(
-        implode('|', [
-            $user->email, '127.0.0.1',
-        ]),
-        amount: 10
+        md5(
+            'login' . implode('|', [
+                $user->email,
+                '127.0.0.1',
+            ])
+        ),
+        amount: 5
     );
 
     post(route('login.store'), [
         'email' => $user->email,
         'password' => 'wrong-password',
     ])
-        ->assertSessionHasErrors('email');
-
-    /** @var ViewErrorBag $errors */
-    $errors = session('errors');
-
-    assertStringContainsString('Too many login attempts', $errors->first('email'));
+        ->assertTooManyRequests();
 });

@@ -14,7 +14,6 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -56,8 +55,11 @@ final class UserFactory extends Factory
             'name' => $name,
             'email' => Str::snake($name, '.') . '@' . fake()->safeEmailDomain(),
             'email_verified_at' => now(),
-            'password' => self::$password ??= Hash::make('password'),
+            'password' => self::$password ??= 'password',
             'remember_token' => Str::random(10),
+            'two_factor_secret' => Str::random(10),
+            'two_factor_recovery_codes' => Str::random(10),
+            'two_factor_confirmed_at' => now(),
         ];
     }
 
@@ -68,6 +70,18 @@ final class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes): array => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * Indicate that the model does not have two-factor authentication configured.
+     */
+    public function withoutTwoFactor(): self
+    {
+        return $this->state(fn (array $attributes): array => [
+            'two_factor_secret' => null,
+            'two_factor_recovery_codes' => null,
+            'two_factor_confirmed_at' => null,
         ]);
     }
 

@@ -1,15 +1,15 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Spinner } from '@/components/ui/spinner';
 // generated (wayfinder)
-import AuthenticatedSessionController from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
 import { register } from '@/routes';
+import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 
 import InputError from '@/components/InputError.vue';
@@ -17,8 +17,9 @@ import TextLink from '@/components/TextLink.vue';
 import AuthBase from '@/layouts/AuthLayout.vue';
 
 defineProps<{
-    status?: string;
+    canRegister: boolean;
     canResetPassword: boolean;
+    status?: string;
 }>();
 </script>
 
@@ -37,7 +38,7 @@ defineProps<{
         </div>
 
         <Form
-            v-bind="AuthenticatedSessionController.store.form()"
+            v-bind="store.form()"
             :reset-on-success="['password']"
             v-slot="{ errors, processing }"
             class="flex flex-col gap-6"
@@ -103,21 +104,22 @@ defineProps<{
                     :disabled="processing"
                     data-test="login-button"
                 >
-                    <LoaderCircle
-                        v-if="processing"
-                        class="h-4 w-4 animate-spin"
-                    />
+                    <Spinner v-if="processing" />
                     Log in
                 </Button>
             </div>
 
-            <div class="text-center text-sm text-muted-foreground">
+            <div
+                v-if="canRegister"
+                class="text-center text-sm text-muted-foreground"
+            >
                 Don't have an account?
                 <TextLink
                     :href="register()"
                     :tabindex="5"
-                    >Sign up</TextLink
                 >
+                    Sign up
+                </TextLink>
             </div>
         </Form>
     </AuthBase>

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\AbstractModel;
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ abstract class AbstractController
      *
      * @since 0.0.0-vertebrae introduced
      */
-    protected AbstractModel $model;
+    protected AbstractModel|User $model;
 
     /**
      * The number of results to return per page.

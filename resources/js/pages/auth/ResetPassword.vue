@@ -1,14 +1,14 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
 import { ref } from 'vue';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Spinner } from '@/components/ui/spinner';
 // generated (wayfinder)
-import NewPasswordController from '@/actions/App/Http/Controllers/Auth/NewPasswordController';
+import { update } from '@/routes/password';
 
 import InputError from '@/components/InputError.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
@@ -29,7 +29,7 @@ const inputEmail = ref(props.email);
         <Head title="Reset password" />
 
         <Form
-            v-bind="NewPasswordController.store.form()"
+            v-bind="update.form()"
             :transform="(data) => ({ ...data, token, email })"
             :reset-on-success="['password', 'password_confirmation']"
             v-slot="{ errors, processing }"
@@ -85,10 +85,7 @@ const inputEmail = ref(props.email);
                     :disabled="processing"
                     data-test="reset-password-button"
                 >
-                    <LoaderCircle
-                        v-if="processing"
-                        class="h-4 w-4 animate-spin"
-                    />
+                    <Spinner v-if="processing" />
                     Reset password
                 </Button>
             </div>

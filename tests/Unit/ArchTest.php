@@ -12,8 +12,10 @@ declare(strict_types=1);
 arch()
     ->preset()
     ->php()
-    ->ignoring(Database\Seeders\CurrencySeeder::class) // some currency symbols contain 'suspicious' characters
-    ->ignoring(Database\Seeders\LocaleSeeder::class); // some locale natives contain 'suspicious' characters
+    ->ignoring([
+        Database\Seeders\CurrencySeeder::class, // some currency symbols contain 'suspicious' characters
+        Database\Seeders\LocaleSeeder::class, // some locale natives contain 'suspicious' characters
+    ]);
 
 arch()
     ->preset()
@@ -47,6 +49,7 @@ arch()
     ])
     ->toBeFinal()
     ->ignoring([
+        App\Actions\Fortify\PasswordValidationRules::class,
         App\Exceptions\AbstractException::class,
         App\Http\Controllers\AbstractController::class,
         App\Http\Requests\AbstractFormRequest::class,
@@ -70,6 +73,11 @@ arch()
     ->toHavePrefix('Abstract')
     ->toBeAbstract()
     ->not->toBeFinal();
+
+arch()
+    ->expect('App\Actions')
+    ->toHaveMethod('handle')
+    ->ignoring('App\Actions\Fortify');
 
 arch()
     ->expect('App\Exceptions')
@@ -106,8 +114,10 @@ arch()
     ->not->toHaveSuffix('Model')
     ->ignoring(App\Models\AbstractModel::class)
     ->toExtend(App\Models\AbstractModel::class)
+    ->ignoring(App\Models\User::class)
     ->toHaveMethod('casts')
     ->toOnlyBeUsedIn([
+        'App\Actions',
         'App\Http',
         'App\Jobs',
         'App\Models',

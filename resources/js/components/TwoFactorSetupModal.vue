@@ -2,12 +2,13 @@
 // packages
 import { Form } from '@inertiajs/vue3';
 import { useClipboard } from '@vueuse/core';
-import { Check, Copy, Loader2, ScanLine } from 'lucide-vue-next';
-import { computed, nextTick, ref, watch } from 'vue';
+import { Check, Copy, ScanLine } from 'lucide-vue-next';
+import { computed, nextTick, ref, useTemplateRef, watch } from 'vue';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { PinInput, PinInputGroup, PinInputSlot } from '@/components/ui/pin-input';
+import { Spinner } from '@/components/ui/spinner';
 // generated (wayfinder)
 import { confirm } from '@/routes/two-factor';
 
@@ -30,7 +31,7 @@ const showVerificationStep = ref(false);
 const code = ref<number[]>([]);
 const codeValue = computed<string>(() => code.value.join(''));
 
-const pinInputContainerRef = ref<HTMLElement | null>(null);
+const pinInputContainerRef = useTemplateRef('pinInputContainerRef');
 
 const modalConfig = computed<{
     title: string;
@@ -148,7 +149,7 @@ watch(
                                     v-if="!qrCodeSvg"
                                     class="absolute inset-0 z-10 flex aspect-square h-auto w-full animate-pulse items-center justify-center bg-background"
                                 >
-                                    <Loader2 class="size-6 animate-spin" />
+                                    <Spinner class="size-6" />
                                 </div>
                                 <div
                                     v-else
@@ -182,7 +183,7 @@ watch(
                                     v-if="!manualSetupKey"
                                     class="flex h-full w-full items-center justify-center bg-muted p-3"
                                 >
-                                    <Loader2 class="size-4 animate-spin" />
+                                    <Spinner />
                                 </div>
                                 <template v-else>
                                     <input
