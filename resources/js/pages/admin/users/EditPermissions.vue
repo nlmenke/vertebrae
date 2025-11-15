@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Head, useForm, usePage } from '@inertiajs/vue3';
+import { wTrans, wTransChoice } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -19,11 +20,11 @@ const permissions = page.props.permissions as Permission[];
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Users',
+        title: wTransChoice('users.users', 2),
         href: UserControllerIndex(),
     },
     {
-        title: 'Edit Permissions (' + user.name + ')',
+        title: wTrans('users.edit_permissions'),
         href: UserPermissionController.edit(user),
     },
 ];
@@ -48,10 +49,10 @@ const submit = () => {
         // remove permissions that are already assigned to the user's roles
         form.permissions = form.permissions.filter(
             (permission) =>
-                !user.roles
-                    .map((role) => role.permissions.map((rolePermission) => rolePermission.slug))
-                    .shift()
-                    .includes(permission.slug),
+                !(
+                    user.roles.map((role) => role.permissions.map((rolePermission) => rolePermission.slug)).shift() ??
+                    []
+                ).includes(permission.slug),
         );
     }
 
@@ -61,7 +62,7 @@ const submit = () => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head :title="`Edit Permissions for ${user.name}`" />
+        <Head :title="wTrans('users.edit_permissions').value" />
 
         <div class="w-full space-y-6 p-4">
             <form
@@ -72,8 +73,8 @@ const submit = () => {
                     <TableHeader>
                         <TableRow>
                             <TableHead></TableHead>
-                            <TableHead>Permission</TableHead>
-                            <TableHead>Description</TableHead>
+                            <TableHead>{{ wTransChoice('permissions.permissions', 1) }}</TableHead>
+                            <TableHead>{{ wTrans('permissions.fields.description') }}</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -87,12 +88,13 @@ const submit = () => {
                                     v-model="permission.checked"
                                     :disabled="
                                         user.roles.map((role) => role.slug).includes('admin') ||
-                                        user.roles
-                                            .map((role) =>
-                                                role.permissions.map((rolePermission) => rolePermission.slug),
-                                            )
-                                            .shift()
-                                            .includes(permission.slug) ||
+                                        (
+                                            user.roles
+                                                .map((role) =>
+                                                    role.permissions.map((rolePermission) => rolePermission.slug),
+                                                )
+                                                .shift() ?? []
+                                        ).includes(permission.slug) ||
                                         !authUser.permission_list.includes(permission.slug)
                                     "
                                 />
@@ -104,21 +106,9 @@ const submit = () => {
                 </Table>
 
                 <div class="flex items-center">
-                    <Button :disabled="form.processing">Save</Button>
-
-                    <Transition
-                        enter-active-class="transition ease-in-out"
-                        enter-from-class="opacity-0"
-                        leave-active-class="transition ease-in-out"
-                        leave-to-class="opacity-0"
-                    >
-                        <p
-                            v-show="form.recentlySuccessful"
-                            class="text-sm text-neutral-600"
-                        >
-                            Saved.
-                        </p>
-                    </Transition>
+                    <Button :disabled="form.processing">
+                        {{ wTrans('common.button.save') }}
+                    </Button>
                 </div>
             </form>
         </div>

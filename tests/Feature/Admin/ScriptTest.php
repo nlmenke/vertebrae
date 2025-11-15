@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use App\Enums\ScriptDirection;
 use App\Models\Locale;
 use App\Models\Script;
 use App\Models\User;
@@ -83,7 +84,9 @@ test('authorized users can create a script', function (): void {
         ->assertRedirect(route('admin.scripts.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Script Create was created successfully.',
+            'message' => trans('common.created_successfully', [
+                'value' => 'Test Script Create',
+            ]),
         ]);
 
     assertDatabaseHas('scripts', [
@@ -146,7 +149,9 @@ test('authorized users can edit a script', function (): void {
         ->assertRedirect(route('admin.scripts.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Script Update was updated successfully.',
+            'message' => trans('common.updated_successfully', [
+                'value' => 'Test Script Update',
+            ]),
         ]);
 
     $updatedScript = $script->fresh();
@@ -154,7 +159,7 @@ test('authorized users can edit a script', function (): void {
     assertSame($updatedScript?->iso_alpha, 'Aaaa');
     assertSame($updatedScript?->iso_numeric, '000');
     assertSame($updatedScript?->name, 'Test Script Update');
-    assertSame($updatedScript?->direction, 'ltr');
+    assertSame($updatedScript?->direction, ScriptDirection::LTR);
 });
 
 test('unauthorized users cannot delete a script', function (): void {
@@ -175,7 +180,9 @@ test('authorized users can delete a script', function (): void {
         ->assertRedirect(route('admin.scripts.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => $script->name . ' was deleted successfully.',
+            'message' => trans('common.deleted_successfully', [
+                'value' => $script->name,
+            ]),
         ]);
 
     assertSoftDeleted($script);

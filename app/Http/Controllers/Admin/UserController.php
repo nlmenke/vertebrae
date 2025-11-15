@@ -76,7 +76,9 @@ final class UserController extends AbstractController
         return to_route('admin.users.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $user->refresh()->name . ' was updated successfully.',
+                'message' => trans('common.updated_successfully', [
+                    'value' => $user->refresh()->name,
+                ]),
             ]);
     }
 }

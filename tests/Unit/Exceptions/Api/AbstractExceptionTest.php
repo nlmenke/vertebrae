@@ -13,7 +13,7 @@ use App\Exceptions\AbstractException;
 
 test('exception can use the default message', function (): void {
     expect(fn () => throw new class() extends AbstractException {})
-        ->toThrow(AbstractException::class, 'Whoops, something went wrong.');
+        ->toThrow(AbstractException::class, trans('exceptions.http.500_message'));
 });
 
 test('exception can use a custom message', function (): void {

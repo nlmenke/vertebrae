@@ -42,7 +42,13 @@ final class OpenExchangeRatesApiService extends AbstractApiService implements Ex
     {
         $apiKey = Config::string('currency.exchange_rates.drivers.open_exchange_rates');
 
-        throw_unless($apiKey, MissingOrInvalidApiKeyException::class, 'Missing Open Exchange Rates API key.');
+        throw_unless(
+            $apiKey,
+            MissingOrInvalidApiKeyException::class,
+            trans('exceptions.api.missing_api_key', [
+                'name' => 'Open Exchange Rates',
+            ])
+        );
 
         $this->baseUri = 'https://openexchangerates.org/api/';
 

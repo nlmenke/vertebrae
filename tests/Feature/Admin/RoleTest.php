@@ -92,7 +92,9 @@ test('authorized users can create a role', function (): void {
         ->assertRedirect(route('admin.roles.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Role Create was created successfully.',
+            'message' => trans('common.created_successfully', [
+                'value' => 'Test Role Create',
+            ]),
         ]);
 
     assertDatabaseHas('roles', [
@@ -109,7 +111,9 @@ test('authorized users can create a role', function (): void {
         ->assertRedirect(route('admin.roles.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Role Create 2 was created successfully.',
+            'message' => trans('common.created_successfully', [
+                'value' => 'Test Role Create 2',
+            ]),
         ]);
 
     assertDatabaseHas('roles', [
@@ -166,7 +170,9 @@ test('authorized users can edit a role', function (): void {
         ->assertRedirect(route('admin.roles.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Role Update was updated successfully.',
+            'message' => trans('common.updated_successfully', [
+                'value' => 'Test Role Update',
+            ]),
         ]);
 
     $updatedRole = $role->fresh();
@@ -184,7 +190,9 @@ test('authorized users can edit a role', function (): void {
         ->assertRedirect(route('admin.roles.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Role Update 2 was updated successfully.',
+            'message' => trans('common.updated_successfully', [
+                'value' => 'Test Role Update 2',
+            ]),
         ]);
 
     $updatedRole = $role->fresh();
@@ -211,7 +219,9 @@ test('authorized users can delete a role', function (): void {
         ->assertRedirect(route('admin.roles.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => $role->name . ' was deleted successfully.',
+            'message' => trans('common.deleted_successfully', [
+                'value' => $role->name,
+            ]),
         ]);
 
     assertNull($role->fresh());
@@ -225,7 +235,9 @@ test('authorized users can delete a role', function (): void {
         ->assertRedirect(route('admin.roles.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => $role->name . ' was deleted successfully.',
+            'message' => trans('common.deleted_successfully', [
+                'value' => $role->name,
+            ]),
         ]);
 
     assertNull($role->fresh());

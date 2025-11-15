@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 import { computed, ref } from 'vue';
 // shadcn ui
 import { Button } from '@/components/ui/button';
@@ -21,16 +22,16 @@ interface AuthConfigContent {
 const authConfigContent = computed<AuthConfigContent>(() => {
     if (showRecoveryInput.value) {
         return {
-            title: 'Recovery Code',
-            description: 'Please confirm access to your account by entering one of your emergency recovery codes.',
-            toggleText: 'login using an authentication code',
+            title: wTrans('auth.two-factor.challenge.recovery.title').value,
+            description: wTrans('auth.two-factor.challenge.recovery.description').value,
+            toggleText: wTrans('auth.two-factor.challenge.recovery.toggle_text').value,
         };
     }
 
     return {
-        title: 'Authentication Code',
-        description: 'Enter the authentication code provided by your authenticator application.',
-        toggleText: 'login using a recovery code',
+        title: wTrans('auth.two-factor.challenge.authentication.title'),
+        description: wTrans('auth.two-factor.challenge.authentication.description'),
+        toggleText: wTrans('auth.two-factor.challenge.authentication.toggle_text'),
     };
 });
 
@@ -51,7 +52,7 @@ const codeValue = computed<string>(() => code.value.join(''));
         :title="authConfigContent.title"
         :description="authConfigContent.description"
     >
-        <Head title="Two-Factor Authentication" />
+        <Head :title="wTrans('auth.two-factor.title').value" />
 
         <div class="space-y-6">
             <template v-if="!showRecoveryInput">
@@ -93,10 +94,11 @@ const codeValue = computed<string>(() => code.value.join(''));
                         type="submit"
                         class="w-full"
                         :disabled="processing"
-                        >Continue</Button
                     >
+                        {{ wTrans('common.button.continue') }}
+                    </Button>
                     <div class="text-center text-sm text-muted-foreground">
-                        <span>or you can </span>
+                        <span>{{ wTrans('auth.or_you_can') }}</span>
                         <button
                             type="button"
                             class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
@@ -118,7 +120,7 @@ const codeValue = computed<string>(() => code.value.join(''));
                     <Input
                         name="recovery_code"
                         type="text"
-                        placeholder="Enter recovery code"
+                        :placeholder="wTrans('auth.two-factor.enter_recovery_code').value"
                         :autofocus="showRecoveryInput"
                         required
                     />
@@ -127,11 +129,12 @@ const codeValue = computed<string>(() => code.value.join(''));
                         type="submit"
                         class="w-full"
                         :disabled="processing"
-                        >Continue</Button
                     >
+                        {{ wTrans('common.button.continue') }}
+                    </Button>
 
                     <div class="text-center text-sm text-muted-foreground">
-                        <span>or you can </span>
+                        <span>{{ wTrans('auth.or_you_can') }}</span>
                         <button
                             type="button"
                             class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"

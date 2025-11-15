@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Link } from '@inertiajs/vue3';
+import { wTrans, wTransChoice } from 'laravel-vue-i18n';
 import { Banknote, BookA, Earth, Folder, Languages, LayoutGrid, ScrollText, Shield, User } from 'lucide-vue-next';
 // shadcn ui
 import {
@@ -31,49 +32,49 @@ import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: wTrans('common.dashboard'),
         href: dashboard(),
         icon: LayoutGrid,
         isVisible: true,
     },
     {
-        title: 'Countries',
+        title: wTransChoice('countries.countries', 2),
         href: CountryControllerIndex(),
         icon: Earth,
         isVisible: can('view-countries'),
     },
     {
-        title: 'Currencies',
+        title: wTransChoice('currencies.currencies', 2),
         href: CurrencyControllerIndex(),
         icon: Banknote,
         isVisible: can('view-currencies'),
     },
     {
-        title: 'Languages',
+        title: wTransChoice('languages.languages', 2),
         href: LanguageControllerIndex(),
         icon: Languages,
         isVisible: can('view-languages'),
     },
     {
-        title: 'Locales',
+        title: wTransChoice('locales.locales', 2),
         href: LocaleControllerIndex(),
         icon: BookA,
         isVisible: can('view-locales'),
     },
     {
-        title: 'Roles',
+        title: wTransChoice('roles.roles', 2),
         href: RoleControllerIndex(),
         icon: Shield,
         isVisible: can('view-roles'),
     },
     {
-        title: 'Scripts',
+        title: wTransChoice('scripts.scripts', 2),
         href: ScriptControllerIndex(),
         icon: ScrollText,
         isVisible: can('view-scripts'),
     },
     {
-        title: 'Users',
+        title: wTransChoice('users.users', 2),
         href: UserControllerIndex(),
         icon: User,
         isVisible: can('view-users'),
@@ -82,7 +83,7 @@ const mainNavItems: NavItem[] = [
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'GitHub Repo',
+        title: wTrans('common.github_repo'),
         href: 'https://github.com/nlmenke/vertebrae',
         icon: Folder,
     },

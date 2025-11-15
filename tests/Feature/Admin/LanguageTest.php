@@ -82,7 +82,9 @@ test('authorized users can create a language', function (): void {
         ->assertRedirect(route('admin.languages.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Language Create was created successfully.',
+            'message' => trans('common.created_successfully', [
+                'value' => 'Test Language Create',
+            ]),
         ]);
 
     assertDatabaseHas('languages', [
@@ -144,7 +146,9 @@ test('authorized users can edit a language', function (): void {
         ->assertRedirect(route('admin.languages.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Language Update was updated successfully.',
+            'message' => trans('common.updated_successfully', [
+                'value' => 'Test Language Update',
+            ]),
         ]);
 
     $updatedLanguage = $language->fresh();
@@ -172,7 +176,9 @@ test('authorized users can delete a language', function (): void {
         ->assertRedirect(route('admin.languages.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => $language->name . ' was deleted successfully.',
+            'message' => trans('common.deleted_successfully', [
+                'value' => $language->name,
+            ]),
         ]);
 
     assertSoftDeleted($language);

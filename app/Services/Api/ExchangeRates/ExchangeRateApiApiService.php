@@ -40,7 +40,13 @@ final class ExchangeRateApiApiService extends AbstractApiService implements Exch
     {
         $apiKey = Config::string('currency.exchange_rates.drivers.exchangerate_api');
 
-        throw_unless($apiKey, MissingOrInvalidApiKeyException::class, 'Missing ExchangeRate-API API key.');
+        throw_unless(
+            $apiKey,
+            MissingOrInvalidApiKeyException::class,
+            trans('exceptions.api.missing_api_key', [
+                'name' => 'ExchangeRate-API',
+            ])
+        );
 
         $this->baseUri = 'https://v6.exchangerate-api.com/v6/';
 

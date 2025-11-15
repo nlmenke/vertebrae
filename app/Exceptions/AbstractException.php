@@ -28,7 +28,7 @@ abstract class AbstractException extends Exception
         ?Throwable $previous = null,
     ) {
         if ($message === null) {
-            $message = 'Whoops, something went wrong.';
+            $message = trans('exceptions.http.500_message');
         }
 
         parent::__construct($message, $code, $previous);

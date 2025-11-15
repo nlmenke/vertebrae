@@ -97,7 +97,9 @@ test('authorized users can create a locale', function (): void {
         ->assertRedirect(route('admin.locales.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Locale Create was created successfully.',
+            'message' => trans('common.created_successfully', [
+                'value' => 'Test Locale Create',
+            ]),
         ]);
 
     assertDatabaseHas('locales', [
@@ -170,7 +172,9 @@ test('authorized users can edit a locale', function (): void {
         ->assertRedirect(route('admin.locales.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Locale Update was updated successfully.',
+            'message' => trans('common.updated_successfully', [
+                'value' => 'Test Locale Update',
+            ]),
         ]);
 
     $updatedLocale = $locale->fresh();
@@ -201,7 +205,9 @@ test('authorized users can delete a locale', function (): void {
         ->assertRedirect(route('admin.locales.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => $locale->native . ' was deleted successfully.',
+            'message' => trans('common.deleted_successfully', [
+                'value' => $locale->native,
+            ]),
         ]);
 
     assertSoftDeleted($locale);

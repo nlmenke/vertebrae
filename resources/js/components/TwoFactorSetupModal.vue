@@ -2,6 +2,7 @@
 // packages
 import { Form } from '@inertiajs/vue3';
 import { useClipboard } from '@vueuse/core';
+import { wTrans } from 'laravel-vue-i18n';
 import { Check, Copy, ScanLine } from 'lucide-vue-next';
 import { computed, nextTick, ref, useTemplateRef, watch } from 'vue';
 // shadcn ui
@@ -40,26 +41,24 @@ const modalConfig = computed<{
 }>(() => {
     if (props.twoFactorEnabled) {
         return {
-            title: 'Two-Factor Authentication Enabled',
-            description:
-                'Two-factor authentication is now enabled. Scan the QR code or enter the setup key in your authenticator app.',
-            buttonText: 'Close',
+            title: wTrans('auth.two-factor.enabled.title').value,
+            description: wTrans('auth.two-factor.enabled.description').value,
+            buttonText: wTrans('common.button.close').value,
         };
     }
 
     if (showVerificationStep.value) {
         return {
-            title: 'Verify Authentication Code',
-            description: 'Enter the 6-digit code from your authenticator app',
-            buttonText: 'Continue',
+            title: wTrans('auth.two-factor.verify.title').value,
+            description: wTrans('auth.two-factor.verify.description').value,
+            buttonText: wTrans('common.button.continue'),
         };
     }
 
     return {
-        title: 'Enable Two-Factor Authentication',
-        description:
-            'To finish enabling two-factor authentication, scan the QR code or enter the setup key in your authenticator app',
-        buttonText: 'Continue',
+        title: wTrans('auth.two-factor.setup.title').value,
+        description: wTrans('auth.two-factor.setup.description').value,
+        buttonText: wTrans('common.button.continue'),
     };
 });
 
@@ -174,7 +173,9 @@ watch(
 
                         <div class="relative flex w-full items-center justify-center">
                             <div class="absolute inset-0 top-1/2 h-px w-full bg-border" />
-                            <span class="relative bg-card px-2 py-1">or, enter the code manually</span>
+                            <span class="relative bg-card px-2 py-1">
+                                {{ wTrans('auth.two-factor.enter_code_manually') }}
+                            </span>
                         </div>
 
                         <div class="flex w-full items-center justify-center space-x-2">

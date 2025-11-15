@@ -78,7 +78,7 @@ test('users cannot authenticate with invalid password', function (): void {
     assertGuest();
 });
 
-test('users can logout', function (): void {
+test('users can log out', function (): void {
     $user = User::factory()->create();
 
     actingAs($user)

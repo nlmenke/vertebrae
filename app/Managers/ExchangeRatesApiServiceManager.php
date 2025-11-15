@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace App\Managers;
 
-use App\Interfaces\ExchangeRatesApiServiceInterface;
 use App\Services\Api\ExchangeRates\CurrencyApiApiService;
 use App\Services\Api\ExchangeRates\ExchangeRateApiApiService;
 use App\Services\Api\ExchangeRates\FixerApiService;
@@ -30,7 +29,7 @@ final class ExchangeRatesApiServiceManager extends Manager
      *
      * @see https://currencyapi.com/
      */
-    public function createCurrencyApiDriver(): ExchangeRatesApiServiceInterface
+    public function createCurrencyApiDriver(): CurrencyApiApiService
     {
         return new CurrencyApiApiService();
     }
@@ -40,7 +39,7 @@ final class ExchangeRatesApiServiceManager extends Manager
      *
      * @see https://exchangerate-api.com/
      */
-    public function createExchangeRateApiDriver(): ExchangeRatesApiServiceInterface
+    public function createExchangeRateApiDriver(): ExchangeRateApiApiService
     {
         return new ExchangeRateApiApiService();
     }
@@ -50,7 +49,7 @@ final class ExchangeRatesApiServiceManager extends Manager
      *
      * @see https://fixer.io/
      */
-    public function createFixerDriver(): ExchangeRatesApiServiceInterface
+    public function createFixerDriver(): FixerApiService
     {
         return new FixerApiService();
     }
@@ -60,7 +59,7 @@ final class ExchangeRatesApiServiceManager extends Manager
      *
      * @see https://openexchangerates.org/
      */
-    public function createOpenExchangeRatesDriver(): ExchangeRatesApiServiceInterface
+    public function createOpenExchangeRatesDriver(): OpenExchangeRatesApiService
     {
         return new OpenExchangeRatesApiService();
     }

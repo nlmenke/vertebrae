@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, Head, usePage } from '@inertiajs/vue3';
+import { wTrans, wTransChoice } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,11 +18,13 @@ const user = page.props.user as User;
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Users',
+        title: wTransChoice('users.users', 2),
         href: UserController.index(),
     },
     {
-        title: 'Edit (' + user.name + ')',
+        title: wTrans('common.edit', {
+            value: user.name,
+        }),
         href: UserController.edit(user),
     },
 ];
@@ -29,20 +32,26 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head :title="`Edit User`" />
+        <Head
+            :title="
+                wTrans('common.edit', {
+                    value: wTransChoice('users.users', 1).value,
+                }).value
+            "
+        />
 
         <div class="w-full space-y-6 p-4">
             <Form
                 v-bind="UserController.update.form(user)"
                 class="space-y-4"
-                v-slot="{ errors, processing, recentlySuccessful }"
+                v-slot="{ errors, processing }"
             >
                 <div class="grid gap-2">
                     <Label for="name">
-                        Name
+                        {{ wTrans('users.fields.name') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -52,7 +61,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         name="name"
                         class="mt-1 block w-full"
                         v-model="user.name"
-                        :placeholder="`Name`"
+                        :placeholder="wTrans('users.fields.name').value"
                         required
                     />
                     <InputError
@@ -62,13 +71,13 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="email">Email Address</Label>
+                    <Label for="email">{{ wTrans('users.fields.email') }}</Label>
                     <Input
                         id="email"
                         name="email"
                         class="mt-1 block w-full"
                         v-model="user.email"
-                        :placeholder="`Email Address`"
+                        :placeholder="wTrans('users.fields.email').value"
                         disabled
                     />
                     <InputError
@@ -78,26 +87,9 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <Button
-                        :disabled="processing"
-                        data-test="update-user-button"
-                    >
-                        Save
+                    <Button :disabled="processing">
+                        {{ wTrans('common.button.save') }}
                     </Button>
-
-                    <Transition
-                        enter-active-class="transition ease-in-out"
-                        enter-from-class="opacity-0"
-                        leave-active-class="transition ease-in-out"
-                        leave-to-class="opacity-0"
-                    >
-                        <p
-                            v-show="recentlySuccessful"
-                            class="text-sm text-neutral-600"
-                        >
-                            Saved.
-                        </p>
-                    </Transition>
                 </div>
             </Form>
         </div>

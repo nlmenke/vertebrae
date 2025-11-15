@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -21,10 +22,10 @@ defineProps<{
 
 <template>
     <AuthLayout
-        title="Forgot password"
-        description="Enter your email to receive a password reset link"
+        :title="wTrans('auth.forgot_password.title').value"
+        :description="wTrans('auth.forgot_password.description').value"
     >
-        <Head title="Forgot password" />
+        <Head :title="wTrans('auth.forgot_password.header_title').value" />
 
         <div
             v-if="status"
@@ -39,7 +40,9 @@ defineProps<{
                 v-slot="{ errors, processing }"
             >
                 <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
+                    <Label for="email">
+                        {{ wTrans('users.fields.email').value }}
+                    </Label>
                     <Input
                         id="email"
                         type="email"
@@ -58,14 +61,14 @@ defineProps<{
                         data-test="email-password-reset-link-button"
                     >
                         <Spinner v-if="processing" />
-                        Email password reset link
+                        {{ wTrans('auth.button.reset_password_link') }}
                     </Button>
                 </div>
             </Form>
 
             <div class="space-x-1 text-center text-sm text-muted-foreground">
-                <span>Or, return to</span>
-                <TextLink :href="login()">log in</TextLink>
+                <span>{{ wTrans('auth.or_return_to') }}</span>
+                <TextLink :href="login()">{{ wTrans('auth.button.log_in').value.toLowerCase() }}</TextLink>
             </div>
         </div>
     </AuthLayout>

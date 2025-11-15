@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,10 +18,10 @@ import AuthBase from '@/layouts/AuthLayout.vue';
 
 <template>
     <AuthBase
-        title="Create an account"
-        description="Enter your details below to create your account"
+        :title="wTrans('auth.register.title').value"
+        :description="wTrans('auth.register.description').value"
     >
-        <Head title="Register" />
+        <Head :title="wTrans('auth.register.header_title').value" />
 
         <Form
             v-bind="store.form()"
@@ -30,7 +31,9 @@ import AuthBase from '@/layouts/AuthLayout.vue';
         >
             <div class="grid gap-6">
                 <div class="grid gap-2">
-                    <Label for="name">Name</Label>
+                    <Label for="name">
+                        {{ wTrans('users.fields.name') }}
+                    </Label>
                     <Input
                         id="name"
                         type="text"
@@ -39,13 +42,15 @@ import AuthBase from '@/layouts/AuthLayout.vue';
                         :tabindex="1"
                         autocomplete="name"
                         name="name"
-                        placeholder="Full name"
+                        :placeholder="wTrans('users.fields.name').value"
                     />
                     <InputError :message="errors.name" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
+                    <Label for="email">
+                        {{ wTrans('users.fields.email') }}
+                    </Label>
                     <Input
                         id="email"
                         type="email"
@@ -59,7 +64,9 @@ import AuthBase from '@/layouts/AuthLayout.vue';
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password">Password</Label>
+                    <Label for="password">
+                        {{ wTrans('users.fields.password') }}
+                    </Label>
                     <Input
                         id="password"
                         type="password"
@@ -67,13 +74,15 @@ import AuthBase from '@/layouts/AuthLayout.vue';
                         :tabindex="3"
                         autocomplete="new-password"
                         name="password"
-                        placeholder="Password"
+                        :placeholder="wTrans('users.fields.password').value"
                     />
                     <InputError :message="errors.password" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password_confirmation">Confirm password</Label>
+                    <Label for="password_confirmation">
+                        {{ wTrans('users.fields.confirm_password') }}
+                    </Label>
                     <Input
                         id="password_confirmation"
                         type="password"
@@ -81,7 +90,7 @@ import AuthBase from '@/layouts/AuthLayout.vue';
                         :tabindex="4"
                         autocomplete="new-password"
                         name="password_confirmation"
-                        placeholder="Confirm password"
+                        :placeholder="wTrans('users.fields.confirm_password').value"
                     />
                     <InputError :message="errors.password_confirmation" />
                 </div>
@@ -94,18 +103,19 @@ import AuthBase from '@/layouts/AuthLayout.vue';
                     data-test="register-user-button"
                 >
                     <Spinner v-if="processing" />
-                    Create account
+                    {{ wTrans('auth.button.create_account') }}
                 </Button>
             </div>
 
             <div class="text-center text-sm text-muted-foreground">
-                Already have an account?
+                {{ wTrans('auth.have_account') }}
                 <TextLink
                     :href="login()"
                     class="underline underline-offset-4"
                     :tabindex="6"
-                    >Log in</TextLink
                 >
+                    {{ wTrans('auth.button.log_in') }}
+                </TextLink>
             </div>
         </Form>
     </AuthBase>

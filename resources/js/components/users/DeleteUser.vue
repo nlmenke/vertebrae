@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 import { useTemplateRef } from 'vue';
 // shadcn ui
 import { Button } from '@/components/ui/button';
@@ -28,13 +29,17 @@ const passwordInput = useTemplateRef('passwordInput');
 <template>
     <div class="space-y-6">
         <HeadingSmall
-            title="Delete account"
-            description="Delete your account and all of its resources"
+            :title="
+                wTrans('common.delete.title', {
+                    value: wTrans('users.account').value.toLowerCase(),
+                }).value
+            "
+            :description="wTrans('users.delete.description').value"
         />
         <div class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10">
             <div class="relative space-y-0.5 text-red-600 dark:text-red-100">
-                <p class="font-medium">Warning</p>
-                <p class="text-sm">Please proceed with caution, this cannot be undone.</p>
+                <p class="font-medium">{{ wTrans('common.delete.warning.title') }}</p>
+                <p class="text-sm">{{ wTrans('common.delete.warning.description') }}</p>
             </div>
             <Dialog>
                 <DialogTrigger as-child>
@@ -42,7 +47,11 @@ const passwordInput = useTemplateRef('passwordInput');
                         variant="destructive"
                         data-test="delete-user-button"
                     >
-                        Delete account
+                        {{
+                            wTrans('common.delete.title', {
+                                value: wTrans('users.account').value.toLowerCase(),
+                            })
+                        }}
                     </Button>
                 </DialogTrigger>
                 <DialogContent>
@@ -57,11 +66,11 @@ const passwordInput = useTemplateRef('passwordInput');
                         v-slot="{ errors, processing, reset, clearErrors }"
                     >
                         <DialogHeader class="space-y-3">
-                            <DialogTitle>Are you sure you want to delete your account?</DialogTitle>
+                            <DialogTitle>
+                                {{ wTrans('users.delete.dialog.title') }}
+                            </DialogTitle>
                             <DialogDescription>
-                                Once your account is deleted, all of its resources and data will also be permanently
-                                deleted. Please enter your password to confirm you would like to permanently delete your
-                                account.
+                                {{ wTrans('users.delete.dialog.description') }}
                             </DialogDescription>
                         </DialogHeader>
 
@@ -70,14 +79,14 @@ const passwordInput = useTemplateRef('passwordInput');
                                 for="password"
                                 class="sr-only"
                             >
-                                Password
+                                {{ wTrans('users.fields.password') }}
                             </Label>
                             <Input
                                 id="password"
                                 type="password"
                                 name="password"
                                 ref="passwordInput"
-                                placeholder="Password"
+                                :placeholder="wTrans('users.fields.password').value"
                             />
                             <InputError :message="errors.password" />
                         </div>
@@ -93,7 +102,7 @@ const passwordInput = useTemplateRef('passwordInput');
                                         }
                                     "
                                 >
-                                    Cancel
+                                    {{ wTrans('common.button.cancel') }}
                                 </Button>
                             </DialogClose>
 
@@ -103,7 +112,11 @@ const passwordInput = useTemplateRef('passwordInput');
                                 :disabled="processing"
                                 data-test="confirm-delete-user-button"
                             >
-                                Delete account
+                                {{
+                                    wTrans('common.delete.title', {
+                                        value: wTrans('users.account').value.toLowerCase(),
+                                    })
+                                }}
                             </Button>
                         </DialogFooter>
                     </Form>

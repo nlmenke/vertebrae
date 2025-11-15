@@ -96,7 +96,9 @@ final class LocaleController extends AbstractController
         return to_route('admin.locales.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $locale->native . ' was created successfully.',
+                'message' => trans('common.created_successfully', [
+                    'value' => $locale->native,
+                ]),
             ]);
     }
 
@@ -137,7 +139,9 @@ final class LocaleController extends AbstractController
         return to_route('admin.locales.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $locale->native . ' was updated successfully.',
+                'message' => trans('common.updated_successfully', [
+                    'value' => $locale->refresh()->native,
+                ]),
             ]);
     }
 
@@ -155,7 +159,9 @@ final class LocaleController extends AbstractController
         return to_route('admin.locales.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $localeNative . ' was deleted successfully.',
+                'message' => trans('common.deleted_successfully', [
+                    'value' => $localeNative,
+                ]),
             ]);
     }
 }

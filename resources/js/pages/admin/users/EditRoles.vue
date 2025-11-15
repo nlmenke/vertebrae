@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Head, useForm, usePage } from '@inertiajs/vue3';
+import { wTrans, wTransChoice } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -19,11 +20,11 @@ const roles = page.props.roles as Role[];
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Users',
+        title: wTransChoice('users.users', 2),
         href: UserControllerIndex(),
     },
     {
-        title: 'Edit Roles  (' + user.name + ')',
+        title: wTrans('users.edit_roles'),
         href: UserRoleController.edit(user),
     },
 ];
@@ -33,7 +34,7 @@ const form = useForm({
 });
 
 roles.map((role) => {
-    role.checked = user.roles.map((role) => role.slug).includes(role.slug);
+    role.checked = user.roles.map((userRole) => userRole.slug).includes(role.slug);
 
     return role;
 });
@@ -47,7 +48,7 @@ const submit = () => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head :title="`Edit Roles for ${user.name}`" />
+        <Head :title="wTrans('users.edit_roles').value" />
 
         <div class="w-full space-y-6 p-4">
             <form
@@ -58,8 +59,8 @@ const submit = () => {
                     <TableHeader>
                         <TableRow>
                             <TableHead></TableHead>
-                            <TableHead>Role</TableHead>
-                            <TableHead>Description</TableHead>
+                            <TableHead>{{ wTransChoice('roles.roles', 1) }}</TableHead>
+                            <TableHead>{{ wTrans('roles.fields.description') }}</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -73,7 +74,7 @@ const submit = () => {
                                     v-model="role.checked"
                                     :disabled="
                                         role.slug === 'admin' &&
-                                        !authUser.roles.map((role) => role.slug).includes('admin')
+                                        !authUser.roles.map((userRole) => userRole.slug).includes('admin')
                                     "
                                 />
                             </TableCell>
@@ -84,21 +85,9 @@ const submit = () => {
                 </Table>
 
                 <div class="flex items-center">
-                    <Button :disabled="form.processing">Save</Button>
-
-                    <Transition
-                        enter-active-class="transition ease-in-out"
-                        enter-from-class="opacity-0"
-                        leave-active-class="transition ease-in-out"
-                        leave-to-class="opacity-0"
-                    >
-                        <p
-                            v-show="form.recentlySuccessful"
-                            class="text-sm text-neutral-600"
-                        >
-                            Saved.
-                        </p>
-                    </Transition>
+                    <Button :disabled="form.processing">
+                        {{ wTrans('common.button.save') }}
+                    </Button>
                 </div>
             </form>
         </div>

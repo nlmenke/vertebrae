@@ -87,7 +87,9 @@ test('authorized users can create a currency', function (): void {
         ->assertRedirect(route('admin.currencies.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Currency Create was created successfully.',
+            'message' => trans('common.created_successfully', [
+                'value' => 'Test Currency Create',
+            ]),
         ]);
 
     assertDatabaseHas('currencies', [
@@ -156,7 +158,9 @@ test('authorized users can edit a currency', function (): void {
         ->assertRedirect(route('admin.currencies.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Currency Update was updated successfully.',
+            'message' => trans('common.updated_successfully', [
+                'value' => 'Test Currency Update',
+            ]),
         ]);
 
     $updatedCurrency = $currency->fresh();
@@ -187,7 +191,9 @@ test('authorized users can delete a currency', function (): void {
         ->assertRedirect(route('admin.currencies.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => $currency->name . ' was deleted successfully.',
+            'message' => trans('common.deleted_successfully', [
+                'value' => $currency->name,
+            ]),
         ]);
 
     assertSoftDeleted($currency);

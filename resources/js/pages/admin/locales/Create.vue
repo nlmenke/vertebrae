@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, Head, usePage } from '@inertiajs/vue3';
+import { wTrans, wTransChoice } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -21,11 +22,11 @@ const scripts = page.props.scripts as Script[];
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Locales',
+        title: wTransChoice('locales.locales', 2),
         href: LocaleController.index(),
     },
     {
-        title: 'Create',
+        title: wTrans('common.button.create'),
         href: LocaleController.create(),
     },
 ];
@@ -33,27 +34,39 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head :title="`Create Locale`" />
+        <Head
+            :title="
+                wTrans('common.create', {
+                    value: wTransChoice('locales.locales', 1).value,
+                }).value
+            "
+        />
 
         <div class="w-full space-y-6 p-4">
             <Form
                 v-bind="LocaleController.store.form()"
                 class="space-y-4"
-                v-slot="{ errors, processing, recentlySuccessful }"
+                v-slot="{ errors, processing }"
             >
                 <div class="grid">
                     <Label for="language">
-                        Language
+                        {{ wTransChoice('languages.language', 1) }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
                     </Label>
                     <Select name="language_id">
                         <SelectTrigger>
-                            <SelectValue :placeholder="`Select a Language`" />
+                            <SelectValue
+                                :placeholder="
+                                    wTrans('common.select', {
+                                        value: wTransChoice('languages.languages', 1).value,
+                                    }).value
+                                "
+                            />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem
@@ -72,13 +85,19 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
 
                 <div class="grid">
-                    <Label for="country">Country</Label>
+                    <Label for="country">{{ wTransChoice('countries.countries', 1) }}</Label>
                     <Select name="country_id">
                         <SelectTrigger>
-                            <SelectValue :placeholder="`Select a Country`" />
+                            <SelectValue
+                                :placeholder="
+                                    wTrans('common.select', {
+                                        value: wTransChoice('countries.countries', 1).value,
+                                    }).value
+                                "
+                            />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem :value="null">None</SelectItem>
+                            <SelectItem :value="null">{{ wTrans('common.none') }}</SelectItem>
                             <SelectItem
                                 v-for="country in countries"
                                 :key="country.id"
@@ -96,17 +115,23 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 <div class="grid">
                     <Label for="script">
-                        Script
+                        {{ wTransChoice('scripts.script', 1) }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
                     </Label>
                     <Select name="script_id">
                         <SelectTrigger>
-                            <SelectValue :placeholder="`Select a Script`" />
+                            <SelectValue
+                                :placeholder="
+                                    wTrans('common.select', {
+                                        value: wTransChoice('scripts.scripts', 1).value,
+                                    }).value
+                                "
+                            />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem
@@ -126,10 +151,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 <div class="grid">
                     <Label for="code">
-                        Code
+                        {{ wTrans('locales.fields.code') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -138,7 +163,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="code"
                         name="code"
                         class="mt-1 block w-full"
-                        :placeholder="`Code`"
+                        :placeholder="wTrans('locales.fields.code').value"
                         required
                     />
                     <InputError
@@ -149,10 +174,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 <div class="grid">
                     <Label for="native">
-                        Native
+                        {{ wTrans('locales.fields.native') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -161,7 +186,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="native"
                         name="native"
                         class="mt-1 block w-full"
-                        :placeholder="`Native`"
+                        :placeholder="wTrans('locales.fields.native').value"
                         required
                     />
                     <InputError
@@ -172,10 +197,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 <div class="grid">
                     <Label for="decimal_mark">
-                        Decimal Mark
+                        {{ wTrans('locales.fields.decimal_mark') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -184,7 +209,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="decimal_mark"
                         name="decimal_mark"
                         class="mt-1 block w-full"
-                        :placeholder="`Decimal Mark`"
+                        :placeholder="wTrans('locales.fields.decimal_mark').value"
                         required
                     />
                     <InputError
@@ -195,10 +220,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 <div class="grid">
                     <Label for="thousands_separator">
-                        Thousands Separator
+                        {{ wTrans('locales.fields.thousands_separator') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -207,7 +232,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="thousands_separator"
                         name="thousands_separator"
                         class="mt-1 block w-full"
-                        :placeholder="`Thousands Separator`"
+                        :placeholder="wTrans('locales.fields.thousands_separator').value"
                         required
                     />
                     <InputError
@@ -221,7 +246,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="currency_symbol_first"
                         name="currency_symbol_first"
                     />
-                    <Label for="currency_symbol_first">Currency Symbol First?</Label>
+                    <Label for="currency_symbol_first">{{ wTrans('locales.fields.currency_symbol_first') }}?</Label>
                     <InputError
                         class="mt-2"
                         :message="errors.currency_symbol_first"
@@ -233,7 +258,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="active"
                         name="active"
                     />
-                    <Label for="active">Active?</Label>
+                    <Label for="active">{{ wTrans('locales.fields.active') }}?</Label>
                     <InputError
                         class="mt-2"
                         :message="errors.active"
@@ -241,21 +266,9 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
 
                 <div class="flex items-center">
-                    <Button :disabled="processing">Save</Button>
-
-                    <Transition
-                        enter-active-class="transition ease-in-out"
-                        enter-from-class="opacity-0"
-                        leave-active-class="transition ease-in-out"
-                        leave-to-class="opacity-0"
-                    >
-                        <p
-                            v-show="recentlySuccessful"
-                            class="text-sm text-neutral-600"
-                        >
-                            Saved.
-                        </p>
-                    </Transition>
+                    <Button :disabled="processing">
+                        {{ wTrans('common.button.save') }}
+                    </Button>
                 </div>
             </Form>
         </div>

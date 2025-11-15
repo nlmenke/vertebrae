@@ -77,7 +77,9 @@ final class CurrencyController extends AbstractController
         return to_route('admin.currencies.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $currency->name . ' was created successfully.',
+                'message' => trans('common.created_successfully', [
+                    'value' => $currency->name,
+                ]),
             ]);
     }
 
@@ -103,7 +105,9 @@ final class CurrencyController extends AbstractController
         return to_route('admin.currencies.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $currency->name . ' was updated successfully.',
+                'message' => trans('common.updated_successfully', [
+                    'value' => $currency->refresh()->name,
+                ]),
             ]);
     }
 
@@ -121,7 +125,9 @@ final class CurrencyController extends AbstractController
         return to_route('admin.currencies.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $currencyName . ' was deleted successfully.',
+                'message' => trans('common.deleted_successfully', [
+                    'value' => $currencyName,
+                ]),
             ]);
     }
 }

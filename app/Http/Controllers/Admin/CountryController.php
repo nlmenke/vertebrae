@@ -84,7 +84,9 @@ final class CountryController extends AbstractController
         return to_route('admin.countries.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $country->name . ' was created successfully.',
+                'message' => trans('common.created_successfully', [
+                    'value' => $country->name,
+                ]),
             ]);
     }
 
@@ -115,7 +117,9 @@ final class CountryController extends AbstractController
         return to_route('admin.countries.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $country->name . ' was updated successfully.',
+                'message' => trans('common.updated_successfully', [
+                    'value' => $country->refresh()->name,
+                ]),
             ]);
     }
 
@@ -133,7 +137,9 @@ final class CountryController extends AbstractController
         return to_route('admin.countries.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $countryName . ' was deleted successfully.',
+                'message' => trans('common.deleted_successfully', [
+                    'value' => $countryName,
+                ]),
             ]);
     }
 }

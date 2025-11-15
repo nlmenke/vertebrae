@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Admin\Script;
 
+use App\Enums\ScriptDirection;
 use App\Http\Requests\AbstractFormRequest;
 use App\Models\Script;
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -33,7 +34,7 @@ final class UpdateScriptRequest extends AbstractFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, Rules\In|Rules\Unique|ValidationRule|list<Rules\In|Rules\Unique|ValidationRule|string>|string>
+     * @return array<string, Rules\Enum|Rules\Unique|ValidationRule|list<Rules\Enum|Rules\Unique|ValidationRule|string>|string>
      */
     public function rules(): array
     {
@@ -67,13 +68,7 @@ final class UpdateScriptRequest extends AbstractFormRequest
             ],
             'direction' => [
                 'required',
-                'string',
-                Rule::in([
-                    'ltr',
-                    'rtl',
-                    'ttb',
-                    'varies',
-                ]),
+                Rule::Enum(ScriptDirection::class),
             ],
         ];
     }

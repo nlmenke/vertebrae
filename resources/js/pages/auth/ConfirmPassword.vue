@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,10 +16,10 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
 
 <template>
     <AuthLayout
-        title="Confirm your password"
-        description="This is a secure area of the application. Please confirm your password before continuing."
+        :title="wTrans('auth.confirm_password.title').value"
+        :description="wTrans('auth.confirm_password.description').value"
     >
-        <Head title="Confirm password" />
+        <Head :title="wTrans('auth.confirm_password.header_title').value" />
 
         <Form
             v-bind="store.form()"
@@ -27,7 +28,9 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
         >
             <div class="space-y-6">
                 <div class="grid gap-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">
+                        {{ wTrans('users.fields.password').value }}
+                    </Label>
                     <Input
                         id="password"
                         type="password"
@@ -48,7 +51,7 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
                         data-test="confirm-password-button"
                     >
                         <Spinner v-if="processing" />
-                        Confirm Password
+                        {{ wTrans('auth.button.confirm_password') }}
                     </Button>
                 </div>
             </div>

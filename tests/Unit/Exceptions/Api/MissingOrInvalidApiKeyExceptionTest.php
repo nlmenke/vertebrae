@@ -13,7 +13,7 @@ use App\Exceptions\Api\MissingOrInvalidApiKeyException;
 
 test('exception can use the default message', function (): void {
     expect(fn () => throw new MissingOrInvalidApiKeyException())
-        ->toThrow(MissingOrInvalidApiKeyException::class, 'Missing or invalid API key.');
+        ->toThrow(MissingOrInvalidApiKeyException::class, trans('exceptions.api.missing_or_invalid_api_key'));
 });
 
 test('exception can use a custom message', function (): void {

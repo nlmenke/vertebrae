@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, Head, usePage } from '@inertiajs/vue3';
+import { wTrans, wTransChoice } from 'laravel-vue-i18n';
 import { toInteger } from 'lodash';
 // shadcn ui
 import { Button } from '@/components/ui/button';
@@ -28,11 +29,13 @@ let script = scripts.find((script) => script.id === locale.script_id) as Script 
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Locales',
+        title: wTransChoice('locales.locales', 2),
         href: LocaleController.index(),
     },
     {
-        title: 'Edit (' + locale.native + ')',
+        title: wTrans('common.edit', {
+            value: locale.native,
+        }),
         href: LocaleController.edit(locale),
     },
 ];
@@ -52,28 +55,47 @@ const updateScriptValue = (newScriptId: number) => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head :title="`Edit Locale`" />
+        <Head
+            :title="
+                wTrans('common.edit', {
+                    value: wTransChoice('locales.locales', 1).value,
+                }).value
+            "
+        />
 
         <div class="w-full space-y-6 p-4">
             <Form
                 v-bind="LocaleController.update.form(locale)"
                 class="space-y-4"
-                v-slot="{ errors, processing, recentlySuccessful }"
+                v-slot="{ errors, processing }"
             >
                 <div class="grid">
-                    <Label for="language">Language</Label>
+                    <Label for="language">
+                        {{ wTransChoice('languages.languages', 1) }}
+                        <span
+                            class="-ml-2 text-red-600 dark:text-red-500"
+                            :title="wTrans('common.required').value"
+                        >
+                            *
+                        </span>
+                    </Label>
                     <Select
                         name="language_id"
                         v-model="locale.language_id"
                         @update:model-value="updateLanguageValue"
                     >
                         <SelectTrigger>
-                            <SelectValue :placeholder="`Select a Language`">
+                            <SelectValue
+                                :placeholder="
+                                    wTrans('common.select', {
+                                        value: wTransChoice('languages.languages', 1).value,
+                                    }).value
+                                "
+                            >
                                 {{ language?.name ?? '' }}
                             </SelectValue>
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem :value="null">None</SelectItem>
                             <SelectItem
                                 v-for="language in languages"
                                 :key="language.id"
@@ -86,19 +108,25 @@ const updateScriptValue = (newScriptId: number) => {
                 </div>
 
                 <div class="grid">
-                    <Label for="country">Country</Label>
+                    <Label for="country">{{ wTransChoice('countries.countries', 1) }}</Label>
                     <Select
                         name="country_id"
                         v-model="locale.country_id"
                         @update:model-value="updateCountryValue"
                     >
                         <SelectTrigger>
-                            <SelectValue :placeholder="`Select a Country`">
-                                {{ country?.name ?? 'None' }}
+                            <SelectValue
+                                :placeholder="
+                                    wTrans('common.select', {
+                                        value: wTransChoice('countries.countries', 1).value,
+                                    }).value
+                                "
+                            >
+                                {{ country?.name ?? wTrans('common.none') }}
                             </SelectValue>
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem :value="null">None</SelectItem>
+                            <SelectItem :value="null">{{ wTrans('common.none') }}</SelectItem>
                             <SelectItem
                                 v-for="country in countries"
                                 :key="country.id"
@@ -111,19 +139,32 @@ const updateScriptValue = (newScriptId: number) => {
                 </div>
 
                 <div class="grid">
-                    <Label for="script">Script</Label>
+                    <Label for="script">
+                        {{ wTransChoice('scripts.script', 1) }}
+                        <span
+                            class="-ml-2 text-red-600 dark:text-red-500"
+                            :title="wTrans('common.required').value"
+                        >
+                            *
+                        </span>
+                    </Label>
                     <Select
                         name="script_id"
                         v-model="locale.script_id"
                         @update:model-value="updateScriptValue"
                     >
                         <SelectTrigger>
-                            <SelectValue :placeholder="`Select a Script`">
+                            <SelectValue
+                                :placeholder="
+                                    wTrans('common.select', {
+                                        value: wTransChoice('scripts.scripts', 1).value,
+                                    }).value
+                                "
+                            >
                                 {{ script?.name ?? '' }}
                             </SelectValue>
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem :value="null">None</SelectItem>
                             <SelectItem
                                 v-for="script in scripts"
                                 :key="script.id"
@@ -137,10 +178,10 @@ const updateScriptValue = (newScriptId: number) => {
 
                 <div class="grid">
                     <Label for="code">
-                        Code
+                        {{ wTrans('locales.fields.code') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -150,7 +191,7 @@ const updateScriptValue = (newScriptId: number) => {
                         name="code"
                         class="mt-1 block w-full"
                         v-model="locale.code"
-                        :placeholder="`Code`"
+                        :placeholder="wTrans('locales.fields.code').value"
                         required
                     />
                     <InputError
@@ -161,10 +202,10 @@ const updateScriptValue = (newScriptId: number) => {
 
                 <div class="grid">
                     <Label for="native">
-                        Native
+                        {{ wTrans('locales.fields.native') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -174,7 +215,7 @@ const updateScriptValue = (newScriptId: number) => {
                         name="native"
                         class="mt-1 block w-full"
                         v-model="locale.native"
-                        :placeholder="`Native`"
+                        :placeholder="wTrans('locales.fields.native').value"
                         required
                     />
                     <InputError
@@ -185,10 +226,10 @@ const updateScriptValue = (newScriptId: number) => {
 
                 <div class="grid">
                     <Label for="decimal_mark">
-                        Decimal Mark
+                        {{ wTrans('locales.fields.decimal_mark') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -198,7 +239,7 @@ const updateScriptValue = (newScriptId: number) => {
                         name="decimal_mark"
                         class="mt-1 block w-full"
                         v-model="locale.decimal_mark"
-                        :placeholder="`Decimal Mark`"
+                        :placeholder="wTrans('locales.fields.decimal_mark').value"
                         required
                     />
                     <InputError
@@ -209,10 +250,10 @@ const updateScriptValue = (newScriptId: number) => {
 
                 <div class="grid">
                     <Label for="thousands_separator">
-                        Thousands Separator
+                        {{ wTrans('locales.fields.thousands_separator') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -222,7 +263,7 @@ const updateScriptValue = (newScriptId: number) => {
                         name="thousands_separator"
                         class="mt-1 block w-full"
                         v-model="locale.thousands_separator"
-                        :placeholder="`Thousands Separator`"
+                        :placeholder="wTrans('locales.fields.thousands_separator').value"
                         required
                     />
                     <InputError
@@ -237,7 +278,7 @@ const updateScriptValue = (newScriptId: number) => {
                         name="currency_symbol_first"
                         v-model="locale.currency_symbol_first"
                     />
-                    <Label for="currency_symbol_first">Currency Symbol First?</Label>
+                    <Label for="currency_symbol_first">{{ wTrans('locales.fields.currency_symbol_first') }}?</Label>
                 </div>
 
                 <div class="flex items-center space-x-2">
@@ -246,25 +287,13 @@ const updateScriptValue = (newScriptId: number) => {
                         name="active"
                         v-model="locale.active"
                     />
-                    <Label for="active">Active?</Label>
+                    <Label for="active">{{ wTrans('locales.fields.active') }}?</Label>
                 </div>
 
                 <div class="flex items-center">
-                    <Button :disabled="processing">Save</Button>
-
-                    <Transition
-                        enter-active-class="transition ease-in-out"
-                        enter-from-class="opacity-0"
-                        leave-active-class="transition ease-in-out"
-                        leave-to-class="opacity-0"
-                    >
-                        <p
-                            v-show="recentlySuccessful"
-                            class="text-sm text-neutral-600"
-                        >
-                            Saved.
-                        </p>
-                    </Transition>
+                    <Button :disabled="processing">
+                        {{ wTrans('common.button.save') }}
+                    </Button>
                 </div>
             </Form>
 

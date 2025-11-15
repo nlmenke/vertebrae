@@ -102,7 +102,9 @@ final class RoleController extends AbstractController
         return to_route('admin.roles.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $role->refresh()->name . ' was created successfully.',
+                'message' => trans('common.created_successfully', [
+                    'value' => $role->name,
+                ]),
             ]);
     }
 
@@ -157,7 +159,9 @@ final class RoleController extends AbstractController
         return to_route('admin.roles.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $role->refresh()->name . ' was updated successfully.',
+                'message' => trans('common.updated_successfully', [
+                    'value' => $role->refresh()->name,
+                ]),
             ]);
     }
 
@@ -175,7 +179,9 @@ final class RoleController extends AbstractController
         return to_route('admin.roles.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $roleName . ' was deleted successfully.',
+                'message' => trans('common.deleted_successfully', [
+                    'value' => $roleName,
+                ]),
             ]);
     }
 }

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
@@ -18,16 +19,16 @@ defineProps<{
 
 <template>
     <AuthLayout
-        title="Verify email"
-        description="Please verify your email address by clicking on the link we just emailed to you."
+        :title="wTrans('auth.verify_email.title').value"
+        :description="wTrans('auth.verify_email.description').value"
     >
-        <Head title="Email verification" />
+        <Head :title="wTrans('auth.verify_email.header_title').value" />
 
         <div
             v-if="status === 'verification-link-sent'"
             class="mb-4 text-center text-sm font-medium text-green-600"
         >
-            A new verification link has been sent to the email address you provided during registration.
+            {{ wTrans('auth.verify_email.email_sent') }}
         </div>
 
         <Form
@@ -40,7 +41,7 @@ defineProps<{
                 variant="secondary"
             >
                 <Spinner v-if="processing" />
-                Resend verification email
+                {{ wTrans('auth.button.resend_verification_email') }}
             </Button>
 
             <TextLink
@@ -48,7 +49,7 @@ defineProps<{
                 as="button"
                 class="mx-auto block text-sm"
             >
-                Log out
+                {{ wTrans('auth.button.log_out') }}
             </TextLink>
         </Form>
     </AuthLayout>

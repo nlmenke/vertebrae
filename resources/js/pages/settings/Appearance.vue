@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Head } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 // generated (wayfinder)
 import { edit } from '@/routes/appearance';
 
@@ -12,7 +13,7 @@ import type { BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Appearance settings',
+        title: wTrans('users.account_settings.appearance.title'),
         href: edit(),
     },
 ];
@@ -20,13 +21,13 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head title="Appearance settings" />
+        <Head :title="wTrans('users.account_settings.appearance.heading_title').value" />
 
         <SettingsLayout>
             <div class="space-y-6">
                 <HeadingSmall
-                    title="Appearance settings"
-                    description="Update your account's appearance settings"
+                    :title="wTrans('users.account_settings.appearance.title').value"
+                    :description="wTrans('users.account_settings.appearance.description').value"
                 />
                 <AppearanceTabs />
             </div>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 // packages
+import { wTrans } from 'laravel-vue-i18n';
 import { Monitor, Moon, Sun } from 'lucide-vue-next';
 
 import { useAppearance } from '@/composables/useAppearance';
@@ -10,17 +11,17 @@ const tabs = [
     {
         value: 'light',
         Icon: Sun,
-        label: 'Light',
+        label: wTrans('users.appearance.tabs.light'),
     },
     {
         value: 'dark',
         Icon: Moon,
-        label: 'Dark',
+        label: wTrans('users.appearance.tabs.dark'),
     },
     {
         value: 'system',
         Icon: Monitor,
-        label: 'System',
+        label: wTrans('users.appearance.tabs.system'),
     },
 ] as const;
 </script>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
+import { wTrans, wTransChoice } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,11 +15,11 @@ import type { BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Languages',
+        title: wTransChoice('languages.languages', 2),
         href: LanguageController.index(),
     },
     {
-        title: 'Create',
+        title: wTrans('common.button.create'),
         href: LanguageController.create(),
     },
 ];
@@ -26,20 +27,26 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head :title="`Create Language`" />
+        <Head
+            :title="
+                wTrans('common.create', {
+                    value: wTransChoice('languages.languages', 1).value,
+                }).value
+            "
+        />
 
         <div class="w-full space-y-6 p-4">
             <Form
                 v-bind="LanguageController.store.form()"
                 class="space-y-4"
-                v-slot="{ errors, processing, recentlySuccessful }"
+                v-slot="{ errors, processing }"
             >
                 <div class="grid">
                     <Label for="iso_alpha_2">
-                        ISO Alpha 2
+                        {{ wTrans('languages.fields.iso_alpha_2') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -48,7 +55,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="iso_alpha_2"
                         name="iso_alpha_2"
                         class="mt-1 block w-full"
-                        :placeholder="`ISO Alpha 2`"
+                        :placeholder="wTrans('languages.fields.iso_alpha_2').value"
                         required
                     />
                     <InputError
@@ -59,10 +66,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 <div class="grid">
                     <Label for="iso_alpha_3">
-                        ISO Alpha 3
+                        {{ wTrans('languages.fields.iso_alpha_3') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -71,7 +78,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="iso_alpha_3"
                         name="iso_alpha_3"
                         class="mt-1 block w-full"
-                        :placeholder="`ISO Alpha 3`"
+                        :placeholder="wTrans('languages.fields.iso_alpha_3').value"
                         required
                     />
                     <InputError
@@ -82,10 +89,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 <div class="grid">
                     <Label for="name">
-                        Name
+                        {{ wTrans('languages.fields.name') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -94,7 +101,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="name"
                         name="name"
                         class="mt-1 block w-full"
-                        :placeholder="`Name`"
+                        :placeholder="wTrans('languages.fields.name').value"
                         required
                     />
                     <InputError
@@ -104,21 +111,9 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
 
                 <div class="flex items-center">
-                    <Button :disabled="processing">Save</Button>
-
-                    <Transition
-                        enter-active-class="transition ease-in-out"
-                        enter-from-class="opacity-0"
-                        leave-active-class="transition ease-in-out"
-                        leave-to-class="opacity-0"
-                    >
-                        <p
-                            v-show="recentlySuccessful"
-                            class="text-sm text-neutral-600"
-                        >
-                            Saved.
-                        </p>
-                    </Transition>
+                    <Button :disabled="processing">
+                        {{ wTrans('common.button.save') }}
+                    </Button>
                 </div>
             </Form>
         </div>

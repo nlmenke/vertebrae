@@ -77,7 +77,9 @@ final class LanguageController extends AbstractController
         return to_route('admin.languages.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $language->name . ' was created successfully.',
+                'message' => trans('common.created_successfully', [
+                    'value' => $language->name,
+                ]),
             ]);
     }
 
@@ -103,7 +105,9 @@ final class LanguageController extends AbstractController
         return to_route('admin.languages.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $language->name . ' was updated successfully.',
+                'message' => trans('common.updated_successfully', [
+                    'value' => $language->refresh()->name,
+                ]),
             ]);
     }
 
@@ -121,7 +125,9 @@ final class LanguageController extends AbstractController
         return to_route('admin.languages.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $languageName . ' was deleted successfully.',
+                'message' => trans('common.deleted_successfully', [
+                    'value' => $languageName,
+                ]),
             ]);
     }
 }

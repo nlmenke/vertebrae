@@ -55,7 +55,7 @@ abstract class AbstractApiService
      *
      * @param array<string, mixed> $query
      *
-     * @return array<mixed, mixed>
+     * @return array<mixed>
      */
     final public function get(
         string $uri,
@@ -88,7 +88,7 @@ abstract class AbstractApiService
      *
      * @param array<string, mixed> $formParams
      *
-     * @return array<mixed, mixed>
+     * @return array<mixed>
      */
     final public function post(
         string $uri,
@@ -121,7 +121,7 @@ abstract class AbstractApiService
      *
      * @param array<string, mixed> $formParams
      *
-     * @return array<mixed, mixed>
+     * @return array<mixed>
      */
     final public function put(
         string $uri,
@@ -152,7 +152,7 @@ abstract class AbstractApiService
     /**
      * Submits a DELETE request to an external API.
      *
-     * @return array<mixed, mixed>
+     * @return array<mixed>
      */
     final public function delete(
         string $uri,

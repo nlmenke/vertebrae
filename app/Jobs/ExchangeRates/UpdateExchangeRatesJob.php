@@ -53,7 +53,11 @@ final class UpdateExchangeRatesJob implements ShouldQueue
                     $currency->setAttribute('exchange_rate', $exchangeRates[$currency->iso_alpha]);
                     $currency->save();
                 } else {
-                    Log::warning(sprintf('Exchange rate for %s does not exist in the exchange rate database.', $currency->name));
+                    Log::warning(
+                        trans('currencies.exchange_rate_does_not_exist_in_external_database', [
+                            'currency' => $currency->name,
+                        ])
+                    );
                 }
             });
         } catch (Throwable $throwable) {

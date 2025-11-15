@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 import { ShieldBan, ShieldCheck } from 'lucide-vue-next';
 import { onUnmounted, ref } from 'vue';
 // shadcn ui
@@ -29,7 +30,7 @@ withDefaults(defineProps<Props>(), {
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Two-Factor Authentication',
+        title: wTrans('auth.two-factor.title'),
         href: show(),
     },
 ];
@@ -44,23 +45,25 @@ onUnmounted(() => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head title="Two-Factor Authentication" />
+        <Head :title="wTrans('auth.two-factor.title').value" />
+
         <SettingsLayout>
             <div class="space-y-6">
                 <HeadingSmall
-                    title="Two-Factor Authentication"
-                    description="Manage your two-factor authentication settings"
+                    :title="wTrans('auth.two-factor.title').value"
+                    :description="wTrans('auth.two-factor.description').value"
                 />
 
                 <div
                     v-if="!twoFactorEnabled"
                     class="flex flex-col items-start justify-start space-y-4"
                 >
-                    <Badge variant="destructive">Disabled</Badge>
+                    <Badge variant="destructive">
+                        {{ wTrans('common.disabled') }}
+                    </Badge>
 
                     <p class="text-muted-foreground">
-                        When you enable two-factor authentication, you will be prompted for a secure pin during login.
-                        This pin can be retrieved from a TOTP-supported application on your phone.
+                        {{ wTrans('auth.two-factor.2fa_enable_description') }}
                     </p>
 
                     <div>
@@ -68,7 +71,8 @@ onUnmounted(() => {
                             v-if="hasSetupData"
                             @click="showSetupModal = true"
                         >
-                            <ShieldCheck />Continue Setup
+                            <ShieldCheck />
+                            {{ wTrans('auth.button.continue_setup') }}
                         </Button>
                         <Form
                             v-else
@@ -80,9 +84,10 @@ onUnmounted(() => {
                                 type="submit"
                                 :disabled="processing"
                             >
-                                <ShieldCheck />Enable 2FA</Button
-                            ></Form
-                        >
+                                <ShieldCheck />
+                                {{ wTrans('auth.button.enable_2fa') }}
+                            </Button>
+                        </Form>
                     </div>
                 </div>
 
@@ -90,11 +95,12 @@ onUnmounted(() => {
                     v-else
                     class="flex flex-col items-start justify-start space-y-4"
                 >
-                    <Badge variant="default">Enabled</Badge>
+                    <Badge variant="default">
+                        {{ wTrans('common.enabled') }}
+                    </Badge>
 
                     <p class="text-muted-foreground">
-                        With two-factor authentication enabled, you will be prompted for a secure, random pin during
-                        login, which you can retrieve from the TOTP-supported application on your phone.
+                        {{ wTrans('auth.two-factor.2fa_enabled_description') }}
                     </p>
 
                     <TwoFactorRecoveryCodes />
@@ -110,7 +116,7 @@ onUnmounted(() => {
                                 :disabled="processing"
                             >
                                 <ShieldBan />
-                                Disable 2FA
+                                {{ wTrans('auth.button.disable_2fa') }}
                             </Button>
                         </Form>
                     </div>

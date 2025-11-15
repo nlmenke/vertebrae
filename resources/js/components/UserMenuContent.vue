@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Link, router } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 import { LogOut, Settings } from 'lucide-vue-next';
 // shadcn ui
 import {
@@ -46,7 +47,7 @@ defineProps<Props>();
                 as="button"
             >
                 <Settings class="mr-2 h-4 w-4" />
-                Settings
+                {{ wTrans('users.settings') }}
             </Link>
         </DropdownMenuItem>
     </DropdownMenuGroup>
@@ -60,7 +61,7 @@ defineProps<Props>();
             data-test="logout-button"
         >
             <LogOut class="mr-2 h-4 w-4" />
-            Log out
+            {{ wTrans('auth.button.log_out') }}
         </Link>
     </DropdownMenuItem>
 </template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 import { ref } from 'vue';
 // shadcn ui
 import { Button } from '@/components/ui/button';
@@ -23,10 +24,10 @@ const inputEmail = ref(props.email);
 
 <template>
     <AuthLayout
-        title="Reset password"
-        description="Please enter your new password below"
+        :title="wTrans('auth.reset_password.title').value"
+        :description="wTrans('auth.reset_password.description').value"
     >
-        <Head title="Reset password" />
+        <Head :title="wTrans('auth.reset_password.header_title').value" />
 
         <Form
             v-bind="update.form()"
@@ -36,7 +37,9 @@ const inputEmail = ref(props.email);
         >
             <div class="grid gap-6">
                 <div class="grid gap-2">
-                    <Label for="email">Email</Label>
+                    <Label for="email">
+                        {{ wTrans('users.fields.email') }}
+                    </Label>
                     <Input
                         id="email"
                         type="email"
@@ -45,6 +48,7 @@ const inputEmail = ref(props.email);
                         v-model="inputEmail"
                         class="mt-1 block w-full"
                         readonly
+                        placeholder="email@example.com"
                     />
                     <InputError
                         :message="errors.email"
@@ -53,7 +57,10 @@ const inputEmail = ref(props.email);
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password">Password</Label>
+                    <Label for="password">
+                        Password
+                        {{ wTrans('users.fields.password') }}
+                    </Label>
                     <Input
                         id="password"
                         type="password"
@@ -61,20 +68,22 @@ const inputEmail = ref(props.email);
                         autocomplete="new-password"
                         class="mt-1 block w-full"
                         autofocus
-                        placeholder="Password"
+                        :placeholder="wTrans('users.fields.password').value"
                     />
                     <InputError :message="errors.password" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password_confirmation"> Confirm Password </Label>
+                    <Label for="password_confirmation">
+                        {{ wTrans('users.fields.confirm_password') }}
+                    </Label>
                     <Input
                         id="password_confirmation"
                         type="password"
                         name="password_confirmation"
                         autocomplete="new-password"
                         class="mt-1 block w-full"
-                        placeholder="Confirm password"
+                        :placeholder="wTrans('users.fields.confirm_password').value"
                     />
                     <InputError :message="errors.password_confirmation" />
                 </div>
@@ -86,7 +95,7 @@ const inputEmail = ref(props.email);
                     data-test="reset-password-button"
                 >
                     <Spinner v-if="processing" />
-                    Reset password
+                    {{ wTrans('auth.button.reset_password') }}
                 </Button>
             </div>
         </Form>

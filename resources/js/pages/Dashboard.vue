@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Head } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 // generated (wayfinder)
 import { dashboard } from '@/routes';
 
@@ -10,16 +11,16 @@ import type { BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Dashboard',
+        title: wTrans('common.dashboard'),
         href: dashboard(),
     },
 ];
 </script>
 
 <template>
-    <Head title="Dashboard" />
-
     <AppLayout :breadcrumbs="breadcrumbs">
+        <Head :title="wTrans('common.dashboard').value" />
+
         <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
             <div class="grid auto-rows-min gap-4 md:grid-cols-3">
                 <div

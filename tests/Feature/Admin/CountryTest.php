@@ -87,7 +87,9 @@ test('authorized users can create a country', function (): void {
         ->assertRedirect(route('admin.countries.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Country Create was created successfully.',
+            'message' => trans('common.created_successfully', [
+                'value' => 'Test Country Create',
+            ]),
         ]);
 
     assertDatabaseHas('countries', [
@@ -154,7 +156,9 @@ test('authorized users can edit a country', function (): void {
         ->assertRedirect(route('admin.countries.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => 'Test Country Update was updated successfully.',
+            'message' => trans('common.updated_successfully', [
+                'value' => 'Test Country Update',
+            ]),
         ]);
 
     $updatedCountry = $country->fresh();
@@ -183,7 +187,9 @@ test('authorized users can delete a country', function (): void {
         ->assertRedirect(route('admin.countries.index'))
         ->assertSessionHas('toast', [
             'style' => 'success',
-            'message' => $country->name . ' was deleted successfully.',
+            'message' => trans('common.deleted_successfully', [
+                'value' => $country->name,
+            ]),
         ]);
 
     assertSoftDeleted($country);

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Link } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -16,19 +17,19 @@ import type { NavItem } from '@/types';
 
 const sidebarNavItems: NavItem[] = [
     {
-        title: 'Profile',
+        title: wTrans('users.nav.profile'),
         href: editProfile(),
     },
     {
-        title: 'Password',
+        title: wTrans('users.nav.password'),
         href: editPassword(),
     },
     {
-        title: 'Two-Factor Auth',
+        title: wTrans('users.nav.two-factor_auth'),
         href: show(),
     },
     {
-        title: 'Appearance',
+        title: wTrans('users.nav.appearance'),
         href: editAppearance(),
     },
 ];
@@ -39,8 +40,8 @@ const currentPath = typeof window !== undefined ? window.location.pathname : '';
 <template>
     <div class="px-4 py-6">
         <Heading
-            title="Settings"
-            description="Manage your profile and account settings"
+            :title="wTrans('users.account_settings.title').value"
+            :description="wTrans('users.account_settings.description').value"
         />
 
         <div class="flex flex-col lg:flex-row lg:space-x-12">

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 import { Eye, EyeOff, LockKeyhole, RefreshCw } from 'lucide-vue-next';
 import { nextTick, onMounted, ref, useTemplateRef } from 'vue';
 // shadcn ui
@@ -41,11 +42,10 @@ onMounted(async () => {
         <CardHeader>
             <CardTitle class="flex gap-3">
                 <LockKeyhole class="size-4" />
-                2FA Recovery Codes
+                {{ wTrans('auth.two-factor.recovery.title') }}
             </CardTitle>
             <CardDescription>
-                Recovery codes let you regain access if you lose your 2FA device. Store them in a secure password
-                manager.
+                {{ wTrans('auth.two-factor.recovery.description') }}
             </CardDescription>
         </CardHeader>
         <CardContent>
@@ -58,7 +58,11 @@ onMounted(async () => {
                         :is="isRecoveryCodesVisible ? EyeOff : Eye"
                         class="size-4"
                     />
-                    {{ isRecoveryCodesVisible ? 'Hide' : 'View' }} Recovery Codes
+                    {{
+                        wTrans('auth.two-factor.recovery.show_hide_recovery_codes', {
+                            value: isRecoveryCodesVisible ? wTrans('common.hide').value : wTrans('common.view').value,
+                        })
+                    }}
                 </Button>
 
                 <Form
@@ -75,7 +79,7 @@ onMounted(async () => {
                         :disabled="processing"
                     >
                         <RefreshCw />
-                        Regenerate Codes
+                        {{ wTrans('auth.two-factor.recovery.regenerate_codes') }}
                     </Button>
                 </Form>
             </div>
@@ -118,8 +122,7 @@ onMounted(async () => {
                         </div>
                     </div>
                     <p class="text-xs text-muted-foreground select-none">
-                        Each recovery code can be used once to access your account and will be removed after use. If you
-                        need more, click <span class="font-bold">Regenerate Codes</span> above.
+                        {{ wTrans('auth.two-factor.recovery.removed_after_use') }}
                     </p>
                 </div>
             </div>

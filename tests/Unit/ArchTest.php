@@ -55,6 +55,7 @@ arch()
         App\Http\Requests\AbstractFormRequest::class,
         App\Models\AbstractModel::class,
         App\Policies\AbstractPolicy::class,
+        'App\Enums',
         'App\Interfaces',
         App\Services\AbstractService::class,
         App\Services\Api\AbstractApiService::class,
@@ -78,6 +79,10 @@ arch()
     ->expect('App\Actions')
     ->toHaveMethod('handle')
     ->ignoring('App\Actions\Fortify');
+
+arch()
+    ->expect('App\Enums')
+    ->toBeEnums();
 
 arch()
     ->expect('App\Exceptions')

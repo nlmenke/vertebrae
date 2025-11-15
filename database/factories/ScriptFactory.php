@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\ScriptDirection;
 use App\Models\Script;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -32,7 +33,7 @@ final class ScriptFactory extends Factory
             'iso_alpha' => ucfirst(fake()->unique()->lexify()),
             'iso_numeric' => fake()->unique()->numerify(),
             'name' => fake()->unique()->word(),
-            'direction' => fake()->randomElement(['ltr', 'rtl', 'ttb', 'varies']),
+            'direction' => fake()->randomElement(array_column(ScriptDirection::cases(), 'value')),
         ];
     }
 }

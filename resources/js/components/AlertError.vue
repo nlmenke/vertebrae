@@ -1,5 +1,6 @@
 <script setup lang="ts">
 // packages
+import { wTrans } from 'laravel-vue-i18n';
 import { AlertCircle } from 'lucide-vue-next';
 import { computed } from 'vue';
 // shadcn ui
@@ -11,9 +12,10 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    title: 'Something went wrong.',
+    title: undefined,
 });
 
+const title = computed(() => props.title ?? wTrans('auth.errors.two-factor.default').value);
 const uniqueErrors = computed(() => Array.from(new Set(props.errors)));
 </script>
 

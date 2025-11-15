@@ -40,7 +40,13 @@ final class FixerApiService extends AbstractApiService implements ExchangeRatesA
     {
         $apiKey = Config::string('currency.exchange_rates.drivers.fixer');
 
-        throw_unless($apiKey, MissingOrInvalidApiKeyException::class, 'Missing Fixer API key.');
+        throw_unless(
+            $apiKey,
+            MissingOrInvalidApiKeyException::class,
+            trans('exceptions.api.missing_api_key', [
+                'name' => 'Fixer',
+            ])
+        );
 
         $this->baseUri = 'https://data.fixer.io/api/';
 

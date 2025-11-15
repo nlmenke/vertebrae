@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, Head } from '@inertiajs/vue3';
+import { wTrans, wTransChoice } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,11 +15,11 @@ import type { BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Currencies',
+        title: wTransChoice('currencies.currencies', 2),
         href: CurrencyController.index(),
     },
     {
-        title: 'Create',
+        title: wTrans('common.button.create'),
         href: CurrencyController.create(),
     },
 ];
@@ -26,20 +27,26 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head :title="`Create Currency`" />
+        <Head
+            :title="
+                wTrans('common.create', {
+                    value: wTransChoice('currencies.currencies', 1).value,
+                }).value
+            "
+        />
 
         <div class="w-full space-y-6 p-4">
             <Form
                 v-bind="CurrencyController.store.form()"
                 class="space-y-4"
-                v-slot="{ errors, processing, recentlySuccessful }"
+                v-slot="{ errors, processing }"
             >
                 <div class="grid">
                     <Label for="iso_alpha">
-                        ISO Alpha
+                        {{ wTrans('currencies.fields.iso_alpha') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -48,7 +55,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="iso_alpha"
                         name="iso_alpha"
                         class="mt-1 block w-full"
-                        :placeholder="`ISO Alpha`"
+                        :placeholder="wTrans('currencies.fields.iso_alpha').value"
                         required
                     />
                     <InputError
@@ -59,10 +66,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 <div class="grid">
                     <Label for="iso_numeric">
-                        ISO Numeric
+                        {{ wTrans('currencies.fields.iso_numeric') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -71,7 +78,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="iso_numeric"
                         name="iso_numeric"
                         class="mt-1 block w-full"
-                        :placeholder="`ISO Numeric`"
+                        :placeholder="wTrans('currencies.fields.iso_numeric').value"
                         type="number"
                         step="1"
                         required
@@ -84,10 +91,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 <div class="grid">
                     <Label for="name">
-                        Name
+                        {{ wTrans('currencies.fields.name') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -96,7 +103,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="name"
                         name="name"
                         class="mt-1 block w-full"
-                        :placeholder="`Name`"
+                        :placeholder="wTrans('currencies.fields.name').value"
                         required
                     />
                     <InputError
@@ -107,10 +114,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 <div class="grid">
                     <Label for="symbol">
-                        Symbol
+                        {{ wTrans('currencies.fields.symbol') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -119,7 +126,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="symbol"
                         name="symbol"
                         class="mt-1 block w-full"
-                        :placeholder="`Symbol`"
+                        :placeholder="wTrans('currencies.fields.symbol').value"
                         required
                     />
                     <InputError
@@ -130,10 +137,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 <div class="grid">
                     <Label for="decimal_precision">
-                        Decimal Precision
+                        {{ wTrans('currencies.fields.decimal_precision') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -142,7 +149,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="decimal_precision"
                         name="decimal_precision"
                         class="mt-1 block w-full"
-                        :placeholder="`Decimal Precision`"
+                        :placeholder="wTrans('currencies.fields.decimal_precision').value"
                         type="number"
                         step="1"
                         required
@@ -155,10 +162,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 <div class="grid">
                     <Label for="exchange_rate">
-                        Exchange Rates
+                        {{ wTrans('currencies.fields.exchange_rate') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -167,7 +174,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         id="exchange_rate"
                         name="exchange_rate"
                         class="mt-1 block w-full"
-                        :placeholder="`Exchange Rates`"
+                        :placeholder="wTrans('currencies.fields.exchange_rate').value"
                         type="number"
                         step="0.000001"
                         required
@@ -179,21 +186,9 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
 
                 <div class="flex items-center">
-                    <Button :disabled="processing">Save</Button>
-
-                    <Transition
-                        enter-active-class="transition ease-in-out"
-                        enter-from-class="opacity-0"
-                        leave-active-class="transition ease-in-out"
-                        leave-to-class="opacity-0"
-                    >
-                        <p
-                            v-show="recentlySuccessful"
-                            class="text-sm text-neutral-600"
-                        >
-                            Saved.
-                        </p>
-                    </Transition>
+                    <Button :disabled="processing">
+                        {{ wTrans('common.button.save') }}
+                    </Button>
                 </div>
             </Form>
         </div>

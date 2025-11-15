@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Head, useForm, usePage } from '@inertiajs/vue3';
+import { wTrans, wTransChoice } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -21,11 +22,11 @@ const permissions = page.props.permissions as Permission[];
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Roles',
+        title: wTransChoice('roles.roles', 2),
         href: RoleController.index(),
     },
     {
-        title: 'Create',
+        title: wTrans('common.button.create'),
         href: RoleController.create(),
     },
 ];
@@ -52,7 +53,13 @@ const submit = () => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head :title="`Create Role`" />
+        <Head
+            :title="
+                wTrans('common.create', {
+                    value: wTransChoice('roles.roles', 1).value,
+                }).value
+            "
+        />
 
         <div class="w-full space-y-6 p-4">
             <form
@@ -60,12 +67,12 @@ const submit = () => {
                 class="space-y-4"
             >
                 <div class="grid">
-                    <Label for="slug">Slug</Label>
+                    <Label for="slug">{{ wTrans('roles.fields.slug') }}</Label>
                     <Input
                         id="slug"
                         class="mt-1 block w-full"
                         v-model="form.slug"
-                        :placeholder="`Slug`"
+                        :placeholder="wTrans('roles.fields.slug').value"
                     />
                     <InputError
                         class="mt-2"
@@ -75,10 +82,10 @@ const submit = () => {
 
                 <div class="grid">
                     <Label for="name">
-                        Name
+                        {{ wTrans('roles.fields.name') }}
                         <span
                             class="-ml-2 text-red-600 dark:text-red-500"
-                            :title="`Required`"
+                            :title="wTrans('common.required').value"
                         >
                             *
                         </span>
@@ -87,7 +94,7 @@ const submit = () => {
                         id="name"
                         class="mt-1 block w-full"
                         v-model="form.name"
-                        :placeholder="`Name`"
+                        :placeholder="wTrans('roles.fields.name').value"
                         required
                     />
                     <InputError
@@ -97,12 +104,12 @@ const submit = () => {
                 </div>
 
                 <div class="grid">
-                    <Label for="description">Description</Label>
+                    <Label for="description">{{ wTrans('roles.fields.description') }}</Label>
                     <Textarea
                         id="description"
                         class="mt-1 block w-full"
                         v-model="form.description"
-                        :placeholder="`Description`"
+                        :placeholder="wTrans('roles.fields.description').value"
                     />
                     <InputError
                         class="mt-2"
@@ -114,8 +121,8 @@ const submit = () => {
                     <TableHeader>
                         <TableRow>
                             <TableHead></TableHead>
-                            <TableHead>Permission</TableHead>
-                            <TableHead>Description</TableHead>
+                            <TableHead>{{ wTransChoice('permissions.permissions', 1) }}</TableHead>
+                            <TableHead>{{ wTrans('permissions.fields.description') }}</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -137,21 +144,9 @@ const submit = () => {
                 </Table>
 
                 <div class="flex items-center">
-                    <Button :disabled="form.processing">Save</Button>
-
-                    <Transition
-                        enter-active-class="transition ease-in-out"
-                        enter-from-class="opacity-0"
-                        leave-active-class="transition ease-in-out"
-                        leave-to-class="opacity-0"
-                    >
-                        <p
-                            v-show="form.recentlySuccessful"
-                            class="text-sm text-neutral-600"
-                        >
-                            Saved.
-                        </p>
-                    </Transition>
+                    <Button :disabled="form.processing">
+                        {{ wTrans('common.button.save') }}
+                    </Button>
                 </div>
             </form>
         </div>

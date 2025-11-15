@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
+import { wTrans, wTransChoice } from 'laravel-vue-i18n';
 import { ArrowLeft, ArrowLeftToLine, ArrowRight, ArrowRightToLine, Lock, Pencil, Shield } from 'lucide-vue-next';
 // shadcn ui
 import { Button } from '@/components/ui/button';
@@ -20,7 +21,7 @@ const users = page.props.users.data as User[];
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Users',
+        title: wTransChoice('users.users', 2),
         href: UserController.index(),
     },
 ];
@@ -43,7 +44,7 @@ const setPageSize = (pageSize: number) => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head :title="`Users`" />
+        <Head :title="wTransChoice('users.users', 2).value" />
 
         <div class="w-full p-4">
             <div class="flex items-center py-4"></div>
@@ -52,8 +53,8 @@ const setPageSize = (pageSize: number) => {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Name</TableHead>
-                            <TableHead>Email Address</TableHead>
+                            <TableHead>{{ wTrans('users.fields.name') }}</TableHead>
+                            <TableHead>{{ wTrans('users.fields.email') }}</TableHead>
                             <TableHead></TableHead>
                         </TableRow>
                     </TableHeader>
@@ -68,7 +69,11 @@ const setPageSize = (pageSize: number) => {
                                 <Link
                                     v-if="can('edit-user-roles')"
                                     :href="UserRoleController.edit(user)"
-                                    :title="`Edit Roles`"
+                                    :title="
+                                        wTrans('common.edit', {
+                                            value: wTransChoice('roles.roles', 2).value,
+                                        }).value
+                                    "
                                 >
                                     <Button
                                         variant="ghost"
@@ -80,7 +85,11 @@ const setPageSize = (pageSize: number) => {
                                 <Link
                                     v-if="can('edit-user-permissions')"
                                     :href="UserPermissionController.edit(user)"
-                                    :title="`Edit Permissions`"
+                                    :title="
+                                        wTrans('common.edit', {
+                                            value: wTransChoice('permissions.permissions', 2).value,
+                                        }).value
+                                    "
                                 >
                                     <Button
                                         variant="ghost"
@@ -92,7 +101,7 @@ const setPageSize = (pageSize: number) => {
                                 <Link
                                     v-if="can('edit-users')"
                                     :href="UserController.edit(user)"
-                                    :title="`Edit`"
+                                    :title="wTrans('common.button.edit').value"
                                 >
                                     <Button
                                         variant="ghost"
@@ -110,7 +119,7 @@ const setPageSize = (pageSize: number) => {
             <div class="flex items-center justify-end space-x-2 py-4">
                 <div class="flex items-center space-x-6 lg:space-x-8">
                     <div class="flex items-center space-x-2">
-                        <p class="text-sm font-medium">Rows Per Page</p>
+                        <p class="text-sm font-medium">{{ wTrans('pagination.per_page') }}</p>
                         <Select
                             :model-value="page.props.users.per_page"
                             @update:model-value="setPageSize"
@@ -130,7 +139,12 @@ const setPageSize = (pageSize: number) => {
                         </Select>
                     </div>
                     <div class="flex w-[100px] items-center justify-center text-sm font-medium">
-                        Page {{ currentPage }} of {{ lastPage }}
+                        {{
+                            wTrans('pagination.page', {
+                                current: currentPage,
+                                total: lastPage,
+                            })
+                        }}
                     </div>
                     <div class="flex items-center space-x-2">
                         <Link :href="firstPageUrl">
@@ -139,7 +153,7 @@ const setPageSize = (pageSize: number) => {
                                 class="hidden h-8 w-8 p-0 lg:flex"
                                 :disabled="currentPage === firstPage"
                             >
-                                <span class="sr-only">First Page</span>
+                                <span class="sr-only">{{ wTrans('pagination.first_page') }}</span>
                                 <ArrowLeftToLine class="h-4 w-4" />
                             </Button>
                         </Link>
@@ -149,7 +163,7 @@ const setPageSize = (pageSize: number) => {
                                 class="h-8 w-8 p-0"
                                 :disabled="currentPage === firstPage"
                             >
-                                <span class="sr-only">Previous Page</span>
+                                <span class="sr-only">{{ wTrans('pagination.previous_page') }}</span>
                                 <ArrowLeft class="h-4 w-4" />
                             </Button>
                         </Link>
@@ -159,7 +173,7 @@ const setPageSize = (pageSize: number) => {
                                 class="h-8 w-8 p-0"
                                 :disabled="currentPage === lastPage"
                             >
-                                <span class="sr-only">Next Page</span>
+                                <span class="sr-only">{{ wTrans('pagination.next_page') }}</span>
                                 <ArrowRight class="h-4 w-4" />
                             </Button>
                         </Link>
@@ -169,7 +183,7 @@ const setPageSize = (pageSize: number) => {
                                 class="hidden h-8 w-8 p-0 lg:flex"
                                 :disabled="currentPage === lastPage"
                             >
-                                <span class="sr-only">Last Page</span>
+                                <span class="sr-only">{{ wTrans('pagination.last_page') }}</span>
                                 <ArrowRightToLine class="h-4 w-4" />
                             </Button>
                         </Link>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { InertiaLinkProps, Link, usePage } from '@inertiajs/vue3';
+import { wTrans, wTransChoice } from 'laravel-vue-i18n';
 import {
     Banknote,
     BookA,
@@ -66,49 +67,49 @@ const activeItemStyles = computed(
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: wTrans('common.dashboard'),
         href: dashboard(),
         icon: LayoutGrid,
         isVisible: true,
     },
     {
-        title: 'Countries',
+        title: wTransChoice('countries.countries', 2),
         href: CountryControllerIndex(),
         icon: Earth,
         isVisible: can('view-countries'),
     },
     {
-        title: 'Currencies',
+        title: wTransChoice('currencies.currencies', 2),
         href: CurrencyControllerIndex(),
         icon: Banknote,
         isVisible: can('view-currencies'),
     },
     {
-        title: 'Languages',
+        title: wTransChoice('languages.languages', 2),
         href: LanguageControllerIndex(),
         icon: Languages,
         isVisible: can('view-languages'),
     },
     {
-        title: 'Locales',
+        title: wTransChoice('locales.locales', 2),
         href: LocaleControllerIndex(),
         icon: BookA,
         isVisible: can('view-locales'),
     },
     {
-        title: 'Roles',
+        title: wTransChoice('roles.roles', 2),
         href: RoleControllerIndex(),
         icon: Shield,
         isVisible: can('view-roles'),
     },
     {
-        title: 'Scripts',
+        title: wTransChoice('scripts.scripts', 2),
         href: ScriptControllerIndex(),
         icon: ScrollText,
         isVisible: can('view-scripts'),
     },
     {
-        title: 'Users',
+        title: wTransChoice('users.users', 2),
         href: UserControllerIndex(),
         icon: User,
         isVisible: can('view-users'),
@@ -117,7 +118,7 @@ const mainNavItems: NavItem[] = [
 
 const rightNavItems: NavItem[] = [
     {
-        title: 'GitHub Repo',
+        title: wTrans('common.github_repo'),
         href: 'https://github.com/nlmenke/vertebrae',
         icon: Folder,
     },
@@ -144,7 +145,7 @@ const rightNavItems: NavItem[] = [
                             side="left"
                             class="w-[300px] p-6"
                         >
-                            <SheetTitle class="sr-only">Navigation Menu</SheetTitle>
+                            <SheetTitle class="sr-only">{{ wTrans('common.navigation_menu') }}</SheetTitle>
                             <SheetHeader class="flex justify-start text-left">
                                 <AppLogoIcon class="size-6 fill-current text-black dark:text-white" />
                             </SheetHeader>

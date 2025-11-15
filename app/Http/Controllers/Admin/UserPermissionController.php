@@ -70,7 +70,9 @@ final class UserPermissionController extends AbstractController
         return to_route('admin.users.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => 'Permissions for ' . $user->refresh()->name . ' were updated successfully.',
+                'message' => trans('users.permissions_updated_successfully', [
+                    'user' => $user->refresh()->name,
+                ]),
             ]);
     }
 }

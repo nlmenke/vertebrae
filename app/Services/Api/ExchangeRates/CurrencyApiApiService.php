@@ -40,7 +40,13 @@ final class CurrencyApiApiService extends AbstractApiService implements Exchange
     {
         $apiKey = Config::string('currency.exchange_rates.drivers.currency_api');
 
-        throw_unless($apiKey, MissingOrInvalidApiKeyException::class, 'Missing CurrencyApi API key.');
+        throw_unless(
+            $apiKey,
+            MissingOrInvalidApiKeyException::class,
+            trans('exceptions.api.missing_api_key', [
+                'name' => 'CurrencyApi',
+            ])
+        );
 
         $this->baseUri = 'https://api.currencyapi.com/v3/';
 

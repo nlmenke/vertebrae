@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ScriptDirection;
 use App\Http\Controllers\AbstractController;
 use App\Http\Requests\Admin\Script\StoreScriptRequest;
 use App\Http\Requests\Admin\Script\UpdateScriptRequest;
@@ -63,7 +64,14 @@ final class ScriptController extends AbstractController
     {
         $this->authorize('create', Script::class);
 
-        return Inertia::render('admin/scripts/Create');
+        $scriptDirections = [];
+        foreach (ScriptDirection::cases() as $direction) {
+            $scriptDirections[$direction->value] = $direction->trans();
+        }
+
+        return Inertia::render('admin/scripts/Create', [
+            'scriptDirections' => $scriptDirections,
+        ]);
     }
 
     /**
@@ -77,7 +85,9 @@ final class ScriptController extends AbstractController
         return to_route('admin.scripts.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $script->name . ' was created successfully.',
+                'message' => trans('common.created_successfully', [
+                    'value' => $script->name,
+                ]),
             ]);
     }
 
@@ -88,8 +98,14 @@ final class ScriptController extends AbstractController
     {
         $this->authorize('update', $script);
 
+        $scriptDirections = [];
+        foreach (ScriptDirection::cases() as $direction) {
+            $scriptDirections[$direction->value] = $direction->trans();
+        }
+
         return Inertia::render('admin/scripts/Edit', [
             'script' => $script,
+            'scriptDirections' => $scriptDirections,
         ]);
     }
 
@@ -103,7 +119,9 @@ final class ScriptController extends AbstractController
         return to_route('admin.scripts.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $script->name . ' was updated successfully.',
+                'message' => trans('common.updated_successfully', [
+                    'value' => $script->refresh()->name,
+                ]),
             ]);
     }
 
@@ -121,7 +139,9 @@ final class ScriptController extends AbstractController
         return to_route('admin.scripts.index')
             ->with('toast', [
                 'style' => 'success',
-                'message' => $scriptName . ' was deleted successfully.',
+                'message' => trans('common.deleted_successfully', [
+                    'value' => $scriptName,
+                ]),
             ]);
     }
 }

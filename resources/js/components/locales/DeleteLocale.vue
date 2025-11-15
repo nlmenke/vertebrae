@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // packages
 import { Form, usePage } from '@inertiajs/vue3';
+import { wTrans, wTransChoice } from 'laravel-vue-i18n';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import {
@@ -26,18 +27,26 @@ const locale = page.props.locale as Locale;
 <template>
     <div class="space-y-6">
         <HeadingSmall
-            :title="`Delete Locale`"
-            :description="`Delete '${locale.native}' from the system.`"
+            :title="
+                wTrans('common.delete.title', {
+                    value: wTransChoice('locales.locales', 1).value,
+                }).value
+            "
+            :description="
+                wTrans('common.delete.description', {
+                    value: locale.native,
+                }).value
+            "
         />
 
         <div class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10">
             <div class="5 relative space-y-0 text-red-600 dark:text-red-100">
-                <p class="font-medium">Warning</p>
-                <p class="text-sm">Please proceed with caution, this cannot be undone.</p>
+                <p class="font-medium">{{ wTrans('common.delete.warning.title') }}</p>
+                <p class="text-sm">{{ wTrans('common.delete.warning.description') }}</p>
             </div>
             <Dialog>
                 <DialogTrigger as-child>
-                    <Button variant="destructive">Delete</Button>
+                    <Button variant="destructive">{{ wTrans('common.button.delete') }}</Button>
                 </DialogTrigger>
                 <DialogContent>
                     <Form
@@ -46,9 +55,19 @@ const locale = page.props.locale as Locale;
                         v-slot="{ processing, reset, clearErrors }"
                     >
                         <DialogHeader class="space-y-3">
-                            <DialogTitle>Are you sure you want to delete this locale?</DialogTitle>
+                            <DialogTitle>
+                                {{
+                                    wTrans('common.delete.dialog.title', {
+                                        value: wTransChoice('locales.locales', 1).value.toLowerCase(),
+                                    })
+                                }}
+                            </DialogTitle>
                             <DialogDescription>
-                                This cannot be undone. Please confirm you would like to delete '{{ locale.native }}.'
+                                {{
+                                    wTrans('common.delete.dialog.description', {
+                                        value: locale.native,
+                                    })
+                                }}
                             </DialogDescription>
                         </DialogHeader>
 
@@ -63,7 +82,7 @@ const locale = page.props.locale as Locale;
                                         }
                                     "
                                 >
-                                    Cancel
+                                    {{ wTrans('common.button.cancel') }}
                                 </Button>
                             </DialogClose>
 
@@ -72,7 +91,7 @@ const locale = page.props.locale as Locale;
                                 variant="destructive"
                                 :disabled="processing"
                             >
-                                Delete
+                                {{ wTrans('common.button.delete') }}
                             </Button>
                         </DialogFooter>
                     </Form>

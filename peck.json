@@ -178,13 +178,18 @@
             "pgsql",
             "php",
             "phpstorm",
+            "sonner",
             "ssr",
             "supervisord",
             "textarea",
             "tooltip",
             "tsconfig",
             "utils",
-            "viewport"
+            "viewport",
+
+            "ltr",
+            "rtl",
+            "ttb"
         ],
         "paths": []
     }
