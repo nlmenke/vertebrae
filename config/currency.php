@@ -1,14 +1,10 @@
 <?php
 /**
- * Currency Config.
+ * Currency configuration.
  *
- * @package Config
+ * @author Nick Menke <git@nlmenke.net>
  *
- * @author    Nick Menke <nick@nlmenke.net>
- * @copyright 2018-2020 Nick Menke
- *
- * @link  https://github.com/nlmenke/vertebrae
- * @since x.x.x introduced
+ * @since 0.0.0-vertebrae introduced
  */
 
 declare(strict_types=1);
@@ -30,15 +26,29 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | OpenExchangeRates API Key
+    | Exchange Rate API
     |--------------------------------------------------------------------------
     |
     | This will allow you to update the currency exchange rates. You will
-    | need to create an account at https://openexchangerates.org/ then
-    | enter the App ID found in the confirmation email to your env.
+    | need to create an account for your preferred exchange rate source
+    | then add the provided API key for the service to your env file.
+    |
+    | Supported drivers: "currency_api", "exchangerate_api", "fixer",
+    |                    "open_exchange_rates"
     |
     */
 
-    'api_key' => env('OPEN_EXCHANGE_RATES_APP_ID'),
+    'exchange_rates' => [
+        'default_driver' => env('EXCHANGE_RATE_DRIVER', 'open_exchange_rates'),
+
+        'drivers' => [
+
+            'currency_api' => env('CURRENCYAPI_API_KEY'),
+            'exchangerate_api' => env('EXCHANGERATEAPI_API_KEY'),
+            'fixer' => env('FIXER_API_KEY'),
+            'open_exchange_rates' => env('OPEN_EXCHANGE_RATES_APP_ID'),
+
+        ],
+    ],
 
 ];
