@@ -46,7 +46,7 @@ final class UpdateExchangeRatesJob implements ShouldQueue
     ): void {
         try {
             $currencies = $currencies?->isNotEmpty() ? $currencies : Currency::all();
-            $exchangeRates = $exchangeRates !== [] ? $exchangeRates : app(ExchangeRatesApiServiceManager::class)->getExchangeRates();
+            $exchangeRates = $exchangeRates !== [] ? $exchangeRates : resolve(ExchangeRatesApiServiceManager::class)->getExchangeRates();
 
             $currencies->each(function (Currency $currency) use ($exchangeRates): void {
                 if (array_key_exists($currency->iso_alpha, $exchangeRates)) {

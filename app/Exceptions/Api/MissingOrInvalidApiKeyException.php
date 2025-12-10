@@ -1,6 +1,6 @@
 <?php
 /**
- * Missing Or Invalid API Key Exception.
+ * Missing Or Invalid API Key exception.
  *
  * @author Nick Menke <git@nlmenke.net>
  */

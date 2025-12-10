@@ -7,7 +7,7 @@ import { computed, nextTick, ref, useTemplateRef, watch } from 'vue';
 // shadcn ui
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { PinInput, PinInputGroup, PinInputSlot } from '@/components/ui/pin-input';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { Spinner } from '@/components/ui/spinner';
 // generated (wayfinder)
 import { confirm } from '@/routes/two-factor';
@@ -28,8 +28,7 @@ const { copy, copied } = useClipboard();
 const { qrCodeSvg, manualSetupKey, clearSetupData, fetchSetupData, errors } = useTwoFactorAuth();
 
 const showVerificationStep = ref(false);
-const code = ref<number[]>([]);
-const codeValue = computed<string>(() => code.value.join(''));
+const code = ref<string>('');
 
 const pinInputContainerRef = useTemplateRef('pinInputContainerRef');
 
@@ -84,7 +83,7 @@ const resetModalState = () => {
     }
 
     showVerificationStep.value = false;
-    code.value = [];
+    code.value = '';
 };
 
 watch(
@@ -215,37 +214,34 @@ watch(
                     <Form
                         v-bind="confirm.form()"
                         reset-on-error
-                        @finish="code = []"
+                        @finish="code = ''"
                         @success="isOpen = false"
                         v-slot="{ errors, processing }"
                     >
                         <input
                             type="hidden"
                             name="code"
-                            :value="codeValue"
+                            :value="code"
                         />
                         <div
                             ref="pinInputContainerRef"
                             class="relative w-full space-y-3"
                         >
                             <div class="flex w-full flex-col items-center justify-center space-y-3 py-2">
-                                <PinInput
+                                <InputOTP
                                     id="otp"
-                                    placeholder="○"
                                     v-model="code"
-                                    type="number"
-                                    otp
+                                    :maxlength="6"
+                                    :disabled="processing"
                                 >
-                                    <PinInputGroup>
-                                        <PinInputSlot
-                                            autofocus
-                                            v-for="(id, index) in 6"
-                                            :key="id"
-                                            :index="index"
-                                            :disabled="processing"
+                                    <InputOTPGroup>
+                                        <InputOTPSlot
+                                            v-for="index in 6"
+                                            :key="index"
+                                            :index="index - 1"
                                         />
-                                    </PinInputGroup>
-                                </PinInput>
+                                    </InputOTPGroup>
+                                </InputOTP>
                                 <InputError :message="errors?.confirmTwoFactorAuthentication?.code" />
                             </div>
 
@@ -262,7 +258,7 @@ watch(
                                 <Button
                                     type="submit"
                                     class="w-auto flex-1"
-                                    :disabled="processing || codeValue.length < 6"
+                                    :disabled="processing || code.length < 6"
                                 >
                                     Confirm
                                 </Button>

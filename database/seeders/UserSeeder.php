@@ -43,12 +43,12 @@ final class UserSeeder extends AbstractSeeder
     {
         if (app()->isLocal()) {
             // create basic users for development/testing
-            User::factory()->create([
+            User::factory()->withoutTwoFactor()->create([
                 'name' => 'Admin',
                 'email' => 'admin@example.com',
             ]);
 
-            User::factory()->create([
+            User::factory()->withoutTwoFactor()->create([
                 'name' => 'User',
                 'email' => 'user@example.com',
             ]);

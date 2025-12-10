@@ -63,8 +63,8 @@ test('unauthorized users cannot create a language', function (): void {
 
     actingAs($user)
         ->post(route('admin.languages.store'), [
-            'iso_alpha_2' => 'AA',
-            'iso_alpha_3' => 'AAA',
+            'iso_alpha_2' => 'zz',
+            'iso_alpha_3' => 'zzz',
             'name' => 'Test Language Create',
         ])
         ->assertForbidden();
@@ -75,8 +75,8 @@ test('authorized users can create a language', function (): void {
 
     actingAs($user)
         ->post(route('admin.languages.store'), [
-            'iso_alpha_2' => 'AA',
-            'iso_alpha_3' => 'AAA',
+            'iso_alpha_2' => 'zz',
+            'iso_alpha_3' => 'zzz',
             'name' => 'Test Language Create',
         ])
         ->assertRedirect(route('admin.languages.index'))
@@ -86,13 +86,13 @@ test('authorized users can create a language', function (): void {
         ]);
 
     assertDatabaseHas('languages', [
-        'iso_alpha_2' => 'AA',
-        'iso_alpha_3' => 'AAA',
+        'iso_alpha_2' => 'zz',
+        'iso_alpha_3' => 'zzz',
         'name' => 'Test Language Create',
     ]);
 
     // test the relationship for model coverage
-    $language = Language::query()->firstWhere('iso_alpha_2', 'AA');
+    $language = Language::query()->firstWhere('iso_alpha_2', 'zz');
     $country = Country::factory()->create();
     $locale = Locale::factory()->create(['language_id' => $language?->id, 'country_id' => $country->id]);
 
@@ -124,8 +124,8 @@ test('unauthorized users cannot edit a language', function (): void {
 
     actingAs($user)
         ->patch(route('admin.languages.update', $language), [
-            'iso_alpha_2' => 'AA',
-            'iso_alpha_3' => 'AAA',
+            'iso_alpha_2' => 'zz',
+            'iso_alpha_3' => 'zzz',
             'name' => 'Test Language Update',
         ])
         ->assertForbidden();
@@ -137,8 +137,8 @@ test('authorized users can edit a language', function (): void {
 
     actingAs($user)
         ->patch(route('admin.languages.update', $language), [
-            'iso_alpha_2' => 'AA',
-            'iso_alpha_3' => 'AAA',
+            'iso_alpha_2' => 'zz',
+            'iso_alpha_3' => 'zzz',
             'name' => 'Test Language Update',
         ])
         ->assertRedirect(route('admin.languages.index'))
@@ -149,8 +149,8 @@ test('authorized users can edit a language', function (): void {
 
     $updatedLanguage = $language->fresh();
 
-    assertSame($updatedLanguage?->iso_alpha_2, 'AA');
-    assertSame($updatedLanguage?->iso_alpha_3, 'AAA');
+    assertSame($updatedLanguage?->iso_alpha_2, 'zz');
+    assertSame($updatedLanguage?->iso_alpha_3, 'zzz');
     assertSame($updatedLanguage?->name, 'Test Language Update');
 });
 

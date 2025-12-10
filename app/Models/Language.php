@@ -49,7 +49,7 @@ final class Language extends AbstractModel
      */
     public function countries(): HasManyThrough
     {
-        return $this->hasManyThrough(Country::class, Locale::class, 'language_id', 'id');
+        return $this->hasManyThrough(Country::class, Locale::class, 'language_id', 'id', null, 'country_id');
     }
 
     /**

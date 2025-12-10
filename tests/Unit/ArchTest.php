@@ -123,7 +123,7 @@ arch()
         'App\Models',
         'App\Policies',
         'App\Providers',
-        'app\Services',
+        'App\Services',
         'Database\Factories',
         'Database\Seeders',
     ]);
