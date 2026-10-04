@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+final class {{ class }} extends AbstractSeeder
+{
+    /**
+     * Items to be seeded.
+     *
+     * @var array<array<string, mixed>>
+     */
+    protected array $itemList = [];
+
+    /**
+     * Tables that should be truncated before running.
+     *
+     * @var list<string>
+     */
+    protected array $truncateTables = [];
+}

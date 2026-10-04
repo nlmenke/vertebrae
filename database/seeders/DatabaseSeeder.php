@@ -1,42 +1,31 @@
 <?php
 /**
- * Database Seeder.
+ * Database seeder.
  *
- * @package Database Seeders
- *
- * @author    Taylor Otwell <taylor@laravel.com>
- * @author    Nick Menke <nick@nlmenke.net>
- * @copyright 2018-2020 Nick Menke
- *
- * @link https://github.com/nlmenke/vertebrae
+ * @author Taylor Otwell <taylor@laravel.com>
  */
 
 declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
+
 /**
- * The base database seeder class.
- *
- * This is the base seeder fired when no seeder class is passed to the artisan
+ * The default seeder fired when no seeder class is passed to the artisan
  * migrate / seed console commands.
  *
  * @since 0.0.0-framework introduced
- * @since x.x.x           modified to extend AbstractSeeder
  */
-class DatabaseSeeder extends AbstractSeeder
+final class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
     public function run(): void
     {
-        $this->call(CurrenciesTableSeeder::class);
-        $this->call(CountriesTableSeeder::class);
-        $this->call(LanguagesTableSeeder::class);
-        $this->call(ScriptsTableSeeder::class);
-        $this->call(LocalesTableSeeder::class); // must be after countries, languages, and scripts
+        $this->call(UserSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(PermissionSeeder::class);
     }
 }
