@@ -1,0 +1,28 @@
+includes:
+  - vendor/larastan/larastan/extension.neon
+  - vendor/nesbot/carbon/extension.neon
+  - vendor/phpstan/phpstan-mockery/extension.neon
+  - vendor/pestphp/pest-plugin-phpstan/extension.neon
+
+parameters:
+
+  paths:
+    - app
+    - bootstrap
+    - config
+    - database
+    - public
+    - resources
+    - routes
+    - tests
+    - artisan
+    - rector.php
+
+  excludePaths:
+    - tests/Unit/ArchTest.php
+
+  checkModelProperties: true
+
+  level: max
+
+  tmpDir: /tmp/phpstan
