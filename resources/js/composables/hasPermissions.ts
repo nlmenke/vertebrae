@@ -1,6 +1,4 @@
-// packages
 import { usePage } from '@inertiajs/vue3';
-
 import type { SharedData, User } from '@/types';
 
 export function can(permission: string): boolean {

@@ -27,10 +27,5 @@ final class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(PermissionSeeder::class);
-        $this->call(CurrencySeeder::class);
-        $this->call(CountrySeeder::class);
-        $this->call(LanguageSeeder::class);
-        $this->call(ScriptSeeder::class);
-        $this->call(LocaleSeeder::class);
     }
 }

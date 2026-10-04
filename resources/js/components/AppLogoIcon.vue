@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// packages
 import type { HTMLAttributes } from 'vue';
 
 defineOptions({

@@ -14,8 +14,10 @@ use App\Http\Requests\Admin\Role\StoreRoleRequest;
 use App\Http\Requests\Admin\Role\UpdateRoleRequest;
 use App\Models\Permission;
 use App\Models\Role;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 
@@ -38,6 +40,8 @@ final class RoleController extends AbstractController
 
     /**
      * Display a listing of the resource.
+     *
+     * @throws AuthorizationException
      */
     public function index(): InertiaResponse
     {
@@ -59,6 +63,8 @@ final class RoleController extends AbstractController
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @throws AuthorizationException
      */
     public function create(): InertiaResponse
     {
@@ -86,6 +92,8 @@ final class RoleController extends AbstractController
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @throws ValidationException
      */
     public function store(StoreRoleRequest $request): RedirectResponse
     {
@@ -108,6 +116,8 @@ final class RoleController extends AbstractController
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @throws AuthorizationException
      */
     public function edit(Role $role): InertiaResponse
     {
@@ -142,6 +152,8 @@ final class RoleController extends AbstractController
 
     /**
      * Update the specified resource in storage.
+     *
+     * @throws ValidationException
      */
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
     {
@@ -163,6 +175,8 @@ final class RoleController extends AbstractController
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @throws AuthorizationException
      */
     public function destroy(Role $role): RedirectResponse
     {

@@ -1,19 +1,15 @@
 <script setup lang="ts">
-// packages
 import { Link, router } from '@inertiajs/vue3';
 import { LogOut, Settings } from 'lucide-vue-next';
-// shadcn ui
 import {
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-// generated (wayfinder)
+import UserInfo from '@/components/UserInfo.vue';
 import { logout } from '@/routes';
 import { edit } from '@/routes/profile';
-
-import UserInfo from '@/components/UserInfo.vue';
 import type { User } from '@/types';
 
 interface Props {

@@ -1,8 +1,6 @@
 <script setup lang="ts">
-// shadcn ui
-import { SidebarTrigger } from '@/components/ui/sidebar';
-
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 import type { BreadcrumbItemType } from '@/types';
 
 withDefaults(

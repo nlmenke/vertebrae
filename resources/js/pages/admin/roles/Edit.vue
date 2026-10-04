@@ -1,18 +1,14 @@
 <script setup lang="ts">
-// packages
 import { Head, useForm, usePage } from '@inertiajs/vue3';
-// shadcn ui
+import RoleController from '@/actions/App/Http/Controllers/Admin/RoleController';
+import InputError from '@/components/InputError.vue';
+import DeleteRole from '@/components/roles/DeleteRole.vue';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Textarea } from '@/components/ui/textarea';
-// generated (wayfinder)
-import RoleController from '@/actions/App/Http/Controllers/Admin/RoleController';
-
-import InputError from '@/components/InputError.vue';
-import DeleteRole from '@/components/roles/DeleteRole.vue';
 import { can } from '@/composables/hasPermissions';
 import AppLayout from '@/layouts/AppLayout.vue';
 import type { BreadcrumbItem, Permission, Role, SharedData } from '@/types';

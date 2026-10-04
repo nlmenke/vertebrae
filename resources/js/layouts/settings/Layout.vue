@@ -1,17 +1,13 @@
 <script setup lang="ts">
-// packages
 import { Link } from '@inertiajs/vue3';
-// shadcn ui
+import Heading from '@/components/Heading.vue';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-// generated (wayfinder)
+import { toUrl, urlIsActive } from '@/lib/utils';
 import { edit as editAppearance } from '@/routes/appearance';
 import { edit as editProfile } from '@/routes/profile';
 import { show } from '@/routes/two-factor';
 import { edit as editPassword } from '@/routes/user-password';
-
-import Heading from '@/components/Heading.vue';
-import { toUrl, urlIsActive } from '@/lib/utils';
 import type { NavItem } from '@/types';
 
 const sidebarNavItems: NavItem[] = [

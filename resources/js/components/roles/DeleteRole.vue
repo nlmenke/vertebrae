@@ -1,7 +1,7 @@
 <script setup lang="ts">
-// packages
 import { Form, usePage } from '@inertiajs/vue3';
-// shadcn ui
+import RoleController from '@/actions/App/Http/Controllers/Admin/RoleController';
+import HeadingSmall from '@/components/HeadingSmall.vue';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -13,10 +13,6 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-// generated (wayfinder)
-import RoleController from '@/actions/App/Http/Controllers/Admin/RoleController';
-
-import HeadingSmall from '@/components/HeadingSmall.vue';
 import type { Role, SharedData } from '@/types';
 
 const page = usePage<SharedData>();

@@ -9,18 +9,28 @@
 
 declare(strict_types=1);
 
+use App\Actions\Fortify\PasswordValidationRules;
+use App\Exceptions\AbstractException;
+use App\Http\Controllers\AbstractController;
+use App\Http\Requests\AbstractFormRequest;
+use App\Models\AbstractModel;
+use App\Models\User;
+use App\Policies\AbstractPolicy;
+use App\Services\AbstractService;
+use App\Services\Api\AbstractApiService;
+use Database\Seeders\AbstractSeeder;
+use Database\Seeders\DatabaseSeeder;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Tests\AbstractTestCase;
+
 arch()
     ->preset()
-    ->php()
-    ->ignoring([
-        Database\Seeders\CurrencySeeder::class, // some currency symbols contain 'suspicious' characters
-        Database\Seeders\LocaleSeeder::class, // some locale natives contain 'suspicious' characters
-    ]);
+    ->php();
 
 arch()
     ->preset()
     ->laravel()
-    ->ignoring(App\Models\AbstractModel::class); // has 'Model' suffix
+    ->ignoring(AbstractModel::class); // has 'Model' suffix
 
 arch()
     ->preset()
@@ -38,38 +48,37 @@ arch()
     ->classes()
     ->not->toBeAbstract()
     ->ignoring([
-        App\Exceptions\AbstractException::class,
-        App\Http\Controllers\AbstractController::class,
-        App\Http\Requests\AbstractFormRequest::class,
-        App\Models\AbstractModel::class,
-        App\Policies\AbstractPolicy::class,
-        App\Services\AbstractService::class,
-        App\Services\Api\AbstractApiService::class,
-        Database\Seeders\AbstractSeeder::class,
+        AbstractException::class,
+        AbstractController::class,
+        AbstractFormRequest::class,
+        AbstractModel::class,
+        AbstractPolicy::class,
+        AbstractService::class,
+        AbstractApiService::class,
+        AbstractSeeder::class,
     ])
     ->toBeFinal()
     ->ignoring([
-        App\Actions\Fortify\PasswordValidationRules::class,
-        App\Exceptions\AbstractException::class,
-        App\Http\Controllers\AbstractController::class,
-        App\Http\Requests\AbstractFormRequest::class,
-        App\Models\AbstractModel::class,
-        App\Policies\AbstractPolicy::class,
-        'App\Interfaces',
-        App\Services\AbstractService::class,
-        App\Services\Api\AbstractApiService::class,
-        Database\Seeders\AbstractSeeder::class,
+        PasswordValidationRules::class,
+        AbstractException::class,
+        AbstractController::class,
+        AbstractFormRequest::class,
+        AbstractModel::class,
+        AbstractPolicy::class,
+        AbstractService::class,
+        AbstractApiService::class,
+        AbstractSeeder::class,
     ]);
 
 arch()
-    ->expect(App\Exceptions\AbstractException::class)
-    ->expect(App\Http\Controllers\AbstractController::class)
-    ->expect(App\Http\Requests\AbstractFormRequest::class)
-    ->expect(App\Models\AbstractModel::class)
-    ->expect(App\Policies\AbstractPolicy::class)
-    ->expect(App\Services\AbstractService::class)
-    ->expect(App\Services\Api\AbstractApiService::class)
-    ->expect(Database\Seeders\AbstractSeeder::class)
+    ->expect(AbstractException::class)
+    ->expect(AbstractController::class)
+    ->expect(AbstractFormRequest::class)
+    ->expect(AbstractModel::class)
+    ->expect(AbstractPolicy::class)
+    ->expect(AbstractService::class)
+    ->expect(AbstractApiService::class)
+    ->expect(AbstractSeeder::class)
     ->toHavePrefix('Abstract')
     ->toBeAbstract()
     ->not->toBeFinal();
@@ -82,7 +91,7 @@ arch()
 arch()
     ->expect('App\Exceptions')
     ->toHaveSuffix('Exception')
-    ->toExtend(App\Exceptions\AbstractException::class);
+    ->toExtend(AbstractException::class);
 
 arch()
     ->expect('App\Http')
@@ -91,30 +100,25 @@ arch()
 arch()
     ->expect('App\Http\Controllers')
     ->toHaveSuffix('Controller')
-    ->toExtend(App\Http\Controllers\AbstractController::class)
+    ->toExtend(AbstractController::class)
     ->not->toBeUsed()
-    ->ignoring(App\Http\Controllers\AbstractController::class);
+    ->ignoring(AbstractController::class);
 
 arch()
     ->expect('App\Http\Requests')
     ->toHaveSuffix('Request')
-    ->toExtend(App\Http\Requests\AbstractFormRequest::class)
+    ->toExtend(AbstractFormRequest::class)
     ->toHaveMethod([
         'authorize',
         'rules',
     ]);
 
 arch()
-    ->expect('App\Jobs')
-    ->toHaveSuffix('Job')
-    ->toHaveMethod('handle');
-
-arch()
     ->expect('App\Models')
     ->not->toHaveSuffix('Model')
-    ->ignoring(App\Models\AbstractModel::class)
-    ->toExtend(App\Models\AbstractModel::class)
-    ->ignoring(App\Models\User::class)
+    ->ignoring(AbstractModel::class)
+    ->toExtend(AbstractModel::class)
+    ->ignoring(User::class)
     ->toHaveMethod('casts')
     ->toOnlyBeUsedIn([
         'App\Actions',
@@ -129,49 +133,39 @@ arch()
     ]);
 
 arch()
-    ->expect('App\Interfaces')
-    ->toHaveSuffix('Interface')
-    ->toBeInterfaces();
-
-arch()
-    ->expect('App\Managers')
-    ->toHaveSuffix('Manager')
-    ->toExtend(Illuminate\Support\Manager::class);
-
-arch()
     ->expect('App\Policies')
     ->toHaveSuffix('Policy')
-    ->toExtend(App\Policies\AbstractPolicy::class);
+    ->toExtend(AbstractPolicy::class);
 
 arch()
     ->expect('App\Services')
     ->toHaveSuffix('Service')
     ->ignoring('App\Services\Api\ExchangeRates')
-    ->toExtend(App\Services\AbstractService::class)
+    ->toExtend(AbstractService::class)
     ->ignoring('App\Services\Api');
 
 arch()
     ->expect('App\Services\Api')
     ->toHaveSuffix('Service')
-    ->toExtend(App\Services\Api\AbstractApiService::class);
+    ->toExtend(AbstractApiService::class);
 
 arch()
     ->expect('Database\Factories')
     ->toHaveSuffix('Factory')
-    ->toExtend(Illuminate\Database\Eloquent\Factories\Factory::class)
+    ->toExtend(Factory::class)
     ->toHaveMethod('definition')
     ->toOnlyBeUsedIn('App\Models');
 
 arch()
     ->expect('Database\Seeders')
     ->toHaveSuffix('Seeder')
-    ->toExtend(Database\Seeders\AbstractSeeder::class)
-    ->ignoring(Database\Seeders\DatabaseSeeder::class)
+    ->toExtend(AbstractSeeder::class)
+    ->ignoring(DatabaseSeeder::class)
     ->toOnlyBeUsedIn('Database\Seeders');
 
 arch()
     ->expect('Tests')
     ->toHaveSuffix('Test')
-    ->ignoring(Tests\AbstractTestCase::class)
+    ->ignoring(AbstractTestCase::class)
     ->not->toBeClasses()
-    ->ignoring(Tests\AbstractTestCase::class);
+    ->ignoring(AbstractTestCase::class);

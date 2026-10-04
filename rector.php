@@ -10,14 +10,13 @@
 declare(strict_types=1);
 
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
-use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
+use Rector\CodingStyle\Rector\ClassMethod\MakeInheritedMethodVisibilitySameAsParentRector;
 use Rector\Config\RectorConfig;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
+use Rector\Php85\Rector\Property\AddOverrideAttributeToOverriddenPropertiesRector;
 use RectorLaravel\Rector\Class_\AddHasFactoryToModelsRector;
 use RectorLaravel\Rector\Class_\AnonymousMigrationsRector;
-use RectorLaravel\Set\LaravelLevelSetList;
 use RectorLaravel\Set\LaravelSetList;
-use RectorLaravel\Set\LaravelSetProvider;
 
 return RectorConfig::configure()
     ->withCache(
@@ -25,6 +24,7 @@ return RectorConfig::configure()
         cacheClass: FileCacheStorage::class,
     )
     ->withComposerBased(laravel: true)
+    ->withImportNames()
     ->withPaths([
         __DIR__ . '/app',
         __DIR__ . '/bootstrap',
@@ -47,7 +47,6 @@ return RectorConfig::configure()
         earlyReturn: true,
         rectorPreset: true,
     )
-    ->withSetProviders(LaravelSetProvider::class)
     ->withSets([
         LaravelSetList::LARAVEL_ARRAYACCESS_TO_METHOD_CALL,
         LaravelSetList::LARAVEL_ARRAY_STR_FUNCTION_TO_STATIC_CALL,
@@ -59,13 +58,16 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_FACTORIES,
         LaravelSetList::LARAVEL_IF_HELPERS,
         LaravelSetList::LARAVEL_LEGACY_FACTORIES_TO_CLASSES,
-        LaravelLevelSetList::UP_TO_LARAVEL_120,
+        LaravelSetList::LARAVEL_TESTING,
+        LaravelSetList::LARAVEL_TYPE_DECLARATIONS,
     ])
+    ->reportUnusedSkips()
     ->withSkip([
         AddHasFactoryToModelsRector::class => [
             __DIR__ . '/app/Models/AbstractModel.php',
         ],
         AddOverrideAttributeToOverriddenMethodsRector::class,
+        AddOverrideAttributeToOverriddenPropertiesRector::class,
         AnonymousMigrationsRector::class,
-        PostIncDecToPreIncDecRector::class,
+        MakeInheritedMethodVisibilitySameAsParentRector::class,
     ]);

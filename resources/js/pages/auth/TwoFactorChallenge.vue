@@ -1,16 +1,12 @@
 <script setup lang="ts">
-// packages
 import { Form, Head } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
-// shadcn ui
+import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-// generated (wayfinder)
-import { store } from '@/routes/two-factor/login';
-
-import InputError from '@/components/InputError.vue';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import AuthLayout from '@/layouts/AuthLayout.vue';
+import { store } from '@/routes/two-factor/login';
 
 interface AuthConfigContent {
     title: string;

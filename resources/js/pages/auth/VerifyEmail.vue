@@ -1,15 +1,11 @@
 <script setup lang="ts">
-// packages
 import { Form, Head } from '@inertiajs/vue3';
-// shadcn ui
+import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
-// generated (wayfinder)
+import AuthLayout from '@/layouts/AuthLayout.vue';
 import { logout } from '@/routes';
 import { send } from '@/routes/verification';
-
-import TextLink from '@/components/TextLink.vue';
-import AuthLayout from '@/layouts/AuthLayout.vue';
 
 defineProps<{
     status?: string;

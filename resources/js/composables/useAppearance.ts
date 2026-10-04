@@ -1,4 +1,3 @@
-// packages
 import { onMounted, ref } from 'vue';
 
 type Appearance = 'light' | 'dark' | 'system';

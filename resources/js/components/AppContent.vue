@@ -1,7 +1,5 @@
 <script setup lang="ts">
-// packages
 import { computed } from 'vue';
-// shadcn ui
 import { SidebarInset } from '@/components/ui/sidebar';
 
 interface Props {

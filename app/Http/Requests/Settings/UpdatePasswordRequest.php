@@ -12,7 +12,7 @@ namespace App\Http\Requests\Settings;
 
 use App\Http\Requests\AbstractFormRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rules\Password;
 
 /**
  * Handles validation for updating password requests.
@@ -33,7 +33,7 @@ final class UpdatePasswordRequest extends AbstractFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, Rules\Password|ValidationRule|list<Rules\Password|ValidationRule|string|null>|string|null>
+     * @return array<string, Password|ValidationRule|list<Password|ValidationRule|string|null>|string|null>
      */
     public function rules(): array
     {
@@ -45,7 +45,7 @@ final class UpdatePasswordRequest extends AbstractFormRequest
             'password' => [
                 'required',
                 'confirmed',
-                Rules\Password::defaults(),
+                Password::defaults(),
             ],
         ];
     }

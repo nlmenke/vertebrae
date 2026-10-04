@@ -16,13 +16,15 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Client\RequestExceptionInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Creates a mock API service instance for testing.
  *
- * @param array<int, mixed>|null $handlerQueue
+ * @param array<array-key, ResponseInterface|RequestExceptionInterface> $handlerQueue
  */
-function createMockApiService(?array $handlerQueue): AbstractApiService
+function createMockApiService(array $handlerQueue): AbstractApiService
 {
     $mockHandler = new MockHandler($handlerQueue);
     $mockClient = new Client([

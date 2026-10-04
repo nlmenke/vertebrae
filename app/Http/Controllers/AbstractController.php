@@ -47,7 +47,7 @@ abstract class AbstractController
      *
      * @since 0.0.0-vertebrae introduced
      *
-     * @var array<string, list<string>>
+     * @var array{columns: non-empty-list<string>, directions: non-empty-list<'asc'|'desc'>}
      */
     protected array $sorting;
 

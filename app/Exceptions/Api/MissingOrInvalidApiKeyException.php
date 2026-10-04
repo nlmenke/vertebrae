@@ -29,9 +29,7 @@ final class MissingOrInvalidApiKeyException extends AbstractException
         int $code = 0,
         ?Throwable $previous = null,
     ) {
-        if ($message === null) {
-            $message = 'Missing or invalid API key.';
-        }
+        $message ??= 'Missing or invalid API key.';
 
         parent::__construct($message, $code, $previous);
     }

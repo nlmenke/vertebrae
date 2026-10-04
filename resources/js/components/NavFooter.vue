@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// shadcn ui
 import {
     SidebarGroup,
     SidebarGroupContent,
@@ -7,7 +6,6 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-
 import { toUrl } from '@/lib/utils';
 import type { NavItem } from '@/types';
 

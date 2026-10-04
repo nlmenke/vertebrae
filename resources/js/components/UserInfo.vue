@@ -1,9 +1,6 @@
 <script setup lang="ts">
-// packages
 import { computed } from 'vue';
-// shadcn ui
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-
 import { useInitials } from '@/composables/useInitials';
 import type { User } from '@/types';
 

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-// packages
 import { Head, Link } from '@inertiajs/vue3';
-// generated (wayfinder)
 import { dashboard, login, register } from '@/routes';
 
 withDefaults(

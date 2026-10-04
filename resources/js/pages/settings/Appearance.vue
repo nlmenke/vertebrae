@@ -1,13 +1,10 @@
 <script setup lang="ts">
-// packages
 import { Head } from '@inertiajs/vue3';
-// generated (wayfinder)
-import { edit } from '@/routes/appearance';
-
 import AppearanceTabs from '@/components/AppearanceTabs.vue';
 import HeadingSmall from '@/components/HeadingSmall.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
+import { edit } from '@/routes/appearance';
 import type { BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [

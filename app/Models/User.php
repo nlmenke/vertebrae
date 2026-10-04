@@ -12,6 +12,8 @@ namespace App\Models;
 use Carbon\CarbonInterface;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
+use Illuminate\Database\Eloquent\Attributes\Appends;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
@@ -35,6 +37,9 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property-read string                              $email
  * @property-read CarbonInterface|null                $email_verified_at
  * @property-read string                              $password
+ * @property-read string|null                         $two_factor_secret
+ * @property-read string|null                         $two_factor_recovery_codes
+ * @property-read CarbonInterface|null                $two_factor_confirmed_at
  * @property-read string|null                         $remember_token
  * @property-read CarbonInterface                     $created_at
  * @property-read CarbonInterface                     $updated_at
@@ -43,6 +48,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property-read EloquentCollection<int, Permission> $permissions
  * @property-read EloquentCollection<int, Role>       $roles
  */
+#[Appends(['permission_list'])]
+#[Hidden(['password', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes', 'two_factor_confirmed_at'])]
 final class User extends Authenticatable implements MustVerifyEmailContract
 {
     /** @use HasFactory<UserFactory> */
@@ -51,27 +58,6 @@ final class User extends Authenticatable implements MustVerifyEmailContract
     use Notifiable;
     use SoftDeletes;
     use TwoFactorAuthenticatable;
-
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var list<string>
-     */
-    protected $appends = [
-        'permission_list',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-        'two_factor_secret',
-        'two_factor_recovery_codes',
-    ];
 
     /**
      * The relations to eager load on every query.

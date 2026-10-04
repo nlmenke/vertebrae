@@ -1,6 +1,4 @@
-// packages
 import { computed, ref } from 'vue';
-// generated (wayfinder)
 import { qrCode, recoveryCodes, secretKey } from '@/routes/two-factor';
 
 const fetchJson = async <T>(url: string): Promise<T> => {

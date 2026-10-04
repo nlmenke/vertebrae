@@ -2,6 +2,7 @@ includes:
   - vendor/larastan/larastan/extension.neon
   - vendor/nesbot/carbon/extension.neon
   - vendor/phpstan/phpstan-mockery/extension.neon
+  - vendor/pestphp/pest-plugin-phpstan/extension.neon
 
 parameters:
 
@@ -10,7 +11,7 @@ parameters:
     - bootstrap
     - config
     - database
-    - public/index.php
+    - public
     - resources
     - routes
     - tests
@@ -19,7 +20,8 @@ parameters:
 
   excludePaths:
     - tests/Unit/ArchTest.php
-    - tests/Pest.php
+
+  checkModelProperties: true
 
   level: max
 

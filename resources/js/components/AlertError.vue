@@ -1,8 +1,6 @@
 <script setup lang="ts">
-// packages
 import { AlertCircle } from 'lucide-vue-next';
 import { computed } from 'vue';
-// shadcn ui
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 interface Props {

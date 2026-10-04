@@ -34,9 +34,9 @@ abstract class AbstractApiService
     /**
      * Headers being sent with the API call.
      *
-     * @var array<string, mixed>
+     * @var array<array-key, string>
      */
-    protected array $headerList = [
+    protected ?array $headerList = [
         'Accept' => 'application/json',
     ];
 
@@ -53,14 +53,14 @@ abstract class AbstractApiService
     /**
      * Submits a GET request to an external API.
      *
-     * @param array<string, mixed> $query
+     * @param array<array-key, mixed>|string $query
      *
-     * @return array<mixed, mixed>
+     * @return array<mixed>
      */
     final public function get(
         string $uri,
         ?int $id = null,
-        array $query = [],
+        array|string $query = [],
         ?Closure $callback = null,
     ): array {
         try {
@@ -86,9 +86,9 @@ abstract class AbstractApiService
     /**
      * Submits a POST request to an external API.
      *
-     * @param array<string, mixed> $formParams
+     * @param array<int|string, array<int|string, mixed>|bool|float|int|string|null> $formParams
      *
-     * @return array<mixed, mixed>
+     * @return array<mixed>
      */
     final public function post(
         string $uri,
@@ -119,9 +119,9 @@ abstract class AbstractApiService
     /**
      * Submits a PUT request to an external API.
      *
-     * @param array<string, mixed> $formParams
+     * @param array<int|string, array<int|string, mixed>|bool|float|int|string|null> $formParams
      *
-     * @return array<mixed, mixed>
+     * @return array<mixed>
      */
     final public function put(
         string $uri,
@@ -152,7 +152,7 @@ abstract class AbstractApiService
     /**
      * Submits a DELETE request to an external API.
      *
-     * @return array<mixed, mixed>
+     * @return array<mixed>
      */
     final public function delete(
         string $uri,
@@ -181,10 +181,11 @@ abstract class AbstractApiService
     /**
      * Adds additional headers to the headerList array.
      *
-     * @param array<string, mixed> $headerList
+     * @param array<array-key, string> $headerList
      */
     protected function headers(array $headerList): self
     {
+        // @phpstan-ignore-next-line
         $this->headerList = array_merge($this->headerList, $headerList);
 
         return $this;

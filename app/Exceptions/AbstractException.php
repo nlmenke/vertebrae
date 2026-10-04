@@ -27,9 +27,7 @@ abstract class AbstractException extends Exception
         int $code = 0,
         ?Throwable $previous = null,
     ) {
-        if ($message === null) {
-            $message = 'Whoops, something went wrong.';
-        }
+        $message ??= 'Whoops, something went wrong.';
 
         parent::__construct($message, $code, $previous);
     }

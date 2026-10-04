@@ -1,14 +1,10 @@
 <script setup lang="ts">
-// packages
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
 import { ArrowLeft, ArrowLeftToLine, ArrowRight, ArrowRightToLine, Pencil } from 'lucide-vue-next';
-// shadcn ui
+import RoleController from '@/actions/App/Http/Controllers/Admin/RoleController';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-// generated (wayfinder)
-import RoleController from '@/actions/App/Http/Controllers/Admin/RoleController';
-
 import { can } from '@/composables/hasPermissions';
 import AppLayout from '@/layouts/AppLayout.vue';
 import type { BreadcrumbItem, Role, SharedData } from '@/types';

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-// packages
 import { Link } from '@inertiajs/vue3';
-// shadcn ui
 import {
     Breadcrumb,
     BreadcrumbItem,

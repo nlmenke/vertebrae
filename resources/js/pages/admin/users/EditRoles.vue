@@ -1,14 +1,10 @@
 <script setup lang="ts">
-// packages
 import { Head, useForm, usePage } from '@inertiajs/vue3';
-// shadcn ui
+import { index as UserControllerIndex } from '@/actions/App/Http/Controllers/Admin/UserController';
+import UserRoleController from '@/actions/App/Http/Controllers/Admin/UserRoleController';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-// generated (wayfinder)
-import { index as UserControllerIndex } from '@/actions/App/Http/Controllers/Admin/UserController';
-import UserRoleController from '@/actions/App/Http/Controllers/Admin/UserRoleController';
-
 import AppLayout from '@/layouts/AppLayout.vue';
 import type { BreadcrumbItem, Role, SharedData, User } from '@/types';
 

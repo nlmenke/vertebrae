@@ -16,7 +16,7 @@
         "lib": [
             "ESNext",
             "DOM",
-            "DOM.Iterable"
+            "DOM.Iterable",
         ],                                                   /* Specify a set of bundled library declaration files that describe the target runtime environment. */
         "jsx": "preserve",                                   /* Specify what JSX code is generated. */
         "jsxImportSource": "vue",                            /* Specify module specifier used to import the JSX factory functions when using 'jsx: react-jsx*'. */
@@ -34,13 +34,14 @@
         "moduleResolution": "bundler",                       /* Specify how TypeScript looks up a file from a given module specifier. */
         // "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
         "paths": {                                           /* Specify a set of entries that re-map imports to additional lookup locations. */
-            "@/*": ["./resources/js/*"],
+            "@/*": [
+                "./resources/js/*",
+            ],
         },
         // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
         // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
         "types": [
             "vite/client",
-            "./resources/js/types"
         ],                                                   /* Specify type package names to be included without being referenced in a source file. */
         // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
         // "moduleSuffixes": [],                             /* List of file name suffixes to search when resolving a module. */
@@ -121,6 +122,6 @@
         "resources/js/**/*.ts",
         "resources/js/**/*.d.ts",
         "resources/js/**/*.tsx",
-        "resources/js/**/*.vue"
+        "resources/js/**/*.vue",
     ]
 }

@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace App\Actions\Fortify;
 
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rules\Password;
 
 /**
  * Handles setting the password validation rules.
@@ -22,14 +22,14 @@ trait PasswordValidationRules
     /**
      * Get the validation rules used to validate passwords.
      *
-     * @return array<int, Rules\Password|ValidationRule|string>
+     * @return array<int, Password|ValidationRule|string>
      */
     protected function passwordRules(): array
     {
         return [
             'required',
             'string',
-            Rules\Password::default(),
+            Password::default(),
             'confirmed',
         ];
     }

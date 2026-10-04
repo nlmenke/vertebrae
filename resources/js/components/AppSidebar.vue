@@ -1,8 +1,12 @@
 <script setup lang="ts">
-// packages
 import { Link } from '@inertiajs/vue3';
-import { Banknote, BookA, Earth, Folder, Languages, LayoutGrid, ScrollText, Shield, User } from 'lucide-vue-next';
-// shadcn ui
+import { Folder, LayoutGrid, Shield, User } from 'lucide-vue-next';
+import { index as RoleControllerIndex } from '@/actions/App/Http/Controllers/Admin/RoleController';
+import { index as UserControllerIndex } from '@/actions/App/Http/Controllers/Admin/UserController';
+import AppLogo from '@/components/AppLogo.vue';
+import NavFooter from '@/components/NavFooter.vue';
+import NavMain from '@/components/NavMain.vue';
+import NavUser from '@/components/NavUser.vue';
 import {
     Sidebar,
     SidebarContent,
@@ -12,21 +16,8 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-// generated (wayfinder)
-import { index as CountryControllerIndex } from '@/actions/App/Http/Controllers/Admin/CountryController';
-import { index as CurrencyControllerIndex } from '@/actions/App/Http/Controllers/Admin/CurrencyController';
-import { index as LanguageControllerIndex } from '@/actions/App/Http/Controllers/Admin/LanguageController';
-import { index as LocaleControllerIndex } from '@/actions/App/Http/Controllers/Admin/LocaleController';
-import { index as RoleControllerIndex } from '@/actions/App/Http/Controllers/Admin/RoleController';
-import { index as ScriptControllerIndex } from '@/actions/App/Http/Controllers/Admin/ScriptController';
-import { index as UserControllerIndex } from '@/actions/App/Http/Controllers/Admin/UserController';
-import { dashboard } from '@/routes';
-
-import AppLogo from '@/components/AppLogo.vue';
-import NavFooter from '@/components/NavFooter.vue';
-import NavMain from '@/components/NavMain.vue';
-import NavUser from '@/components/NavUser.vue';
 import { can } from '@/composables/hasPermissions';
+import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -37,40 +28,10 @@ const mainNavItems: NavItem[] = [
         isVisible: true,
     },
     {
-        title: 'Countries',
-        href: CountryControllerIndex(),
-        icon: Earth,
-        isVisible: can('view-countries'),
-    },
-    {
-        title: 'Currencies',
-        href: CurrencyControllerIndex(),
-        icon: Banknote,
-        isVisible: can('view-currencies'),
-    },
-    {
-        title: 'Languages',
-        href: LanguageControllerIndex(),
-        icon: Languages,
-        isVisible: can('view-languages'),
-    },
-    {
-        title: 'Locales',
-        href: LocaleControllerIndex(),
-        icon: BookA,
-        isVisible: can('view-locales'),
-    },
-    {
         title: 'Roles',
         href: RoleControllerIndex(),
         icon: Shield,
         isVisible: can('view-roles'),
-    },
-    {
-        title: 'Scripts',
-        href: ScriptControllerIndex(),
-        icon: ScrollText,
-        isVisible: can('view-scripts'),
     },
     {
         title: 'Users',

@@ -1,16 +1,12 @@
 <script setup lang="ts">
-// packages
 import { Form, Head } from '@inertiajs/vue3';
-// shadcn ui
+import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
-// generated (wayfinder)
-import { store } from '@/routes/password/confirm';
-
-import InputError from '@/components/InputError.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
+import { store } from '@/routes/password/confirm';
 </script>
 
 <template>
