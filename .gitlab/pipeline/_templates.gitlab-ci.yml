@@ -37,7 +37,7 @@
     - npm run build
     - DB_DATABASE=$MYSQL_DATABASE DB_USERNAME=$MYSQL_USER DB_PASSWORD=$MYSQL_PASSWORD ./vendor/bin/pest --coverage --colors=never
 
-  coverage: /^\s*Total:\s*\d+.\d+\%/
+  coverage: /^\s*Total:\s*\d+.\d+\s*\%/
 
   artifacts:
     paths:
