@@ -35,9 +35,9 @@
     - npm ci
     - npx playwright install --with-deps
     - npm run build
-    - DB_DATABASE=$MYSQL_DATABASE DB_USERNAME=$MYSQL_USER DB_PASSWORD=$MYSQL_PASSWORD ./vendor/bin/pest --coverage-text --colors=never
+    - DB_DATABASE=$MYSQL_DATABASE DB_USERNAME=$MYSQL_USER DB_PASSWORD=$MYSQL_PASSWORD ./vendor/bin/pest --coverage --colors=never
 
-  coverage: /^\s*Lines:\s*\d+.\d+\%/
+  coverage: /^\s*Total:\s*\d+.\d+\%/
 
   artifacts:
     paths:
